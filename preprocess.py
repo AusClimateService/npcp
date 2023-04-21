@@ -8,22 +8,36 @@ import xclim
 import cmdline_provenance as cmdprov
 
 
-var_names = {
+var_to_cmor_name = {
     'tmax': 'tasmax',
-    'tmin': 'tasmin'
+    'tmin': 'tasmin',
     'precip': 'pr',
+    'latitude': 'lat',
+    'longitude': 'lon',
 }
 
-var_attrs = {
+cmor_var_attrs = {
     'tasmax': {
         'long_name': 'Daily Maximum Near-Surface Air Temperature',
         'standard_name': 'air_temperature',
-        'units': 'K',
     },
     'tasmin': {
         'long_name': 'Daily Minimum Near-Surface Air Temperature',
         'standard_name': 'air_temperature',
-        'units': 'K',
+    },
+    'lat': {
+        'long_name': 'latitude',
+        'standard_name': 'latitude',
+        'axis': 'Y',
+        'units': 'degrees_north',
+        'bounds': 'lat_bnds'
+    },
+    'lon': {
+        'long_name': 'longitude',
+        'standard_name': 'longitude',
+        'axis': 'X',
+        'units': 'degrees_east',
+        'bounds': 'lon_bnds'
     },
 }
 
@@ -51,8 +65,9 @@ def convert_units(da, target_units):
     """
 
     xclim_unit_check = {
-        "deg_k": "degK",
-        "kg/m2/s": "kg m-2 s-1",
+        'degrees_Celsius': 'degC',
+        'deg_k': 'degK',
+        'kg/m2/s': 'kg m-2 s-1',
     }
 
     if da.attrs["units"] in xclim_unit_check:
@@ -68,6 +83,9 @@ def convert_units(da, target_units):
             da.attrs["units"] = target_units
         else:
             raise e
+    
+    if target_units == 'degC':
+        da.attrs['units'] = 'degC'
 
     return da
 
@@ -75,13 +93,19 @@ def convert_units(da, target_units):
 def fix_metadata(ds, var):
     "Apply metadata fixes."""
 
-    if var in var_name_fixes:
-        cmor_var = var_names[var]
-        ds = ds.rename({var: cmor_var})
-    else:
-        cmor_var = var
-
-    ds[cmor_var].attrs = var_attrs[cmor_var]
+    dims = list(ds[var].dims)
+    dims.remove('time')
+    units = ds[var].attrs['units']
+    for varname in dims + [var]:
+        if varname in var_to_cmor_name:
+            cmor_var = var_to_cmor_name[var]
+            ds = ds.rename({varname: cmor_var})
+        else:
+            cmor_var = varname
+        ds[cmor_var].attrs = cmor_var_attrs[cmor_var]
+    ds[cmor_var].attrs['units'] = units
+    del ds['lat_bnds'].attrs['xcdat_bounds']
+    del ds['lon_bnds'].attrs['xcdat_bounds']
 
     return ds, cmor_var
     
@@ -95,7 +119,7 @@ def main(args):
     lats = np.arange(-44, -9.99, 0.2)
     lons = np.arange(112, 154.01, 0.2)
     npcp_grid = xcdat.create_grid(lats, lons)
-    
+   
     output_ds = input_ds.regridder.horizontal(
         args.var,
         npcp_grid,
@@ -104,10 +128,10 @@ def main(args):
     )
     output_ds, cmor_var = fix_metadata(output_ds, args.var)
     output_ds[cmor_var] = convert_units(output_ds[cmor_var], output_units[cmor_var])
-    output_ds.attrs['geospatial_lat_min'] = lats[0]
-    output_ds.attrs['geospatial_lat_max'] = lats[-1]
-    output_ds.attrs['geospatial_lon_min'] = lons[0]
-    output_ds.attrs['geospatial_lon_max'] = lons[-1]
+    output_ds.attrs['geospatial_lat_min'] = f'{lats[0]:.1f}'
+    output_ds.attrs['geospatial_lat_max'] = f'{lats[-1]:.1f}'
+    output_ds.attrs['geospatial_lon_min'] = f'{lons[0]:.1f}'
+    output_ds.attrs['geospatial_lon_max'] = f'{lons[-1]:.1f}'
     output_ds.attrs['history'] = cmdprov.new_log()
     output_ds.to_netcdf(args.outfile)
 
