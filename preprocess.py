@@ -25,6 +25,10 @@ cmor_var_attrs = {
         'long_name': 'Daily Minimum Near-Surface Air Temperature',
         'standard_name': 'air_temperature',
     },
+    'pr': {
+        'long_name': 'Precipitation',
+        'standard_name': 'precipitation_flux',
+    },
     'lat': {
         'long_name': 'latitude',
         'standard_name': 'latitude',
@@ -68,6 +72,7 @@ def convert_units(da, target_units):
         'degrees_Celsius': 'degC',
         'deg_k': 'degK',
         'kg/m2/s': 'kg m-2 s-1',
+        'mm': 'mm d-1',
     }
 
     if da.attrs["units"] in xclim_unit_check:
