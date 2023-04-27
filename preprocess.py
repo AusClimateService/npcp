@@ -14,6 +14,7 @@ var_to_cmor_name = {
     'precip': 'pr',
     'latitude': 'lat',
     'longitude': 'lon',
+    'wind': 'wsp',
 }
 
 cmor_var_attrs = {
@@ -29,6 +30,10 @@ cmor_var_attrs = {
         'long_name': 'Precipitation',
         'standard_name': 'precipitation_flux',
     },
+    'wsp': {
+        'long_name': 'Daily Average 10m Wind Speed',
+        'standard_name': 'wind_speed',
+    },
     'lat': {
         'long_name': 'latitude',
         'standard_name': 'latitude',
@@ -43,12 +48,14 @@ cmor_var_attrs = {
         'units': 'degrees_east',
         'bounds': 'lon_bnds'
     },
+
 }
 
 output_units = {
     'tasmax': 'degC',
     'tasmin': 'degC',
     'pr': 'mm d-1',
+    'wsp': 'm s-1'
 }
 
 
@@ -137,7 +144,7 @@ def main(args):
     output_ds.attrs['geospatial_lat_max'] = f'{lats[-1]:.1f}'
     output_ds.attrs['geospatial_lon_min'] = f'{lons[0]:.1f}'
     output_ds.attrs['geospatial_lon_max'] = f'{lons[-1]:.1f}'
-    output_ds.attrs['history'] = cmdprov.new_log()
+    output_ds.attrs['history'] = cmdprov.new_log(infile_logs={args.infile: input_ds.attrs['history']})
     output_ds.to_netcdf(args.outfile)
 
 
