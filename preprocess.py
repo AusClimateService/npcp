@@ -1,10 +1,11 @@
 """Command line program for NPCP intercomparison data pre-processing."""
-
+import pdb
 import argparse
 
 import numpy as np
 import xcdat
 import xclim
+import xarray as xr
 import cmdline_provenance as cmdprov
 
 
@@ -15,6 +16,7 @@ var_to_cmor_name = {
     'latitude': 'lat',
     'longitude': 'lon',
     'wind': 'wsp',
+    'solar_exposure_day': 'rsds',
 }
 
 cmor_var_attrs = {
@@ -29,6 +31,10 @@ cmor_var_attrs = {
     'pr': {
         'long_name': 'Precipitation',
         'standard_name': 'precipitation_flux',
+    },
+    'rsds': {
+        'long_name': 'Surface Downwelling Shortwave Radiation',
+        'standard_name': 'surface_downwelling_shortwave_flux_in_air',
     },
     'wsp': {
         'long_name': 'Daily Average 10m Wind Speed',
@@ -55,7 +61,8 @@ output_units = {
     'tasmax': 'degC',
     'tasmin': 'degC',
     'pr': 'mm d-1',
-    'wsp': 'm s-1'
+    'wsp': 'm s-1',
+    'rsds': 'W m-2',
 }
 
 
@@ -88,10 +95,13 @@ def convert_units(da, target_units):
     try:
         da = xclim.units.convert_units_to(da, target_units)
     except Exception as e:
-        in_precip_kg = da.attrs["units"] == "kg m-2 s-1"
-        out_precip_mm = target_units in ["mm d-1", "mm day-1"]
-        if in_precip_kg and out_precip_mm:
-            da = da * 86400
+        if (da.attrs['units'] == 'kg m-2 s-1') and (target_units in ['mm d-1', 'mm day-1']):
+            with xr.set_options(keep_attrs=True):
+                da = da * 86400
+            da.attrs["units"] = target_units
+        elif (da.attrs['units'] == 'MJ m^-2') and target_units == 'W m-2':
+            with xr.set_options(keep_attrs=True):
+                da = da * (1e6 / 86400)
             da.attrs["units"] = target_units
         else:
             raise e
@@ -144,7 +154,10 @@ def main(args):
     output_ds.attrs['geospatial_lat_max'] = f'{lats[-1]:.1f}'
     output_ds.attrs['geospatial_lon_min'] = f'{lons[0]:.1f}'
     output_ds.attrs['geospatial_lon_max'] = f'{lons[-1]:.1f}'
-    output_ds.attrs['history'] = cmdprov.new_log(infile_logs={args.infile: input_ds.attrs['history']})
+    infile_log = {}
+    if 'history' in input_ds.attrs:
+        infile_log[args.infile] = input_ds.attrs['history']
+    output_ds.attrs['history'] = cmdprov.new_log(infile_logs=infile_log)
     output_ds.to_netcdf(args.outfile)
 
 

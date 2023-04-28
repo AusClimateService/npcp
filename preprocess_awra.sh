@@ -5,7 +5,7 @@
 
 function usage {
     echo "USAGE: bash $0 variable"
-    echo "   variable:   Variable to process (wind)"
+    echo "   variable:   Variable to process (wind, solar_exposure_day)"
     exit 1
 }
 
@@ -15,6 +15,8 @@ script_dir=/g/data/ia39/npcp/code
 var=$1
 if [ "${var}" == "wind" ]; then
     cmor_var=wsp
+elif [ "${var}" == "solar_exposure_day" ]; then
+    cmor_var=rsds
 fi
 
 indir=/g/data/fj8/BoM/AWRA/DATA/CLIMATE/${var}
@@ -34,12 +36,18 @@ for infile in "${infiles[@]}"; do
         command2="${python} ${script_dir}/wind_2m_to_10m.py ${infile} ${var} ${profile} ${temp_file}"
         echo ${command2}
         ${command2}
+
+        command3="${python} ${script_dir}/preprocess.py ${temp_file} ${var} ${outfile}"
+        echo ${command3}    
+        ${command3}
+    
+        command4="rm ${temp_file}"
+        echo ${command4}
+        ${command4}
+    else
+        command2="${python} ${script_dir}/preprocess.py ${infile} ${var} ${outfile}"
+        echo ${command2}    
+        ${command2}
     fi
-    command3="${python} ${script_dir}/preprocess.py ${temp_file} ${var} ${outfile}"
-    echo ${command3}    
-    ${command3}
-    command4="rm ${temp_file}"
-    echo ${command4}
-    ${command4}
 done
 
