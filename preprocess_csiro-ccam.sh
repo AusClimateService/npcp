@@ -20,13 +20,13 @@ infiles=($(ls ${indir}/${var}_AUS-10i_ECMWF-ERA5_evaluation_r1i1p1f1_CSIRO-CCAM-
 outdir=/g/data/ia39/npcp/input_data/${var}/ECMWF-ERA5/CSIRO-CCAM-2203
 command1="mkdir -p ${outdir}"
 echo ${command1}
-#${command1}
+${command1}
 
 for inpath in "${infiles[@]}"; do
     infile=`basename ${inpath}`
     outfile=`echo ${infile} | sed s:AUS-10i:NPCP-20i:`
     command2="${python} ${script_dir}/preprocess.py ${inpath} ${var} ${outdir}/${outfile}"
     echo ${command2}    
-#    ${command2}
+    ${command2}
 done
 
