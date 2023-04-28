@@ -1,5 +1,5 @@
 """Command line program for NPCP intercomparison data pre-processing."""
-import pdb
+
 import argparse
 
 import numpy as np
@@ -128,6 +128,10 @@ def fix_metadata(ds, var):
     ds[cmor_var].attrs['units'] = units
     del ds['lat_bnds'].attrs['xcdat_bounds']
     del ds['lon_bnds'].attrs['xcdat_bounds']
+    try:
+        del ds['time_bnds'].attrs['xcdat_bounds']
+    except KeyError:
+        pass
 
     return ds, cmor_var
     
@@ -169,6 +173,5 @@ if __name__ == '__main__':
     parser.add_argument("infile", type=str, help="input file")
     parser.add_argument("var", type=str, help="input variable")
     parser.add_argument("outfile", type=str, help="output file")
-
     args = parser.parse_args()
     main(args)
