@@ -2,8 +2,17 @@
 
 import argparse
 
+import numpy as np
 import xarray as xr
 import cmdline_provenance as cmdprov
+
+
+def calc_wsp(u, v):
+    """Calculate wind speed."""
+
+    func = lambda u, v: np.sqrt(u**2 + v**2)
+
+    return xr.apply_ufunc(func, u, v, keep_attrs=True)
 
 
 def main(args):
@@ -13,9 +22,13 @@ def main(args):
     eastward_da = eastward_ds[args.eastward_wind_var]
     northward_ds = xr.open_dataset(args.northward_wind_file)
     northward_da = northward_ds[args.northward_wind_var]
-    wsp_da = xr.ufuncs.sqrt(eastward_da ** 2 + northward_da ** 2) 
-    wsp_ds = wsp_da.to_dataset()
-    ## TODO: Fix attributes
+
+    wsp_da = calc_wsp(eastward_da, northward_da)
+    wsp_da.attrs['long_name'] = 'Daily Average 10m Wind Speed'
+    wsp_da.attrs['standard_name'] = 'wind_speed'
+
+    wsp_ds = wsp_da.to_dataset(name='wsp')
+    wsp_ds.attrs = eastward_ds.attrs
     wsp_ds.attrs['history'] = cmdprov.new_log()
     wsp_ds.to_netcdf(args.wsp_file)
 

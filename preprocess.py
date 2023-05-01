@@ -1,5 +1,5 @@
 """Command line program for NPCP intercomparison data pre-processing."""
-
+import pdb
 import argparse
 
 import numpy as np
@@ -93,15 +93,14 @@ def convert_units(da, target_units):
         da.attrs["units"] = xclim_unit_check[da.units]
 
     try:
-        da = xclim.units.convert_units_to(da, target_units)
+        with xr.set_options(keep_attrs=True):
+            da = xclim.units.convert_units_to(da, target_units)
     except Exception as e:
         if (da.attrs['units'] == 'kg m-2 s-1') and (target_units in ['mm d-1', 'mm day-1']):
-            with xr.set_options(keep_attrs=True):
-                da = da * 86400
+            da = da * 86400
             da.attrs["units"] = target_units
         elif (da.attrs['units'] == 'MJ m^-2') and target_units == 'W m-2':
-            with xr.set_options(keep_attrs=True):
-                da = da * (1e6 / 86400)
+            da = da * (1e6 / 86400)
             da.attrs["units"] = target_units
         else:
             raise e
@@ -133,7 +132,7 @@ def fix_metadata(ds, var):
     except KeyError:
         pass
 
-    return ds, cmor_var
+    return ds
     
 
 def main(args):
@@ -152,8 +151,9 @@ def main(args):
         tool='xesmf',
         method='conservative'
     )
-    output_ds, cmor_var = fix_metadata(output_ds, args.var)
-    output_ds[cmor_var] = convert_units(output_ds[cmor_var], output_units[cmor_var])
+    cmor_var = args.var if args.var in var_to_cmor_name.values() else var_to_cmor_name[args.var]     
+    output_ds[args.var] = convert_units(output_ds[args.var], output_units[cmor_var])
+    output_ds = fix_metadata(output_ds, args.var)
     output_ds.attrs['geospatial_lat_min'] = f'{lats[0]:.1f}'
     output_ds.attrs['geospatial_lat_max'] = f'{lats[-1]:.1f}'
     output_ds.attrs['geospatial_lon_min'] = f'{lons[0]:.1f}'
