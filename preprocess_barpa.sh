@@ -34,6 +34,7 @@ ${command1}
 for inpath in "${infiles[@]}"; do
     infile=`basename ${inpath}`
     outfile=`echo ${infile} | sed s:AUS-15:NPCP-20i:`
+    outfile=`echo ${outfile} | sed s:_AWAP.nc:.nc:`
     command2="${python} ${script_dir}/preprocess.py ${inpath} ${var} ${outdir}/${outfile}"
     echo ${command2}    
     ${command2}
