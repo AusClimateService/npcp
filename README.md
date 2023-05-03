@@ -77,7 +77,7 @@ on the common `NPCP-20i` grid.
 #### Precipitation
 
 | driving model | downscaling model | training (1980-1999) | assessment (2000-2019) | projection (2080-2099) |
-| ---           | ---               | ---                  | ---                    | ---                    |
+| ---           | ---               | :-:                  | :-:                    | :-:                    |
 | Observations | AGCD | :green_circle: | :green_circle: | N/A |
 | ERA5 | BOM-BARPA-R | :green_circle: | :green_circle: | N/A |
 | | CSIRO-CCAM-2203 | :green_circle: | :green_circle: | N/A |
