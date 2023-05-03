@@ -27,7 +27,7 @@ fi
 indir=/g/data/zv2/agcd/v1/${var}/${time_agg}/r005/01day
 infiles=($(ls ${indir}/agcd_v1_${var}_${time_agg}_r005_daily_19{8,9}*.nc ${indir}/agcd_v1_${var}_${time_agg}_r005_daily_20{0,1}*.nc))
 
-outdir=/g/data/ia39/npcp/input_data/${cmor_var}/observations/AGCD
+outdir=/g/data/ia39/npcp/data/${cmor_var}/observations/AGCD/raw
 command1="mkdir -p ${outdir}"
 echo ${command1}
 ${command1}

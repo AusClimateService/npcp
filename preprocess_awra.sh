@@ -22,7 +22,7 @@ fi
 indir=/g/data/fj8/BoM/AWRA/DATA/CLIMATE/${var}
 infiles=($(ls ${indir}/${var}_19{8,9}*.nc ${indir}/${var}_20{0,1}*.nc))
 
-outdir=/g/data/ia39/npcp/input_data/${cmor_var}/observations/AWRA
+outdir=/g/data/ia39/npcp/data/${cmor_var}/observations/AWRA/raw
 command1="mkdir -p ${outdir}"
 echo ${command1}
 ${command1}

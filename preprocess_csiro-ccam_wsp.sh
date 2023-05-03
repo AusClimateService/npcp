@@ -15,7 +15,7 @@ indir=/g/data/xv83/mxt599/ccam_era5_evaluation_aus-10i_12km/drs_cordex/CORDEX/ou
 ufiles=($(ls ${indir}/uas/uas_AUS-10i_ECMWF-ERA5_evaluation_r1i1p1f1_CSIRO-CCAM-2203_v1_day_19{8,9}*.nc ${indir}/uas/uas_AUS-10i_ECMWF-ERA5_evaluation_r1i1p1f1_CSIRO-CCAM-2203_v1_day_20{0,1}*.nc))
 vfiles=($(ls ${indir}/vas/vas_AUS-10i_ECMWF-ERA5_evaluation_r1i1p1f1_CSIRO-CCAM-2203_v1_day_19{8,9}*.nc ${indir}/vas/vas_AUS-10i_ECMWF-ERA5_evaluation_r1i1p1f1_CSIRO-CCAM-2203_v1_day_20{0,1}*.nc))
 
-outdir=/g/data/ia39/npcp/input_data/wsp/ECMWF-ERA5/CSIRO-CCAM-2203
+outdir=/g/data/ia39/npcp/data/wsp/ECMWF-ERA5/CSIRO-CCAM-2203/raw
 command1="mkdir -p ${outdir}"
 echo ${command1}
 ${command1}
