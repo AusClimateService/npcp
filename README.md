@@ -18,7 +18,7 @@ https://my.nci.org.au/mancini/project/ia39
 
 The data is archived using the following directoruy structure:  
 ```
-/g/data/ia39/npcp/data/{variable}/{driving-model}/{rcm-model}/{bias-correction}/
+/g/data/ia39/npcp/data/{variable}/{driving-model}/{downscaling-model}/{bias-correction-method}/
 ```
 
 Naming conventions follow CORDEX wherever possible and can take the following values:  
@@ -33,14 +33,14 @@ Naming conventions follow CORDEX wherever possible and can take the following va
   - `CSIRO-BOM-ACCESS-ESM1-5`: ACCESS-ESM1-5 CMIP6 submission
   - `ECMWF-ERA5`: ERA5 reanalysis
   - `observations`: Australian gridded observations
-- `{rcm-model}`  
+- `{downscaling-model}`  
   - `BOM-BARPA-R`: Bureau of Meteorology Atmospheric Regional Projections for Australia
   - `CSIRO-CCAM-2203`: Conformal Cubic Atmospheric Model (run by CSIRO)
   - TODO [CCAM run by QLD Department of Environment and Science]
   - TODO [WRF run by NSW Department of Planning and Environment]
   - `AGCD`: Australian Gridded Climate Data
   - `AWRA`: Australian Water Resource Assessment
-- `{bias-correction}`  
+- `{bias-correction-method}`  
   - `raw`: No bias correction applied (i.e. input data for bias correction)
   - `qm`: Basic quantile matching
   - `qme`: Quantile Matching for Extremes
@@ -52,6 +52,7 @@ Naming conventions follow CORDEX wherever possible and can take the following va
 
 Daily timescale input data is provided for the
 training (1980-1999), assessment (2000-2019) and projection (2080-2099; excluding observational data) periods.
+Model data corresponds to the CMIP6 historical experiment from 1980-2014 and ssp370 for 2015 onwards. 
 
 Each input data file has been pre-processed (using the `preprocess.py` script in this repository)
 in order to ensure common:
@@ -68,7 +69,22 @@ conservative regridding, which is the
 when upscaling from higher to lower horizontal resolution
 (the original observational and downscaled model data is all higher resolution than 0.2 degrees).
 
-Bias corrected data is ultimately produced for the 2000-2019 and 2080-2099 time periods
+Bias corrected daily data is ultimately produced for the 2000-2019 and 2080-2099 time periods
 on the common `NPCP-20i` grid.
 
-### Data availability
+### Input data availability
+
+#### Precipitation
+
+| driving model | downscaling model | training (1980-1999) | assessment (2000-2019) | projection (2080-2099) |
+| ---           | ---               | ---                  | ---                    | ---                    |
+| Observations | AGCD | :green_circle: | :green_circle: | N/A |
+| ERA5 | BOM-BARPA-R | :green_circle: | :green_circle: | N/A |
+| | CSIRO-CCAM-2203 | :green_circle: | :green_circle: | N/A |
+| | QLD-CCAM | :white_circle: | :white_circle: | N/A |
+| | NSW-WRF | :white_circle: | :white_circle: | N/A |
+| ACCESS-ESM1-5 | BOM-BARPA-R | :green_circle: | :green_circle: (no ssp370 yet) | :white_circle: |
+| | CSIRO-CCAM-2203 | :white_circle: | :white_circle: | :white_circle: |
+| | QLD-CCAM | :white_circle: | :white_circle: | :white_circle: |
+| | NSW-WRF | :white_circle: | :white_circle: | :white_circle: |
+
