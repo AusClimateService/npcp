@@ -36,8 +36,8 @@ Naming conventions follow CORDEX wherever possible and can take the following va
 - `{downscaling-model}`  
   - `BOM-BARPA-R`: Bureau of Meteorology Atmospheric Regional Projections for Australia
   - `CSIRO-CCAM-2203`: Conformal Cubic Atmospheric Model (run by CSIRO)
-  - TODO [CCAM run by QLD Department of Environment and Science]
-  - TODO [WRF run by NSW Department of Planning and Environment]
+  - TODO [CCAM run by QLD Department of Environment and Science (DES)]
+  - TODO [WRF run by NARCLiM / NSW Department of Planning and Environment]
   - `AGCD`: Australian Gridded Climate Data
   - `AWRA`: Australian Water Resource Assessment
 - `{bias-correction-method}`  
