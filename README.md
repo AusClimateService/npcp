@@ -30,7 +30,7 @@ Naming conventions follow CORDEX wherever possible and can take the following va
   - `wsp`: surface (10m) wind speed
   - TODO [humidity related variable still to be defined]
 - `{driving-model}`  
-  - `CSIRO-BOM-ACCESS-ESM1-5`: ACCESS-ESM1-5 CMIP6 submission
+  - `CSIRO-ACCESS-ESM1-5`: ACCESS-ESM1-5 CMIP6 submission
   - `ECMWF-ERA5`: ERA5 reanalysis
   - `observations`: Australian gridded observations
 - `{downscaling-model}`  
