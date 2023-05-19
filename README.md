@@ -47,7 +47,7 @@ Naming conventions follow CORDEX wherever possible and can take the following va
   - `mrnbc`: Multivariate Recursive Nesting Bias Correction
   - `cannon`: Multivariate Cannon method
   - `3dbc`: 3 Dimensional Bias Correction
-  - TODO [figure out whether we are doing univariate and/or multivariate quantile delta mapping]
+  - Other methods??
 
 ### Data specifications (time periods, spatial grid, etc)
 
