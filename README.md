@@ -42,9 +42,10 @@ Naming conventions follow CORDEX wherever possible and can take the following va
   - `AWRA`: Australian Water Resource Assessment
 - `{bias-correction-method}`  
   - `raw`: No bias correction applied (i.e. input data for bias correction)
-  - `qm`: Basic quantile matching
+  - `ecdfm`: Equi-distant/ratio CDF matching
   - `qme`: Quantile Matching for Extremes
   - `mrnbc`: Multivariate Recursive Nesting Bias Correction
+  - `cannon`: Multivariate Cannon method
   - `3dbc`: 3 Dimensional Bias Correction
   - TODO [figure out whether we are doing univariate and/or multivariate quantile delta mapping]
 
