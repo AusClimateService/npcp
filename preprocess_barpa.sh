@@ -6,7 +6,7 @@
 function usage {
     echo "USAGE: bash $0 variable experiment"
     echo "   variable:   Variable to process (tasmax, tasmin, pr, rsds)"
-    echo "   experiment: Experiment to process (evaluation, historical)" 
+    echo "   experiment: Experiment to process (evaluation, historical, ssp370)" 
     exit 1
 }
 

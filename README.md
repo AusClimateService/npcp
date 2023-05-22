@@ -82,13 +82,12 @@ An appropriate humidity related variable still to be defined and thus isn't cove
 | driving model | downscaling model | training (1980-1999) | assessment (2000-2019) | projection (2080-2099) |
 | ---           | ---               | :-:                  | :-:                    | :-:                    |
 | Observations | AGCD or AWRA | :green_circle: | :green_circle: | N/A |
-| ERA5 | BOM-BARPA-R | :green_circle: pr tasmin tasmax<br />:white_circle: rsds wsp | :green_circle: pr tasmin tasmax<br />:white_circle: rsds wsp | N/A |
+| ERA5 | BOM-BARPA-R | :green_circle: | :green_circle: | N/A |
 | | CSIRO-CCAM | :green_circle: | :green_circle: | N/A |
 | | QLD-CCAM | :white_circle: | :white_circle: | N/A |
 | | NSW-WRF | :white_circle: | :white_circle: | N/A |
-| ACCESS-ESM1-5 | BOM-BARPA-R | :green_circle: pr tasmin tasmax<br />:white_circle: rsds wsp | :yellow_circle:* pr tasmin tasmax<br />:white_circle: rsds wsp | :white_circle: |
+| ACCESS-ESM1-5 | BOM-BARPA-R | :green_circle: | :green_circle: | :green_circle: |
 | | CSIRO-CCAM | :white_circle: | :white_circle: | :white_circle: |
 | | QLD-CCAM | :white_circle: | :white_circle: | :white_circle: |
 | | NSW-WRF | :white_circle: | :white_circle: | :white_circle: |
 
-*There's no ACCESS-ESM1-5, BOM-BARPA-R ssp370 data available yet (only historical)
