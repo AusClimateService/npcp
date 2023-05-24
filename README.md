@@ -34,9 +34,9 @@ Naming conventions follow CORDEX wherever possible and can take the following va
   - `ECMWF-ERA5`: ERA5 reanalysis
   - `observations`: Australian gridded observations
 - `{downscaling-model}`  
-  - `BOM-BARPA-R`: Bureau of Meteorology Atmospheric Regional Projections for Australia
-  - `CSIRO-CCAM-2203`: Conformal Cubic Atmospheric Model (run by CSIRO)
-  - `DES-CCAM-2105` (run by QLD Department of Environment and Science)
+  - `BOM-BARPA-R`: Bureau of Meteorology Atmospheric Regional Projections for Australia (BARPA), run by BoM
+  - `CSIRO-CCAM-2203`: Conformal Cubic Atmospheric Model (CCAM), run by CSIRO
+  - `DES-CCAM-2105` Conformal Cubic Atmospheric Model (CCAM), run by QLD Department of Environment and Science
   - TODO [WRF run by NARCLiM / NSW Department of Planning and Environment]
   - `AGCD`: Australian Gridded Climate Data
   - `AWRA`: Australian Water Resource Assessment
