@@ -36,7 +36,7 @@ Naming conventions follow CORDEX wherever possible and can take the following va
 - `{downscaling-model}`  
   - `BOM-BARPA-R`: Bureau of Meteorology Atmospheric Regional Projections for Australia
   - `CSIRO-CCAM-2203`: Conformal Cubic Atmospheric Model (run by CSIRO)
-  - TODO [CCAM run by QLD Department of Environment and Science (DES)]
+  - `DES-CCAM-2105` (run by QLD Department of Environment and Science)
   - TODO [WRF run by NARCLiM / NSW Department of Planning and Environment]
   - `AGCD`: Australian Gridded Climate Data
   - `AWRA`: Australian Water Resource Assessment
@@ -82,12 +82,12 @@ An appropriate humidity related variable still to be defined and thus isn't cove
 | driving model | downscaling model | training (1980-1999) | assessment (2000-2019) | projection (2080-2099) |
 | ---           | ---               | :-:                  | :-:                    | :-:                    |
 | Observations | AGCD or AWRA | :green_circle: | :green_circle: | N/A |
-| ERA5 | BOM-BARPA-R | :green_circle: | :green_circle: | N/A |
+| ERA5 | BOM-BARPA | :green_circle: | :green_circle: | N/A |
 | | CSIRO-CCAM | :green_circle: | :green_circle: | N/A |
-| | QLD-CCAM | :white_circle: | :white_circle: | N/A |
+| | DES-CCAM | :white_circle: | :white_circle: | N/A |
 | | NSW-WRF | :white_circle: | :white_circle: | N/A |
-| ACCESS-ESM1-5 | BOM-BARPA-R | :green_circle: | :green_circle: | :green_circle: |
+| ACCESS-ESM1-5 | BOM-BARPA | :green_circle: | :green_circle: | :green_circle: |
 | | CSIRO-CCAM | :white_circle: | :white_circle: | :white_circle: |
-| | QLD-CCAM | :white_circle: | :white_circle: | :white_circle: |
+| | DES-CCAM | :white_circle: | :white_circle: | :white_circle: |
 | | NSW-WRF | :white_circle: | :white_circle: | :white_circle: |
 
