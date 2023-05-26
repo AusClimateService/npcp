@@ -16,6 +16,7 @@ var_to_cmor_name = {
     'latitude': 'lat',
     'longitude': 'lon',
     'wind': 'wsp',
+    'sfcWind': 'wsp',
     'solar_exposure_day': 'rsds',
 }
 

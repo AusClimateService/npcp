@@ -84,7 +84,7 @@ An appropriate humidity related variable still to be defined and thus isn't cove
 | Observations | AGCD or AWRA | :green_circle: | :green_circle: | N/A |
 | ERA5 | BOM-BARPA | :green_circle: | :green_circle: | N/A |
 | | CSIRO-CCAM | :green_circle: | :green_circle: | N/A |
-| | UQ-DES-CCAM | :white_circle: | :white_circle: | N/A |
+| | UQ-DES-CCAM | :green_circle: | :green_circle: | N/A |
 | | NSW-WRF | :white_circle: | :white_circle: | N/A |
 | ACCESS-ESM1-5 | BOM-BARPA | :green_circle: | :green_circle: | :green_circle: |
 | | CSIRO-CCAM | :white_circle: | :white_circle: | :white_circle: |
