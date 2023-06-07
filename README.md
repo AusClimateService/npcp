@@ -44,9 +44,9 @@ Naming conventions follow CORDEX wherever possible and can take the following va
   - `raw`: No bias correction applied (i.e. input data for bias correction)
   - `ecdfm`: Equi-distant/ratio CDF matching (Damien Irving; [Li et al 2010](https://doi.org/10.1029/2009JD012882), [Wang and Chen 2013](https://doi.org/10.1002/asl2.454))
   - `qme`: Quantile Matching for Extremes (Andrew Dowdy; [Dowdy 2020](https://doi.org/10.1071/ES20001))
-  - `mrnbc`: Multivariate Recursive Nesting Bias Correction (Arpit Kapoor; [Mehrotra et al 2018](https://doi.org/10.1016/j.envsoft.2018.02.010))
+  - `mrnbc`: Multivariate Recursive Nesting Bias Correction (Arpit Kapoor; [Mehrotra & Sharma 2015](https://doi.org/10.1016/j.jhydrol.2014.11.037))
   - `mbcn`: N-Dimensional Multi-Variate Bias Correction (Thi Lan Dao; [Cannon 2018](https://doi.org/10.1007/s00382-017-3580-6))
-  - `3dbc`: 3 Dimensional Bias Correction (Fei Ji; )
+  - `3dbc`: Three Dimensional Bias Correction (Fei Ji; [Mehrotra & Sharma 2019](https://doi.org/10.1029/2018WR023270))
 
 ### Data specifications (time periods, spatial grid, etc)
 
