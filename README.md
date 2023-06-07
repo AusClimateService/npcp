@@ -28,7 +28,7 @@ Naming conventions follow CORDEX wherever possible and can take the following va
   - `tasmax`: daily maximum surface air temperature
   - `tasmin`: daily minimum surface air temperature
   - `wsp`: surface (10m) wind speed
-  - TODO [humidity related variable still to be defined]
+  - [humidity related variable still to be defined]
 - `{driving-model}`  
   - `CSIRO-ACCESS-ESM1-5`: ACCESS-ESM1-5 CMIP6 submission
   - `ECMWF-ERA5`: ERA5 reanalysis
@@ -37,17 +37,16 @@ Naming conventions follow CORDEX wherever possible and can take the following va
   - `BOM-BARPA-R`: Bureau of Meteorology Atmospheric Regional Projections for Australia (BARPA), run by BoM
   - `CSIRO-CCAM-2203`: Conformal Cubic Atmospheric Model (CCAM), run by CSIRO
   - `UQ-DES-CCAM-2105` Conformal Cubic Atmospheric Model (CCAM), run by UQ and the QLD Department of Environment and Science
-  - TODO [WRF run by NARCLiM / NSW Department of Planning and Environment]
+  - `NARCLIM-WRF`: Weather Research and Forecasting (WRF) model, run by NARCLiM (NSW Australian Regional Climate Modelling)
   - `AGCD`: Australian Gridded Climate Data
   - `AWRA`: Australian Water Resource Assessment
 - `{bias-correction-method}`  
   - `raw`: No bias correction applied (i.e. input data for bias correction)
-  - `ecdfm`: Equi-distant/ratio CDF matching
-  - `qme`: Quantile Matching for Extremes
-  - `mrnbc`: Multivariate Recursive Nesting Bias Correction
-  - `cannon`: Multivariate Cannon method
-  - `3dbc`: 3 Dimensional Bias Correction
-  - Other methods??
+  - `ecdfm`: Equi-distant/ratio CDF matching (Damien Irving; [Li et al 2010](https://doi.org/10.1029/2009JD012882), [Wang and Chen 2013](https://doi.org/10.1002/asl2.454))
+  - `qme`: Quantile Matching for Extremes (Andrew Dowdy; [Dowdy 2020](https://doi.org/10.1071/ES20001))
+  - `mrnbc`: Multivariate Recursive Nesting Bias Correction (Arpit Kapoor; [Mehrotra et al 2018](https://doi.org/10.1016/j.envsoft.2018.02.010))
+  - `mbcn`: N-Dimensional Multi-Variate Bias Correction (Thi Lan Dao; [Cannon 2018](https://doi.org/10.1007/s00382-017-3580-6))
+  - `3dbc`: 3 Dimensional Bias Correction (Fei Ji; )
 
 ### Data specifications (time periods, spatial grid, etc)
 
@@ -85,9 +84,9 @@ An appropriate humidity related variable still to be defined and thus isn't cove
 | ERA5 | BOM-BARPA | :green_circle: | :green_circle: | N/A |
 | | CSIRO-CCAM | :green_circle: | :green_circle: | N/A |
 | | UQ-DES-CCAM | :green_circle: | :green_circle: | N/A |
-| | NSW-WRF | :white_circle: | :white_circle: | N/A |
+| | NARCLIM-WRF | :white_circle: | :white_circle: | N/A |
 | ACCESS-ESM1-5 | BOM-BARPA | :green_circle: | :green_circle: | :green_circle: |
 | | CSIRO-CCAM | :white_circle: | :white_circle: | :white_circle: |
 | | UQ-DES-CCAM | :green_circle: | :green_circle: | :green_circle: |
-| | NSW-WRF | :white_circle: | :white_circle: | :white_circle: |
+| | NARCLIM-WRF | :white_circle: | :white_circle: | :white_circle: |
 
