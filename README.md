@@ -85,9 +85,9 @@ An appropriate humidity related variable still to be defined and thus isn't cove
 | ERA5 | BOM-BARPA | :green_circle: | :green_circle: | N/A |
 | | CSIRO-CCAM | :green_circle: | :green_circle: | N/A |
 | | UQ-DES-CCAM | :green_circle: | :green_circle: | N/A |
-| | NARCLIM-WRF | :white_circle: | :white_circle: | N/A |
+| | NARCLIM-WRF | Available Aug 2023 | Available Aug 2023 | N/A |
 | ACCESS-ESM1-5 | BOM-BARPA | :green_circle: | :green_circle: | :green_circle: |
 | | CSIRO-CCAM | :white_circle: | :white_circle: | :white_circle: |
 | | UQ-DES-CCAM | :green_circle: | :green_circle: | :green_circle: |
-| | NARCLIM-WRF | :white_circle: | :white_circle: | :white_circle: |
+| | NARCLIM-WRF | Available Aug 2023 | Available Aug 2023 | Available Aug 2023 |
 
