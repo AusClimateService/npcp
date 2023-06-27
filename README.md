@@ -28,7 +28,6 @@ Naming conventions follow CORDEX wherever possible and can take the following va
   - `tasmax`: daily maximum surface air temperature
   - `tasmin`: daily minimum surface air temperature
   - `wsp`: surface (10m) wind speed
-  - [humidity related variable still to be defined]
 - `{driving-model}`  
   - `CSIRO-ACCESS-ESM1-5`: ACCESS-ESM1-5 CMIP6 submission
   - `ECMWF-ERA5`: ERA5 reanalysis
@@ -49,10 +48,9 @@ Naming conventions follow CORDEX wherever possible and can take the following va
   - `mbcn-qld`: N-Dimensional Multi-Variate Bias Correction, run by UQ-DES using R (Ralph Trancoso; [Cannon 2018](https://doi.org/10.1007/s00382-017-3580-6))
   - `3dbc`: Three Dimensional Bias Correction (Fei Ji; [Mehrotra & Sharma 2019](https://doi.org/10.1029/2018WR023270))
 
-### Data specifications (time periods, spatial grid, etc)
+### Input data specifications (time periods, spatial grid, etc)
 
-Daily timescale input data is provided for the
-training (1980-1999), assessment (2000-2019) and projection (2080-2099; excluding observational data) periods.
+Daily timescale input data is provided for the 1980-2019 and 2080-2099 periods.
 Model data corresponds to the CMIP6 historical experiment from 1980-2014 and ssp370 for 2015 onwards. 
 
 Each input data file has been pre-processed (using the `preprocess.py` script in this repository)
@@ -70,24 +68,32 @@ conservative regridding, which is the
 when upscaling from higher to lower horizontal resolution
 (the original observational and downscaled model data is all higher resolution than 0.2 degrees).
 
-Bias corrected daily data is ultimately produced for the 2000-2019 and 2080-2099 time periods
-on the common `NPCP-20i` grid.
-
 ### Input data availability
 
 Unless otherwise stated, the traffic lights in the following table
 summarise the availability of `pr`, `rsds`, `tasmax`, `tasmin` and `wsp` data.
-An appropriate humidity related variable still to be defined and thus isn't covered by this table yet.
 
-| driving model | downscaling model | training (1980-1999) | assessment (2000-2019) | projection (2080-2099) |
-| ---           | ---               | :-:                  | :-:                    | :-:                    |
-| Observations | AGCD or AWRA | :green_circle: | :green_circle: | N/A |
-| ERA5 | BOM-BARPA | :green_circle: | :green_circle: | N/A |
-| | CSIRO-CCAM | :green_circle: | :green_circle: | N/A |
-| | UQ-DES-CCAM | :green_circle: | :green_circle: | N/A |
-| | NARCLIM-WRF | Available Aug 2023 | Available Aug 2023 | N/A |
-| ACCESS-ESM1-5 | BOM-BARPA | :green_circle: | :green_circle: | :green_circle: |
-| | CSIRO-CCAM | :white_circle: | :white_circle: | :white_circle: |
-| | UQ-DES-CCAM | :green_circle: | :green_circle: | :green_circle: |
-| | NARCLIM-WRF | Available Aug 2023 | Available Aug 2023 | Available Aug 2023 |
+| driving model | downscaling model | 1980-2019 | 2080-2099 |
+| ---           | ---               | :-:       | :-:       |
+| Observations | AGCD or AWRA | :green_circle: | N/A |
+| ERA5 | BOM-BARPA | :green_circle: | N/A |
+| | CSIRO-CCAM | :green_circle: | N/A |
+| | UQ-DES-CCAM | :green_circle: | N/A |
+| | NARCLIM-WRF | Available Aug 2023 | N/A |
+| ACCESS-ESM1-5 | BOM-BARPA | :green_circle: | :green_circle: |
+| | CSIRO-CCAM  | :white_circle: | :white_circle: |
+| | UQ-DES-CCAM | :green_circle: | :green_circle: |
+| | NARCLIM-WRF | Available Aug 2023 | Available Aug 2023 |
+
+## Bias correction tasks
+
+### Phase 1
+
+Phase 1 of the intercomparison will focus on daily timescale
+`tasmax`, `tasmin` and `pr` data on the `NPCP-20i` grid.
+
+The three tasks for this phase are as follows:
+1. **Historical:** Produce bias corrected data for the 2000-2019 period, using 1980-1999 as a training period.
+2. **Projection:** Produce bias corrected data for the 2080-2099 period, using 1980-1999 as a training period.
+3. **Cross validation:** Produce bias corrected data for even years from 1980-2019 (i.e. every second year), using odd years from 1980-2019 as training data.
 
