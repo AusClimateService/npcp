@@ -18,7 +18,7 @@ https://my.nci.org.au/mancini/project/ia39
 
 The data is archived using the following directoruy structure:  
 ```
-/g/data/ia39/npcp/data/{variable}/{driving-model}/{downscaling-model}/{bias-correction-method}/
+/g/data/ia39/npcp/data/{variable}/{driving-model}/{downscaling-model}/{bias-correction-method}/{task}
 ```
 
 Naming conventions follow CORDEX wherever possible and can take the following values:  
@@ -47,6 +47,11 @@ Naming conventions follow CORDEX wherever possible and can take the following va
   - `mbcn-bom`: N-Dimensional Multi-Variate Bias Correction, run by BoM using Python/xclim (Thi Lan Dao; [Cannon 2018](https://doi.org/10.1007/s00382-017-3580-6))
   - `mbcn-qld`: N-Dimensional Multi-Variate Bias Correction, run by UQ-DES using R (Ralph Trancoso; [Cannon 2018](https://doi.org/10.1007/s00382-017-3580-6))
   - `3dbc`: Three Dimensional Bias Correction (Fei Ji; [Mehrotra & Sharma 2019](https://doi.org/10.1029/2018WR023270))
+- `{task}`
+  - `task-historical`: See "historical" bias correction task defined below
+  - `task-projection`: See "projection" bias correction task defined below
+  - `task-xvalidation`: See "cross validation" bias correction task defined below
+  - `task-reference`: Reference data for bias correction tasks 
 
 ### Input data specifications (time periods, spatial grid, etc)
 
