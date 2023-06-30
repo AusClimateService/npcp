@@ -129,3 +129,8 @@ Bias corrected data files written to `ia39` for each task should look something 
 The files have the same reference syntax as the input files with an additional field
 after the final `_` indicating the bias correction method and the start and end time
 for the training period.
+
+### Phase 2
+
+There might be an opportunity for a second phase of the intercomparison.
+Ideas for that phase are being collected at https://github.com/AusClimateService/npcp/issues/3.
