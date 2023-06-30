@@ -76,11 +76,11 @@ when upscaling from higher to lower horizontal resolution
 ### Input data availability
 
 Unless otherwise stated, the traffic lights in the following table
-summarise the availability of `pr`, `rsds`, `tasmax`, `tasmin` and `wsp` data.
+summarise the availability of `pr`, `tasmax` and `tasmin` data.
 
 | driving model | downscaling model | 1980-2019 | 2080-2099 |
 | ---           | ---               | :-:       | :-:       |
-| Observations | AGCD or AWRA | :green_circle: | N/A |
+| Observations | AGCD | :green_circle: | N/A |
 | ERA5 | BOM-BARPA | :green_circle: | N/A |
 | | CSIRO-CCAM | :green_circle: | N/A |
 | | UQ-DES-CCAM | :green_circle: | N/A |
@@ -92,6 +92,15 @@ summarise the availability of `pr`, `rsds`, `tasmax`, `tasmin` and `wsp` data.
 
 ## Bias correction tasks
 
+Researchers who are interested in participting in the intercomparison project
+(i.e. by applying their bias correction method/code)
+are required to complete the tasks described below.
+
+You'll need to apply for access to the
+[NCI project ia39 writers group](https://my.nci.org.au/mancini/project/ia39_w) (ia39_w)
+in order write your bias corrected data files to `/g/data/ia39/npcp/data/`
+following the data reference syntax described above.
+
 ### Phase 1
 
 Phase 1 of the intercomparison will focus on daily timescale
@@ -102,7 +111,16 @@ The three tasks for this phase are as follows:
 2. **Projection:** Produce bias corrected data for the 2080-2099 period, using 1980-1999 as a training period.
 3. **Cross validation:** Produce bias corrected data for even years from 1980-2019 (i.e. every second year), using odd years from 1980-2019 as training data.
 
-An example of an output file for each of these three tasks is as follows:
+The training data for each variable is the AGCD data archived at `/g/data/ia39/npcp/data/`
+following the data reference syntax described above.
+
+The model data requiring bias correction is the dynamically downscaled
+BOM-BARPA-R, CSIRO-CCAM-2203, UQ-DES-CCAM-2105 and NARCLIM-WRF data
+for both the ECMWF-ERA5 and CSIRO-ACCESS-ESM1-5 parent models.
+Check the input data availability table above for an indication of
+which combinations of downscaling and parent models are available.
+
+Bias corrected data files written to `ia39` for each task should look something like the following examples:
 1. `/g/data/ia39/npcp/data/tasmax/CSIRO-ACCESS-ESM1-5/UQ-DES-CCAM-2105/ecdfm/task-historical/tasmax_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM-2105_v1_day_20000101-20191231_ecdfm-19800101-19991231.nc`
 2. `/g/data/ia39/npcp/data/tasmax/CSIRO-ACCESS-ESM1-5/UQ-DES-CCAM-2105/ecdfm/task-projection/tasmax_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM-2105_v1_day_20800101-20991231_ecdfm-19800101-19991231.nc`
 3. `/g/data/ia39/npcp/data/tasmax/CSIRO-ACCESS-ESM1-5/UQ-DES-CCAM-2105/ecdfm/task-xvalidation/tasmax_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM-2105_v1_day_19800101-20181231-even-years_ecdfm-19810101-20191231-odd-years.nc`
