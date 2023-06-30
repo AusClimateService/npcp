@@ -96,10 +96,11 @@ Researchers who are interested in participting in the intercomparison project
 (i.e. by applying their bias correction method/code)
 are required to complete the tasks described below.
 
-You'll need to apply for access to the
-[NCI project ia39 writers group](https://my.nci.org.au/mancini/project/ia39_w) (ia39_w)
-in order write your bias corrected data files to `/g/data/ia39/npcp/data/`
-following the data reference syntax described above.
+In order write your bias corrected data files to `/g/data/ia39/npcp/data/`
+(following the data reference syntax described above),
+you'll need to apply for access to the
+NCI project ia39 writers group (ia39_w) at the following link:  
+https://my.nci.org.au/mancini/project/ia39_w
 
 ### Phase 1
 
