@@ -31,7 +31,7 @@ elif [ "${exp}" == "ssp370" ]; then
     vfiles=($(ls ${indir}/vas/vas_AUS-15_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_BOM-BARPA-R_v1_day_201*.nc ${indir}/vas/vas_AUS-15_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_BOM-BARPA-R_v1_day_20{8,9}*.nc))
 fi
 
-outdir=/g/data/ia39/npcp/data/wsp/${parent_model}/BOM-BARPA-R/raw
+outdir=/g/data/ia39/npcp/data/wsp/${parent_model}/BOM-BARPA-R/raw/task-reference
 command1="mkdir -p ${outdir}"
 echo ${command1}
 ${command1}
@@ -42,6 +42,8 @@ for (( i=0; i<${#ufiles[*]}; ++i)); do
     ufile=`basename ${upath}`
     temp_file=`echo ${ufile} | sed s:uas:wsp:`
     outfile=`echo ${temp_file} | sed s:AUS-15:NPCP-20i:`
+    outfile=`echo ${outfile} | sed s:12.nc:1231.nc:`
+    outfile=`echo ${outfile} | sed s:01-:0101-:`
     temp_path=${outdir}/${temp_file}
     outpath=${outdir}/${outfile}
 

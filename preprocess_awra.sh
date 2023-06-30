@@ -22,17 +22,17 @@ fi
 indir=/g/data/fj8/BoM/AWRA/DATA/CLIMATE/${var}
 infiles=($(ls ${indir}/${var}_19{8,9}*.nc ${indir}/${var}_20{0,1}*.nc))
 
-outdir=/g/data/ia39/npcp/data/${cmor_var}/observations/AWRA/raw
+outdir=/g/data/ia39/npcp/data/${cmor_var}/observations/AWRA/raw/task-reference
 command1="mkdir -p ${outdir}"
 echo ${command1}
 ${command1}
 
 for infile in "${infiles[@]}"; do
     year=`echo $infile | cut -d'.' -f 1 | rev | cut -d'_' -f 1 | rev`
-    outfile=${outdir}/${cmor_var}_NPCP-20i_AWRA_day_${year}01-${year}12.nc
+    outfile=${outdir}/${cmor_var}_NPCP-20i_AWRA_day_${year}0101-${year}1231.nc
     if [ "${var}" == "wind" ]; then
         profile=${script_dir}/davenport-vertical-wind-profile-parameters-0.05-mean.h5
-        temp_file=${outdir}/${var}-10m_gn_AWRA_day_${year}01-${year}12.nc
+        temp_file=${outdir}/${var}-10m_gn_AWRA_day_${year}0101-${year}1231.nc
         command2="${python} ${script_dir}/wind_2m_to_10m.py ${infile} ${var} ${profile} ${temp_file}"
         echo ${command2}
         ${command2}

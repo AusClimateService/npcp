@@ -30,7 +30,7 @@ elif [ "${exp}" == "ssp370" ]; then
     infiles=($(ls ${indir}/${var}_AUS-15_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_BOM-BARPA-R_v1_day_201*.nc ${indir}/${var}_AUS-15_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_BOM-BARPA-R_v1_day_20{8,9}*.nc))
 fi
 
-outdir=/g/data/ia39/npcp/data/${var}/${parent_model}/BOM-BARPA-R/raw
+outdir=/g/data/ia39/npcp/data/${var}/${parent_model}/BOM-BARPA-R/raw/task-reference
 command1="mkdir -p ${outdir}"
 echo ${command1}
 ${command1}
@@ -38,6 +38,8 @@ ${command1}
 for inpath in "${infiles[@]}"; do
     infile=`basename ${inpath}`
     outfile=`echo ${infile} | sed s:AUS-15:NPCP-20i:`
+    outfile=`echo ${outfile} | sed s:12.nc:1231.nc:`
+    outfile=`echo ${outfile} | sed s:01-:0101-:`
     command2="${python} ${script_dir}/preprocess.py ${inpath} ${var} ${outdir}/${outfile}"
     echo ${command2}    
     ${command2}

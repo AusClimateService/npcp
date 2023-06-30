@@ -36,7 +36,7 @@ elif [ "${exp}" == "ssp370" ]; then
     infiles=($(ls ${indir}/${var}_AUS-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM_v1_day_201*.nc ${indir}/${var}_AUS-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM_v1_day_20{8,9}*.nc))
 fi
 
-outdir=/g/data/ia39/npcp/data/${cmor_var}/${parent_model}/UQ-DES-CCAM-2105/raw
+outdir=/g/data/ia39/npcp/data/${cmor_var}/${parent_model}/UQ-DES-CCAM-2105/raw/task-reference
 command1="mkdir -p ${outdir}"
 echo ${command1}
 ${command1}
