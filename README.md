@@ -102,3 +102,11 @@ The three tasks for this phase are as follows:
 2. **Projection:** Produce bias corrected data for the 2080-2099 period, using 1980-1999 as a training period.
 3. **Cross validation:** Produce bias corrected data for even years from 1980-2019 (i.e. every second year), using odd years from 1980-2019 as training data.
 
+An example of an output file for each of these three tasks is as follows:
+1. `/g/data/ia39/npcp/data/tasmax/CSIRO-ACCESS-ESM1-5/UQ-DES-CCAM-2105/ecdfm/task-historical/tasmax_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM-2105_v1_day_20000101-20191231_ecdfm-19800101-19991231.nc`
+2. `/g/data/ia39/npcp/data/tasmax/CSIRO-ACCESS-ESM1-5/UQ-DES-CCAM-2105/ecdfm/task-projection/tasmax_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM-2105_v1_day_20800101-20991231_ecdfm-19800101-19991231.nc`
+3. `/g/data/ia39/npcp/data/tasmax/CSIRO-ACCESS-ESM1-5/UQ-DES-CCAM-2105/ecdfm/task-xvalidation/tasmax_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM-2105_v1_day_19800101-20181231-even-years_ecdfm-19810101-20191231-odd-years.nc`
+
+The files have the same reference syntax as the input files with an additional field
+after the final `_` indicating the bias correction method and the start and end time
+for the training period.
