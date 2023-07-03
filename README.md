@@ -122,13 +122,13 @@ Check the input data availability table above for an indication of
 which combinations of downscaling and parent models are available.
 
 Bias corrected data files written to `ia39` for each task should look something like the following examples:
-1. `/g/data/ia39/npcp/data/tasmax/CSIRO-ACCESS-ESM1-5/UQ-DES-CCAM-2105/ecdfm/task-historical/tasmax_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM-2105_v1_day_20000101-20191231_ecdfm-19800101-19991231.nc`
-2. `/g/data/ia39/npcp/data/tasmax/CSIRO-ACCESS-ESM1-5/UQ-DES-CCAM-2105/ecdfm/task-projection/tasmax_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM-2105_v1_day_20800101-20991231_ecdfm-19800101-19991231.nc`
-3. `/g/data/ia39/npcp/data/tasmax/CSIRO-ACCESS-ESM1-5/UQ-DES-CCAM-2105/ecdfm/task-xvalidation/tasmax_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM-2105_v1_day_19800101-20181231-even-years_ecdfm-19810101-20191231-odd-years.nc`
+1. `/g/data/ia39/npcp/data/tasmax/CSIRO-ACCESS-ESM1-5/UQ-DES-CCAM-2105/ecdfm/task-historical/tasmax_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM-2105_v1_day_20000101-20191231_ecdfm-AGCD-19800101-19991231.nc`
+2. `/g/data/ia39/npcp/data/tasmax/CSIRO-ACCESS-ESM1-5/UQ-DES-CCAM-2105/ecdfm/task-projection/tasmax_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM-2105_v1_day_20800101-20991231_ecdfm-AGCD-19800101-19991231.nc`
+3. `/g/data/ia39/npcp/data/tasmax/CSIRO-ACCESS-ESM1-5/UQ-DES-CCAM-2105/ecdfm/task-xvalidation/tasmax_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM-2105_v1_day_19800101-20181231-even-years_ecdfm-AGCD-19810101-20191231-odd-years.nc`
 
 The files have the same reference syntax as the input files with an additional field
-after the final `_` indicating the bias correction method and the start and end time
-for the training period.
+after the final `_` indicating the bias correction method, observational dataset
+and the start and end time for the training period.
 
 ### Phase 2
 
