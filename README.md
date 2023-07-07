@@ -111,7 +111,7 @@ The four tasks for this phase are as follows:
 1. **Historical:** Produce bias corrected data for the 2000-2019 period, using 1980-1999 as a training period.
 2. **Projection:** Produce bias corrected data for the 2080-2099 period, using 1980-1999 as a training period.
 3. **Cross validation:** Produce bias corrected data for even years from 1980-2019 (i.e. every second year), using odd years from 1980-2019 as training data.
-4. **Documentation:**  
+4. **Documentation:** Submit a pull request to this repo to add a summary of how your bias correction method works and the details/location of code used to implement it to the [methods](https://github.com/AusClimateService/npcp/tree/master/methods) subdirectory. 
 
 The training data for each variable is the AGCD data archived at `/g/data/ia39/npcp/data/`
 following the data reference syntax described above.
