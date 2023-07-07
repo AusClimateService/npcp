@@ -107,10 +107,11 @@ https://my.nci.org.au/mancini/project/ia39_w
 Phase 1 of the intercomparison will focus on daily timescale
 `tasmax`, `tasmin` and `pr` data on the `NPCP-20i` grid.
 
-The three tasks for this phase are as follows:
+The four tasks for this phase are as follows:
 1. **Historical:** Produce bias corrected data for the 2000-2019 period, using 1980-1999 as a training period.
 2. **Projection:** Produce bias corrected data for the 2080-2099 period, using 1980-1999 as a training period.
 3. **Cross validation:** Produce bias corrected data for even years from 1980-2019 (i.e. every second year), using odd years from 1980-2019 as training data.
+4. **Documentation:**  
 
 The training data for each variable is the AGCD data archived at `/g/data/ia39/npcp/data/`
 following the data reference syntax described above.
@@ -129,6 +130,8 @@ Bias corrected data files written to `ia39` for each task should look something 
 The files have the same reference syntax as the input files with an additional field
 after the final `_` indicating the bias correction method, observational dataset
 and the start and end time for the training period.
+
+
 
 ### Phase 2
 
