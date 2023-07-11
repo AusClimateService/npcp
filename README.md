@@ -44,8 +44,8 @@ Naming conventions follow CORDEX wherever possible and can take the following va
   - `ecdfm`: Equi-distant/ratio CDF matching (Damien Irving; [Li et al 2010](https://doi.org/10.1029/2009JD012882), [Wang and Chen 2013](https://doi.org/10.1002/asl2.454))
   - `qme`: Quantile Matching for Extremes (Andrew Dowdy & Justin Peter; [Dowdy 2020](https://doi.org/10.1071/ES20001))
   - `mrnbc`: Multivariate Recursive Nesting Bias Correction (Arpit Kapoor; [Mehrotra & Sharma 2015](https://doi.org/10.1016/j.jhydrol.2014.11.037))
-  - `mbcn-bom`: N-Dimensional Multi-Variate Bias Correction, run by BoM using Python/xclim (Thi Lan Dao; [Cannon 2018](https://doi.org/10.1007/s00382-017-3580-6))
-  - `mbcn-qld`: N-Dimensional Multi-Variate Bias Correction, run by UQ-DES using R (Ralph Trancoso; [Cannon 2018](https://doi.org/10.1007/s00382-017-3580-6))
+  - `mbcn`: N-Dimensional Multi-Variate Bias Correction (Thi Lan Dao; [Cannon 2018](https://doi.org/10.1007/s00382-017-3580-6))
+  - `mbcp`: Multi-Variate Bias Correction (using Pearman correlation) (Ralph Trancoso; [Cannon 2016](https://doi.org/10.1175/JCLI-D-15-0679.1))
   - `3dbc`: Three Dimensional Bias Correction (Fei Ji; [Mehrotra & Sharma 2019](https://doi.org/10.1029/2018WR023270))
 - `{task}`
   - `task-historical`: See "historical" bias correction task defined below
