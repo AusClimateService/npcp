@@ -2,12 +2,14 @@
 
 ## Method
 
-The first step in any bias correction prodcedure involves establishing a statistical relationship or transfer function between model outputs and observations over a reference (i.e. historical/training) time period.
-The established transfer function is then applied to the target model data (e.g. future model projections) in order to produce a "bias corrected" model time series.
+The first step in any bias correction prodcedure involves establishing a statistical relationship or transfer function
+between model outputs and observations over a reference (i.e. historical/training) time period.
+The established transfer function is then applied to the target model data (e.g. future model projections)
+in order to produce a "bias corrected" model time series.
 
 Many bias correction procudures are quantile based,
 meaning the model data are corrected on a quantile by quantile basis.
-In *equidistant cumulative density function matching* (EDCFm; [Li et al, 2010](https://doi.org/10.1029/2009JD012882)),
+In *equidistant cumulative density function matching* (ECDFm; [Li et al, 2010](https://doi.org/10.1029/2009JD012882)),
 the transfer function represents the distance (i.e. arithmetic difference)
 between the observations and model for each quantile of the training period.
 Those differences are then added to the target model data
@@ -34,9 +36,6 @@ is used:
 
 $$x_{m-adjust} = x_{m,p} \times (F_{o,h}^{-1}(F_{m,p}(x_{m,p})) \div F_{m,h}^{-1}(F_{m,p}(x_{m,p})))$$
 
-It is generally accepted that non-parametric quantile mapping is best for bias correction,
-so ECDFm is usually applied without fitting a parametric distribution to the data first.
-
 ## Code
 
 ### Location
@@ -45,16 +44,34 @@ https://github.com/climate-innovation-hub/qqscale
 
 ### Application of the method
 
-There are choices to make when applying EDCDFm (or EQCDFm) relating to how many quantiles to calculate,
-how to interpolate between those quantiles,
-and whether to apply any temporal grouping (e.g. to process individual seasons or months separately).
-We chose to calculate 100 quantiles and to apply nearest neighbour interpolation for data points
-that fall between two quantiles. 
-Linear and cubic interpolation is much more computationally expensive and produces very similar
-results to nearest neighbour.
-We apply monthly time grouping (i.e. process each month separately).
-Again, something like a 30-day running window is far more computationally expensive
-and produces similar results to monthly grouping.
+There are a number of choices to make when applying EDCDFm (or EQCDFm): 
+- *Parametric or non-parametric*:
+  It is generally accepted that non-parametric quantile mapping is best for bias correction,
+  so ECDFm is usually applied without fitting a parametric distribution to the data first.
+  We take a non-parametric / empirical approach.
+- *Downscaling (when and how)*:
+  Model data is usually on a coarser spatial grid than observations.
+  Some authors downscale the model data first
+  (via simple spatial interpolation, statistical downscaling or dynamical downscaling)
+  and then perform bias correction.
+  Others upscale the observations,
+  perform the bias correction on the model grid
+  and then downscale the bias corrected model data.   
+  We do the former and downscale the model data first using bilinear interpolation.
+- *Qunatiles (number and interpolation)*:
+  We chose to calculate 100 quantiles
+  and to apply nearest neighbour interpolation to determine the adjustment factor
+  for target data points that fall between two quantiles. 
+  Linear and cubic interpolation is much more computationally expensive
+  and produces very similar results to nearest neighbour.
+- *Time grouping*:
+  It is common to bias correct individual seasons or months separately
+  to avoid conflating different times of the year
+  (e.g. spring and autumn temperature often occupy the same annual quantile space
+  but may be biased in different ways).
+  We apply monthly time grouping (i.e. process each month separately).
+  Again, something like a 30-day running window is far more computationally expensive
+  and produces similar results to monthly grouping.
 
 ### Performance
 
