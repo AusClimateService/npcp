@@ -35,7 +35,7 @@ is used:
 $$x_{m-adjust} = x_{m,p} \times (F_{o,h}^{-1}(F_{m,p}(x_{m,p})) \div F_{m,h}^{-1}(F_{m,p}(x_{m,p})))$$
 
 It is generally accepted that non-parametric quantile mapping is best for bias correction,
-so ECDFM is usually applied without fitting a parametric distribution to the data first.
+so ECDFm is usually applied without fitting a parametric distribution to the data first.
 
 ## Code
 
