@@ -2,24 +2,36 @@
 
 ## Method
 
-This method of quantile mapping has been referred to in the literature as 
-*equidistant CDF matching* (EDCDFm; in the case of additive bias correction; [Li et al, 2010](https://doi.org/10.1029/2009JD012882)) or
-*equiratio CDF matching* (EQCDFm; in the case of multiplicative bias correction; [Wang and Chen, 2013](https://doi.org/10.1002/asl2.454)).
+The first step in any bias correction prodcedure involves establishing a statistical relationship or transfer function between model outputs and observations over a reference (i.e. historical/training) time period.
+The established transfer function is then applied to the target model data (e.g. future model projections) in order to produce a "bias corrected" model time series.
 
-Following the notation in [Cannon et al. (2015)](https://doi.org/10.1175/JCLI-D-14-00754.1),
-let $F_{m,p}$, $F_{m,h}$ and $F_{o,h}$ denote, respectively,
-the CDF from model *m* in future period *p* (or actually any model period to be bias corrected),
-the CDF from model *m* in the historical period *h* and
-the CDF from the reference data *o* in the historical period *h*.
-Let $x_{m,p}$ be a modelled future value at time *t*,
-and let $x_{m,p}^a$ be the associated adjusted value for the same future date.
-In addition, let $τ_{m,p}$ denote the non-exceedance probability associated with $x_{m,p}$,
-such that $τ_{m,p} = F_{m,p}[x_{m,p}].F^{−1}$ represents the inverse CDF.
-The adjusted value is defined as follows for an additive variable:
-$$x_{m,p}^a(t) = x_{m,p}(t) + (F_{o,h}^{-1}[τ_{m,p}] - F_{m,h}^{-1}[τ_{m,p}])$$
-In other words, the adjusted value is the original value plus the bias.
-For a multiplicative variable such as precipitation,
-the right hand side in those equations becomes multiplicative rather than additive.
+Many bias correction procudures are quantile based,
+meaning the model data are corrected on a quantile by quantile basis.
+In *equidistant cumulative density function matching* (EDCFm; [Li et al, 2010](https://doi.org/10.1029/2009JD012882)),
+the transfer function represents the distance (i.e. arithmetic difference)
+between the observations and model for each quantile of the training period.
+Those differences are then added to the target model data
+according to the quantile each target data point represents over the target period.
+For instance, if a target value of 25 degrees Celsius corresponds to the 0.1 quantile in the target data,
+the difference between the 0.1 quantile value in the observations and reference model data
+is added to the target value in order to obtain the bias adjusted value.
+The underlying assumption is that the distance between the model and observed quantiles during the training period
+also applies to the target period, hence the name "equidistant."
+
+The reference to "CDF matching" is clear from the mathematical representation of the method:
+$$x_{m-adjust} = x_{m,p} + F_{o,h}^{-1}(F_{m,p}(x_{m,p})) - F_{m,h}^{-1}(F_{m,p}(x_{m,p}))$$
+
+where $F$ is the CDF of either the observations ($o$) or model ($m$) for a historic training period ($h$) or target period ($p$).
+That means $F_{o,h}^{-1}$ and $F_{m,h}^{-1}$ are the quantile functions (inverse CDF) corresponding to the observations and model respectively.
+Given that a quantile of a random variable is a real number $x_p$ satisfying $F(x_p) = p$ ($p$ is probability in this case),
+a quantile function expresses the quantile values as a function of probabilities.
+
+For variables like precipitation, multiplicative as opposed to additive bias correction is preferred
+to avoid the possibility of getting bias corrected values less than zero.
+In this case, *equiratio CDF matching* (EQCDFm; [Wang and Chen, 2013](https://doi.org/10.1002/asl2.454))
+is used:
+
+$$x_{m-adjust} = x_{m,p} \times (F_{o,h}^{-1}(F_{m,p}(x_{m,p})) \div F_{m,h}^{-1}(F_{m,p}(x_{m,p})))$$
 
 ## Code
 
