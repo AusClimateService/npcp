@@ -2,7 +2,7 @@
 
 ## Method
 
-See: https://github.com/climate-innovation-hub/qqscale/blob/master/method_ecdfm.md.
+See: https://github.com/climate-innovation-hub/qqscale/blob/master/docs/method_ecdfm.md
 
 ## Code
 
@@ -12,4 +12,4 @@ See: https://github.com/climate-innovation-hub/qqscale
 
 ### Performance
 
-TODO.
+See: https://github.com/climate-innovation-hub/qqscale/tree/master#performance
