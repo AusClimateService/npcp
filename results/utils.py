@@ -71,7 +71,7 @@ def get_npcp_data(
     
     assert variable in ['tasmax', 'tasmin', 'pr']
     assert driving_model in ['observations', 'CSIRO-ACCESS-ESM1-5', 'ECMWF-ERA5']
-    assert downscaling_model in ['AGCD', 'BOM-BARPA-R', 'UQ-DES-CCAM-2015', 'GCM']
+    assert downscaling_model in ['AGCD', 'BOM-BARPA-R', 'UQ-DES-CCAM-2105', 'GCM']
     assert bias_correction_method in ['raw', 'ecdfm', 'qme']
     assert task in ['task-reference', 'task-projection', 'task-historical', 'task-xvalidation']
     assert region in ['AU', 'NA', 'SA', 'EA', 'R']
