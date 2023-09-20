@@ -10,7 +10,7 @@ If you'd like to contribute a notebook for a particular metric or suggest a new 
 you can open an issue to discuss [here](https://github.com/AusClimateService/npcp/issues).
 
 
-# References:
+### References:
 Vogel, E., Johnson, F., Marshall, L., Bende-Michl, U., Wilson, L., Peter, J.R., Wasko, C., Srikanthan, S., Sharples, W., Dowdy, A. and Hope, P., 2023. 
 An evaluation framework for downscaling and bias correction in climate change impact studies. Journal of Hydrology, p.129693.
 
