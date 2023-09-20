@@ -3,7 +3,7 @@
 Results from the intercomparison will be progressively added to this directory.
 The basic idea is that there's a separate jupyter notebook displaying results for each different evaluation metric.
 
-The evaluation metrics calculated here, are for the most part a combination of the evaluation metrics used in Vogel et al. (2023) and Schroeter et al. (2023; Manuscript in preparation).
+The evaluation metrics calculated here, are for the most part a combination of the evaluation metrics used in [Vogel et al. (2023)](https://doi.org/10.1016/j.jhydrol.2023.129693) and Schroeter et al. (2023; Manuscript in preparation).
 
 We're keeping track of the metrics still to come [here](https://github.com/AusClimateService/npcp/issues/8).
 If you'd like to contribute a notebook for a particular metric or suggest a new metric,
