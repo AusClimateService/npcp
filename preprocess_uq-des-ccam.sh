@@ -29,11 +29,11 @@ if [ "${exp}" == "evaluation" ]; then
 elif [ "${exp}" == "historical" ]; then
     parent_model=CSIRO-ACCESS-ESM1-5
     indir=/g/data/xv83/jis554/UQ-DES/CSIRO-ACCESS-ESM1-5/historical/r6i1p1f1/UQ-DES-CCAM/v1/day/${var}
-    infiles=($(ls ${indir}/${var}_AUS-20i_CSIRO-ACCESS-ESM1-5_historical_r6i1p1f1_UQ-DES-CCAM_v1_day_19{8,9}*.nc ${indir}/${var}_AUS-20i_CSIRO-ACCESS-ESM1-5_historical_r6i1p1f1_UQ-DES-CCAM_v1_day_20{0,1}*.nc))
+    infiles=($(ls ${indir}/${var}_AUS-20i_CSIRO-ACCESS-ESM1-5_historical_r6i1p1f1_UQ-DES-CCAM_v1_day_19{6,7,8,9}*.nc ${indir}/${var}_AUS-20i_CSIRO-ACCESS-ESM1-5_historical_r6i1p1f1_UQ-DES-CCAM_v1_day_20{0,1}*.nc))
 elif [ "${exp}" == "ssp370" ]; then
     parent_model=CSIRO-ACCESS-ESM1-5
     indir=/g/data/xv83/jis554/UQ-DES/CSIRO-ACCESS-ESM1-5/ssp370/r6i1p1f1/UQ-DES-CCAM/v1/day/${var}
-    infiles=($(ls ${indir}/${var}_AUS-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM_v1_day_201*.nc ${indir}/${var}_AUS-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM_v1_day_20{8,9}*.nc))
+    infiles=($(ls ${indir}/${var}_AUS-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM_v1_day_201*.nc ${indir}/${var}_AUS-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM_v1_day_20{6,7,8,9}*.nc))
 fi
 
 outdir=/g/data/ia39/npcp/data/${cmor_var}/${parent_model}/UQ-DES-CCAM-2105/raw/task-reference

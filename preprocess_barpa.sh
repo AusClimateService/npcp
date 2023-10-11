@@ -23,11 +23,11 @@ if [ "${exp}" == "evaluation" ]; then
 elif [ "${exp}" == "historical" ]; then
     parent_model=CSIRO-ACCESS-ESM1-5
     indir=/g/data/ia39/australian-climate-service/release/CORDEX-CMIP6/output/AUS-15/BOM/CSIRO-ACCESS-ESM1-5/historical/r6i1p1f1/BOM-BARPA-R/v1/day/${var}
-    infiles=($(ls ${indir}/${var}_AUS-15_CSIRO-ACCESS-ESM1-5_historical_r6i1p1f1_BOM-BARPA-R_v1_day_19{8,9}*.nc ${indir}/${var}_AUS-15_CSIRO-ACCESS-ESM1-5_historical_r6i1p1f1_BOM-BARPA-R_v1_day_20{0,1}*.nc))
+    infiles=($(ls ${indir}/${var}_AUS-15_CSIRO-ACCESS-ESM1-5_historical_r6i1p1f1_BOM-BARPA-R_v1_day_19{6,7,8,9}*.nc ${indir}/${var}_AUS-15_CSIRO-ACCESS-ESM1-5_historical_r6i1p1f1_BOM-BARPA-R_v1_day_20{0,1}*.nc))
 elif [ "${exp}" == "ssp370" ]; then
     parent_model=CSIRO-ACCESS-ESM1-5
     indir=/g/data/ia39/australian-climate-service/release/CORDEX-CMIP6/output/AUS-15/BOM/CSIRO-ACCESS-ESM1-5/ssp370/r6i1p1f1/BOM-BARPA-R/v1/day/${var}
-    infiles=($(ls ${indir}/${var}_AUS-15_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_BOM-BARPA-R_v1_day_201*.nc ${indir}/${var}_AUS-15_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_BOM-BARPA-R_v1_day_20{8,9}*.nc))
+    infiles=($(ls ${indir}/${var}_AUS-15_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_BOM-BARPA-R_v1_day_201*.nc ${indir}/${var}_AUS-15_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_BOM-BARPA-R_v1_day_20{6,7,8,9}*.nc))
 fi
 
 outdir=/g/data/ia39/npcp/data/${var}/${parent_model}/BOM-BARPA-R/raw/task-reference

@@ -25,7 +25,7 @@ elif [ "${var}" == "precip" ]; then
 fi
 
 indir=/g/data/zv2/agcd/v1-0-1/${var}/${time_agg}/r005/01day
-infiles=($(ls ${indir}/agcd_v1-0-1_${var}_${time_agg}_r005_daily_19{8,9}*.nc ${indir}/agcd_v1-0-1_${var}_${time_agg}_r005_daily_20{0,1}*.nc))
+infiles=($(ls ${indir}/agcd_v1-0-1_${var}_${time_agg}_r005_daily_19{6,7,8,9}*.nc ${indir}/agcd_v1-0-1_${var}_${time_agg}_r005_daily_20{0,1}*.nc))
 
 outdir=/g/data/ia39/npcp/data/${cmor_var}/observations/AGCD/raw/task-reference
 command1="mkdir -p ${outdir}"
