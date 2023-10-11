@@ -55,8 +55,8 @@ Naming conventions follow CORDEX wherever possible and can take the following va
 
 ### Input data specifications (time periods, spatial grid, etc)
 
-Daily timescale input data is provided for the 1980-2019 and 2080-2099 periods.
-Model data corresponds to the CMIP6 historical experiment from 1980-2014 and ssp370 for 2015 onwards. 
+Daily timescale input data is provided for the 1960-2019 and 2060-2099 periods.
+Model data corresponds to the CMIP6 historical experiment from 1960-2014 and ssp370 for 2015 onwards. 
 
 Each input data file has been pre-processed (using the `preprocess.py` script in this repository)
 in order to ensure common:
@@ -106,12 +106,20 @@ https://my.nci.org.au/mancini/project/ia39_w
 
 Phase 1 of the intercomparison will focus on daily timescale
 `tasmax`, `tasmin` and `pr` data on the `NPCP-20i` grid.
+For each variable there are 5 tasks to complete.
 
-The four tasks for this phase are as follows:
-1. **Historical:** Produce bias corrected data for the 2000-2019 period, using 1980-1999 as a training period.
-2. **Projection:** Produce bias corrected data for the 2080-2099 period, using 1980-1999 as a training period.
-3. **Cross validation:** Produce bias corrected data for even years from 1980-2019 (i.e. every second year), using odd years from 1980-2019 as training data.
-4. **Documentation:** Submit a pull request to this repo to add a summary of how your bias correction method works and the details/location of code used to implement it to the [methods](https://github.com/AusClimateService/npcp/tree/master/methods) subdirectory. 
+For the downscaled data based on ACCESS-ESM1-5 the tasks are:  
+- **Task 1 (Historical)**: Produce bias corrected data for the 1980-2019 period, using 1980-2019 as a training period.
+- **Task 2 (Projection)**: Produce bias corrected data for the 2060-2099 period, using 1980-2019 as a training period.
+- **Task 3 (Cross validation)**: Produce bias corrected data for the 1990-2019 period, using 1960-1989 as a training period.
+
+For the downscaled data based on ERA5 the tasks are:  
+- **Task 4 (Historical)**: Produce bias corrected data for the 1980-2019 period, using 1980-2019 as a training period.
+- **Task 5 (Cross validation)**: Produce bias corrected data for the 2000-2019 period, using 1980-1999 as a training period.
+
+An additional **documentation** task involves submitting a pull request to this repo
+to add a summary of how your bias correction method works
+and the details/location of code used to implement it to the [methods](https://github.com/AusClimateService/npcp/tree/master/methods) subdirectory. 
 
 The training data for each variable is the AGCD data archived at `/g/data/ia39/npcp/data/`
 following the data reference syntax described above.
@@ -123,15 +131,15 @@ Check the input data availability table above for an indication of
 which combinations of downscaling and parent models are available.
 
 Bias corrected data files written to `ia39` for each task should look something like the following examples:
-1. `/g/data/ia39/npcp/data/tasmax/CSIRO-ACCESS-ESM1-5/UQ-DES-CCAM-2105/ecdfm/task-historical/tasmax_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM-2105_v1_day_20000101-20191231_ecdfm-AGCD-19800101-19991231.nc`
-2. `/g/data/ia39/npcp/data/tasmax/CSIRO-ACCESS-ESM1-5/UQ-DES-CCAM-2105/ecdfm/task-projection/tasmax_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM-2105_v1_day_20800101-20991231_ecdfm-AGCD-19800101-19991231.nc`
-3. `/g/data/ia39/npcp/data/tasmax/CSIRO-ACCESS-ESM1-5/UQ-DES-CCAM-2105/ecdfm/task-xvalidation/tasmax_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM-2105_v1_day_19800101-20181231-even-years_ecdfm-AGCD-19810101-20191231-odd-years.nc`
+1. `/g/data/ia39/npcp/data/tasmax/CSIRO-ACCESS-ESM1-5/UQ-DES-CCAM-2105/ecdfm/task-historical/tasmax_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM-2105_v1_day_19800101-20191231_ecdfm-AGCD-19800101-20191231.nc`
+2. `/g/data/ia39/npcp/data/tasmax/CSIRO-ACCESS-ESM1-5/UQ-DES-CCAM-2105/ecdfm/task-projection/tasmax_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM-2105_v1_day_20600101-20991231_ecdfm-AGCD-19800101-20191231.nc`
+3. `/g/data/ia39/npcp/data/tasmax/CSIRO-ACCESS-ESM1-5/UQ-DES-CCAM-2105/ecdfm/task-xvalidation/tasmax_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_UQ-DES-CCAM-2105_v1_day_19900101-20191231_ecdfm-AGCD-19600101-19891231.nc`
+4. `/g/data/ia39/npcp/data/tasmax/ECMWF-ERA5/UQ-DES-CCAM-2105/ecdfm/task-historical/tasmax_NPCP-20i_ECMWF-ERA5_evaluation_r1i1p1f1_UQ-DES-CCAM-2105_v1_day_19800101-20191231_ecdfm-AGCD-19800101-20191231.nc`
+5. `/g/data/ia39/npcp/data/tasmax/ECMWF-ERA5/UQ-DES-CCAM-2105/ecdfm/task-xvalidation/tasmax_NPCP-20i_ECMWF-ERA5_evaluation_r1i1p1f1_UQ-DES-CCAM-2105_v1_day_20000101-20191231_ecdfm-AGCD-19800101-19991231.nc`
 
 The files have the same reference syntax as the input files with an additional field
 after the final `_` indicating the bias correction method, observational dataset
 and the start and end time for the training period.
-
-
 
 ### Phase 2
 
