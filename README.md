@@ -78,17 +78,19 @@ when upscaling from higher to lower horizontal resolution
 Unless otherwise stated, the traffic lights in the following table
 summarise the availability of `pr`, `tasmax` and `tasmin` data.
 
-| driving model | downscaling model | 1980-2019 | 2080-2099 |
+| driving model | downscaling model | 1960-2019* | 2060-2099 |
 | ---           | ---               | :-:       | :-:       |
 | Observations | AGCD | :green_circle: | N/A |
 | ERA5 | BOM-BARPA | :green_circle: | N/A |
 | | CSIRO-CCAM | :green_circle: | N/A |
 | | UQ-DES-CCAM | :green_circle: | N/A |
-| | NARCLIM-WRF | Available Aug 2023 | N/A |
+| | NARCLIM-WRF | :white_circle: | N/A |
 | ACCESS-ESM1-5 | BOM-BARPA | :green_circle: | :green_circle: |
-| | CSIRO-CCAM  | :white_circle: | :white_circle: |
+| | CSIRO-CCAM  | :green_circle: | :green_circle: |
 | | UQ-DES-CCAM | :green_circle: | :green_circle: |
-| | NARCLIM-WRF | Available Aug 2023 | Available Aug 2023 |
+| | NARCLIM-WRF | :white_circle: | :white_circle: |
+
+*The ERA5 data is only available from 1979 onwards.
 
 ## Bias correction tasks
 
