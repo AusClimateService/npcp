@@ -108,14 +108,14 @@ https://my.nci.org.au/mancini/project/ia39_w
 
 Phase 1 of the intercomparison will focus on daily timescale
 `tasmax`, `tasmin` and `pr` data on the `NPCP-20i` grid.
-For each variable there are 5 tasks to complete.
+For each variable and downscaling model there are 5 tasks to complete...
 
-For the downscaled data based on ACCESS-ESM1-5 the tasks are:  
+For the downscaled ACCESS-ESM1-5 data the tasks are:  
 - **Task 1 (Historical)**: Produce bias corrected data for the 1980-2019 period, using 1980-2019 as a training period.
 - **Task 2 (Projection)**: Produce bias corrected data for the 2060-2099 period, using 1980-2019 as a training period.
 - **Task 3 (Cross validation)**: Produce bias corrected data for the 1990-2019 period, using 1960-1989 as a training period.
 
-For the downscaled data based on ERA5 the tasks are:  
+For the downscaled ERA5 data the tasks are:  
 - **Task 4 (Historical)**: Produce bias corrected data for the 1980-2019 period, using 1980-2019 as a training period.
 - **Task 5 (Cross validation)**: Produce bias corrected data for the 2000-2019 period, using 1980-1999 as a training period.
 
