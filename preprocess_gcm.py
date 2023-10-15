@@ -23,21 +23,14 @@ def main(args):
         raise OSError(f'No files at {ssp_dir}')
 
     input_ds = xcdat.open_mfdataset(hist_files + ssp_files)
-    input_ds_ref = input_ds.sel(time=slice('1980-01-01', '1999-12-31'))
-    input_ds_hist = input_ds.sel(time=slice('2000-01-01', '2019-12-31'))
-    input_ds_proj = input_ds.sel(time=slice('2080-01-01', '2099-12-31'))
+    input_ds_hist = input_ds.sel(time=slice('1960-01-01', '2019-12-31'))
+    input_ds_proj = input_ds.sel(time=slice('2060-01-01', '2099-12-31'))
 
     # NPCP-20i (0.2 degree) grid
     lats = np.arange(-44, -9.99, 0.2)
     lons = np.arange(112, 154.01, 0.2)
     npcp_grid = xcdat.create_grid(lats, lons)
    
-    ds_ref = input_ds_ref.regridder.horizontal(
-        args.var,
-        npcp_grid,
-        tool='xesmf',
-        method='bilinear'
-    )
     ds_hist = input_ds_hist.regridder.horizontal(
         args.var,
         npcp_grid,
@@ -51,9 +44,6 @@ def main(args):
         method='bilinear'
     )
 
-    ds_ref[args.var] = preprocess.convert_units(
-        ds_ref[args.var], preprocess.output_units[args.var]
-    )
     ds_hist[args.var] = preprocess.convert_units(
         ds_hist[args.var], preprocess.output_units[args.var]
     )
@@ -62,16 +52,13 @@ def main(args):
     )
 
     new_log = cmdprov.new_log()
-    ds_ref.attrs['history'] = new_log
     ds_hist.attrs['history'] = new_log
     ds_proj.attrs['history'] = new_log
     
     outdir = f'/g/data/ia39/npcp/data/{args.var}/CSIRO-ACCESS-ESM1-5/GCM/raw/task-reference'
-    ref_path = f'{outdir}/{args.var}_NPCP-20i_CSIRO-ACCESS-ESM1-5_historical_r6i1p1f1_GCM_latest_day_19800101-19991231.nc'
-    hist_path = f'{outdir}/{args.var}_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_GCM_latest_day_20000101-20191231.nc'
-    proj_path = f'{outdir}/{args.var}_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_GCM_latest_day_20800101-20991231.nc'
+    hist_path = f'{outdir}/{args.var}_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_GCM_latest_day_19600101-20191231.nc'
+    proj_path = f'{outdir}/{args.var}_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_GCM_latest_day_20600101-20991231.nc'
  
-    ds_ref.to_netcdf(ref_path)
     ds_hist.to_netcdf(hist_path)
     ds_proj.to_netcdf(proj_path)
     
