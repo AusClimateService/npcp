@@ -1,5 +1,5 @@
 """Command line program for NPCP intercomparison data pre-processing."""
-import pdb
+
 import argparse
 
 import numpy as np
@@ -142,16 +142,16 @@ def main(args):
     input_ds = xcdat.open_dataset(args.infile)
 
     # 20i (0.2 degree) grid with AWRA bounds
-    lats = np.arange(-44, -9.99, 0.2)
-    lons = np.arange(112, 154.01, 0.2)
+    lats = np.round(np.arange(-44, -9.99, 0.2), decimals=1)
+    lons = np.round(np.arange(112, 154.01, 0.2), decimals=1)
     npcp_grid = xcdat.create_grid(lats, lons)
-   
     output_ds = input_ds.regridder.horizontal(
         args.var,
         npcp_grid,
         tool='xesmf',
         method='conservative'
     )
+
     cmor_var = args.var if args.var in var_to_cmor_name.values() else var_to_cmor_name[args.var]     
     output_ds[args.var] = convert_units(output_ds[args.var], output_units[cmor_var])
     output_ds = fix_metadata(output_ds, args.var)
