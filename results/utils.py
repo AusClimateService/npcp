@@ -84,12 +84,12 @@ def get_npcp_data(
         raise OSError(f'No files at {search_dir}')
     ds = xr.open_mfdataset(files).sel(time=slice(start_date, end_date))
     
-    lats = np.arange(-44, -9.9, 0.2)
+    lats = np.round(np.arange(-44, -9.9, 0.2), decimals=1)
     if np.allclose(ds['lat'].values, lats, rtol=1e-05, atol=1e-08, equal_nan=True):
         lat_attrs = ds['lat'].attrs
         ds = ds.assign_coords({'lat': lats})
         ds.attrs = lat_attrs
-    lons = np.arange(112, 154.01, 0.2)
+    lons = np.round(np.arange(112, 154.01, 0.2), decimals=1)
     if np.allclose(ds['lon'].values, lons, rtol=1e-05, atol=1e-08, equal_nan=True):
         lon_attrs = ds['lon'].attrs
         ds = ds.assign_coords({'lon': lons})

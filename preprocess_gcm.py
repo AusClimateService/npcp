@@ -27,8 +27,8 @@ def main(args):
     input_ds_proj = input_ds.sel(time=slice('2060-01-01', '2099-12-31'))
 
     # NPCP-20i (0.2 degree) grid
-    lats = np.arange(-44, -9.99, 0.2)
-    lons = np.arange(112, 154.01, 0.2)
+    lats = np.round(np.arange(-44, -9.99, 0.2), decimals=1)
+    lons = np.round(np.arange(112, 154.01, 0.2), decimals=1)
     npcp_grid = xcdat.create_grid(lats, lons)
    
     ds_hist = input_ds_hist.regridder.horizontal(
