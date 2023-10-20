@@ -72,18 +72,17 @@ def get_npcp_data(
     assert variable in ['tasmax', 'tasmin', 'pr']
     assert driving_model in ['observations', 'CSIRO-ACCESS-ESM1-5', 'ECMWF-ERA5']
     assert downscaling_model in ['AGCD', 'BOM-BARPA-R', 'UQ-DES-CCAM-2105', 'CSIRO-CCAM-2203', 'GCM']
-    assert bias_correction_method in ['raw', 'ecdfm', 'qme']
+    assert bias_correction_method in ['raw', 'ecdfm', 'qme', 'qdm']
     assert task in ['task-reference', 'task-projection', 'task-historical', 'task-xvalidation']
     assert region in ['AU', 'NA', 'SA', 'EA', 'R']
     
-    file_starts = {'raw': variable, 'ecdfm': f'{variable}_NPCP', 'qme': variable}
+    file_starts = {'raw': variable, 'ecdfm': f'{variable}_NPCP', 'qme': variable, 'qdm': f'{variable}_NPCP'}
     file_start = file_starts[bias_correction_method]
     search_dir = f'/g/data/ia39/npcp/data/{variable}/{driving_model}/{downscaling_model}/{bias_correction_method}/{task}'
     files = sorted(glob.glob(f'{search_dir}/{file_start}*.nc'))
     if not files:
         raise OSError(f'No files at {search_dir}')
     ds = xr.open_mfdataset(files).sel(time=slice(start_date, end_date))
-    
     lats = np.round(np.arange(-44, -9.9, 0.2), decimals=1)
     if np.allclose(ds['lat'].values, lats, rtol=1e-05, atol=1e-08, equal_nan=True):
         lat_attrs = ds['lat'].attrs
