@@ -11,8 +11,11 @@ import cmdline_provenance as cmdprov
 
 var_to_cmor_name = {
     'tmax': 'tasmax',
+    'mx2t': 'tasmax',
     'tmin': 'tasmin',
+    'mn2t': 'tasmin',
     'precip': 'pr',
+    'tp': 'pr',
     'latitude': 'lat',
     'longitude': 'lon',
     'wind': 'wsp',
