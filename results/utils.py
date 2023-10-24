@@ -101,3 +101,34 @@ def get_npcp_data(
     da = clip_data(ds[variable], shape)
                    
     return da      
+
+
+def get_pr_weights(gcm, task):
+    """Get fraction of time steps influenced by precipitation obs"""
+    
+    if task == 'historical':
+        start_year = '1980'
+        end_year = '2019'
+    elif (task == 'xvalidation') and (gcm == 'CSIRO-ACCESS-ESM1-5'):
+        start_year = '1960'
+        end_year = '1989'
+    elif (task == 'xvalidation') and (gcm == 'ECMWF-ERA5'):
+        start_year = '1980'
+        end_year = '1999'
+    else:
+        raise ValueError('Invalid GCM / task combination')
+    
+    fraction_dir = '/g/data/ia39/npcp/data/pr/observations/AGCD/raw/task-reference/'
+    fraction_file = f'ob-fractions_NPCP-20i_AGCD_v1-0-1_day_{start_year}0101-{end_year}1231.nc'
+    ds = xr.open_dataset(fraction_dir+fraction_file)
+    
+    return ds['fraction']
+
+
+def mask_by_pr_ob_fraction(da, da_fraction, threshold=0.9):
+    """Mask data according to precip obs fraction"""
+    
+    da_selection = da_fraction > threshold 
+    da = da.where(da_selection)
+    
+    return da
