@@ -65,7 +65,7 @@ def get_npcp_data(
     task,
     start_date,
     end_date,
-    region
+    region,
 ): 
     """Get data that has been submitted to the NPCP intercomparison project"""
     
