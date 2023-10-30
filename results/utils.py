@@ -65,7 +65,7 @@ def get_npcp_data(
     task,
     start_date,
     end_date,
-    region
+    region=None,
 ): 
     """Get data that has been submitted to the NPCP intercomparison project"""
     
@@ -74,7 +74,7 @@ def get_npcp_data(
     assert downscaling_model in ['AGCD', 'BOM-BARPA-R', 'UQ-DES-CCAM-2105', 'CSIRO-CCAM-2203', 'GCM']
     assert bias_correction_method in ['raw', 'ecdfm', 'qme', 'qdm']
     assert task in ['task-reference', 'task-projection', 'task-historical', 'task-xvalidation']
-    assert region in ['AU', 'NA', 'SA', 'EA', 'R']
+    assert region in [None, 'AU', 'NA', 'SA', 'EA', 'R']
     
     file_starts = {'raw': variable, 'ecdfm': f'{variable}_NPCP', 'qme': variable, 'qdm': f'{variable}_NPCP'}
     file_start = file_starts[bias_correction_method]
@@ -96,9 +96,12 @@ def get_npcp_data(
     
     if region == 'AU':
         shape = get_aus_shape()
-    else:
+        da = clip_data(ds[variable], shape)
+    elif region:
         shape = get_nrm_super_cluster(region)
-    da = clip_data(ds[variable], shape)
+        da = clip_data(ds[variable], shape)
+    else:
+        da = ds[variable]
                    
     return da      
 
