@@ -78,8 +78,9 @@ def get_npcp_data(
     
     file_starts = {'raw': variable, 'ecdfm': f'{variable}_NPCP', 'qme': variable, 'qdm': f'{variable}_NPCP'}
     file_start = file_starts[bias_correction_method]
+    file_end = '1231.nc' if bias_correction_method == 'ecdfm' else '.nc'
     search_dir = f'/g/data/ia39/npcp/data/{variable}/{driving_model}/{downscaling_model}/{bias_correction_method}/{task}'
-    files = sorted(glob.glob(f'{search_dir}/{file_start}*.nc'))
+    files = sorted(glob.glob(f'{search_dir}/{file_start}*{file_end}'))
     if not files:
         raise OSError(f'No files at {search_dir}')
     ds = xr.open_mfdataset(files).sel(time=slice(start_date, end_date))
