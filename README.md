@@ -42,7 +42,8 @@ Naming conventions follow CORDEX wherever possible and can take the following va
 - `{bias-correction-method}`  
   - `raw`: No bias correction applied (i.e. input data for bias correction)
   - `ecdfm`: Equi-distant/ratio CDF matching (Damien Irving; [Li et al 2010](https://doi.org/10.1029/2009JD012882), [Wang and Chen 2013](https://doi.org/10.1002/asl2.454))
-  - `qme`: Quantile Matching for Extremes (Andrew Dowdy & Justin Peter; [Dowdy 2020](https://doi.org/10.1071/ES20001))
+  - `qdm`: Quantile Delta Mapping (Damien Irving; [Cannon et al 2015](https://doi.org/10.1175/JCLI-D-14-00754.1))
+  - `qme`: Quantile Matching for Extremes (Andrew Dowdy & Andrew Gammon; [Dowdy 2020](https://doi.org/10.1071/ES20001))
   - `mrnbc`: Multivariate Recursive Nesting Bias Correction (Arpit Kapoor; [Mehrotra & Sharma 2015](https://doi.org/10.1016/j.jhydrol.2014.11.037))
   - `mbcn`: N-Dimensional Multi-Variate Bias Correction (Thi Lan Dao; [Cannon 2018](https://doi.org/10.1007/s00382-017-3580-6))
   - `mbcp`: Multi-Variate Bias Correction (using Pearman correlation) (Ralph Trancoso; [Cannon 2016](https://doi.org/10.1175/JCLI-D-15-0679.1))
@@ -154,3 +155,5 @@ Ideas for that phase are being collected at https://github.com/AusClimateService
 Results for the intercomparison are being progressively added to the
 [`results/`](https://github.com/AusClimateService/npcp/tree/master/results) directory
 in the form of notebooks that people can click on and view.
+Draft reports arising from the results can be found in the
+[`reports/`](https://github.com/AusClimateService/npcp/tree/master/reports) directory.
