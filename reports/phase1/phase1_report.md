@@ -179,3 +179,25 @@ was the Australian Gridded Climate Data (AGCD) dataset
 The spatial resolution of the datasets ranged from 0.5 degrees of latitude and longitude (AGCD)
 to 0.2 degrees (UQ-DES-CCAM-2015) over the entire landmass of Australia,
 so all data was regridded to the 0.2 degree grid using conservative remapping.
+
+## Assessment
+
+Each contributor to the intercomparison was asked to use their bias correction software to complete three tasks
+(for each of the four RCMs):
+- **Task 1 (Historical)**: Produce bias corrected data for the 1980-2019 period, using 1980-2019 as a training period.
+- **Task 2 (Projection)**: Produce bias corrected data for the 2060-2099 period, using 1980-2019 as a training period.
+- **Task 3 (Cross validation)**: Produce bias corrected data for the 1990-2019 period, using 1960-1989 as a training period.
+
+The data from each bias correction method were then compared on a number of metrics
+relating to their ability to capture the observed
+climatology (annual mean and monthly mean),
+variability (e.g. wet day frequency, drought intensity, rainfall distribution, heat wave duration),
+extremes (99th percentile, 1-in-10 year event),
+trends
+and the link between variables (e.g. cross correlation between temperature and precipitation).
+
+## Results
+
+### Climatology
+
+TODO.
