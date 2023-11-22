@@ -196,8 +196,32 @@ extremes (99th percentile, 1-in-10 year event),
 trends
 and the link between variables (e.g. cross correlation between temperature and precipitation).
 
-## Results
+## Results: Temperature
 
 ### Climatology
 
-TODO.
+With respect to daily minimum and maximum temperature,
+all the univariate bias correction methods do an almost perfect job of
+representing the observed (AGCD) 1980-2019 annual mean
+when trained on that same 1980-2019 observed data
+(i.e. the historical assessment task; e.g. Figure 1).
+
+![Description](tasmax_mean-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png)
+
+For the cross validation task,
+all the bias correction methods perform similarity well with respect to the annual mean (e.g. Figure 2 & 3).
+The relative ranking of the methods in terms of the spatial mean average error
+differs depending on exactly which RCM and variable is assessed.
+It also does not appear to make much difference whether the data are dynamically downscaled
+prior to bias correction or not.
+
+![Description](tasmax_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png)
+![Description](tasmax_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png)
+
+
+
+
+
+
+
+ 
