@@ -2,6 +2,8 @@ _This report is currently in draft form and is not complete._
 
 # Phase 1 Report
 
+## 1. Introduction
+
 The [Climate Projections Roadmap for Australia](https://www.dcceew.gov.au/climate-change/publications/climate-projections-roadmap-for-australia)
 has been developed by the Department of Climate Change, Energy, the Environment and Water (DCCEEW)
 through a collaborative effort of the Australian climate projections community.
@@ -26,28 +28,42 @@ there was a clear need to establish an NPCP bias correction intercomparison proj
 to identify the most appropriate bias correction methods and associated software.
 
 This report summarises the findings of the first phase of the intercomparison project,
-which focuses on three climate variables (daily minimum temperature, daily maximum temperature and daily rainfall)
-and three univariate bias correction methods.
+which focuses on univariate bias correction methods 
+for three climate variables (daily minimum temperature, daily maximum temperature and daily rainfall).
 Additional variables and more sophisticated multi-variate bias correction methods will be considered in subsequent phases of the project.
 
-## Participating bias correction methods
+## 2. Participating bias correction methods
+
+The first step in a typical bias correction procedure involves establishing a statistical relationship or transfer function
+between model outputs and observations over a reference (i.e. historical/training) time period.
+The established transfer function is then applied to the target model data
+(e.g. future model projections) in order to produce a "bias corrected" model time series.
+There are a wide variety of transfer functions / bias correction methdologies out there,
+ranging from relatively simple methods that take a single variable as input
+to more sophisticated multi-variate approaches.
 
 Through a series of NPCP meetings and workshops on the topic of bias correction,
 a number of individuals from NPCP member organisations/projects stepped forward
 with a bias correction method to contribute to the intercomparison.
-There were three univariate methods:
-equi-distant/ratio cumulative density function matching (ECDFm),
-quantile delta mapping (QDM) and
-quantile matching for extremes (QME).
-Each of these methods is described in detail below.
+There were two univariate methods:
+equi-distant/ratio cumulative density function matching (ECDFm)
+and quantile matching for extremes (QME).
 
-### ECDFm
+A related univariate "delta change" method
+known as quantile delta mapping (QDM) was also included in the assessment.
+In contrast to bias correction,
+delta change approaches establish a transfer function between reference and future model outputs
+(e.g. from an historical model experiment and future climate emission scenario experiment)
+and then apply that transfer function to observations to create a future time series.
+Application ready climate data was produced using QDM for the
+[Climate Change in Australia](https://www.climatechangeinaustralia.gov.au/) project,
+so it is useful to compare that approach to traditional bias correction.
 
-#### Method
-The first step in any bias correction procedure involves establishing a statistical relationship or transfer function
-between model outputs and observations over a reference (i.e. historical/training) time period.
-The established transfer function is then applied to the target model data
-(e.g. future model projections) in order to produce a "bias corrected" model time series.
+Each of these three methods is described in detail below.
+
+### 2.1. ECDFm
+
+#### 2.1.1. Method
 
 Many bias correction procedures are quantile based,
 meaning the model data are corrected on a quantile by quantile basis.
@@ -76,7 +92,7 @@ to avoid the possibility of getting bias corrected values less than zero.
 In this case, *equiratio CDF matching* ([Wang and Chen, 2013](https://doi.org/10.1002/asl2.454)) is used:
 $$x_{m-adjust} = x_{m,p} \times (F_{o,h}^{-1}(F_{m,p}(x_{m,p})) \div F_{m,h}^{-1}(F_{m,p}(x_{m,p})))$$
 
-#### Software (and implementation choices)
+#### 2.1.2. Software (and implementation choices)
 The code used to implement the ECDFm method is maintained by the CSIRO Climate Innovation Hub
 and is openly available on [Github](https://github.com/climate-innovation-hub/qqscale).
 The code basically implements the [bias adjustment and downscaling](https://xclim.readthedocs.io/en/stable/sdba.html)
