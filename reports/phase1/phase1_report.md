@@ -200,6 +200,12 @@ and the link between variables (e.g. cross correlation between temperature and p
 
 ### Climatology
 
+> Summary: There's essentially no difference between the univariate bias correction methods
+> with respect to the daily minimum and maximum temperature climatologies.
+> While the raw RCM data is less biased than the raw GCM data,
+> it also makes no difference whether the GCM data is dynamically downscaled or not
+> prior to applying bias correction.
+
 With respect to daily minimum and maximum temperature,
 all the univariate bias correction methods do an almost perfect job of
 representing the observed (AGCD) 1980-2019 annual mean
@@ -247,11 +253,3 @@ prior to bias correction or not.
     </em>
 </p>
 
-
-
-
-
-
-
-
- 
