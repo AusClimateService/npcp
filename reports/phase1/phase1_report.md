@@ -206,17 +206,47 @@ representing the observed (AGCD) 1980-2019 annual mean
 when trained on that same 1980-2019 observed data
 (i.e. the historical assessment task; e.g. Figure 1).
 
-![Description](tasmax_mean-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png)
+<p align="center">
+    <img src="tasmax_mean-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
+    <br>
+    <em>
+      Figure 1: Bias in annual mean daily maximum temperature (relative to the AGCD dataset)
+      for the "historical" assessment task.
+      Results are shown for a GCM (top left),
+      RCM forced by that GCM (bottom left)
+      and various bias correction methods applied to those model data (rows).
+    </em>
+</p>
 
 For the cross validation task,
 all the bias correction methods perform similarity well with respect to the annual mean (e.g. Figure 2 & 3).
 The relative ranking of the methods in terms of the spatial mean average error
 differs depending on exactly which RCM and variable is assessed.
-It also does not appear to make much difference whether the data are dynamically downscaled
+It does not appear to make much difference whether the data are dynamically downscaled
 prior to bias correction or not.
 
-![Description](tasmax_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png)
-![Description](tasmax_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png)
+<p align="center">
+    <img src="tasmax_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <br>
+    <em>
+      Figure 2: Bias in annual mean daily maximum temperature (relative to the AGCD dataset)
+      for the "cross validation" assessment task.
+      Results are shown for a GCM (top left),
+      RCM forced by that GCM (bottom left),
+      various bias correction methods applied to those model data (rows),
+      and a reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) (bottom right).
+    </em>
+</p>
+
+<p align="center">
+    <img src="tasmin_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <br>
+    <em>
+      Figure 3: As per Figure 2 but for minimum temperature.
+    </em>
+</p>
+
 
 
 
