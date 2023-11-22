@@ -226,17 +226,17 @@ when trained on that same 1980-2019 observed data
 </p>
 
 For the cross validation task,
-all the bias correction methods perform similarity well with respect to the annual mean (e.g. Figure 2 & 3).
+all the bias correction methods perform similarity well with respect to the annual mean (e.g. Figure 2).
 The relative ranking of the methods in terms of the spatial mean absolute error
 differs depending on exactly which RCM and variable is assessed.
 It does not appear to make much difference whether the data are dynamically downscaled
 prior to bias correction or not.
 
 <p align="center">
-    <img src="tasmax_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <img src="tasmin_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
     <br>
     <em>
-      Figure 2: Bias in annual mean daily maximum temperature (relative to the AGCD dataset)
+      Figure 2: Bias in annual mean daily minimum temperature (relative to the AGCD dataset)
       for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
@@ -247,11 +247,5 @@ prior to bias correction or not.
     </em>
 </p>
 
-<p align="center">
-    <img src="tasmin_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
-    <br>
-    <em>
-      Figure 3: As per Figure 2 but for minimum temperature.
-    </em>
-</p>
+
 
