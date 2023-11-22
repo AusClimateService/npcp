@@ -2,6 +2,8 @@ _This report is currently in draft form and is not complete._
 
 # Phase 1 Report
 
+## 1. Introduction
+
 The [Climate Projections Roadmap for Australia](https://www.dcceew.gov.au/climate-change/publications/climate-projections-roadmap-for-australia)
 has been developed by the Department of Climate Change, Energy, the Environment and Water (DCCEEW)
 through a collaborative effort of the Australian climate projections community.
@@ -26,28 +28,42 @@ there was a clear need to establish an NPCP bias correction intercomparison proj
 to identify the most appropriate bias correction methods and associated software.
 
 This report summarises the findings of the first phase of the intercomparison project,
-which focuses on three climate variables (daily minimum temperature, daily maximum temperature and daily rainfall)
-and three univariate bias correction methods.
+which focuses on univariate bias correction methods 
+for three climate variables (daily minimum temperature, daily maximum temperature and daily rainfall).
 Additional variables and more sophisticated multi-variate bias correction methods will be considered in subsequent phases of the project.
 
-## Participating bias correction methods
+## 2. Participating bias correction methods
+
+The first step in a typical bias correction procedure involves establishing a statistical relationship or transfer function
+between model outputs and observations over a reference (i.e. historical/training) time period.
+The established transfer function is then applied to the target model data
+(e.g. future model projections) in order to produce a "bias corrected" model time series.
+There are a wide variety of transfer functions / bias correction methdologies out there,
+ranging from relatively simple methods that take a single variable as input
+to more sophisticated multi-variate approaches.
 
 Through a series of NPCP meetings and workshops on the topic of bias correction,
 a number of individuals from NPCP member organisations/projects stepped forward
 with a bias correction method to contribute to the intercomparison.
-There were three univariate methods:
-equi-distant/ratio cumulative density function matching (ECDFm),
-quantile delta mapping (QDM) and
-quantile matching for extremes (QME).
-Each of these methods is described in detail below.
+There were two univariate methods:
+equi-distant/ratio cumulative density function matching (ECDFm)
+and quantile matching for extremes (QME).
 
-### ECDFm
+A related univariate "delta change" method
+known as quantile delta mapping (QDM) was also included in the assessment.
+In contrast to bias correction,
+delta change approaches establish a transfer function between reference and future model outputs
+(e.g. from an historical model experiment and future climate emission scenario experiment)
+and then apply that transfer function to observations to create a future time series.
+Application ready climate data was produced using QDM for the
+[Climate Change in Australia](https://www.climatechangeinaustralia.gov.au/) project,
+so it is useful to compare that approach to traditional bias correction.
 
-#### Method
-The first step in any bias correction procedure involves establishing a statistical relationship or transfer function
-between model outputs and observations over a reference (i.e. historical/training) time period.
-The established transfer function is then applied to the target model data
-(e.g. future model projections) in order to produce a "bias corrected" model time series.
+Each of these three methods is described in detail below.
+
+### 2.1. ECDFm
+
+#### 2.1.1. Method
 
 Many bias correction procedures are quantile based,
 meaning the model data are corrected on a quantile by quantile basis.
@@ -76,7 +92,14 @@ to avoid the possibility of getting bias corrected values less than zero.
 In this case, *equiratio CDF matching* ([Wang and Chen, 2013](https://doi.org/10.1002/asl2.454)) is used:
 $$x_{m-adjust} = x_{m,p} \times (F_{o,h}^{-1}(F_{m,p}(x_{m,p})) \div F_{m,h}^{-1}(F_{m,p}(x_{m,p})))$$
 
-#### Software (and implementation choices)
+Besides incredibly simple bias correction approaches like mean scaling
+(i.e. where the difference in the mean between the model and observations
+is simply removed from all data points),
+ECDFm is effectively the most basic (and thus easy to understand/explain)
+bias correction method available.
+
+#### 2.1.2. Software (and implementation choices)
+
 The code used to implement the ECDFm method is maintained by the CSIRO Climate Innovation Hub
 and is openly available on [Github](https://github.com/climate-innovation-hub/qqscale).
 The code basically implements the [bias adjustment and downscaling](https://xclim.readthedocs.io/en/stable/sdba.html)
@@ -100,9 +123,18 @@ There are a number of decisions to make when implementing the ECDFm method:
   are set to a small random non-zero value prior to data processing,
   and then after the bias correction process is complete any values less than the threshold are set to zero.
 
-### QDM
+### 2.2. QME
 
-#### Method
+#### 2.2.1. Method
+TODO.
+
+#### 2.2.2. Software (and implementation choices) 
+TODO.
+
+### 2.3. QDM
+
+#### 2.3.1 Method
+
 One of the most widely used methods for producing climate projection data is the so-called "delta change" approach.
 Rather than use the data from a model simulation of the future climate directly,
 the delta change approach calculates the relative change between a future and historical modelled time period.
@@ -129,7 +161,8 @@ For variables like precipitation, multiplicative as opposed to additive mapping 
 to avoid the possibility of producing future values less than zero:
 $$x_{o,p} = x_{o,h} \times (F_{m,p}^{-1}(F_{o,h}(x_{o,h})) \div F_{m,h}^{-1}(F_{o,h}(x_{o,h})))$$
 
-#### Software (and implementation choices)
+#### 2.3.2. Software (and implementation choices)
+
 Since both methods are conceptually very similar,
 the QDM method is implemented using the same software as the ECDFm method.
 The same implementation choices are made regarding time grouping, quantiles and singularity stochastic removal.
@@ -141,10 +174,7 @@ is much different than the mean change between the future and historical model s
 As such, we don't apply any time grouping when applying QDM to precipitation data
 and use 1000 quantiles in order to still have 10-15 data values between each quantile. 
 
-### QME
-TODO.
-
-## Data
+## 3. Data
 
 The model data used for the intercomparison was taken from the multi-scenario,
 multi-model ensemble of simulations from regional climate models (RCMs)
@@ -168,6 +198,7 @@ Data from four different RCMs was assessed:
 - `UQ-DES-CCAM-2105`:
   CCAM,
   run by the University of Queensland and the Queensland Department of Environment and Science
+  ([Chapman et al 2023](https://doi.org/10.1029/2023EF003548))
 - `NARCLIM-WRF`:
   Weather Research and Forecasting (WRF) model,
   run by the New South Wales Australian Regional Climate Modelling (NARCLiM) project
@@ -180,7 +211,7 @@ The spatial resolution of the datasets ranged from 0.5 degrees of latitude and l
 to 0.2 degrees (UQ-DES-CCAM-2015) over the entire landmass of Australia,
 so all data was regridded to the 0.2 degree grid using conservative remapping.
 
-## Assessment
+## 4. Assessment
 
 Each contributor to the intercomparison was asked to use their bias correction software to complete three tasks
 (for each of the four RCMs):
@@ -188,16 +219,106 @@ Each contributor to the intercomparison was asked to use their bias correction s
 - **Task 2 (Projection)**: Produce bias corrected data for the 2060-2099 period, using 1980-2019 as a training period.
 - **Task 3 (Cross validation)**: Produce bias corrected data for the 1990-2019 period, using 1960-1989 as a training period.
 
-The data from each bias correction method were then compared on a number of metrics
+The rationale for the historical task was to assess how well the bias correction methods perform
+when they train on exactly the same data that they correct.
+It is the most basic test of a bias correction method - if a method cannot adequately correct the very data it trained on,
+it is unlikely to be a useful method.
+Conversely, if a method performs too well at the historical task,
+this can be an indication of over-fitting.
+The cross validation task assesses how well the methods perform when producing data
+for a different time period than the training period,
+which is a more difficult test (and also a very common application).
+The projection task was included to see if the bias correction methods substantially modify the trend simulated by the models.
+Trend modification is a problem for many bias correction methods.
+ 
+The data arising from each bias correction method were compared on a number of metrics
 relating to their ability to capture the observed
 climatology (annual mean and monthly mean),
 variability (e.g. wet day frequency, drought intensity, rainfall distribution, heat wave duration),
-extremes (99th percentile, 1-in-10 year event),
+extremes (e.g. 99th percentile, 1-in-10 year event),
 trends
 and the link between variables (e.g. cross correlation between temperature and precipitation).
+The results for each of those metrics are presented below.
 
-## Results
+## 5. Results: Temperature
 
-### Climatology
+### 5.1. Climatology
 
+> Summary: There's essentially no difference between the univariate bias correction methods
+> with respect to the daily minimum and maximum temperature climatologies.
+> While the raw RCM data is less biased than the raw GCM data,
+> it also makes no difference whether the GCM data is dynamically downscaled or not
+> prior to applying bias correction.
+
+With respect to daily minimum and maximum temperature,
+all the univariate bias correction methods do an almost perfect job of
+representing the observed (AGCD) 1980-2019 annual mean
+when trained on that same 1980-2019 observed data
+(i.e. the historical assessment task; e.g. Figure 1).
+
+<p align="center">
+    <img src="tasmax_mean-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
+    <br>
+    <em>
+      Figure 1: Bias in annual mean daily maximum temperature (relative to the AGCD dataset)
+      for the "historical" assessment task.
+      Results are shown for a GCM (top left),
+      RCM forced by that GCM (bottom left)
+      and various bias correction methods applied to those model data (rows).
+      (MAE = mean absolute error.)
+    </em>
+</p>
+
+For the cross validation task,
+all the bias correction methods perform similarity well with respect to the annual mean (e.g. Figure 2).
+The relative ranking of the methods in terms of the spatial mean absolute error
+differs depending on exactly which RCM and variable is assessed.
+It does not appear to make much difference whether the data are dynamically downscaled
+prior to bias correction or not.
+
+<p align="center">
+    <img src="tasmin_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <br>
+    <em>
+      Figure 2: Bias in annual mean daily minimum temperature (relative to the AGCD dataset)
+      for the "cross validation" assessment task.
+      Results are shown for a GCM (top left),
+      RCM forced by that GCM (bottom left),
+      various bias correction methods applied to those model data (rows),
+      and a reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) (bottom right).
+      (MAE = mean absolute error.)
+    </em>
+</p>
+
+### 5.2. Variability
 TODO.
+
+### 5.3. Extremes
+TODO.
+
+### 5.4. Trends
+TODO.
+
+### 5.5. Link between variables
+TODO.
+
+## 6. Results: Precipitation
+
+### 6.1. Climatology
+TODO.
+
+### 6.2. Variability
+TODO.
+
+### 6.3. Extremes
+TODO.
+
+### 6.4. Trends
+TODO.
+
+### 6.5. Link between variables
+TODO.
+
+## 7. Discussion
+TODO
