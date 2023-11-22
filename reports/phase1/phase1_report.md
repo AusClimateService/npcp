@@ -168,6 +168,7 @@ Data from four different RCMs was assessed:
 - `UQ-DES-CCAM-2105`:
   CCAM,
   run by the University of Queensland and the Queensland Department of Environment and Science
+  ([Chapman et al 2023](https://doi.org/10.1029/2023EF003548))
 - `NARCLIM-WRF`:
   Weather Research and Forecasting (WRF) model,
   run by the New South Wales Australian Regional Climate Modelling (NARCLiM) project
