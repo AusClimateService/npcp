@@ -221,12 +221,13 @@ when trained on that same 1980-2019 observed data
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left)
       and various bias correction methods applied to those model data (rows).
+      (MAE = mean absolute error.)
     </em>
 </p>
 
 For the cross validation task,
 all the bias correction methods perform similarity well with respect to the annual mean (e.g. Figure 2 & 3).
-The relative ranking of the methods in terms of the spatial mean average error
+The relative ranking of the methods in terms of the spatial mean absolute error
 differs depending on exactly which RCM and variable is assessed.
 It does not appear to make much difference whether the data are dynamically downscaled
 prior to bias correction or not.
@@ -242,6 +243,7 @@ prior to bias correction or not.
       various bias correction methods applied to those model data (rows),
       and a reference case where the AGCD training data (1960-1989)
       was simply duplicated for the assessment period (1990-2019) (bottom right).
+      (MAE = mean absolute error.)
     </em>
 </p>
 
