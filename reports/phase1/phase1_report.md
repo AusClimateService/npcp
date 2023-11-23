@@ -240,12 +240,24 @@ using the ECDFM and QDM methods.
 
 The data arising from each bias correction method was compared on a number of metrics
 relating to the ability to capture the observed
-climatology (annual mean and monthly mean),
-variability (e.g. wet day frequency, drought intensity, rainfall distribution, heat wave duration),
-extremes (e.g. 99th percentile, 1-in-10 year event),
-trends
-and the link between variables (e.g. cross correlation between temperature and precipitation).
-The results for each of those metrics are presented below.
+climatology, variability, extremes, trends and the link between different variables (Table 1).
+A summary of the results for each of those metrics are presented below - plots for
+all variable / RCM / metric combinations can be found at:  
+https://github.com/AusClimateService/npcp/tree/master/results
+
+| Category | Metric | Description |
+| ---      | ---    | ---         |
+| Climatology | Annual mean | |
+| Climatology | Seasonal cycle | Calculate the monthly climatology at each grid point, then sum the absolute value of the difference between the bias corrected model data and observations across all twelve months. That sum represents the seasonal cycle bias. |
+| Variability | Interannual | Standard deviation of annual mean timeseries. |
+| Variability | Multi-year | Standard deviation of annual mean timeseries with 5-year running mean applied. |
+| Variability | Wet day frequency | |
+| Variability | Drought intensity | |
+| Extremes | 1-in-10 year event | |
+| Extremes | Percentiles | 99, 99.5 and 99.9 or 1.0, 0.5 and 0.1 |
+| Links | Cross correlation | Between monthly mean daily maximum temperature and rainfall | 
+
+_Table 1: Metrics used in the assessment._
 
 ## 5. Results: Temperature
 
@@ -256,6 +268,8 @@ The results for each of those metrics are presented below.
 > While the raw RCM data is less biased than the raw GCM data,
 > it also makes no difference whether the GCM data is dynamically downscaled or not
 > prior to applying bias correction.
+
+#### Annual mean
 
 With respect to daily minimum and maximum temperature,
 all the univariate bias correction methods do an almost perfect job of
@@ -297,6 +311,10 @@ prior to bias correction or not.
       (MAE = mean absolute error.)
     </em>
 </p>
+
+#### Seasonal cycle
+
+
 
 ### 5.2. Variability
 TODO.
