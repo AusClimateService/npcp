@@ -59,14 +59,14 @@ Application ready climate data was produced using QDM for the
 [Climate Change in Australia](https://www.climatechangeinaustralia.gov.au/) project,
 so it is useful to compare that approach to traditional bias correction.
 
-Each of these three methods is described in detail below.
+All three of the methods are quantile based,
+meaning the transfers are a function of quantile.
+Each of the methods is described in detail below.
 
 ### 2.1. ECDFm
 
 #### 2.1.1. Method
 
-Many bias correction procedures are quantile based,
-meaning the model data are corrected on a quantile by quantile basis.
 In *equidistant cumulative density function matching* ([Li et al, 2010](https://doi.org/10.1029/2009JD012882)),
 the transfer function represents the distance (i.e. arithmetic difference)
 between the observations and model for each quantile of the training period.
@@ -221,7 +221,7 @@ Each contributor to the intercomparison was asked to use their bias correction s
 
 The rationale for the historical task was to assess how well the bias correction methods perform
 when they train on exactly the same data that they correct.
-It is the most basic test of a bias correction method - if a method cannot adequately correct the very data it trained on,
+This is the most basic test of a bias correction method - if a method cannot adequately correct the very data it trained on,
 it is unlikely to be a useful method.
 Conversely, if a method performs too well at the historical task,
 this can be an indication of over-fitting.
@@ -230,9 +230,16 @@ for a different time period than the training period,
 which is a more difficult test (and also a very common application).
 The projection task was included to see if the bias correction methods substantially modify the trend simulated by the models.
 Trend modification is a problem for many bias correction methods.
- 
-The data arising from each bias correction method were compared on a number of metrics
-relating to their ability to capture the observed
+
+Since the ensemble of GCMs selected for dynamical downscaling by RCMs is only a subset of the full CMIP6 ensemble,
+some NPCP members are also interested in applying bias correction directly to GCM output.
+In order to better understand how GCM outputs that have been dynamically downscaled and then bias corrected
+compare to GCM outputs that are directly bias corrected,
+the three assessment tasks were also completed on the ACCESS-ESM1-5 output
+using the ECDFM and QDM methods.
+
+The data arising from each bias correction method was compared on a number of metrics
+relating to the ability to capture the observed
 climatology (annual mean and monthly mean),
 variability (e.g. wet day frequency, drought intensity, rainfall distribution, heat wave duration),
 extremes (e.g. 99th percentile, 1-in-10 year event),
