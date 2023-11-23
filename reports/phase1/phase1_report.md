@@ -269,13 +269,11 @@ _Table 1: Metrics used in the assessment._
 > it also makes no difference whether the GCM data is dynamically downscaled or not
 > prior to applying bias correction.
 
-#### Annual mean
-
 With respect to daily minimum and maximum temperature,
 all the univariate bias correction methods do an almost perfect job of
-representing the observed (AGCD) 1980-2019 annual mean
+representing the observed (AGCD) 1980-2019 annual mean and seasonal cycle
 when trained on that same 1980-2019 observed data
-(i.e. the historical assessment task; e.g. Figure 1).
+(i.e. the historical assessment task; e.g. Figures 1 and 2).
 
 <p align="center">
     <img src="tasmax_mean-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
@@ -290,8 +288,17 @@ when trained on that same 1980-2019 observed data
     </em>
 </p>
 
+<p align="center">
+    <img src="tasmax_seasonal-cycle_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
+    <br>
+    <em>
+      Figure 2: As per Figure 1 but for the seasonal cycle bias metric defined in Table 1.
+    </em>
+</p>
+
 For the cross validation task,
-all the bias correction methods perform similarity well with respect to the annual mean (e.g. Figure 2).
+all the bias correction methods perform similarity well with respect to both
+the annual mean (e.g. Figure 3) and seasonal cycle (e.g. Figure 4).
 The relative ranking of the methods in terms of the spatial mean absolute error
 differs depending on exactly which RCM and variable is assessed.
 It does not appear to make much difference whether the data are dynamically downscaled
@@ -301,7 +308,7 @@ prior to bias correction or not.
     <img src="tasmin_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
     <br>
     <em>
-      Figure 2: Bias in annual mean daily minimum temperature (relative to the AGCD dataset)
+      Figure 3: Bias in annual mean daily minimum temperature (relative to the AGCD dataset)
       for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
@@ -311,10 +318,6 @@ prior to bias correction or not.
       (MAE = mean absolute error.)
     </em>
 </p>
-
-#### Seasonal cycle
-
-
 
 ### 5.2. Variability
 TODO.
