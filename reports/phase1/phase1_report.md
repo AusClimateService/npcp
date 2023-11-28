@@ -298,7 +298,7 @@ when trained on that same 1980-2019 observed data
 
 For the cross validation task,
 all the bias correction methods perform similarity well with respect to both
-the annual mean (e.g. Figure 3) and seasonal cycle (e.g. Figure 4).
+the annual mean (e.g. Figure 3) and seasonal cycle (e.g. Figure 4 and 5).
 The relative ranking of the methods in terms of the spatial mean absolute error
 differs depending on exactly which RCM and variable is assessed.
 It does not appear to make much difference whether the data are dynamically downscaled
@@ -318,6 +318,24 @@ prior to bias correction or not.
       (MAE = mean absolute error.)
     </em>
 </p>
+
+<p align="center">
+    <img src="tasmin_seasonal-cycle_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
+    <br>
+    <em>
+      Figure 4: As per Figure 3 but for the seasonal cycle bias metric defined in Table 1.
+    </em>
+</p>
+
+<p align="center">
+    <img src="tasmin_seasonal-cycle-cities_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
+    <br>
+    <em>
+      Figure 5: Daily minimum temperature seasonal climatology for the "cross validation" assessment task..
+    </em>
+</p>
+
+
 
 ### 5.2. Variability
 TODO.
