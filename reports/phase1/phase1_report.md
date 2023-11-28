@@ -401,7 +401,7 @@ none of the univariate bias correction methods substantially alter the model sim
 In fact, dynamical downscaling appears to modify the model trend much more than bias correction.
 
 <p align="center">
-    <img src="tasmax_trend_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
+    <img src="tasmax_trend_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
       Figure X: Change in annual mean daily maximum temperature
