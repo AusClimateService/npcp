@@ -320,7 +320,7 @@ prior to bias correction or not.
 </p>
 
 <p align="center">
-    <img src="tasmin_seasonal-cycle_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
+    <img src="tasmin_seasonal-cycle_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
       Figure 4: As per Figure 3 but for the seasonal cycle bias metric defined in Table 1.
@@ -328,7 +328,7 @@ prior to bias correction or not.
 </p>
 
 <p align="center">
-    <img src="tasmin_seasonal-cycle-cities_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
+    <img src="tasmin_seasonal-cycle-cities_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
       Figure 5: Daily minimum temperature seasonal climatology for the "cross validation" assessment task..
