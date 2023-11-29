@@ -271,15 +271,16 @@ _Table 1: Metrics used in the assessment._
 
 With respect to daily minimum and maximum temperature,
 all the univariate bias correction methods do an almost perfect job of
-representing the observed (AGCD) 1980-2019 annual mean and seasonal cycle
+representing the observed (AGCD) 1980-2019 annual mean (e.g. Figure 5.1.1)
+and seasonal cycle (e.g. Figure 5.1.2)
 when trained on that same 1980-2019 observed data
-(i.e. the historical assessment task; e.g. Figures 1 and 2).
+(i.e. the historical assessment task).
 
 <p align="center">
     <img src="tasmax_mean-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
     <br>
     <em>
-      Figure 1: Bias in annual mean daily maximum temperature (relative to the AGCD dataset)
+      Figure 5.1.1: Bias in annual mean daily maximum temperature (relative to the AGCD dataset)
       for the "historical" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left)
@@ -292,13 +293,13 @@ when trained on that same 1980-2019 observed data
     <img src="tasmax_seasonal-cycle_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
     <br>
     <em>
-      Figure 2: As per Figure 1 but for the seasonal cycle bias metric defined in Table 1.
+      Figure 5.1.2: As per Figure 5.1.1 but for the seasonal cycle bias metric defined in Table 1.
     </em>
 </p>
 
 For the cross validation task,
 all the bias correction methods perform similarity well with respect to both
-the annual mean (e.g. Figure 3) and seasonal cycle (e.g. Figure 4 and 5).
+the annual mean (e.g. Figure 5.1.3) and seasonal cycle (e.g. Figure 5.1.4 and 5.1.5).
 The relative ranking of the methods in terms of the spatial mean absolute error
 differs depending on exactly which RCM and variable is assessed.
 It does not appear to make much difference whether the data are dynamically downscaled
@@ -308,7 +309,7 @@ prior to bias correction or not.
     <img src="tasmin_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
     <br>
     <em>
-      Figure 3: Bias in annual mean daily minimum temperature (relative to the AGCD dataset)
+      Figure 5.1.3: Bias in annual mean daily minimum temperature (relative to the AGCD dataset)
       for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
@@ -323,7 +324,7 @@ prior to bias correction or not.
     <img src="tasmin_seasonal-cycle_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
-      Figure 4: As per Figure 3 but for the seasonal cycle bias metric defined in Table 1.
+      Figure 5.1.4: As per Figure 5.1.3 but for the seasonal cycle bias metric defined in Table 1.
     </em>
 </p>
 
@@ -331,11 +332,9 @@ prior to bias correction or not.
     <img src="tasmin_seasonal-cycle-cities_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
-      Figure 5: Daily minimum temperature seasonal climatology for the "cross validation" assessment task..
+      Figure 5.1.5: Daily minimum temperature seasonal climatology for the "cross validation" assessment task.
     </em>
 </p>
-
-
 
 ### 5.2. Variability
 TODO.
@@ -354,13 +353,13 @@ of daily minimum and maximum temperature,
 all the univariate bias correction methods do a similar job of
 representing the observed (AGCD) 1980-2019 extremes
 when trained on that same 1980-2019 observed data
-(i.e. the historical assessment task; e.g. Figure X).
+(i.e. the historical assessment task; e.g. Figure 5.3.1).
 
 <p align="center">
     <img src="tasmax_extreme-bias_task-historical_CSIRO-ACCESS-ESM1-5_UQ-DES-CCAM-2105.png" width=65% height=65%>
     <br>
     <em>
-      Figure X: Bias in the 1-in-10 year high daily maximum temperature (relative to the AGCD dataset)
+      Figure 5.3.1: Bias in the 1-in-10 year high daily maximum temperature (relative to the AGCD dataset)
       for the "historical" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left)
@@ -370,7 +369,7 @@ when trained on that same 1980-2019 observed data
 </p>
 
 For the cross validation task,
-all the bias correction methods also perform similarity.
+all the bias correction methods also perform similarity (Figure 5.3.2).
 The relative ranking of the methods in terms of the spatial mean absolute error
 differs depending on exactly which RCM and variable is assessed.
 It does not appear to make much difference whether the data are dynamically downscaled
@@ -380,7 +379,7 @@ prior to bias correction or not.
     <img src="tasmin_extreme-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
     <br>
     <em>
-      Figure X: Bias in the 1-in-10 year low daily minimum temperature (relative to the AGCD dataset)
+      Figure 5.3.2: Bias in the 1-in-10 year low daily minimum temperature (relative to the AGCD dataset)
       for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
@@ -397,14 +396,14 @@ prior to bias correction or not.
 > substantially modify model simulated temperature trends.
 
 With respect to the simulated trend in annual mean daily maximum or minimum temperature,
-none of the univariate bias correction methods substantially alter the model simulated trend (e.g. Figure X).
+none of the univariate bias correction methods substantially alter the model simulated trend (e.g. Figure 5.4.1).
 In fact, dynamical downscaling appears to modify the model trend much more than bias correction.
 
 <p align="center">
     <img src="tasmax_trend_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
-      Figure X: Change in annual mean daily maximum temperature
+      Figure 5.4.1: Change in annual mean daily maximum temperature
       between 1980-2019 and 2060-2099 for the ssp370 experiment.
       Results are shown for a GCM (left most panel),
       RCM forced by that GCM (second from the left)
@@ -412,16 +411,18 @@ In fact, dynamical downscaling appears to modify the model trend much more than 
     </em>
 </p>
 
-
-### 5.5. Link between variables
-TODO.
-
 ## 6. Results: Precipitation
+
+TODO: The relative performance of each of the bias correction methods differs quite a bit from RCM to RCM,
+so we should process the RCM data for anotehr GCM or two to see whehter a consistent pattern in the results
+can be identified. 
 
 ### 6.1. Climatology
 
-> Summary: Relatively large biases persist in the precipitation climatology
-> after applying any of the univariate bias correction methods.
+> Summary: For the cross validation task,
+> relatively large biases persist in the precipitation climatology
+> even after applying the univariate bias correction methods.
+> A simple replication of the training data outperforms all methods.
 > The QDM method tends to perform better than QME,
 > which in turn performs better than ECDFm.
 > While the raw RCM data tends to be less biased than the raw GCM data,
@@ -430,37 +431,201 @@ TODO.
 
 With respect to precipitation,
 all the univariate bias correction methods do a good job of
-representing the observed (AGCD) 1980-2019 annual mean and seasonal cycle
-when trained on that same 1980-2019 observed data (e.g. Figures X).
+representing the observed (AGCD) 1980-2019 annual mean (e.g. Figure 6.1.1)
+and seasonal cycle (e.g. Figure 6.1.2 and 6.1.3)
+when trained on that same 1980-2019 observed data.
 The ECDFm method tends to slightly outperform the QME method
 on this historical assessment task.
 
-TDOD: Insert figures.
+<p align="center">
+    <img src="pr_mean-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
+    <br>
+    <em>
+      Figure 6.1.1: Bias in annual mean precipitation (relative to the AGCD dataset)
+      for the "historical" assessment task.
+      Results are shown for a GCM (top left),
+      RCM forced by that GCM (bottom left)
+      and various bias correction methods applied to those model data (rows).
+      (MAE = mean absolute error.)
+    </em>
+</p>
+
+<p align="center">
+    <img src="pr_seasonal-cycle_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
+    <br>
+    <em>
+      Figure 6.1.2: As per Figure 6.1.1 but for the seasonal cycle bias metric defined in Table 1.
+    </em>
+</p>
+
+
+<p align="center">
+    <img src="pr_seasonal-cycle-fraction_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
+    <br>
+    <em>
+      Figure 6.1.3: As per Figure 6.1.2 but the seasonal cycle bias metric is expressed as a fraction of the mean total annual precipitation.
+    </em>
+</p>
 
 For the cross validation task,
 substantial biases remain in the precipitation climatology
 even after the application of the univariate bias correction methods.
 In fact, a simple replication of the training data is the best performing "method",
-followed by QDM, QME and ECDFm (e.g. Figure X and X).
+followed by QDM, QME and ECDFm (e.g. Figure 6.1.4 to 6.1.7).
 While the raw RCM data tends to be (but is not always) less biased than the raw GCM data,
-biases tend to be lower if the GCM data is not dynamically downscaled prior to applying bias correction.
+biases tend to be (but are not always) lower if the GCM data
+is not dynamically downscaled prior to applying bias correction.
 
 TODO: Explain that the ECDFm biases can be reduced (to the point they are comparable to QME)
 by applying limiting precipitation qnatile increases to 50% as the QME method does.
 
-TODO: Insert figures.
+<p align="center">
+    <img src="pr_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <br>
+    <em>
+      Figure 6.1.4: Bias in annual mean precipitation (relative to the AGCD dataset)
+      for the "cross validation" assessment task.
+      Results are shown for a GCM (top left),
+      RCM forced by that GCM (bottom left),
+      various bias correction methods applied to those model data (rows),
+      and a reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) (bottom right).
+      (MAE = mean absolute error.)
+    </em>
+</p>
+
+<p align="center">
+    <img src="pr_seasonal-cycle_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <br>
+    <em>
+      Figure 6.1.5: As per Figure 6.1.4 but for the seasonal cycle bias metric defined in Table 1.
+    </em>
+</p>
+
+<p align="center">
+    <img src="pr_seasonal-cycle-fraction_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <br>
+    <em>
+      Figure 6.1.6: As per Figure 6.1.5 but the seasonal cycle bias metric is expressed as a fraction of the mean total annual precipitation.
+    </em>
+</p>
+
+<p align="center">
+    <img src="pr_seasonal-cycle-cities_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <br>
+    <em>
+      Figure 6.1.7: Precipitation seasonal climatology for the "cross validation" assessment task.
+    </em>
+</p>
+
 
 ### 6.2. Variability
 TODO.
 
 ### 6.3. Extremes
-TODO.
+
+> Summary: Relatively large biases persist
+> in the most extreme daily precipitation values
+> even after applying the univariate bias correction methods.
+> A simple replication of the training data outperforms all methods on the cross validation task,
+> while the relaitve performance of QDM, QME and ECDFm differs between RCMs and extremes metrics.
+> The raw RCM data tends to be more biased than the raw GCM data,
+> and biases tend to be lower if the GCM data is not dynamically downscaled
+> prior to applying bias correction.
+
+With respect to extreme indices such as the 1-in-10 year event
+or the most extreme percentiles (e.g. 99th or 1st)
+of daily precipitation,
+both the univariate bias correction methods do a similar job of
+representing the observed (AGCD) 1980-2019 extremes
+when trained on that same 1980-2019 observed data
+(i.e. the historical assessment task; e.g. Figure 6.3.1).
+
+<p align="center">
+    <img src="pr_extreme-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
+    <br>
+    <em>
+      Figure 6.3.1: Bias in the 1-in-10 year high daily precipitation (relative to the AGCD dataset)
+      for the "historical" assessment task.
+      Results are shown for a GCM (top left),
+      RCM forced by that GCM (bottom left)
+      and various bias correction methods applied to those model data (rows).
+      (MAE = mean absolute error.)
+    </em>
+</p>
+
+For the cross validation task,
+a simple replication of the training data outperforms all the bias correction methods.
+The relative performance of the bias correction methods differs between RCMs (e.g. Figure 6.3.2 to 6.3.4)
+and metrics (TODO: Add percentile figures).
+The raw RCM data tends to be more biased than the raw GCM data,
+and biases tend to be lower if the GCM data
+is not dynamically downscaled prior to applying bias correction.
+
+<p align="center">
+    <img src="pr_extreme-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <br>
+    <em>
+      Figure 6.3.2: Bias in the 1-in-10 year high daily precipitation (relative to the AGCD dataset)
+      for the "cross validation" assessment task.
+      Results are shown for a GCM (top left),
+      RCM forced by that GCM (bottom left),
+      various bias correction methods applied to those model data (rows),
+      and a reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) (bottom right).
+      (MAE = mean absolute error.)
+    </em>
+</p>
+
+<p align="center">
+    <img src="pr_extreme-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_CSIRO-CCAM-2203.png">
+    <br>
+    <em>
+      Figure 6.3.3: As per Figure 6.3.2.
+    </em>
+</p>
+
+<p align="center">
+    <img src="pr_extreme-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_UQ-DES-CCAM-2105.png">
+    <br>
+    <em>
+      Figure 6.3.4: As per Figure 6.3.3.
+    </em>
+</p>
 
 ### 6.4. Trends
+
+> Summary: The univariate bias correction methods
+> only slightly modify model simulated precipitation trends.
+
+With respect to the simulated trend in annual mean rainfall,
+none of the univariate bias correction methods substantially alter the model simulated trend (e.g. Figure 6.4.1 and 6.4.2).
+Dynamical downscaling appears to modify the model trend much more than bias correction.
+
+<p align="center">
+    <img src="pr_trend_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <br>
+    <em>
+      Figure 6.4.1: Change in annual mean precipitation
+      between 1980-2019 and 2060-2099 for the ssp370 experiment.
+      Results are shown for a GCM (left most panel),
+      RCM forced by that GCM (second from the left)
+      and various bias correction methods applied to those model data (remaining panels).
+    </em>
+</p>
+
+<p align="center">
+    <img src="pr_trend-rcm_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=80% height=80%>
+    <br>
+    <em>
+      Figure 6.4.2: Change in annual mean precipitation
+      between 1980-2019 and 2060-2099 for the ssp370 experiment
+      relative to the RCM change.
+    </em>
+</p>
+
+## 7. Link between variables
 TODO.
 
-### 6.5. Link between variables
+## 8. Discussion
 TODO.
-
-## 7. Discussion
-TODO
