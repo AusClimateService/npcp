@@ -109,7 +109,7 @@ There are a number of decisions to make when implementing the ECDFm method:
 - _Time grouping_:
   It is common to bias correct individual seasons or months separately to avoid conflating different times of the year
   (e.g. spring and autumn temperatures often occupy the same annual quantile space but may be biased in different ways).
-  We use monthly time grouping. 
+  Monthly time grouping is used for this NPCP intercomparsion. 
 - _Qunatiles (number and interpolation)_:
   The software allows the user to specify the number of quantiles to calculate
   and what interpolation method to use to determine the bias correction for target data points that fall between quantiles/months.
@@ -127,14 +127,47 @@ There are a number of decisions to make when implementing the ECDFm method:
 
 #### 2.2.1. Method
 
-The _quantile matching for extremes_ (Dowdy 2023) method involves populating a histogram
-with data that has been clipped to a valid range
-and then scaled to an integer value between 0 and the desired number of bins (typically 500). 
+The _quantile matching for extremes_ ([Dowdy 2023](http://www.bom.gov.au/research/publications/researchreports/BRR-087.pdf))
+method involves populating a histogram with data that has been clipped to a valid range
+and then scaled to an integer value between 0 and the desired number of bins. 
+
+A typical valid data range might be -30 to 60 C for daily maximum temperature (tasmax),
+-45 to 50 C for daily minimum temperature (tasmin),
+or 0 to 1250 mm/day for precipitation (pr).
+The following scaling formulas (used in this intercomparison)
+map the valid range of data values across 500 integer bins: 
+- (tasmax + 35) * 5
+- (tasmin + 55) * 5
+- alog(pr + 1) * 70, where alog is the natural logarithm 
+
+A small value of 0.1 mm/day would have a scaled value of alog(0.1 + 1) * 70 = 6.7,
+which is rounded to an integer value / bin number of 7.
+The largest valid rainfall amount of 1250 mm/day would have a scaled value of alog(1250 + 1 ) * 70 = 499.2,
+which means it would be stored in the second highest bin in the histogram (i.e., 499).
 
 TODO - Finish description.
 
 #### 2.2.2. Software (and implementation choices) 
-TODO.
+
+The original IDL code used to implement the QME method is maintained by Andrew Dowdy at the University of Melbourne.
+A copy of the code as at October 2023 is included in the appendix of the Bureau of Meteorology research report
+that documents the QME method ([Dowdy 2023](http://www.bom.gov.au/research/publications/researchreports/BRR-087.pdf)),
+while the very latest version is available from the author by request.
+The Bureau of Meteorology is also developing a Python wrapper for that original IDL code.
+
+There are a number of decisions to make when implementing the QDM method:
+- _Time grouping_:
+  Similar to ECDFm, it is common to apply the QME method to individual seasons or months separately.
+  Monthly time grouping is used for this NPCP intercomparsion.
+- _Number of bins_:
+  The software allows the user to specify the number of histogram bins.
+  A total of 500 bins were used for this NPCP intercomparsion.
+- _Adjustment limits_:
+  An upper limit of 50% was used for the multiplicative correction of precipitation.
+- _Trend matching_: The long-term trend in the data can be removed prior to applying the bias correction,
+  and then added back in after the bias correction has been applied in order to ensure that the bias correction
+  does not substantially alter the model simulated trend.
+  
 
 ### 2.3. QDM
 
@@ -173,7 +206,7 @@ the QDM method is implemented using the same software as the ECDFm method.
 The same implementation choices are made regarding time grouping, quantiles and singularity stochastic removal.
 The only difference is when processing precipitation data (a multiplicative application of QDM)
 we've found that in many locations the model bias in the timing of the seasonal cycle
-means that monthly time grouping dramatically modifies the climate trend in the dat
+means that monthly time grouping dramatically modifies the climate trend in the data
 (i.e. the mean change between the future data produced by QDM and the observations
 is much different than the mean change between the future and historical model simulations).
 As such, we don't apply any time grouping when applying QDM to precipitation data
