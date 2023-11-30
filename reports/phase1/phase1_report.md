@@ -59,9 +59,15 @@ Application ready climate data was produced using QDM for the
 [Climate Change in Australia](https://www.climatechangeinaustralia.gov.au/) project,
 so it is useful to compare that approach to traditional bias correction.
 
-All three of the methods are quantile based,
-meaning the transfers are a function of quantile.
-Each of the methods is described in detail below.
+All three of these univariate methods are quantile-based,
+meaning the applied transfers are a function of quantile.
+Quantile methods are a popular and slightly more sophisticated approach than mean scaling,
+where the difference (or ratio) in the mean between the model and observations is
+removed from all data points.
+The ECDFm and QDM methods are essentially the most basic quantile methods available...
+TODO: finish high level comparison of the methods.
+
+Each of the methods is described in more detail below.
 
 ### 2.1. ECDFm
 
@@ -91,12 +97,6 @@ For precipitation, multiplicative as opposed to additive bias correction is pref
 to avoid the possibility of getting bias corrected values less than zero.
 In this case, *equiratio CDF matching* ([Wang and Chen, 2013](https://doi.org/10.1002/asl2.454)) is used:
 $$x_{m-adjust} = x_{m,p} \times (F_{o,h}^{-1}(F_{m,p}(x_{m,p})) \div F_{m,h}^{-1}(F_{m,p}(x_{m,p})))$$
-
-Besides incredibly simple bias correction approaches like mean scaling
-(i.e. where the difference in the mean between the model and observations
-is simply removed from all data points),
-ECDFm is effectively the most basic (and thus easy to understand/explain)
-bias correction method available.
 
 #### 2.1.2. Software (and implementation choices)
 
