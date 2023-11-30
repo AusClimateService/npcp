@@ -126,7 +126,12 @@ There are a number of decisions to make when implementing the ECDFm method:
 ### 2.2. QME
 
 #### 2.2.1. Method
-TODO.
+
+The _quantile matching for extremes_ (Dowdy 2023) method involves populating a histogram
+with data that has been clipped to a valid range
+and then scaled to an integer value between 0 and the desired number of bins (typically 500). 
+
+TODO - Finish description.
 
 #### 2.2.2. Software (and implementation choices) 
 TODO.
