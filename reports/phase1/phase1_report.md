@@ -171,7 +171,7 @@ There are a number of decisions to make when implementing the QDM method:
 - _Trend matching_: The long-term trend in the data can be removed prior to applying the bias correction,
   and then added back in after the bias correction has been applied in order to ensure that the bias correction
   does not substantially alter the model simulated trend.
-  
+  This option was applied for the temperature data in the projection assessment task (described below).
 
 ### 2.3. QDM
 
