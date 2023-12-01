@@ -136,28 +136,45 @@ The _quantile matching for extremes_ ([Dowdy 2023](http://www.bom.gov.au/researc
 method involves populating a histogram with data that has been clipped to a valid range
 and then scaled to an integer value between 0 and the desired number of bins. 
 
-A typical valid data range might be -30 to 60 C for daily maximum temperature (tasmax),
--45 to 50 C for daily minimum temperature (tasmin),
-or 0 to 1250 mm/day for precipitation (pr).
+A typical valid data range might be -30C to 60C for daily maximum temperature (tasmax),
+-45C to 50C for daily minimum temperature (tasmin),
+or 0mm to 1250mm for daily precipitation (pr).
 The following scaling formulas (used in this intercomparison)
 map the valid range of data values across 500 integer bins: 
 - (tasmax + 35) * 5
 - (tasmin + 55) * 5
 - alog(pr + 1) * 70, where alog is the natural logarithm 
 
-A small value of 0.1 mm/day would have a scaled value of alog(0.1 + 1) * 70 = 6.7,
+A small value of 0.1mm would have a scaled value of alog(0.1 + 1) * 70 = 6.7,
 which is rounded to an integer value / bin number of 7.
-The largest valid rainfall amount of 1250 mm/day would have a scaled value of alog(1250 + 1 ) * 70 = 499.2,
-which means it would be stored in the second highest bin in the histogram (i.e., 499).
+The largest valid rainfall amount of 1250mm would have a scaled value of alog(1250 + 1 ) * 70 = 499.2,
+which means it would be stored in the second highest bin in the histogram (i.e. bin 499).
 
-TODO - Finish description.
+Depending on the range of the data,
+some of the bins will be empty.
+The range occupied by the model data might also differ from the observed range.
+To account for these issues, the bins that are populated are ranked from lowest to highest
+and those rankings are used to match the bins from the observed training data
+with the corresponding bins from the model training data.
+The differences between those rank matched bins represents the model bias.
+
+> I think there's some weighted averaging here I'm missing.  
+> Is QME multiplicative for precipiation?
+
+To avoid potential overfitting or an excessive influence of very rare events,
+before the adjustment factor for each ranked bin is applied to the target data
+the factors for the N most extreme high and extreme low bins (typically N=3)
+are replaced by the value from the neighbouring histogram bin
+(i.e., the histogram bin that is one place less extreme than the third highest value in the sample).
+The reference to _extremes_ in the name of the method is a nod to these tweaks
+to the quantile adjustments in the tails of the distribution. 
 
 #### 2.2.2. Software (and implementation choices) 
 
 The original IDL code used to implement the QME method is maintained by Andrew Dowdy at the University of Melbourne.
 A copy of the code as at October 2023 is included in the appendix of the Bureau of Meteorology research report
 that documents the QME method ([Dowdy 2023](http://www.bom.gov.au/research/publications/researchreports/BRR-087.pdf)),
-while the very latest version is available from the author by request.
+while the very latest version is available from Andrew by request.
 The Bureau of Meteorology is also developing a Python wrapper for that original IDL code.
 
 There are a number of decisions to make when implementing the QDM method:
@@ -169,14 +186,13 @@ There are a number of decisions to make when implementing the QDM method:
   for which to calculate an adjustment factor.
   A total of 500 bins were used for this NPCP intercomparsion.
 - _Adjustment factor smoothing_:
-  A 21-point moving average was applied as smoothing over the range of bias correction values
-  (i.e. for bins 0 to 500) for each month.
+  A 21-point moving average was applied  over the range of bias correction values (i.e. for bins 0 to 500) for each month.
 - _Adjustment limits_:
   The software allows the user to specify a maximum adjustment/correction. 
   The default setting for precipitation (used in this intercomparison)
   is for a maximum increase of 50% applied to values great than or equal to 10mm.
-  For instance, model precipitation data of 20 mm/day could potentially be bias corrected up to a
-  maximum value of 30 mm/day.
+  For instance, a model daily precipitation value of 20mm could potentially be bias corrected
+  up to a maximum value of 30mm.
 - _Trend matching_: The long-term trend in the data can be removed prior to applying the bias correction,
   and then added back in after the bias correction has been applied in order to ensure that the bias correction
   does not substantially alter the model simulated trend.
