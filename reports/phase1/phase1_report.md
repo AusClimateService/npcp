@@ -107,16 +107,21 @@ functionality available in the widely used open source xclim library.
 
 There are a number of decisions to make when implementing the ECDFm method:
 - _Time grouping_:
-  It is common to bias correct individual seasons or months separately to avoid conflating different times of the year
+  It is common calculate bias correction adjustment factors for individual seasons or months separately
+  in order to avoid conflating different times of the year
   (e.g. spring and autumn temperatures often occupy the same annual quantile space but may be biased in different ways).
-  Monthly time grouping is used for this NPCP intercomparsion. 
-- _Qunatiles (number and interpolation)_:
-  The software allows the user to specify the number of quantiles to calculate
-  and what interpolation method to use to determine the bias correction for target data points that fall between quantiles/months.
+  For the NPCP intercomparsion, adjustment factors were calculated for each month.
+- _Qunatiles_:
+  The software allows the user to specify the number of quantiles for which to calculate an adjustment factor.
   We've found that it's best to have approximately 10-15 data values between each quantile.
   For the NPCP bias correction tasks (that train on 30 or 40 years of daily data),
-  that means 100 quantiles for monthly time grouping.
-  We apply linear interpolation.
+  that means 100 quantiles for each month.
+- _Adjustment factor smoothing_:
+  The bias correction applied to each target data point is the closest value from the array of adjustment factors.
+  In this case, it is a 12 (months) by 100 (quantiles) array
+  and linear interpolation/smoothing is applied along the month axis.
+  That means the adjustment factor for a target data point from 29 July that corresponds to the 0.651 quantile
+  will be a linear combination of the adjustment factors for the nearest quantile (0.65) from both July and August.
 - _Singularity stochastic removal_ ([Vrac et al 2016](https://doi.org/10.1002/2015JD024511))
   is used to avoid divide by zero errors in the analysis of precipitation data.
   All near-zero values (i.e. values less than a very small positive threshold value)
@@ -159,9 +164,13 @@ There are a number of decisions to make when implementing the QDM method:
 - _Time grouping_:
   Similar to ECDFm, it is common to apply the QME method to individual seasons or months separately.
   Monthly time grouping was used for this NPCP intercomparsion.
-- _Number of bins_:
-  The software allows the user to specify the number of histogram bins.
+- _Quantiles_:
+  The software allows the user to specify the number of quantiles (i.e. number of histogram bins)
+  for which to calculate an adjustment factor.
   A total of 500 bins were used for this NPCP intercomparsion.
+- _Adjustment factor smoothing_:
+  A 21-point moving average was applied as smoothing over the range of bias correction values
+  (i.e. for bins 0 to 500) for each month.
 - _Adjustment limits_:
   The software allows the user to specify a maximum adjustment/correction. 
   The default setting for precipitation (used in this intercomparison)
