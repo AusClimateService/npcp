@@ -111,7 +111,7 @@ There are a number of decisions to make when implementing the ECDFm method:
   in order to avoid conflating different times of the year
   (e.g. spring and autumn temperatures often occupy the same annual quantile space but may be biased in different ways).
   For the NPCP intercomparsion, adjustment factors were calculated for each month.
-- _Qunatiles_:
+- _Quantiles_:
   The software allows the user to specify the number of quantiles for which to calculate an adjustment factor.
   We've found that it's best to have approximately 10-15 data values between each quantile.
   For the NPCP bias correction tasks (that train on 30 or 40 years of daily data),
