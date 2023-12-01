@@ -163,7 +163,11 @@ There are a number of decisions to make when implementing the QDM method:
   The software allows the user to specify the number of histogram bins.
   A total of 500 bins were used for this NPCP intercomparsion.
 - _Adjustment limits_:
-  An upper limit of 50% was used for the multiplicative correction of precipitation.
+  The software allows the user to specify a maximum adjustment/correction. 
+  The default setting for precipitation (used in this intercomparison)
+  is for a maximum increase of 50% applied to values great than or equal to 10mm.
+  For instance, model precipitation data of 20 mm/day could potentially be bias corrected up to a
+  maximum value of 30 mm/day.
 - _Trend matching_: The long-term trend in the data can be removed prior to applying the bias correction,
   and then added back in after the bias correction has been applied in order to ensure that the bias correction
   does not substantially alter the model simulated trend.
