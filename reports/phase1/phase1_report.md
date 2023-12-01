@@ -158,7 +158,7 @@ The Bureau of Meteorology is also developing a Python wrapper for that original 
 There are a number of decisions to make when implementing the QDM method:
 - _Time grouping_:
   Similar to ECDFm, it is common to apply the QME method to individual seasons or months separately.
-  Monthly time grouping is used for this NPCP intercomparsion.
+  Monthly time grouping was used for this NPCP intercomparsion.
 - _Number of bins_:
   The software allows the user to specify the number of histogram bins.
   A total of 500 bins were used for this NPCP intercomparsion.
