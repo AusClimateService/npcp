@@ -38,7 +38,7 @@ The first step in a typical bias correction procedure involves establishing a st
 between model outputs and observations over a reference (i.e. historical/training) time period.
 The established transfer function is then applied to the target model data
 (e.g. future model projections) in order to produce a "bias corrected" model time series.
-There are a wide variety of transfer functions / bias correction methdologies out there,
+There are a wide variety of transfer functions / bias correction methodologies out there,
 ranging from relatively simple methods that take a single variable as input
 to more sophisticated multi-variate approaches.
 
@@ -159,7 +159,7 @@ with the corresponding bins from the model training data.
 The differences between those rank matched bins represents the model bias.
 
 > I think there's some weighted averaging here I'm missing.  
-> Is QME multiplicative for precipiation?
+> Is QME multiplicative for precipitation?
 
 To avoid potential overfitting or an excessive influence of very rare events,
 before the adjustment factor for each ranked bin is applied to the target data
