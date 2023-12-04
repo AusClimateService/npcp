@@ -297,6 +297,8 @@ This is the most basic test of a bias correction method - if a method cannot ade
 it is unlikely to be a useful method.
 Conversely, if a method performs too well at the historical task,
 this can in some cases be an indication of over-fitting.
+(The historical task was not completed for the QDM method since
+by definition that method would achieve a perfect score by simply returning the observations un-adjusted.)
 The cross validation task assesses how well the methods perform when producing data
 for a different time period than the training period,
 which is a more difficult test (and also the typical application for bias correction methods).
@@ -335,14 +337,14 @@ _Table 1: Metrics used in the assessment._
 
 ### 5.1. Climatology
 
-> Summary: There's essentially no difference between the univariate bias correction methods
+> Summary: There's essentially no difference between the univariate methods
 > with respect to the daily minimum and maximum temperature climatologies.
 > While the raw RCM data is less biased than the raw GCM data,
 > it also makes no difference whether the GCM data is dynamically downscaled or not
 > prior to applying bias correction.
 
 With respect to daily minimum and maximum temperature,
-all the univariate bias correction methods do an almost perfect job of
+both univariate bias correction methods do an almost perfect job of
 representing the observed (AGCD) 1980-2019 annual mean (e.g. Figure 5.1.1)
 and seasonal cycle (e.g. Figure 5.1.2)
 when trained on that same 1980-2019 observed data
@@ -370,7 +372,7 @@ when trained on that same 1980-2019 observed data
 </p>
 
 For the cross validation task,
-all the bias correction methods perform similarity well with respect to both
+all three methods perform similarity well with respect to both
 the annual mean (e.g. Figure 5.1.3) and seasonal cycle (e.g. Figure 5.1.4 and 5.1.5).
 The relative ranking of the methods in terms of the spatial mean absolute error
 differs depending on exactly which RCM and variable is assessed.
@@ -413,7 +415,7 @@ TODO.
 
 ### 5.3. Extremes
 
-> Summary: There's essentially no difference between the univariate bias correction methods
+> Summary: There's essentially no difference between the univariate methods
 > with respect to the most extreme daily minimum and maximum temperatures.
 > While the raw RCM data is generally (but not always) less biased than the raw GCM data,
 > it also makes no difference whether the GCM data is dynamically downscaled or not
@@ -422,7 +424,7 @@ TODO.
 With respect to extreme indices such as the 1-in-10 year event
 or the most extreme percentiles (e.g. 99th or 1st)
 of daily minimum and maximum temperature,
-all the univariate bias correction methods do a similar job of
+both univariate bias correction methods do a similar job of
 representing the observed (AGCD) 1980-2019 extremes
 when trained on that same 1980-2019 observed data
 (i.e. the historical assessment task; e.g. Figure 5.3.1).
@@ -441,7 +443,7 @@ when trained on that same 1980-2019 observed data
 </p>
 
 For the cross validation task,
-all the bias correction methods also perform similarity (Figure 5.3.2).
+all three methods perform similarity (Figure 5.3.2).
 The relative ranking of the methods in terms of the spatial mean absolute error
 differs depending on exactly which RCM and variable is assessed.
 It does not appear to make much difference whether the data are dynamically downscaled
@@ -464,11 +466,10 @@ prior to bias correction or not.
 
 ### 5.4. Trends
 
-> Summary: None of the univariate bias correction methods
-> substantially modify model simulated temperature trends.
+> Summary: None of the univariate methods substantially modify model simulated temperature trends.
 
 With respect to the simulated trend in annual mean daily maximum or minimum temperature,
-none of the univariate bias correction methods substantially alter the model simulated trend (e.g. Figure 5.4.1).
+none of the methods substantially alter the model simulated trend (e.g. Figure 5.4.1).
 In fact, dynamical downscaling appears to modify the model trend much more than bias correction.
 
 <p align="center">
@@ -493,7 +494,7 @@ can be identified.
 
 > Summary: For the cross validation task,
 > relatively large biases persist in the precipitation climatology
-> even after applying the univariate bias correction methods.
+> even after applying the univariate methods.
 > A simple replication of the training data outperforms all methods.
 > The QDM method tends to perform better than QME,
 > which in turn performs better than ECDFm.
@@ -502,7 +503,7 @@ can be identified.
 > prior to applying bias correction.
 
 With respect to precipitation,
-all the univariate bias correction methods do a good job of
+both bias correction methods do a good job of
 representing the observed (AGCD) 1980-2019 annual mean (e.g. Figure 6.1.1)
 and seasonal cycle (e.g. Figure 6.1.2 and 6.1.3)
 when trained on that same 1980-2019 observed data.
@@ -541,7 +542,7 @@ on this historical assessment task.
 
 For the cross validation task,
 substantial biases remain in the precipitation climatology
-even after the application of the univariate bias correction methods.
+even after the application of the univariate methods.
 In fact, a simple replication of the training data is the best performing "method",
 followed by QDM, QME and ECDFm (e.g. Figure 6.1.4 to 6.1.7).
 While the raw RCM data tends to be (but is not always) less biased than the raw GCM data,
@@ -598,7 +599,7 @@ TODO.
 
 > Summary: Relatively large biases persist
 > in the most extreme daily precipitation values
-> even after applying the univariate bias correction methods.
+> even after applying the univariate methods.
 > A simple replication of the training data outperforms all methods on the cross validation task,
 > while the relaitve performance of QDM, QME and ECDFm differs between RCMs and extremes metrics.
 > The raw RCM data tends to be more biased than the raw GCM data,
@@ -627,8 +628,8 @@ when trained on that same 1980-2019 observed data
 </p>
 
 For the cross validation task,
-a simple replication of the training data outperforms all the bias correction methods.
-The relative performance of the bias correction methods differs between RCMs (e.g. Figure 6.3.2 to 6.3.4)
+a simple replication of the training data outperforms all the univariate methods.
+The relative performance of the methods differs between RCMs (e.g. Figure 6.3.2 to 6.3.4)
 and metrics (TODO: Add percentile figures).
 The raw RCM data tends to be more biased than the raw GCM data,
 and biases tend to be lower if the GCM data
@@ -667,11 +668,10 @@ is not dynamically downscaled prior to applying bias correction.
 
 ### 6.4. Trends
 
-> Summary: The univariate bias correction methods
-> only slightly modify model simulated precipitation trends.
+> Summary: The univariate methods only slightly modify model simulated precipitation trends.
 
 With respect to the simulated trend in annual mean rainfall,
-none of the univariate bias correction methods substantially alter the model simulated trend (e.g. Figure 6.4.1 and 6.4.2).
+none of the univariate methods substantially alter the model simulated trend (e.g. Figure 6.4.1 and 6.4.2).
 Dynamical downscaling appears to modify the model trend much more than bias correction.
 
 <p align="center">
