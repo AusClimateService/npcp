@@ -49,6 +49,20 @@ There were two univariate methods:
 equi-distant/ratio cumulative density function matching (ECDFm)
 and quantile matching for extremes (QME).
 
+Both of these univariate methods are quantile-based,
+meaning the applied transfers are a function of quantile.
+Quantile methods are a popular and slightly more sophisticated approach than mean scaling,
+where the bias (i.e. a difference or ratio) in the mean between the model and observations is
+removed from all model data points of interest.
+The ECDFm method is essentially the most basic quantile-based bias correction method available.
+The bias is calculated for a series of quantiles (instead of just the mean)
+and then removed from the corresponding quantiles of the model data of interest.
+The QME method is slightly more complicated in that it involves scaling the data
+before matching the model and observations by quantile.
+Prior to removing the quantile biases from the model data of interest,
+the bias correction factors at the extreme ends of the distribution are also modified
+in an attempt to avoid potential overfitting or an excessive influence of very rare events.
+
 A related univariate "delta change" method
 known as quantile delta mapping (QDM) was also included in the assessment.
 In contrast to bias correction,
@@ -58,14 +72,8 @@ and then apply that transfer function to observations to create a future time se
 Application ready climate data was produced using QDM for the
 [Climate Change in Australia](https://www.climatechangeinaustralia.gov.au/) project,
 so it is useful to compare that approach to traditional bias correction.
-
-All three of these univariate methods are quantile-based,
-meaning the applied transfers are a function of quantile.
-Quantile methods are a popular and slightly more sophisticated approach than mean scaling,
-where the difference (or ratio) in the mean between the model and observations is
-removed from all data points.
-The ECDFm and QDM methods are essentially the most basic quantile methods available...
-TODO: finish high level comparison of the methods.
+The QDM method is conceptually very similar to ECDFm
+and is essentially the most basic quantile-based delta change method available.
 
 Each of the methods is described in more detail below.
 
