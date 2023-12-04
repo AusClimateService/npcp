@@ -262,7 +262,7 @@ we used dynamically downscaled daily timescale temperature and precipitation dat
 from simulations forced by GCM data from the ACCESS-ESM1-5 model for the
 historical (available for the years 1960-2014)
 and SSP370 (2015-2100) experiments.
-Data from four different RCMs was assessed:
+Data from three different RCMs was assessed:
 - `BOM-BARPA-R`:
   Bureau of Meteorology Atmospheric Regional Projections for Australia
   (BARPA; [Su et al 2022](http://www.bom.gov.au/research/publications/researchreports/BRR-069.pdf)),
@@ -274,9 +274,6 @@ Data from four different RCMs was assessed:
   CCAM,
   run by the University of Queensland and the Queensland Department of Environment and Science
   ([Chapman et al 2023](https://doi.org/10.1029/2023EF003548))
-- `NARCLIM-WRF`:
-  Weather Research and Forecasting (WRF) model,
-  run by the New South Wales Australian Regional Climate Modelling (NARCLiM) project
 
 The observational / reference data used for the bias correction
 was the Australian Gridded Climate Data (AGCD) dataset
@@ -289,7 +286,7 @@ so all data was regridded to the 0.2 degree grid using conservative remapping.
 ## 4. Assessment
 
 Each contributor to the intercomparison was asked to use their bias correction software to complete three tasks
-(for each of the four RCMs):
+(for each of the three RCMs):
 - **Task 1 (Historical)**: Produce bias corrected data for the 1980-2019 period, using 1980-2019 as a training period.
 - **Task 2 (Projection)**: Produce bias corrected data for the 2060-2099 period, using 1980-2019 as a training period.
 - **Task 3 (Cross validation)**: Produce bias corrected data for the 1990-2019 period, using 1960-1989 as a training period.
@@ -299,10 +296,10 @@ when they train on exactly the same data that they correct.
 This is the most basic test of a bias correction method - if a method cannot adequately correct the very data it trained on,
 it is unlikely to be a useful method.
 Conversely, if a method performs too well at the historical task,
-this can be an indication of over-fitting.
+this can in some cases be an indication of over-fitting.
 The cross validation task assesses how well the methods perform when producing data
 for a different time period than the training period,
-which is a more difficult test (and also a very common application).
+which is a more difficult test (and also the typical application for bias correction methods).
 The projection task was included to see if the bias correction methods substantially modify the trend simulated by the models.
 Trend modification is a problem for many bias correction methods.
 
