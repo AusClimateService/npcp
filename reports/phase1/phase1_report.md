@@ -706,7 +706,9 @@ In observations,
 there is a negative correlation between the two variables across the whole of Australia
 with the strongest correlation seen in the north and east of the country (Figure 7.1).
 In other words, across wet months tend to be associated with lower daily maximum temperatures.
-The ACCESS-ESM1-5 model does a reasonable job of capturing those negative cross correlations... TODO
+The ACCESS-ESM1-5 model does a reasonable job of capturing those negative cross correlations.
+Dynamical downscaling and bias correction can slightly reduce the GCM biases,
+particularly the QDM method.
 
 <p align="center">
     <img src="ptcorr-values_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
