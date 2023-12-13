@@ -713,7 +713,7 @@ but in southern Australia it underestimates the magitude of the negative correla
 or even simulates a weak positive correlation in the far south.
 
 <p align="center">
-    <img src="ptcorr-values_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=80% height=80%>
+    <img src="ptcorr-values_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
       Figure 7.1: Cross correlation between the monthly mean anomaly timeseries
@@ -736,7 +736,7 @@ which means its starting point is the training observations
 thus more or less preserving the observed cross correlation).
 
 <p align="center">
-    <img src="ptcorr-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=80% height=80%>
+    <img src="ptcorr-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
       Figure 7.2: As per Figure 7.1 but showing the difference in cross correlation
