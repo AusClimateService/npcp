@@ -698,19 +698,15 @@ Dynamical downscaling appears to modify the model trend much more than bias corr
 
 ## 7. Link between variables
 
-> Summary: The QDM method does an excellent job of capturing
-> the cross correlation between monthly mean precipitation and daily maximum temperature.
-> The bias correction methods (and dynamical downscaling itself)
-> do nothing to reduce the GCM biases in cross correlation.
+> Summary: TODO
 
 The link between temperature and rainfall was assessed by calculating the cross correlation
 between the monthly mean anomaly timeseries of precipitation and daily maximum temperature.
-In observations, there is a relatively constant moderate negative correlation (typically -0.2 to -0.4)
-between the two variables across Australia (Figure 7.1).
-In other words, across the country wet months tend to be associated with lower daily maximum temperatures.
-The ACCESS-ESM1-5 model captures a similar negative correlation in northern Australia,
-but in southern Australia it underestimates the magitude of the negative correlation
-or even simulates a weak positive correlation in the far south.
+In observations,
+there is a negative correlation between the two variables across the whole of Australia
+with the strongest correlation seen in the north and east of the country (Figure 7.1).
+In other words, across wet months tend to be associated with lower daily maximum temperatures.
+The ACCESS-ESM1-5 model does a reasonable job of capturing those negative cross correlations... TODO
 
 <p align="center">
     <img src="ptcorr-values_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
