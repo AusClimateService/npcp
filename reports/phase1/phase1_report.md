@@ -732,7 +732,7 @@ to the GCM bias in cross correlation (Figure 7.2).
 In contrast, the cross correlation is much improved for the QDM method.
 This is presumably because QDM is a delta change method,
 which means its starting point is the training observations
-(to which is makes relative small perturbations,
+(to which it makes relative small perturbations,
 thus more or less preserving the observed cross correlation).
 
 <p align="center">
