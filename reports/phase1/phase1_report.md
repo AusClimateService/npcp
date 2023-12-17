@@ -329,7 +329,7 @@ https://github.com/AusClimateService/npcp/tree/master/results
 | Variability | Drought intensity | |
 | Extremes | 1-in-10 year event | |
 | Extremes | Percentiles | 99, 99.5 and 99.9 or 1.0, 0.5 and 0.1 |
-| Links | Cross correlation | Between monthly mean daily maximum temperature and rainfall | 
+| Links | Cross correlation | Between the monthly mean daily maximum temperature anomaly and monthly mean rainfall anomaly | 
 
 _Table 1: Metrics used in the assessment._
 
@@ -697,7 +697,50 @@ Dynamical downscaling appears to modify the model trend much more than bias corr
 </p>
 
 ## 7. Link between variables
-TODO.
+
+> Summary: TODO
+
+The link between temperature and rainfall was assessed by calculating the cross correlation
+between the monthly mean anomaly timeseries of precipitation and daily maximum temperature.
+In observations,
+there is a negative correlation between the two variables across the whole of Australia
+with the strongest correlation seen in the north and east of the country (Figure 7.1).
+In other words, across wet months tend to be associated with lower daily maximum temperatures.
+The ACCESS-ESM1-5 model does a reasonable job of capturing those negative cross correlations.
+Dynamical downscaling and bias correction can slightly reduce the GCM biases,
+particularly the QDM method.
+
+<p align="center">
+    <img src="ptcorr-values_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <br>
+    <em>
+      Figure 7.1: Cross correlation between the monthly mean anomaly timeseries
+      of precipitation and daily maximum temperature
+      for the "cross validation" assessment task.
+      Results are shown for a GCM (top left),
+      RCM forced by that GCM (bottom left),
+      and various bias correction methods applied to those model data (rows).
+      The far right column shows the observed AGCD cross correlation
+      for the assessment (1990-2019; top right) and training (1960-1989; bottom right) periods.
+    </em>
+</p>
+
+Neither dynamical downscaling or bias correction makes any appreciable difference
+to the GCM bias in cross correlation (Figure 7.2).
+In contrast, the cross correlation is much improved for the QDM method.
+This is presumably because QDM is a delta change method,
+which means its starting point is the training observations
+(to which it makes relative small perturbations,
+thus more or less preserving the observed cross correlation).
+
+<p align="center">
+    <img src="ptcorr-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <br>
+    <em>
+      Figure 7.2: As per Figure 7.1 but showing the difference in cross correlation
+      relative to the observed AGCD correlation.
+    </em>
+</p>
 
 ## 8. Discussion
 TODO.
