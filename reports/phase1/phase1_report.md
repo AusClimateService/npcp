@@ -158,16 +158,7 @@ which is rounded to an integer value / bin number of 7.
 The largest valid rainfall amount of 1250mm would have a scaled value of alog(1250 + 1 ) * 70 = 499.2,
 which means it would be stored in the second highest bin in the histogram (i.e. bin 499).
 
-Depending on the range of the data,
-some of the bins will be empty.
-The range occupied by the model data might also differ from the observed range.
-To account for these issues, the bins that are populated are ranked from lowest to highest
-and those rankings are used to match the bins from the observed training data
-with the corresponding bins from the model training data.
-The differences between those rank matched bins represents the model bias.
-
-> I think there's some weighted averaging here I'm missing.  
-> Is QME multiplicative for precipitation?
+TODO - Describe quantile matching process.
 
 To avoid potential overfitting or an excessive influence of very rare events,
 before the adjustment factor for each ranked bin is applied to the target data
@@ -190,11 +181,10 @@ There are a number of decisions to make when implementing the QDM method:
   Similar to ECDFm, it is common to apply the QME method to individual seasons or months separately.
   Monthly time grouping was used for this NPCP intercomparsion.
 - _Quantiles_:
-  The software allows the user to specify the number of quantiles (i.e. number of histogram bins)
-  for which to calculate an adjustment factor.
-  A total of 500 bins were used for this NPCP intercomparsion.
+  TODO - Find out if there are options here.
 - _Adjustment factor smoothing_:
-  A 21-point moving average was applied  over the range of bias correction values (i.e. for bins 0 to 500) for each month.
+  A 21-point moving average was applied over the range of bias correction values (i.e. for bins 0 to 500) for each month.
+  TODO: Check if this is correct.
 - _Adjustment limits_:
   The software allows the user to specify a maximum adjustment/correction. 
   The default setting for precipitation (used in this intercomparison)
