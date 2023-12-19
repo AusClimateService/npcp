@@ -13,11 +13,28 @@ import preprocess
 def main(args):
     """Run the program."""
     
-    hist_dir = f'/g/data/fs38/publications/CMIP6/CMIP/CSIRO/ACCESS-ESM1-5/historical/r6i1p1f1/day/{args.var}/gn/latest/' 
+    if args.cordex_model == 'CSIRO-ACCESS-ESM1-5':
+        institution = 'CSIRO'
+        model = 'ACCESS-ESM1-5'
+        run = 'r6i1p1f1'
+        grid = 'gn'
+        version = 'latest'
+        cmip_dir = 'fs38/publications'
+    elif args.cordex_model == 'EC-Earth-Consortium-EC-Earth3':
+        institution = 'EC-Earth-Consortium'
+        model = 'EC-Earth3'
+        run = 'r1i1p1f1'
+        grid = 'gr'
+        version = 'v20200310'
+        cmip_dir = 'oi10/replicas'
+    else:
+        raise ValueError('Unrecognised CODREX model')
+
+    hist_dir = f'/g/data/{cmip_dir}/CMIP6/CMIP/{institution}/{model}/historical/{run}/day/{args.var}/{grid}/{version}/' 
     hist_files = sorted(glob.glob(f'{hist_dir}/*.nc'))
     if not hist_files:
         raise OSError(f'No files at {hist_dir}')
-    ssp_dir = f'/g/data/fs38/publications/CMIP6/ScenarioMIP/CSIRO/ACCESS-ESM1-5/ssp370/r6i1p1f1/day/{args.var}/gn/latest/' 
+    ssp_dir = f'/g/data/{cmip_dir}/CMIP6/ScenarioMIP/{institution}/{model}/ssp370/{run}/day/{args.var}/{grid}/{version}/' 
     ssp_files = sorted(glob.glob(f'{ssp_dir}/*.nc'))
     if not ssp_files:
         raise OSError(f'No files at {ssp_dir}')
@@ -55,9 +72,9 @@ def main(args):
     ds_hist.attrs['history'] = new_log
     ds_proj.attrs['history'] = new_log
     
-    outdir = f'/g/data/ia39/npcp/data/{args.var}/CSIRO-ACCESS-ESM1-5/GCM/raw/task-reference'
-    hist_path = f'{outdir}/{args.var}_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_GCM_latest_day_19600101-20191231.nc'
-    proj_path = f'{outdir}/{args.var}_NPCP-20i_CSIRO-ACCESS-ESM1-5_ssp370_r6i1p1f1_GCM_latest_day_20600101-20991231.nc'
+    outdir = f'/g/data/ia39/npcp/data/{args.var}/{args.cordex_model}/GCM/raw/task-reference'
+    hist_path = f'{outdir}/{args.var}_NPCP-20i_{args.cordex_model}_ssp370_{run}_GCM_latest_day_19600101-20191231.nc'
+    proj_path = f'{outdir}/{args.var}_NPCP-20i_{args.cordex_model}_ssp370_{run}_GCM_latest_day_20600101-20991231.nc'
  
     ds_hist.to_netcdf(hist_path)
     ds_proj.to_netcdf(proj_path)
@@ -68,6 +85,12 @@ if __name__ == '__main__':
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter
     )     
-    parser.add_argument("var", type=str, help="input variable")
+    parser.add_argument("var", type=str, help="variable to process")
+    parser.add_argument(
+        "cordex_model",
+        type=str,
+        choices=('CSIRO-ACCESS-ESM1-5', 'EC-Earth-Consortium-EC-Earth3'),
+        help="model to process"
+    )
     args = parser.parse_args()
     main(args)
