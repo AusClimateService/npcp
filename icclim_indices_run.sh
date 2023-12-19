@@ -11,19 +11,23 @@ module use /g/data3/hh5/public/modules
 module load conda/analysis3
 
 
-declare -a metrics=("R95pTOT" "R99pTOT" "WSDI" "CSDI")
+declare -a metrics=("R95pTOT" "R99pTOT" "WSDI" "CSDI" "R20mm" "R10mm" "FD")
 declare -A var_metrics
 var_metrics["R95pTOT"]="pr"
 var_metrics["R99pTOT"]="pr"
 var_metrics["WSDI"]="tasmax"
 var_metrics["CSDI"]="tasmin"
+var_metrics["R20mm"]="pr"
+var_metrics["R10mm"]="pr"
+var_metrics["FD"]="tasmin"
+
 declare -a methods=("ecdfm" "qdm")
 declare -a rcms=("BOM-BARPA-R" "CSIRO-CCAM-2203" "UQ-DES-CCAM-2105")
 
 for metric in "${metrics[@]}"; do
     for rcm in "${rcms[@]}"; do
         for method in "${methods[@]}"; do
-            declare -a tasks=()  # Initialize tasks array
+            declare -a tasks=()  
 
             case ${method} in
                 "qdm")
@@ -104,9 +108,12 @@ for metric in "${metrics[@]}"; do
 				echo "Processing $metric for ${var_metrics[$metric]}, $rcm, $method, $task"
 				echo "Input file: $infile"
 				echo "Output file: $outfile"
-
-				python /g/data/xv83/users/at2708/bias_adjustment/evaluation/indices/run_icclim.py --input_files "$infile" --variable "${var_metrics[$metric]}" --verbose "$metric" "$outfile"
-
+				
+				if [ ! -f "$outfile" ]; then
+					python /g/data/xv83/users/at2708/bias_adjustment/evaluation/indices/run_icclim.py --input_files "$infile" --variable "${var_metrics[$metric]}" --verbose "$metric" "$outfile"
+				else
+					echo "File '$outfile' already exists."
+				fi
             done
         done
     done
