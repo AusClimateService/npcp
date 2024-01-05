@@ -72,12 +72,11 @@ def get_npcp_data(
     assert variable in ['tasmax', 'tasmin', 'pr']
     assert driving_model in ['observations', 'CSIRO-ACCESS-ESM1-5', 'ECMWF-ERA5']
     assert downscaling_model in ['AGCD', 'BOM-BARPA-R', 'UQ-DES-CCAM-2105', 'CSIRO-CCAM-2203', 'GCM']
-    assert bias_correction_method in ['raw', 'ecdfm', 'qme', 'qdm']
+    assert bias_correction_method in ['raw', 'ecdfm', 'qme', 'qdm', 'mbcn', 'mrnbc']
     assert task in ['task-reference', 'task-projection', 'task-historical', 'task-xvalidation']
     assert region in [None, 'AU', 'NA', 'SA', 'EA', 'R']
     
-    file_starts = {'raw': variable, 'ecdfm': f'{variable}_NPCP', 'qme': variable, 'qdm': f'{variable}_NPCP'}
-    file_start = file_starts[bias_correction_method]
+    file_start = variable if bias_correction_method in ['raw', 'qme'] else f'{variable}_NPCP'
     file_end = '1231.nc' if bias_correction_method == 'ecdfm' else '.nc'
     search_dir = f'/g/data/ia39/npcp/data/{variable}/{driving_model}/{downscaling_model}/{bias_correction_method}/{task}'
     files = sorted(glob.glob(f'{search_dir}/{file_start}*{file_end}'))
