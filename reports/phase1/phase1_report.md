@@ -204,7 +204,8 @@ The original IDL code used to implement the QME method is maintained by Andrew D
 A copy of the code as at October 2023 is included in the appendix of the Bureau of Meteorology research report
 that documents the QME method ([Dowdy 2023](http://www.bom.gov.au/research/publications/researchreports/BRR-087.pdf)),
 while the very latest version is available from Andrew by request.
-The Bureau of Meteorology is also developing a Python wrapper for that original IDL code.
+The Bureau of Meteorology has also written a Python implementation of the method
+that is openly available on [Github](https://github.com/AusClimateService/QME).
 
 There are a number of decisions to make when implementing the QDM method:
 - _Time grouping_:
