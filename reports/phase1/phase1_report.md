@@ -123,7 +123,7 @@ $$x_{m-adjust} = x_{m,p} \times (F_{o,h}^{-1}(F_{m,p}(x_{m,p})) \div F_{m,h}^{-1
 #### 2.1.2. Software (and implementation choices)
 
 The code used to implement the ECDFm method is maintained by the CSIRO Climate Innovation Hub
-and is openly available on [Github](https://github.com/climate-innovation-hub/qqscale).
+and is openly available on [GitHub](https://github.com/climate-innovation-hub/qqscale).
 The code basically implements the [bias adjustment and downscaling](https://xclim.readthedocs.io/en/stable/sdba.html)
 functionality available in the widely used open source xclim library.
 
@@ -205,7 +205,7 @@ A copy of the code as at October 2023 is included in the appendix of the Bureau 
 that documents the QME method ([Dowdy 2023](http://www.bom.gov.au/research/publications/researchreports/BRR-087.pdf)),
 while the very latest version is available from Andrew by request.
 The Bureau of Meteorology has also written a Python implementation of the method
-that is openly available on [Github](https://github.com/AusClimateService/QME).
+that is openly available on [GitHub](https://github.com/AusClimateService/QME).
 
 There are a number of decisions to make when implementing the QDM method:
 - _Time grouping_:
