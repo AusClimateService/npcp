@@ -177,12 +177,18 @@ The largest valid rainfall amount of 1250mm would have a scaled value of alog(12
 > Things to clarify:
 >   - How many quantiles does it calculate? 100?
 >   - I’m assuming that for temperature data the input and reference quantiles are compared additively
->     (e.g. the bias / adjustment factor for the 0.2 quantile is the arithmetic difference between the input 0.2 quantile and the reference 0.2 quantile).
->     For rainfall is it a multiplicative comparison (i.e. the bias is the ratio) to avoid issues around potentially producing adjusted rainfall amounts less than zero?
->   - When it comes to correcting model data outside the training period (let’s call it future data), let’s say you have a transformed future value of 150.
->     Does the QME method figure out what quantile 150 corresponds to in the input training data (and then applies the adjustment factor for that quantile)
->     or does it figure out what quantile 150 corresponds to in the future data (and then applies the adjustment factor for that quantile).
->   - If a future data value falls between two quantiles, do you just apply the adjustment factor for the quantile it’s closest to?
+>     (e.g. the bias / adjustment factor for the 0.2 quantile is the arithmetic difference
+>     between the input 0.2 quantile and the reference 0.2 quantile).
+>     For rainfall is it a multiplicative comparison (i.e. the bias is the ratio)
+>     to avoid issues around potentially producing adjusted rainfall amounts less than zero?
+>   - When it comes to correcting model data outside the training period (let’s call it future data),
+>     let’s say you have a transformed future value of 150.
+>     Does the QME method figure out what quantile 150 corresponds to in the input training data
+>     (and then applies the adjustment factor for that quantile)
+>     or does it figure out what quantile 150 corresponds to in the future data
+>     (and then applies the adjustment factor for that quantile).
+>   - If a future data value falls between two quantiles,
+>     does QME just apply the adjustment factor for the quantile it’s closest to?
 
 To avoid potential overfitting or an excessive influence of very rare events,
 before the adjustment factor for each ranked bin is applied to the target data
@@ -273,7 +279,7 @@ TODO
 
 TODO
 
-### 2.5. MBCn
+### 2.5. MRNBC
 
 #### 2.5.1. Method
 
