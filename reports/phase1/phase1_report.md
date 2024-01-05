@@ -28,9 +28,10 @@ there was a clear need to establish an NPCP bias correction intercomparison proj
 to identify the most appropriate bias correction methods and associated software.
 
 This report summarises the findings of the first phase of the intercomparison project,
-which focuses on univariate bias correction methods 
+which focuses on the bias correction methods used by the institutions
+participating in the Australian Climate Service (CSIRO and the Bureau of Meteorology) 
 for three climate variables (daily minimum temperature, daily maximum temperature and daily rainfall).
-Additional variables and more sophisticated multi-variate bias correction methods will be considered in subsequent phases of the project.
+Additional variables and bias correction methods from other institutions will be considered in subsequent phases of the project.
 
 ## 2. Participating bias correction methods
 
@@ -43,13 +44,15 @@ ranging from relatively simple methods that take a single variable as input
 to more sophisticated multi-variate approaches.
 
 Through a series of NPCP meetings and workshops on the topic of bias correction,
-a number of individuals from NPCP member organisations/projects stepped forward
-with a bias correction method to contribute to the intercomparison.
-There were two univariate methods:
-equi-distant/ratio cumulative density function matching (ECDFm)
-and quantile matching for extremes (QME).
+a number of individuals from the Australian Climate Service stepped forward
+with a bias correction method to contribute to the intercomparison:
+- Equi-distant/ratio Cumulative Density Function matching (ECDFm; univariate)
+- Quantile Matching for Extremes (QME; univariate)
+- Quantile Delta Mapping (QDM; univariate)
+- N-Dimensional Multi-Variate Bias Correction (MBCn; multivariate)
+- Multivariate Recursive Nesting Bias Correction (MRNBC; multivariate)
 
-Both of these univariate methods are quantile-based,
+All three of the univariate methods are quantile-based,
 meaning the applied transfers are a function of quantile.
 Quantile methods are a popular and slightly more sophisticated approach than mean scaling,
 where the bias (i.e. a difference or ratio) in the mean between the model and observations is
@@ -63,8 +66,8 @@ Prior to removing the quantile biases from the model data of interest,
 the bias correction factors at the extreme ends of the distribution are also modified
 in an attempt to avoid potential overfitting or an excessive influence of very rare events.
 
-A related univariate "delta change" method
-known as quantile delta mapping (QDM) was also included in the assessment.
+While it is technically a "delta change" method as opposed to a "bias correction" method,
+the QDM method was also included in the assessment.
 In contrast to bias correction,
 delta change approaches establish a transfer function between reference and future model outputs
 (e.g. from an historical model experiment and future climate emission scenario experiment)
@@ -74,6 +77,17 @@ Application ready climate data was produced using QDM for the
 so it is useful to compare that approach to traditional bias correction.
 The QDM method is conceptually very similar to ECDFm
 and is essentially the most basic quantile-based delta change method available.
+
+Unlike the univariate approaches,
+multivariate techniques tend to be iterative,
+whereby a bias correction method is applied repeatedly until convergence is reached
+(i.e. until the biases are no longer getting smaller).
+The MBCn method is quantile-based,
+repeatedly applying a multivariate orthogonal rotation to the data followed by the univariate QDM method.
+In contrast, the MRNBC method is not quantile-based
+and instead attempts to address biases in serial dependence
+by correcting the data for biases in the mean, standard deviation and lag-0 and lag-1 auto and cross correlations
+at multiple timescales (daily, monthly, seasonal and annual).
 
 Each of the methods is described in more detail below.
 
@@ -141,24 +155,34 @@ There are a number of decisions to make when implementing the ECDFm method:
 #### 2.2.1. Method
 
 The _quantile matching for extremes_ ([Dowdy 2023](http://www.bom.gov.au/research/publications/researchreports/BRR-087.pdf))
-method involves populating a histogram with data that has been clipped to a valid range
-and then scaled to an integer value between 0 and the desired number of bins. 
+method involves clipping the input data to a valid range
+and then scaling the clipped data to an integer value between 0 and 500 (typically)
+before applying the quantile-based transfer function. 
 
 A typical valid data range might be -30C to 60C for daily maximum temperature (tasmax),
 -45C to 50C for daily minimum temperature (tasmin),
 or 0mm to 1250mm for daily precipitation (pr).
 The following scaling formulas (used in this intercomparison)
-map the valid range of data values across 500 integer bins: 
+map the valid range of data values across the 500 integer values: 
 - (tasmax + 35) * 5
 - (tasmin + 55) * 5
 - alog(pr + 1) * 70, where alog is the natural logarithm 
 
 A small value of 0.1mm would have a scaled value of alog(0.1 + 1) * 70 = 6.7,
-which is rounded to an integer value / bin number of 7.
-The largest valid rainfall amount of 1250mm would have a scaled value of alog(1250 + 1 ) * 70 = 499.2,
-which means it would be stored in the second highest bin in the histogram (i.e. bin 499).
+which is rounded to an integer value of 7.
+The largest valid rainfall amount of 1250mm would have a scaled value of alog(1250 + 1 ) * 70 = 499.2 (rounded to 499).
 
-TODO - Describe quantile matching process.
+> TODO - Describe quantile matching process.
+>
+> Things to clarify:
+>   - How many quantiles does it calculate? 100?
+>   - I’m assuming that for temperature data the input and reference quantiles are compared additively
+>     (e.g. the bias / adjustment factor for the 0.2 quantile is the arithmetic difference between the input 0.2 quantile and the reference 0.2 quantile).
+>     For rainfall is it a multiplicative comparison (i.e. the bias is the ratio) to avoid issues around potentially producing adjusted rainfall amounts less than zero?
+>   - When it comes to correcting model data outside the training period (let’s call it future data), let’s say you have a transformed future value of 150.
+>     Does the QME method figure out what quantile 150 corresponds to in the input training data (and then applies the adjustment factor for that quantile)
+>     or does it figure out what quantile 150 corresponds to in the future data (and then applies the adjustment factor for that quantile).
+>   - If a future data value falls between two quantiles, do you just apply the adjustment factor for the quantile it’s closest to?
 
 To avoid potential overfitting or an excessive influence of very rare events,
 before the adjustment factor for each ranked bin is applied to the target data
@@ -238,6 +262,27 @@ means that monthly time grouping dramatically modifies the climate trend in the 
 is much different than the mean change between the future and historical model simulations).
 As such, we don't apply any time grouping when applying QDM to precipitation data
 and use 1000 quantiles in order to still have 10-15 data values between each quantile. 
+
+### 2.4. MBCn
+
+#### 2.4.1. Method
+
+TODO
+
+#### 2.4.2. Software (and implementation choices)
+
+TODO
+
+### 2.5. MBCn
+
+#### 2.5.1. Method
+
+TODO
+
+#### 2.5.2. Software (and implementation choices)
+
+TODO
+
 
 ## 3. Data
 
