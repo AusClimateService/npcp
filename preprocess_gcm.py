@@ -50,6 +50,7 @@ def main(args):
         raise OSError(f'No files at {ssp_dir}')
 
     input_ds = xcdat.open_mfdataset(hist_files + ssp_files)
+    input_ds = input_ds.drop_duplicates('time')
     input_ds_hist = input_ds.sel(time=slice('1960-01-01', '2019-12-31'))
     input_ds_proj = input_ds.sel(time=slice('2060-01-01', '2099-12-31'))
 
