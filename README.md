@@ -30,7 +30,9 @@ Naming conventions follow CORDEX wherever possible and can take the following va
   - `wsp`: surface (10m) wind speed
 - `{driving-model}`  
   - `CSIRO-ACCESS-ESM1-5`: ACCESS-ESM1-5 CMIP6 submission
+  - `EC-Earth-Consortium-EC-Earth3`: EC-Earth3 CMIP6 submission
   - `ECMWF-ERA5`: ERA5 reanalysis
+  - `NCAR-CESM2`: CESM2 CMIP6 submission
   - `observations`: Australian gridded observations
 - `{downscaling-model}`  
   - `BOM-BARPA-R`: Bureau of Meteorology Atmospheric Regional Projections for Australia (BARPA), run by BoM
@@ -90,8 +92,13 @@ summarise the availability of `pr`, `tasmax` and `tasmin` data.
 | | CSIRO-CCAM  | :green_circle: | :green_circle: |
 | | UQ-DES-CCAM | :green_circle: | :green_circle: |
 | | NARCLIM-WRF | :white_circle: | :white_circle: |
+| CESM2** | BOM-BARPA | :green_circle: | :green_circle: |
+| | CSIRO-CCAM  | :green_circle: | :green_circle: |
+| EC-Earth3** | BOM-BARPA | :green_circle: | :green_circle: |
+| | CSIRO-CCAM  | :green_circle: | :green_circle: |
 
-*The ERA5 data is only available from 1979 onwards.
+*The ERA5 data is only available from 1979 onwards.  
+**We are only processing `pr` data for CESM2 and EC-Earth3
 
 ## Bias correction tasks
 
@@ -115,6 +122,10 @@ For the downscaled ACCESS-ESM1-5 data the tasks are:
 - **Task 1 (Historical)**: Produce bias corrected data for the 1980-2019 period, using 1980-2019 as a training period.
 - **Task 2 (Projection)**: Produce bias corrected data for the 2060-2099 period, using 1980-2019 as a training period.
 - **Task 3 (Cross validation)**: Produce bias corrected data for the 1990-2019 period, using 1960-1989 as a training period.
+
+(You may also be asked to repeat tasks 1-3 for downscaled CESM2 and EC-Earth3 `pr` data,
+since the relative performance of different bias correction methods can vary
+much more for precipitation than temperature.)
 
 For the downscaled ERA5 data the tasks are:  
 - **Task 4 (Historical)**: Produce bias corrected data for the 1980-2019 period, using 1980-2019 as a training period.
