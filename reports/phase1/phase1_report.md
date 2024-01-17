@@ -539,9 +539,9 @@ In fact, dynamical downscaling appears to modify the model trend much more than 
 
 ## 6. Results: Precipitation
 
-TODO: The relative performance of each of the bias correction methods differs quite a bit from RCM to RCM,
-so we should process the RCM data for anotehr GCM or two to see whehter a consistent pattern in the results
-can be identified. 
+> TODO: The relative performance of each of the bias correction methods differs quite a bit from RCM to RCM,
+> so we should process the RCM data for anotehr GCM or two to see whehter a consistent pattern in the results
+> can be identified. 
 
 ### 6.1. Climatology
 
