@@ -462,7 +462,64 @@ prior to bias correction or not.
 
 ### 5.2. Variability
 
-> TODO: Add results for the WSDI and CSDI. 
+> Summary: GCMs tend to overestimate the frequency of extended periods of persistent hot or cold weather.
+> Downscaling with RCMs tends to improve the representation of persistent extreme weather,
+> while bias correction (of GCM or RCM data) has no appreciable impact.
+
+Extended periods of persistent hot or cold weather were captured with the WSDI and CSDI respectively,
+which count the annual number of days that are part of a streak of six or more days
+above the 90th percentile (WSDI) or below the 10th percentile (CSDI). 
+Both indices show higher values in northern Australia
+(where the weather tends to be more persistent / less variable from day to day)
+and lower values in the south (Figure 5.2.1 and 5.2.2).
+
+<p align="center">
+    <img src="WSDI-values_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <br>
+    <em>
+      Figure 5.2.1: WSDI values for the "cross validation" assessment task.
+      Results are shown for a GCM (top left),
+      RCM forced by that GCM (bottom left),
+      and various bias correction methods applied to those model data (rows).
+      The far right column shows the observed AGCD values
+      for the assessment (1990-2019; top right) and training (1960-1989; bottom right) periods.
+    </em>
+</p>
+
+<p align="center">
+    <img src="CSDI-values_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <br>
+    <em>
+      Figure 5.2.2: As per Figure 5.2.1 but for the CSDI.
+    </em>
+</p>
+
+Global climate models tend to overestimate the WSDI and CSDI.
+These biases are reduced with dynamical downscaling but
+none of the bias correction methods lead to any appreciable improvement (Figure 5.2.3 and 5.3.4).
+
+<p align="center">
+    <img src="WSDI-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <br>
+    <em>
+      Figure 5.2.3: Bias in the WSDI (relative to the AGCD dataset)
+      for the "cross validation" assessment task.
+      Results are shown for a GCM (top left),
+      RCM forced by that GCM (bottom left),
+      various bias correction methods applied to those model data (rows),
+      and a reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) (bottom right).
+      (MAE = mean absolute error.)
+    </em>
+</p>
+
+<p align="center">
+    <img src="CSDI-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <br>
+    <em>
+      Figure 5.2.4: As per Figure 5.2.3 but for the CSDI.
+    </em>
+</p>
 
 ### 5.3. Extremes
 
@@ -540,7 +597,7 @@ In fact, dynamical downscaling appears to modify the model trend much more than 
 ## 6. Results: Precipitation
 
 > TODO: The relative performance of each of the bias correction methods differs quite a bit from RCM to RCM,
-> so we should process the RCM data for anotehr GCM or two to see whehter a consistent pattern in the results
+> so we should process the RCM data for another GCM or two to see whehter a consistent pattern in the results
 > can be identified. 
 
 ### 6.1. Climatology
@@ -646,7 +703,8 @@ by applying limiting precipitation qnatile increases to 50% as the QME method do
 
 
 ### 6.2. Variability
-TODO.
+
+> TODO
 
 ### 6.3. Extremes
 
