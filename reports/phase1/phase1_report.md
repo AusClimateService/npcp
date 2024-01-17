@@ -363,15 +363,23 @@ https://github.com/AusClimateService/npcp/tree/master/results
 
 | Category | Metric | Description |
 | ---      | ---    | ---         |
-| Climatology | Annual mean | |
-| Climatology | Seasonal cycle | Calculate the monthly climatology at each grid point, then sum the absolute value of the difference between the bias corrected model data and observations across all twelve months. That sum represents the seasonal cycle bias. |
-| Variability | Interannual | Standard deviation of annual mean timeseries. |
-| Variability | Multi-year | Standard deviation of annual mean timeseries with 5-year running mean applied. |
-| Variability | Wet day frequency | |
-| Variability | Drought intensity | |
-| Extremes | 1-in-10 year event | |
-| Extremes | Percentiles | 99, 99.5 and 99.9 or 1.0, 0.5 and 0.1 |
-| Links | Cross correlation | Between the monthly mean daily maximum temperature anomaly and monthly mean rainfall anomaly | 
+| Climatology | Annual mean - spatial | The bias for the mean annual climatology at each grid point; and the averall Mean Absolute Error (MAE).|
+| Climatology | Annual mean - distribution | The histogram, PDF, and the Perkins Skill Score for the mean annual climatology |
+| Climatology | Seasonal cycle | Calculate the monthly climatology at each grid point, then sum the absolute value of the difference between the bias corrected model data and observations across all twelve months. That sum represents the seasonal cycle bias; and the spatial average |
+| Climatology | monthly climatology | The bias for the mean monthly climatology; and the MAE. |
+| Variability | Interannual | The bias for the standard deviation of annual mean timeseries; and the MAE. |
+| Variability | Multi-year | The bias for the standard deviation of annual mean timeseries with 5-year running mean applied; and the MAE. |
+| Variability | Wet day frequency | The bias of the wet-days (Pr>1mm) fraction (%) per season (DJF, MAM, JJA, SON); and the MAE.|
+| Variability | Drought intensity | The bias for the percentage difference between the minimum annual value and the mean annual value (also, with 2-year and 5-year running mean applied); and the MAE. |
+| Variability | Temporal auto-correlation - spatial and point-based | The bias for the correlation between the annual (or monthly) time series and a lag-1-shifted version of that annual (or monthly) time series; and the MAE. |
+| Variability | Temperature variability indices (icclim)  | WSDI (Warm-spell duration index (days)), CSDI (Cold-spell duration index (days)) |
+| Variability | Rainfall distribution indices (icclim) |  R95pTOT (Precipitation fraction due to very wet days (> 95th percentile) (%)), R99pTOT (Precipitation fraction due to extremely wet days (> 99th percentile)(%)), R10mm (Heavy precipitation days (precipitation ≥ 10 mm) (days)), R20mm (Very heavy precipitation days (precipitation ≥ 20 mm) (days)) |
+| Extremes | 5-year maximum/minimum | The bias of the averaged 5-year maximum (minimum for Tasmin); and the MAE.|
+| Extremes | 1-in-10 year event | The bias of the quatile value that corresponds to ARI 10 applied to annual maxima (minima in case of Tasmin) for each grid cell; and the MAE. |
+| Extremes | Percentiles | 99, 99.5 and 99.9 or 1.0, 0.5 and 0.1; and the MAE |
+| Extremes | Frost day index (icclim) | FD (Frost days (TN < 0◦C) (days)) |
+| Trends | Change signal | The change in mean annual values (future period minus the historical period); and the spatial average. |
+| Links | PT Cross correlation | The bias for the correlation between the monthly anomalies of maximum temperature and of rainfall; and the MAE. | 
 
 _Table 1: Metrics used in the assessment._
 
