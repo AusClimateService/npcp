@@ -461,7 +461,8 @@ prior to bias correction or not.
 </p>
 
 ### 5.2. Variability
-TODO.
+
+> TODO: Add results for the WSDI and CSDI. 
 
 ### 5.3. Extremes
 
