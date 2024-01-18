@@ -465,7 +465,9 @@ prior to bias correction or not.
 
 > Summary: GCMs tend to overestimate the frequency of extended periods of persistent hot or cold weather.
 > Downscaling with RCMs tends to improve the representation of persistent extreme weather,
-> while bias correction (of GCM or RCM data) has no appreciable impact.
+> and the remaining bias can be further reduced by applying the QDM method.
+> In contrast, univariate bias correction (ECDFm or QME) provides no appreciable improvement
+> in the frequency of persistent extreme weather.
 
 Extended periods of persistent hot or cold weather were captured with the WSDI and CSDI respectively,
 which count the annual number of days that are part of a streak of six or more days
@@ -495,9 +497,13 @@ and lower values in the south (Figure 5.2.1 and 5.2.2).
     </em>
 </p>
 
-Global climate models tend to overestimate the WSDI and CSDI.
-These biases are reduced with dynamical downscaling but
-none of the bias correction methods lead to any appreciable improvement (Figure 5.2.3 and 5.3.4).
+Global climate models tend to overestimate the WSDI and CSDI,
+which is somewhat reduced with dynamical downscaling (Figure 5.2.3 and 5.3.4).
+The application of the QDM method to GCM or RCM data substantially reduces the model bias,
+whereas the univariate bias correction methods (ECDFm and QME) provide no appreciable bias reduction.
+This is presumably related to the fact that the QDM (delta change) method
+pertubs the observed training data (which does a good job of representing the WSDI and CSDI),
+whereas the bias correction methods act on the model data.
 
 <p align="center">
     <img src="WSDI-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
