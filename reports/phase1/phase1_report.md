@@ -369,10 +369,8 @@ https://github.com/AusClimateService/npcp/tree/master/results
 | Variability | Interannual variability | Standard deviation of the annual mean timeseries |
 | Variability | Multi-year variability | Standard deviation of the 5-year running mean timeseries |
 | Variability | Temporal auto-correlation | Correlation between the annual (or monthly) time series and a lag-1-shifted version of that annual (or monthly) time series |
-| Variability (temperature) | Warm-spell duration index (WSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmax > 90th percentile calculated for a 5-day window
-centred on each calendar day |
-| Variability (temperature) | Cold-spell duration index (CSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmin < 10th percentile calculated for a 5-day window
-centred on each calendar day |
+| Variability (temperature) | Warm-spell duration index (WSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmax > 90th percentile calculated for a 5-day window centred on each calendar day |
+| Variability (temperature) | Cold-spell duration index (CSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmin < 10th percentile calculated for a 5-day window centred on each calendar day |
 | Variability (rainfall) | Wet day frequency | Wet-day (pr > 1mm) fraction (%) per season (DJF, MAM, JJA, SON) |
 | Variability (rainfall) | Drought intensity | Percentage difference between the minimum annual value and the mean annual value (also, with 2-year and 5-year running mean applied) |
 | Variability (rainfall) | R95pTOT, R99pTOT | Fraction of total annual precipitation that falls very wet days (> 95th or 99th percentile)
