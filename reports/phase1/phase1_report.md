@@ -356,18 +356,18 @@ using the ECDFM and QDM methods.
 
 The data arising from each bias correction method was compared on a number of metrics
 relating to the ability to capture the observed
-climatology, variability, extremes, trends and the link between different variables (Table 1).
-A summary of the results for each of those metrics are presented below - plots for
-all variable / RCM / metric combinations can be found at:  
+climatology, variability, extremes, trends and the link between different variables.
+The metrics presented and/or discussed in the results section of this report are listed in Table 1.
+Some additional metrics can be found at the following GitHub repository
+along with the complete results for all variable / RCM / metric combinations:  
 https://github.com/AusClimateService/npcp/tree/master/results
 
 | Category | Metric | Description |
 | ---      | ---    | ---         |
-| Climatology | Annual mean - spatial | Annual mean climatology at each grid point |
-| Climatology | Annual mean - distribution | The histogram, PDF, and the Perkins Skill Score for the mean annual climatology |
-| Climatology | Seasonal cycle bias | Sum of the absolute value of the difference between the bias corrected model data and observations across all twelve monthly climatology values |
-| Variability | Interannual variability | Standard deviation of annual mean timeseries |
-| Variability | Multi-year | Standard deviation of annual mean timeseries with 5-year running mean applied |
+| Climatology | Annual climatology | Annual mean at each grid point |
+| Climatology | Seasonal cycle bias | Sum of the absolute value of the difference between the bias corrected model and observed climatological mean value for each month |
+| Variability | Interannual variability | Standard deviation of the annual mean timeseries |
+| Variability | Multi-year variability | Standard deviation of the 5-year running mean timeseries |
 | Variability | Temporal auto-correlation | Correlation between the annual (or monthly) time series and a lag-1-shifted version of that annual (or monthly) time series |
 | Variability (temperature) | Warm-spell duration index (WSDI) |  |
 | Variability (temperature) | Cold-spell duration index (CSDI) |  |
