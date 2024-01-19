@@ -388,7 +388,7 @@ _Table 1: Metrics used in the assessment._
 
 ## 5. Results: Temperature
 
-### 5.1. Climatology
+### 5.1. Temperature Climatology
 
 > Summary: There's essentially no difference between the univariate methods
 > with respect to the daily minimum and maximum temperature climatologies.
@@ -463,7 +463,7 @@ prior to bias correction or not.
     </em>
 </p>
 
-### 5.2. Variability
+### 5.2. Temperature Variability
 
 > TODO: Add content about general variability metrics like the interannual and multi-annual variability.
 > In general, dynamical downscaling and univariate bias correction doesn't really modify the bias in these general variability metrics. 
@@ -533,7 +533,7 @@ whereas the bias correction methods act on the model data.
     </em>
 </p>
 
-### 5.3. Extremes
+### 5.3. Temperature Extremes
 
 > Summary: There's essentially no difference between the univariate methods
 > with respect to the most extreme daily minimum and maximum temperatures.
@@ -586,7 +586,7 @@ prior to bias correction or not.
     </em>
 </p>
 
-### 5.4. Trends
+### 5.4. Temperature Trends
 
 > Summary: None of the univariate methods substantially modify model simulated temperature trends.
 
@@ -612,7 +612,7 @@ In fact, dynamical downscaling appears to modify the model trend much more than 
 > so we should process the RCM data for another GCM or two to see whehter a consistent pattern in the results
 > can be identified. 
 
-### 6.1. Climatology
+### 6.1. Precipitation Climatology
 
 > Summary: For the cross validation task,
 > relatively large biases persist in the precipitation climatology
@@ -711,11 +711,18 @@ is not dynamically downscaled prior to applying bias correction.
 </p>
 
 
-### 6.2. Variability
+### 6.2. Precipitation Variability
 
-> TODO
+> TODO: Provide a detailed write-up of the precipitation variability metrics.
+> With respect to interannual variability, for the cross validation task
+> I'm guessing (from the QDM results) that a simple replication of the training data outperforms all methods.
+> The QDM method tends to perform better than QME,
+> which in turn performs better than ECDFm.
+> The differences between the methods are far less pronouced for multi-year variability
+> (in fact, there isn't really any appreciable reduction in the GCM bias).
+> All three univariate methods substantially reduce the (well known) model bias in wet day frequency. 
 
-### 6.3. Extremes
+### 6.3. Precipitation Extremes
 
 > Summary: Relatively large biases persist
 > in the most extreme daily precipitation values
@@ -786,7 +793,7 @@ is not dynamically downscaled prior to applying bias correction.
     </em>
 </p>
 
-### 6.4. Trends
+### 6.4. Precipitation Trends
 
 > Summary: The univariate methods only slightly modify model simulated precipitation trends.
 
