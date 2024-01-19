@@ -92,13 +92,12 @@ summarise the availability of `pr`, `tasmax` and `tasmin` data.
 | | CSIRO-CCAM  | :green_circle: | :green_circle: |
 | | UQ-DES-CCAM | :green_circle: | :green_circle: |
 | | NARCLIM-WRF | :white_circle: | :white_circle: |
-| CESM2** | BOM-BARPA | :green_circle: | :green_circle: |
+| CESM2 | BOM-BARPA | :green_circle: | :green_circle: |
 | | CSIRO-CCAM  | :green_circle: | :green_circle: |
-| EC-Earth3** | BOM-BARPA | :green_circle: | :green_circle: |
+| EC-Earth3 | BOM-BARPA | :green_circle: | :green_circle: |
 | | CSIRO-CCAM  | :green_circle: | :green_circle: |
 
 *The ERA5 data is only available from 1979 onwards.  
-**We are only processing `pr` data for CESM2 and EC-Earth3
 
 ## Bias correction tasks
 
