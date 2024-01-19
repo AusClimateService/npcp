@@ -118,14 +118,10 @@ Phase 1 of the intercomparison will focus on daily timescale
 `tasmax`, `tasmin` and `pr` data on the `NPCP-20i` grid.
 For each variable and downscaling model there are 5 tasks to complete...
 
-For the downscaled ACCESS-ESM1-5 data the tasks are:  
+For the downscaled CMIP6 data (ACCESS-ESM1-5, CESM2 and EC-Earth3) the tasks are:  
 - **Task 1 (Historical)**: Produce bias corrected data for the 1980-2019 period, using 1980-2019 as a training period.
 - **Task 2 (Projection)**: Produce bias corrected data for the 2060-2099 period, using 1980-2019 as a training period.
 - **Task 3 (Cross validation)**: Produce bias corrected data for the 1990-2019 period, using 1960-1989 as a training period.
-
-(You may also be asked to repeat tasks 1-3 for downscaled CESM2 and EC-Earth3 `pr` data,
-since the relative performance of different bias correction methods can vary
-much more for precipitation than temperature.)
 
 For the downscaled ERA5 data the tasks are:  
 - **Task 4 (Historical)**: Produce bias corrected data for the 1980-2019 period, using 1980-2019 as a training period.
@@ -140,7 +136,8 @@ following the data reference syntax described above.
 
 The model data requiring bias correction is the dynamically downscaled
 BOM-BARPA-R, CSIRO-CCAM-2203, UQ-DES-CCAM-2105 and NARCLIM-WRF data
-for both the ECMWF-ERA5 and CSIRO-ACCESS-ESM1-5 parent models.
+for the ECMWF-ERA5 and various CMIP6
+(i.e. CSIRO-ACCESS-ESM1-5, NCAR-CESM2 and EC-Earth-Consortium-EC-Earth3) parent models.
 Check the input data availability table above for an indication of
 which combinations of downscaling and parent models are available.
 
