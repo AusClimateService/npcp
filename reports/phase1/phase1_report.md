@@ -466,7 +466,7 @@ prior to bias correction or not.
 ### 5.2. Variability
 
 > TODO: Add content about general variability metrics like the interannual and multi-annual variability.
-> In general, dynamical downscaling and univariate bias correction doesn't improve the model biases.
+> In general, dynamical downscaling and univariate bias correction doesn't really modify the bias in these general variability metrics. 
 
 > Summary: GCMs tend to overestimate the frequency of extended periods of persistent hot or cold weather.
 > Downscaling with RCMs tends to improve the representation of persistent extreme weather,
