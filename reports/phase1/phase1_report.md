@@ -465,14 +465,16 @@ prior to bias correction or not.
 
 ### 5.2. Temperature Variability
 
-> TODO: Add content about general variability metrics like the interannual and multi-annual variability.
-> In general, dynamical downscaling and univariate bias correction doesn't really modify the bias in these general variability metrics. 
-
-> Summary: GCMs tend to overestimate the frequency of extended periods of persistent hot or cold weather.
+> Summary: GCM biases in interannual and multi-annual temperature variability are relatively small
+> and aren't appreciably modified by dynamical downscaling or univariate bias correction.
+> In contrast, GCMs tend to overestimate the frequency of extended periods of persistent hot or cold weather.
 > Downscaling with RCMs tends to improve the representation of persistent extreme weather,
-> and the remaining bias can be further reduced by applying the QDM method.
-> In contrast, univariate bias correction (ECDFm or QME) provides no appreciable improvement
+> and the remaining bias is typically further reduced by applying the QDM method.
+> Univariate bias correction (ECDFm or QME) provides no appreciable improvement
 > in the frequency of persistent extreme weather.
+
+> TODO: Add details (plots and text) about the interannual and multi-annual variability metrics.
+> (Check that the GCM bias is actually relatively small as stated in the summary.)
 
 Extended periods of persistent hot or cold weather were captured with the WSDI and CSDI respectively,
 which count the annual number of days that are part of a streak of six or more days
@@ -653,7 +655,6 @@ on this historical assessment task.
     </em>
 </p>
 
-
 <p align="center">
     <img src="pr_seasonal-cycle-fraction_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
     <br>
@@ -709,7 +710,6 @@ is not dynamically downscaled prior to applying bias correction.
       Figure 6.1.7: Precipitation seasonal climatology for the "cross validation" assessment task.
     </em>
 </p>
-
 
 ### 6.2. Precipitation Variability
 
