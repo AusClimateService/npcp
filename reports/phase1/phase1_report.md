@@ -372,13 +372,13 @@ https://github.com/AusClimateService/npcp/tree/master/results
 | Variability (temperature) | Warm-spell duration index (WSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmax > 90th percentile calculated for a 5-day window centred on each calendar day |
 | Variability (temperature) | Cold-spell duration index (CSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmin < 10th percentile calculated for a 5-day window centred on each calendar day |
 | Variability (rainfall) | Wet day frequency | Wet-day (pr > 1mm) fraction (%) per season (DJF, MAM, JJA, SON) |
-| Variability (rainfall) | Drought intensity | Percentage difference between the minimum annual value and the mean annual value (also, with 2-year and 5-year running mean applied) |
-| Variability (rainfall) | R95pTOT, R99pTOT | Fraction of total annual precipitation that falls very wet days (> 95th or 99th percentile)
-| Variability (rainfall) | R10mm, R20mm | Annual number of heavy precipitation days (precipitation ≥ 10 mm or 20mm) |
-| Extremes | 5-year maximum/minimum | The averaged 5-year maximum (minimum for Tasmin) |
+| Extremes | 5-year maximum/minimum | The averaged 5-year maximum (or minimum for Tasmin) |
 | Extremes | 1-in-10 year event | Value corresponding to an annual return interval of 10 years |
-| Extremes | Extreme percentiles | The 99, 99.5 and 99.9 percentiles or 1.0, 0.5 and 0.1 |
-| Extremes | Frost day index | Annual number of days with a minimum temperature less than 0◦C |
+| Extremes | Extreme percentiles | The 99, 99.5 and 99.9 percentiles (or 1.0, 0.5 and 0.1 for Tasmin) |
+| Extremes (temperature) | Frost day index | Annual number of days with a minimum temperature less than 0◦C |
+| Extremes (rainfall) | Drought intensity | Percentage difference between the minimum annual value and the mean annual value (also, with 2-year and 5-year running mean applied) |
+| Extremes (rainfall) | R95pTOT, R99pTOT | Fraction of total annual precipitation that falls on very wet days (> 95th or 99th percentile) |
+| Extremes (rainfall) | R10mm, R20mm | Annual number of heavy precipitation days (precipitation ≥ 10 mm or 20mm) |
 | Trends | Change signal | Change in the annual mean (future period minus the historical period) |
 | Links | PT cross correlation | Correlation between the anomaly timeseries of monthly mean maximum temperature and rainfall | 
 
@@ -463,6 +463,9 @@ prior to bias correction or not.
 
 ### 5.2. Variability
 
+> TODO: Add content about general variability metrics like the interannual and multi-annual variability.
+> In general, dynamical downscaling and univariate bias correction doesn't improve the model biases.
+
 > Summary: GCMs tend to overestimate the frequency of extended periods of persistent hot or cold weather.
 > Downscaling with RCMs tends to improve the representation of persistent extreme weather,
 > and the remaining bias can be further reduced by applying the QDM method.
@@ -536,13 +539,15 @@ whereas the bias correction methods act on the model data.
 > it also makes no difference whether the GCM data is dynamically downscaled or not
 > prior to applying bias correction.
 
-With respect to extreme indices such as the 1-in-10 year event
+With respect to general extreme indices such as the 1-in-10 year event
 or the most extreme percentiles (e.g. 99th or 1st)
 of daily minimum and maximum temperature,
 both univariate bias correction methods do a similar job of
 representing the observed (AGCD) 1980-2019 extremes
 when trained on that same 1980-2019 observed data
 (i.e. the historical assessment task; e.g. Figure 5.3.1).
+The exception is frost days,
+where ECDFm tends to slightly outperform QME.
 
 <p align="center">
     <img src="tasmax_extreme-bias_task-historical_CSIRO-ACCESS-ESM1-5_UQ-DES-CCAM-2105.png" width=65% height=65%>
@@ -558,7 +563,7 @@ when trained on that same 1980-2019 observed data
 </p>
 
 For the cross validation task,
-all three methods perform similarity (Figure 5.3.2).
+all three univariate methods (ECDFm, QME and QDM) tend to perform similarity (e.g. Figure 5.3.2).
 The relative ranking of the methods in terms of the spatial mean absolute error
 differs depending on exactly which RCM and variable is assessed.
 It does not appear to make much difference whether the data are dynamically downscaled
@@ -578,8 +583,6 @@ prior to bias correction or not.
       (MAE = mean absolute error.)
     </em>
 </p>
-
-> TODO: Add results for frost days.
 
 ### 5.4. Trends
 
@@ -666,9 +669,6 @@ While the raw RCM data tends to be (but is not always) less biased than the raw 
 biases tend to be (but are not always) lower if the GCM data
 is not dynamically downscaled prior to applying bias correction.
 
-TODO: Explain that the ECDFm biases can be reduced (to the point they are comparable to QME)
-by applying limiting precipitation qnatile increases to 50% as the QME method does.
-
 <p align="center">
     <img src="pr_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
     <br>
@@ -724,7 +724,8 @@ by applying limiting precipitation qnatile increases to 50% as the QME method do
 > and biases tend to be lower if the GCM data is not dynamically downscaled
 > prior to applying bias correction.
 
-With respect to extreme indices such as the 1-in-10 year event
+With respect to extreme rainfall indices such as the 1-in-10 year event,
+R95pTOT, R99pTOT, R10mm, R20mm
 or the most extreme percentiles (e.g. 99th or 1st)
 of daily precipitation,
 both the univariate bias correction methods do a similar job of
@@ -747,10 +748,9 @@ when trained on that same 1980-2019 observed data
 
 For the cross validation task,
 a simple replication of the training data outperforms all the univariate methods.
-The relative performance of the methods differs between RCMs (e.g. Figure 6.3.2 to 6.3.4)
-and metrics (TODO: Add percentile figures).
-The raw RCM data tends to be more biased than the raw GCM data,
-and biases tend to be lower if the GCM data
+The relative performance of the methods differs between RCMs (e.g. Figure 6.3.2 to 6.3.4) and metrics.
+The raw RCM data is often (but not always) more biased than the raw GCM data,
+and biases tend to be (but are not always) lower if the GCM data
 is not dynamically downscaled prior to applying bias correction.
 
 <p align="center">
