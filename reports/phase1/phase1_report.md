@@ -157,19 +157,21 @@ There are a number of decisions to make when implementing the ECDFm method:
 The _quantile matching for extremes_ ([Dowdy 2023](http://www.bom.gov.au/research/publications/researchreports/BRR-087.pdf))
 method involves clipping the input data to a valid range
 and then scaling the clipped data to an integer value between 0 and 500 (typically)
-before applying the quantile-based transfer function. 
+before applying the quantile-based transfer function.
+This scaling can be thought of as binning the data
+(in this case, a histogram with 500 bins).
 
 A typical valid data range might be -30C to 60C for daily maximum temperature (tasmax),
 -45C to 50C for daily minimum temperature (tasmin),
 or 0mm to 1250mm for daily precipitation (pr).
 The following scaling formulas (used in this intercomparison)
-map the valid range of data values across the 500 integer values: 
+map the valid range of data values across the 500 integer values/bins: 
 - (tasmax + 35) * 5
 - (tasmin + 55) * 5
 - alog(pr + 1) * 70, where alog is the natural logarithm 
 
 A small value of 0.1mm would have a scaled value of alog(0.1 + 1) * 70 = 6.7,
-which is rounded to an integer value of 7.
+which is rounded to an integer value / bin number of 7.
 The largest valid rainfall amount of 1250mm would have a scaled value of alog(1250 + 1 ) * 70 = 499.2 (rounded to 499).
 
 > TODO - Describe quantile matching process.
