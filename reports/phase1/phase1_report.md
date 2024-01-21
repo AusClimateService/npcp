@@ -567,7 +567,7 @@ where ECDFm tends to slightly outperform QME.
 </p>
 
 For the cross validation task,
-all three univariate methods (ECDFm, QME and QDM) tend to perform similarity (e.g. Figure 5.3.2).
+all three univariate methods (ECDFm, QME and QDM) tend to perform similarity (e.g. Figure 5.3.2 and 5.3.3).
 The relative ranking of the methods in terms of the spatial mean absolute error
 differs depending on exactly which RCM and variable is assessed.
 It does not appear to make much difference whether the data are dynamically downscaled
@@ -585,6 +585,14 @@ prior to bias correction or not.
       and a reference case where the AGCD training data (1960-1989)
       was simply duplicated for the assessment period (1990-2019) (bottom right).
       (MAE = mean absolute error.)
+    </em>
+</p>
+
+<p align="center">
+    <img src="FD-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <br>
+    <em>
+      Figure 5.3.3: As per Figure 5.3.2 but for the frost day index.
     </em>
 </p>
 
