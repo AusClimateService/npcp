@@ -157,19 +157,21 @@ There are a number of decisions to make when implementing the ECDFm method:
 The _quantile matching for extremes_ ([Dowdy 2023](http://www.bom.gov.au/research/publications/researchreports/BRR-087.pdf))
 method involves clipping the input data to a valid range
 and then scaling the clipped data to an integer value between 0 and 500 (typically)
-before applying the quantile-based transfer function. 
+before applying the quantile-based transfer function.
+This scaling can be thought of as binning the data
+(in this case, a histogram with 500 bins).
 
 A typical valid data range might be -30C to 60C for daily maximum temperature (tasmax),
 -45C to 50C for daily minimum temperature (tasmin),
 or 0mm to 1250mm for daily precipitation (pr).
 The following scaling formulas (used in this intercomparison)
-map the valid range of data values across the 500 integer values: 
+map the valid range of data values across the 500 integer values/bins: 
 - (tasmax + 35) * 5
 - (tasmin + 55) * 5
 - alog(pr + 1) * 70, where alog is the natural logarithm 
 
 A small value of 0.1mm would have a scaled value of alog(0.1 + 1) * 70 = 6.7,
-which is rounded to an integer value of 7.
+which is rounded to an integer value / bin number of 7.
 The largest valid rainfall amount of 1250mm would have a scaled value of alog(1250 + 1 ) * 70 = 499.2 (rounded to 499).
 
 > TODO - Describe quantile matching process.
@@ -356,28 +358,37 @@ using the ECDFM and QDM methods.
 
 The data arising from each bias correction method was compared on a number of metrics
 relating to the ability to capture the observed
-climatology, variability, extremes, trends and the link between different variables (Table 1).
-A summary of the results for each of those metrics are presented below - plots for
-all variable / RCM / metric combinations can be found at:  
+climatology, variability, extremes, trends and the link between different variables.
+The metrics presented and/or discussed in the results section of this report are listed in Table 1.
+Some additional metrics can be found at the following GitHub repository
+along with the complete results for all variable / RCM / metric combinations:  
 https://github.com/AusClimateService/npcp/tree/master/results
 
 | Category | Metric | Description |
 | ---      | ---    | ---         |
-| Climatology | Annual mean | |
-| Climatology | Seasonal cycle | Calculate the monthly climatology at each grid point, then sum the absolute value of the difference between the bias corrected model data and observations across all twelve months. That sum represents the seasonal cycle bias. |
-| Variability | Interannual | Standard deviation of annual mean timeseries. |
-| Variability | Multi-year | Standard deviation of annual mean timeseries with 5-year running mean applied. |
-| Variability | Wet day frequency | |
-| Variability | Drought intensity | |
-| Extremes | 1-in-10 year event | |
-| Extremes | Percentiles | 99, 99.5 and 99.9 or 1.0, 0.5 and 0.1 |
-| Links | Cross correlation | Between the monthly mean daily maximum temperature anomaly and monthly mean rainfall anomaly | 
+| Climatology | Annual climatology | Annual mean at each grid point |
+| Climatology | Seasonal cycle bias | Sum of the absolute value of the difference between the bias corrected model and observed climatological mean value for each month |
+| Variability | Interannual variability | Standard deviation of the annual mean timeseries |
+| Variability | Multi-year variability | Standard deviation of the 5-year running mean timeseries |
+| Variability | Temporal auto-correlation | Correlation between the annual (or monthly) time series and a lag-1-shifted version of that annual (or monthly) time series |
+| Variability (temperature) | Warm-spell duration index (WSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmax > 90th percentile calculated for a 5-day window centred on each calendar day |
+| Variability (temperature) | Cold-spell duration index (CSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmin < 10th percentile calculated for a 5-day window centred on each calendar day |
+| Variability (rainfall) | Wet day frequency | Wet-day (pr > 1mm) fraction (%) per season (DJF, MAM, JJA, SON) |
+| Extremes | 5-year maximum/minimum | The averaged 5-year maximum (or minimum for Tasmin) |
+| Extremes | 1-in-10 year event | Value corresponding to an annual return interval of 10 years |
+| Extremes | Extreme percentiles | The 99, 99.5 and 99.9 percentiles (or 1.0, 0.5 and 0.1 for Tasmin) |
+| Extremes (temperature) | Frost day index | Annual number of days with a minimum temperature less than 0◦C |
+| Extremes (rainfall) | Drought intensity | Percentage difference between the minimum annual value and the mean annual value (also, with 2-year and 5-year running mean applied) |
+| Extremes (rainfall) | R95pTOT, R99pTOT | Fraction of total annual precipitation that falls on very wet days (> 95th or 99th percentile) |
+| Extremes (rainfall) | R10mm, R20mm | Annual number of heavy precipitation days (precipitation ≥ 10 mm or 20mm) |
+| Trends | Change signal | Change in the annual mean (future period minus the historical period) |
+| Links | PT cross correlation | Correlation between the anomaly timeseries of monthly mean maximum temperature and rainfall | 
 
 _Table 1: Metrics used in the assessment._
 
 ## 5. Results: Temperature
 
-### 5.1. Climatology
+### 5.1. Temperature Climatology
 
 > Summary: There's essentially no difference between the univariate methods
 > with respect to the daily minimum and maximum temperature climatologies.
@@ -452,10 +463,79 @@ prior to bias correction or not.
     </em>
 </p>
 
-### 5.2. Variability
-TODO.
+### 5.2. Temperature Variability
 
-### 5.3. Extremes
+> Summary: GCM biases in interannual and multi-annual temperature variability are relatively small
+> and aren't appreciably modified by dynamical downscaling or univariate bias correction.
+> In contrast, GCMs tend to overestimate the frequency of extended periods of persistent hot or cold weather.
+> Downscaling with RCMs tends to improve the representation of persistent extreme weather,
+> and the remaining bias is typically further reduced by applying the QDM method.
+> Univariate bias correction (ECDFm or QME) provides no appreciable improvement
+> in the frequency of persistent extreme weather.
+
+> TODO: Add details (plots and text) about the interannual and multi-annual variability metrics.
+> (Check that the GCM bias is actually relatively small as stated in the summary.)
+
+Extended periods of persistent hot or cold weather were captured with the WSDI and CSDI respectively,
+which count the annual number of days that are part of a streak of six or more days
+above the 90th percentile (WSDI) or below the 10th percentile (CSDI). 
+Both indices show higher values in northern Australia
+(where the weather tends to be more persistent / less variable from day to day)
+and lower values in the south (Figure 5.2.1 and 5.2.2).
+
+<p align="center">
+    <img src="WSDI-values_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <br>
+    <em>
+      Figure 5.2.1: WSDI values for the "cross validation" assessment task.
+      Results are shown for a GCM (top left),
+      RCM forced by that GCM (bottom left),
+      and various bias correction methods applied to those model data (rows).
+      The far right column shows the observed AGCD values
+      for the assessment (1990-2019; top right) and training (1960-1989; bottom right) periods.
+    </em>
+</p>
+
+<p align="center">
+    <img src="CSDI-values_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <br>
+    <em>
+      Figure 5.2.2: As per Figure 5.2.1 but for the CSDI.
+    </em>
+</p>
+
+Global climate models tend to overestimate the WSDI and CSDI,
+which is somewhat reduced with dynamical downscaling (Figure 5.2.3 and 5.3.4).
+The application of the QDM method to GCM or RCM data substantially reduces the model bias,
+whereas the univariate bias correction methods (ECDFm and QME) provide no appreciable bias reduction.
+This is presumably related to the fact that the QDM (delta change) method
+pertubs the observed training data (which does a good job of representing the WSDI and CSDI),
+whereas the bias correction methods act on the model data.
+
+<p align="center">
+    <img src="WSDI-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <br>
+    <em>
+      Figure 5.2.3: Bias in the WSDI (relative to the AGCD dataset)
+      for the "cross validation" assessment task.
+      Results are shown for a GCM (top left),
+      RCM forced by that GCM (bottom left),
+      various bias correction methods applied to those model data (rows),
+      and a reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) (bottom right).
+      (MAE = mean absolute error.)
+    </em>
+</p>
+
+<p align="center">
+    <img src="CSDI-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <br>
+    <em>
+      Figure 5.2.4: As per Figure 5.2.3 but for the CSDI.
+    </em>
+</p>
+
+### 5.3. Temperature Extremes
 
 > Summary: There's essentially no difference between the univariate methods
 > with respect to the most extreme daily minimum and maximum temperatures.
@@ -463,13 +543,15 @@ TODO.
 > it also makes no difference whether the GCM data is dynamically downscaled or not
 > prior to applying bias correction.
 
-With respect to extreme indices such as the 1-in-10 year event
+With respect to general extreme indices such as the 1-in-10 year event
 or the most extreme percentiles (e.g. 99th or 1st)
 of daily minimum and maximum temperature,
 both univariate bias correction methods do a similar job of
 representing the observed (AGCD) 1980-2019 extremes
 when trained on that same 1980-2019 observed data
 (i.e. the historical assessment task; e.g. Figure 5.3.1).
+The exception is frost days,
+where ECDFm tends to slightly outperform QME.
 
 <p align="center">
     <img src="tasmax_extreme-bias_task-historical_CSIRO-ACCESS-ESM1-5_UQ-DES-CCAM-2105.png" width=65% height=65%>
@@ -485,7 +567,7 @@ when trained on that same 1980-2019 observed data
 </p>
 
 For the cross validation task,
-all three methods perform similarity (Figure 5.3.2).
+all three univariate methods (ECDFm, QME and QDM) tend to perform similarity (e.g. Figure 5.3.2 and 5.3.3).
 The relative ranking of the methods in terms of the spatial mean absolute error
 differs depending on exactly which RCM and variable is assessed.
 It does not appear to make much difference whether the data are dynamically downscaled
@@ -506,7 +588,15 @@ prior to bias correction or not.
     </em>
 </p>
 
-### 5.4. Trends
+<p align="center">
+    <img src="FD-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <br>
+    <em>
+      Figure 5.3.3: As per Figure 5.3.2 but for the frost day index.
+    </em>
+</p>
+
+### 5.4. Temperature Trends
 
 > Summary: None of the univariate methods substantially modify model simulated temperature trends.
 
@@ -528,11 +618,11 @@ In fact, dynamical downscaling appears to modify the model trend much more than 
 
 ## 6. Results: Precipitation
 
-TODO: The relative performance of each of the bias correction methods differs quite a bit from RCM to RCM,
-so we should process the RCM data for anotehr GCM or two to see whehter a consistent pattern in the results
-can be identified. 
+> TODO: The relative performance of each of the bias correction methods differs quite a bit from RCM to RCM,
+> so we should process the RCM data for another GCM or two to see whehter a consistent pattern in the results
+> can be identified. 
 
-### 6.1. Climatology
+### 6.1. Precipitation Climatology
 
 > Summary: For the cross validation task,
 > relatively large biases persist in the precipitation climatology
@@ -573,7 +663,6 @@ on this historical assessment task.
     </em>
 </p>
 
-
 <p align="center">
     <img src="pr_seasonal-cycle-fraction_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
     <br>
@@ -590,9 +679,6 @@ followed by QDM, QME and ECDFm (e.g. Figure 6.1.4 to 6.1.7).
 While the raw RCM data tends to be (but is not always) less biased than the raw GCM data,
 biases tend to be (but are not always) lower if the GCM data
 is not dynamically downscaled prior to applying bias correction.
-
-TODO: Explain that the ECDFm biases can be reduced (to the point they are comparable to QME)
-by applying limiting precipitation qnatile increases to 50% as the QME method does.
 
 <p align="center">
     <img src="pr_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
@@ -633,11 +719,18 @@ by applying limiting precipitation qnatile increases to 50% as the QME method do
     </em>
 </p>
 
+### 6.2. Precipitation Variability
 
-### 6.2. Variability
-TODO.
+> TODO: Provide a detailed write-up of the precipitation variability metrics.
+> With respect to interannual variability, for the cross validation task
+> I'm guessing (from the QDM results) that a simple replication of the training data outperforms all methods.
+> The QDM method tends to perform better than QME,
+> which in turn performs better than ECDFm.
+> The differences between the methods are far less pronouced for multi-year variability
+> (in fact, there isn't really any appreciable reduction in the GCM bias).
+> All three univariate methods substantially reduce the (well known) model bias in wet day frequency. 
 
-### 6.3. Extremes
+### 6.3. Precipitation Extremes
 
 > Summary: Relatively large biases persist
 > in the most extreme daily precipitation values
@@ -648,7 +741,8 @@ TODO.
 > and biases tend to be lower if the GCM data is not dynamically downscaled
 > prior to applying bias correction.
 
-With respect to extreme indices such as the 1-in-10 year event
+With respect to extreme rainfall indices such as the 1-in-10 year event,
+R95pTOT, R99pTOT, R10mm, R20mm
 or the most extreme percentiles (e.g. 99th or 1st)
 of daily precipitation,
 both the univariate bias correction methods do a similar job of
@@ -671,10 +765,9 @@ when trained on that same 1980-2019 observed data
 
 For the cross validation task,
 a simple replication of the training data outperforms all the univariate methods.
-The relative performance of the methods differs between RCMs (e.g. Figure 6.3.2 to 6.3.4)
-and metrics (TODO: Add percentile figures).
-The raw RCM data tends to be more biased than the raw GCM data,
-and biases tend to be lower if the GCM data
+The relative performance of the methods differs between RCMs (e.g. Figure 6.3.2 to 6.3.4) and metrics.
+The raw RCM data is often (but not always) more biased than the raw GCM data,
+and biases tend to be (but are not always) lower if the GCM data
 is not dynamically downscaled prior to applying bias correction.
 
 <p align="center">
@@ -708,7 +801,7 @@ is not dynamically downscaled prior to applying bias correction.
     </em>
 </p>
 
-### 6.4. Trends
+### 6.4. Precipitation Trends
 
 > Summary: The univariate methods only slightly modify model simulated precipitation trends.
 

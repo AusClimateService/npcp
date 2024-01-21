@@ -30,7 +30,9 @@ Naming conventions follow CORDEX wherever possible and can take the following va
   - `wsp`: surface (10m) wind speed
 - `{driving-model}`  
   - `CSIRO-ACCESS-ESM1-5`: ACCESS-ESM1-5 CMIP6 submission
+  - `EC-Earth-Consortium-EC-Earth3`: EC-Earth3 CMIP6 submission
   - `ECMWF-ERA5`: ERA5 reanalysis
+  - `NCAR-CESM2`: CESM2 CMIP6 submission
   - `observations`: Australian gridded observations
 - `{downscaling-model}`  
   - `BOM-BARPA-R`: Bureau of Meteorology Atmospheric Regional Projections for Australia (BARPA), run by BoM
@@ -90,8 +92,12 @@ summarise the availability of `pr`, `tasmax` and `tasmin` data.
 | | CSIRO-CCAM  | :green_circle: | :green_circle: |
 | | UQ-DES-CCAM | :green_circle: | :green_circle: |
 | | NARCLIM-WRF | :white_circle: | :white_circle: |
+| CESM2 | BOM-BARPA | :green_circle: | :green_circle: |
+| | CSIRO-CCAM  | :green_circle: | :green_circle: |
+| EC-Earth3 | BOM-BARPA | :green_circle: | :green_circle: |
+| | CSIRO-CCAM  | :green_circle: | :green_circle: |
 
-*The ERA5 data is only available from 1979 onwards.
+*The ERA5 data is only available from 1979 onwards.  
 
 ## Bias correction tasks
 
@@ -111,7 +117,7 @@ Phase 1 of the intercomparison will focus on daily timescale
 `tasmax`, `tasmin` and `pr` data on the `NPCP-20i` grid.
 For each variable and downscaling model there are 5 tasks to complete...
 
-For the downscaled ACCESS-ESM1-5 data the tasks are:  
+For the downscaled CMIP6 data (ACCESS-ESM1-5, CESM2 and EC-Earth3) the tasks are:  
 - **Task 1 (Historical)**: Produce bias corrected data for the 1980-2019 period, using 1980-2019 as a training period.
 - **Task 2 (Projection)**: Produce bias corrected data for the 2060-2099 period, using 1980-2019 as a training period.
 - **Task 3 (Cross validation)**: Produce bias corrected data for the 1990-2019 period, using 1960-1989 as a training period.
@@ -129,7 +135,8 @@ following the data reference syntax described above.
 
 The model data requiring bias correction is the dynamically downscaled
 BOM-BARPA-R, CSIRO-CCAM-2203, UQ-DES-CCAM-2105 and NARCLIM-WRF data
-for both the ECMWF-ERA5 and CSIRO-ACCESS-ESM1-5 parent models.
+for the ECMWF-ERA5 and various CMIP6
+(i.e. CSIRO-ACCESS-ESM1-5, NCAR-CESM2 and EC-Earth-Consortium-EC-Earth3) parent models.
 Check the input data availability table above for an indication of
 which combinations of downscaling and parent models are available.
 
