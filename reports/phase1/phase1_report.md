@@ -2,6 +2,10 @@ _This report is currently in draft form and is not complete._
 
 # Phase 1 Report
 
+[1. Introduction](#1-introduction)  
+[2. Participating bias correction methods](#2-participating-bias-correction-methods)  
+TODO: Rest of table of contents
+
 ## 1. Introduction
 
 The [Climate Projections Roadmap for Australia](https://www.dcceew.gov.au/climate-change/publications/climate-projections-roadmap-for-australia)
