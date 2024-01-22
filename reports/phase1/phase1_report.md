@@ -476,23 +476,38 @@ prior to bias correction or not.
 When considering general measures of temperature variaiblity such as the standard deviation of the
 annual timeseries with ("multi-annual variability") and without ("interannual variability") a 5-year running mean applied,
 GCM biases are a similiar magnitude for the historical and cross validation tasks.
-These biases are not appreciably modified by dynamical downscaling or univariate or multivariate bias correction.
+These biases are not appreciably modified by dynamical downscaling, univariate or multivariate bias correction (e.g. Figure 5.2.1).
 The bias between the training and assessment periods in the AGCD data is reflected in the QDM biases
 (given that QDM perturbs observations as opposed to model data),
 which are slighly larger than the bias correction methods in this case.
+
+<p align="center">
+    <img src="tasmax_interannual-variability-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <br>
+    <em>
+      Figure 5.2.1: Bias in interannual variability (relative to the AGCD dataset)
+      for the "cross validation" assessment task.
+      Results are shown for a GCM (top left),
+      RCM forced by that GCM (bottom left),
+      various bias correction methods applied to those model data (rows),
+      and a reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) (bottom right).
+      (MAE = mean absolute error.)
+    </em>
+</p>
 
 Extended periods of persistent hot or cold weather were captured with the WSDI and CSDI respectively,
 which count the annual number of days that are part of a streak of six or more days
 above the 90th percentile (WSDI) or below the 10th percentile (CSDI). 
 Both indices show higher values in northern Australia
 (where the weather tends to be more persistent / less variable from day to day)
-and lower values in the south (Figure 5.2.1 and 5.2.2).
+and lower values in the south (Figure 5.2.2 and 5.2.3).
 
 <p align="center">
     <img src="WSDI-values_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
-      Figure 5.2.1: WSDI values for the "cross validation" assessment task.
+      Figure 5.2.2: WSDI values for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
       and various bias correction methods applied to those model data (rows).
@@ -505,12 +520,12 @@ and lower values in the south (Figure 5.2.1 and 5.2.2).
     <img src="CSDI-values_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
-      Figure 5.2.2: As per Figure 5.2.1 but for the CSDI.
+      Figure 5.2.3: As per Figure 5.2.2 but for the CSDI.
     </em>
 </p>
 
 Global climate models tend to overestimate the WSDI and CSDI,
-which is somewhat reduced with dynamical downscaling (Figure 5.2.3 and 5.3.4).
+which is somewhat reduced with dynamical downscaling (Figure 5.2.4 and 5.3.5).
 The application of the QDM method to GCM or RCM data substantially reduces the model bias,
 whereas the univariate bias correction methods (ECDFm and QME) provide no appreciable bias reduction.
 This is presumably related to the fact that the QDM (delta change) method
@@ -521,7 +536,7 @@ whereas the bias correction methods act on the model data.
     <img src="WSDI-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
-      Figure 5.2.3: Bias in the WSDI (relative to the AGCD dataset)
+      Figure 5.2.4: Bias in the WSDI (relative to the AGCD dataset)
       for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
@@ -536,7 +551,7 @@ whereas the bias correction methods act on the model data.
     <img src="CSDI-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
-      Figure 5.2.4: As per Figure 5.2.3 but for the CSDI.
+      Figure 5.2.5: As per Figure 5.2.4 but for the CSDI.
     </em>
 </p>
 
