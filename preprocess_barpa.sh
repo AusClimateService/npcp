@@ -7,7 +7,7 @@ function usage {
     echo "USAGE: bash $0 variable experiment model"
     echo "   variable:   Variable to process (tasmax, tasmin, pr, rsds)"
     echo "   experiment: Experiment to process (evaluation, historical, ssp370)" 
-    echo "   model:      Model to process (CSIRO-ACCESS-ESM1-5, EC-Earth-Consortium-EC-Earth3)"
+    echo "   model:      Model to process (CSIRO-ACCESS-ESM1-5, EC-Earth-Consortium-EC-Earth3, NCAR-CESM2)"
     exit 1
 }
 
@@ -20,6 +20,8 @@ model=$3
 
 if [ "${model}" == "CSIRO-ACCESS-ESM1-5" ]; then
     run=r6i1p1f1
+elif [ "${model}" == "NCAR-CESM2" ]; then
+    run=r11i1p1f1
 else
     run=r1i1p1f1
 fi
