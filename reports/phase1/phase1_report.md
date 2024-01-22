@@ -465,16 +465,21 @@ prior to bias correction or not.
 
 ### 5.2. Temperature Variability
 
-> Summary: GCM biases in interannual and multi-annual temperature variability are relatively small
-> and aren't appreciably modified by dynamical downscaling or univariate bias correction.
+> Summary: GCM biases in interannual and multi-year temperature variability are relatively small
+> and aren't substantially modified by dynamical downscaling or univariate bias correction.
 > In contrast, GCMs tend to overestimate the frequency of extended periods of persistent hot or cold weather.
 > Downscaling with RCMs tends to improve the representation of persistent extreme weather,
 > and the remaining bias is typically further reduced by applying the QDM method.
 > Univariate bias correction (ECDFm or QME) provides no appreciable improvement
 > in the frequency of persistent extreme weather.
 
-> TODO: Add details (plots and text) about the interannual and multi-annual variability metrics.
-> (Check that the GCM bias is actually relatively small as stated in the summary.)
+When considering general measures of temperature variaiblity such as the standard deviation of the
+annual timeseries with ("multi-annual variability") and without ("interannual variability") a 5-year running mean applied,
+GCM biases are a similiar magnitude for the historical and cross validation tasks.
+These biases are not appreciably modified by dynamical downscaling or univariate or multivariate bias correction.
+The bias between the training and assessment periods in the AGCD data is reflected in the QDM biases
+(given that QDM perturbs observations as opposed to model data),
+which are slighly larger than the bias correction methods in this case.
 
 Extended periods of persistent hot or cold weather were captured with the WSDI and CSDI respectively,
 which count the annual number of days that are part of a streak of six or more days
