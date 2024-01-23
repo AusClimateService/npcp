@@ -4,7 +4,25 @@ _This report is currently in draft form and is not complete._
 
 [1. Introduction](#1-introduction)  
 [2. Participating bias correction methods](#2-participating-bias-correction-methods)  
-TODO: Rest of table of contents
+&ensp; [2.1. ECDFm](#21-ecdfm)  
+&ensp; [2.2. QME](#22-qme)  
+&ensp; [2.3. QDM](#23-qdm)  
+&ensp; [2.4. MBCn](#24-mbcn)  
+&ensp; [2.5. MRNBC](#25-mrnbc)  
+[3. Data](#3-data)  
+[4. Assessment](#4-assessment)  
+[5. Results: Temperature](#5-results-temperature)  
+&ensp; [5.1. Temperature climatology](#51-temperature-climatology)  
+&ensp; [5.2. Temperature variability](#52-temperature-variability)  
+&ensp; [5.3. Temperature extremes](#53-temperature-extremes)  
+&ensp; [5.4. Temperature trends](#54-temperature-trends)  
+[6. Results: Precipitation](#6-results-precipitation)  
+&ensp; [6.1. Precipitation climatology](#61-precipitation-climatology)  
+&ensp; [6.2. Precipitation variability](#62-precipitation-variability)  
+&ensp; [6.3. Precipitation extremes](#63-precipitation-extremes)  
+&ensp; [6.4. Precipitation trends](#64-precipitation-trends)  
+[7. Results: Link between variables](#7-results-link-between-variables)  
+[8. Discussion](#8-discussion)  
 
 ## 1. Introduction
 
@@ -392,7 +410,7 @@ _Table 1: Metrics used in the assessment._
 
 ## 5. Results: Temperature
 
-### 5.1. Temperature Climatology
+### 5.1. Temperature climatology
 
 > Summary: There's essentially no difference between the univariate methods
 > with respect to the daily minimum and maximum temperature climatologies.
@@ -467,7 +485,7 @@ prior to bias correction or not.
     </em>
 </p>
 
-### 5.2. Temperature Variability
+### 5.2. Temperature variability
 
 > Summary: GCM biases in interannual and multi-year temperature variability are relatively small
 > and aren't substantially modified by dynamical downscaling or univariate bias correction.
@@ -559,7 +577,7 @@ whereas the bias correction methods act on the model data.
     </em>
 </p>
 
-### 5.3. Temperature Extremes
+### 5.3. Temperature extremes
 
 > Summary: There's essentially no difference between the univariate methods
 > with respect to the most extreme daily minimum and maximum temperatures.
@@ -620,7 +638,7 @@ prior to bias correction or not.
     </em>
 </p>
 
-### 5.4. Temperature Trends
+### 5.4. Temperature trends
 
 > Summary: None of the univariate methods substantially modify model simulated temperature trends.
 
@@ -646,7 +664,7 @@ In fact, dynamical downscaling appears to modify the model trend much more than 
 > so we should process the RCM data for another GCM or two to see whehter a consistent pattern in the results
 > can be identified. 
 
-### 6.1. Precipitation Climatology
+### 6.1. Precipitation climatology
 
 > Summary: For the cross validation task,
 > relatively large biases persist in the precipitation climatology
@@ -743,7 +761,7 @@ is not dynamically downscaled prior to applying bias correction.
     </em>
 </p>
 
-### 6.2. Precipitation Variability
+### 6.2. Precipitation variability
 
 > TODO: Provide a detailed write-up of the precipitation variability metrics.
 > With respect to interannual variability, for the cross validation task
@@ -809,7 +827,7 @@ All three univariate methods substantially reduce the (well known) model bias in
 > TODO: Add wet day plots.
 
 
-### 6.3. Precipitation Extremes
+### 6.3. Precipitation extremes
 
 > Summary: Relatively large biases persist
 > in the most extreme daily precipitation values
@@ -880,7 +898,7 @@ is not dynamically downscaled prior to applying bias correction.
     </em>
 </p>
 
-### 6.4. Precipitation Trends
+### 6.4. Precipitation trends
 
 > Summary: The univariate methods only slightly modify model simulated precipitation trends.
 
@@ -910,7 +928,7 @@ Dynamical downscaling appears to modify the model trend much more than bias corr
     </em>
 </p>
 
-## 7. Link between variables
+## 7. Results: Link between variables
 
 The link between temperature and rainfall was assessed by calculating the cross correlation
 between the monthly mean anomaly timeseries of precipitation and daily maximum temperature.
