@@ -414,9 +414,10 @@ _Table 1: Metrics used in the assessment._
 
 > Summary: There's essentially no difference between the univariate methods
 > with respect to the daily minimum and maximum temperature climatologies.
+> All three univariate methods clearly outperform the multivariate methods.
 > While the raw RCM data is less biased than the raw GCM data,
 > it also makes no difference whether the GCM data is dynamically downscaled or not
-> prior to applying bias correction.
+> prior to applying univariate bias correction.
 
 With respect to daily minimum and maximum temperature,
 both univariate bias correction methods do an almost perfect job of
@@ -424,6 +425,9 @@ representing the observed (AGCD) 1980-2019 annual mean (e.g. Figure 5.1.1)
 and seasonal cycle (e.g. Figure 5.1.2)
 when trained on that same 1980-2019 observed data
 (i.e. the historical assessment task).
+In contrast,
+the multivariate methods (and MBCn in particular)
+tend to have a larger bias than the RCM data on the historical task.
 
 <p align="center">
     <img src="tasmax_mean-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
@@ -433,7 +437,8 @@ when trained on that same 1980-2019 observed data
       for the "historical" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left)
-      and various bias correction methods applied to those model data (rows).
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -447,12 +452,15 @@ when trained on that same 1980-2019 observed data
 </p>
 
 For the cross validation task,
-all three methods perform similarity well with respect to both
+all three univariate methods perform similarity well with respect to both
 the annual mean (e.g. Figure 5.1.3) and seasonal cycle (e.g. Figure 5.1.4 and 5.1.5).
 The relative ranking of the methods in terms of the spatial mean absolute error
 differs depending on exactly which RCM and variable is assessed.
 It does not appear to make much difference whether the data are dynamically downscaled
-prior to bias correction or not.
+prior to univariate bias correction or not.
+The relative performance of the multivariate methods is reversed relative to the historical task
+and the better of the two on cross validation (MBCn) performs only slightly worse than the
+univariate methods.
 
 <p align="center">
     <img src="tasmin_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
@@ -462,9 +470,10 @@ prior to bias correction or not.
       for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
-      various bias correction methods applied to those model data (rows),
-      and a reference case where the AGCD training data (1960-1989)
-      was simply duplicated for the assessment period (1990-2019) (bottom right).
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
+      A reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) is also shown (bottom right).
       (MAE = mean absolute error.)
     </em>
 </p>
