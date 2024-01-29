@@ -693,21 +693,26 @@ In fact, dynamical downscaling appears to modify the model trend much more than 
 
 > Summary: For the cross validation task,
 > relatively large biases persist in the precipitation climatology
-> even after applying the univariate methods.
+> even after applying bias correction.
 > A simple replication of the training data outperforms all methods.
-> The QDM method tends to perform better than QME,
+> For univariate methods, QDM tends to perform better than QME,
 > which in turn performs better than ECDFm.
+> The performance of the multivariate MRNBC method is comparable to the univariate methods,
+> but the MBCn method is much worse. 
 > While the raw RCM data tends to be less biased than the raw GCM data,
 > biases tend to be lower if the GCM data is not dynamically downscaled
-> prior to applying bias correction.
+> prior to applying univariate bias correction.
 
 With respect to precipitation,
-both bias correction methods do a good job of
+both univariate bias correction methods do a good job of
 representing the observed (AGCD) 1980-2019 annual mean (e.g. Figure 6.1.1)
 and seasonal cycle (e.g. Figure 6.1.2 and 6.1.3)
 when trained on that same 1980-2019 observed data.
 The ECDFm method tends to slightly outperform the QME method
 on this historical assessment task.
+The multivariate MRNBC tends to perform as well as
+(if not better than) ECDFm on the historical task,
+whereas the MBCn method performs very poorly.
 
 <p align="center">
     <img src="pr_mean-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
@@ -716,8 +721,9 @@ on this historical assessment task.
       Figure 6.1.1: Bias in annual mean precipitation (relative to the AGCD dataset)
       for the "historical" assessment task.
       Results are shown for a GCM (top left),
-      RCM forced by that GCM (bottom left)
-      and various bias correction methods applied to those model data (rows).
+      RCM forced by that GCM (bottom left),
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -740,12 +746,15 @@ on this historical assessment task.
 
 For the cross validation task,
 substantial biases remain in the precipitation climatology
-even after the application of the univariate methods.
+even after the application of the various univariate methods.
 In fact, a simple replication of the training data is the best performing "method",
 followed by QDM, QME and ECDFm (e.g. Figure 6.1.4 to 6.1.7).
+The MRNBC multivariate method performs as well as the best univariate method in relation to annual mean preciptation
+but slightly worse than the univariate methods on the seasonal cycle.
+The MBCn method performs poorly. 
 While the raw RCM data tends to be (but is not always) less biased than the raw GCM data,
 biases tend to be (but are not always) lower if the GCM data
-is not dynamically downscaled prior to applying bias correction.
+is not dynamically downscaled prior to applying univariate bias correction.
 
 <p align="center">
     <img src="pr_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
@@ -755,9 +764,10 @@ is not dynamically downscaled prior to applying bias correction.
       for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
-      various bias correction methods applied to those model data (rows),
-      and a reference case where the AGCD training data (1960-1989)
-      was simply duplicated for the assessment period (1990-2019) (bottom right).
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
+      A reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) is also shown (bottom right).
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -837,9 +847,10 @@ and the relatively poor performance on cross validation.
       for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
-      various bias correction methods applied to those model data (rows),
-      and a reference case where the AGCD training data (1960-1989)
-      was simply duplicated for the assessment period (1990-2019) (bottom right).
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
+      A reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) is also shown (bottom right).
       (MAE = mean absolute error.)
     </em>
 </p>
