@@ -395,7 +395,7 @@ https://github.com/AusClimateService/npcp/tree/master/results
 | Variability | Temporal auto-correlation | Correlation between the annual (or monthly) time series and a lag-1-shifted version of that annual (or monthly) time series |
 | Variability (temperature) | Warm-spell duration index (WSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmax > 90th percentile calculated for a 5-day window centred on each calendar day |
 | Variability (temperature) | Cold-spell duration index (CSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmin < 10th percentile calculated for a 5-day window centred on each calendar day |
-| Variability (rainfall) | Wet day frequency | Wet-day (pr > 1mm) fraction (%) per season (DJF, MAM, JJA, SON) |
+| Variability (rainfall) | Wet day frequency | Number of wet days (pr > 1mm) expressed as a fraction (%) of all days |
 | Extremes | 5-year maximum/minimum | The averaged 5-year maximum (or minimum for Tasmin) |
 | Extremes | 1-in-10 year event | Value corresponding to an annual return interval of 10 years |
 | Extremes | Extreme percentiles | The 99, 99.5 and 99.9 percentiles (or 1.0, 0.5 and 0.1 for Tasmin) |
@@ -497,17 +497,19 @@ univariate methods.
 ### 5.2. Temperature variability
 
 > Summary: GCM biases in interannual and multi-year temperature variability are relatively small
-> and aren't substantially modified by dynamical downscaling or univariate bias correction.
+> and aren't substantially modified by dynamical downscaling or bias correction.
 > In contrast, GCMs tend to overestimate the frequency of extended periods of persistent hot or cold weather.
 > Downscaling with RCMs tends to improve the representation of persistent extreme weather,
-> and the remaining bias is typically further reduced by applying the QDM method.
-> Univariate bias correction (ECDFm or QME) provides no appreciable improvement
+> and it is typically improved further still by the use of the QDM delta change method.
+> In constrast, bias correction (univariate or multivariate) provides no appreciable improvement
 > in the frequency of persistent extreme weather.
 
 When considering general measures of temperature variaiblity such as the standard deviation of the
 annual timeseries with ("multi-annual variability") and without ("interannual variability") a 5-year running mean applied,
 GCM biases are a similiar magnitude for the historical and cross validation tasks.
 These biases are not appreciably modified by dynamical downscaling, univariate or multivariate bias correction (e.g. Figure 5.2.1).
+(With the exception of the MRNBC method,
+which shows such large biases that there might be something wrong with the data provided for that method.)
 The bias between the training and assessment periods in the AGCD data is reflected in the QDM biases
 (given that QDM perturbs observations as opposed to model data),
 which are slighly larger than the bias correction methods in this case.
@@ -520,9 +522,10 @@ which are slighly larger than the bias correction methods in this case.
       for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
-      various bias correction methods applied to those model data (rows),
-      and a reference case where the AGCD training data (1960-1989)
-      was simply duplicated for the assessment period (1990-2019) (bottom right).
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
+      A reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) is also shown (bottom right).
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -541,7 +544,8 @@ and lower values in the south (Figure 5.2.2 and 5.2.3).
       Figure 5.2.2: WSDI values for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
-      and various bias correction methods applied to those model data (rows).
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
       The far right column shows the observed AGCD values
       for the assessment (1990-2019; top right) and training (1960-1989; bottom right) periods.
     </em>
@@ -557,8 +561,10 @@ and lower values in the south (Figure 5.2.2 and 5.2.3).
 
 Global climate models tend to overestimate the WSDI and CSDI,
 which is somewhat reduced with dynamical downscaling (Figure 5.2.4 and 5.3.5).
-The application of the QDM method to GCM or RCM data substantially reduces the model bias,
-whereas the univariate bias correction methods (ECDFm and QME) provide no appreciable bias reduction.
+The application of the QDM delta change method to GCM or RCM data substantially reduces the model bias,
+whereas the univariate and multivariate bias correction methods provide no appreciable bias reduction.
+(With the exception of the MRNBC method for the CSDI,
+which shows such large biases that there might be something wrong with the data provided for that method.)
 This is presumably related to the fact that the QDM (delta change) method
 pertubs the observed training data (which does a good job of representing the WSDI and CSDI),
 whereas the bias correction methods act on the model data.
@@ -571,9 +577,10 @@ whereas the bias correction methods act on the model data.
       for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
-      various bias correction methods applied to those model data (rows),
-      and a reference case where the AGCD training data (1960-1989)
-      was simply duplicated for the assessment period (1990-2019) (bottom right).
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
+      A reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) is also shown (bottom right).
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -590,9 +597,10 @@ whereas the bias correction methods act on the model data.
 
 > Summary: There's essentially no difference between the univariate methods
 > with respect to the most extreme daily minimum and maximum temperatures.
+> All three univariate methods tend to outperform the multivariate methods.
 > While the raw RCM data is generally (but not always) less biased than the raw GCM data,
 > it also makes no difference whether the GCM data is dynamically downscaled or not
-> prior to applying bias correction.
+> prior to applying univariate bias correction.
 
 With respect to general extreme indices such as the 1-in-10 year event
 or the most extreme percentiles (e.g. 99th or 1st)
@@ -603,16 +611,20 @@ when trained on that same 1980-2019 observed data
 (i.e. the historical assessment task; e.g. Figure 5.3.1).
 The exception is frost days,
 where ECDFm tends to slightly outperform QME.
+The MRNBC multivariate method performs very poorly on the historical task,
+while the MBCn method performs slightly better than the univariate methods
+for extreme maximum temperatures but slightly worse for extreme minimums.
 
 <p align="center">
-    <img src="tasmax_extreme-bias_task-historical_CSIRO-ACCESS-ESM1-5_UQ-DES-CCAM-2105.png" width=65% height=65%>
+    <img src="tasmax_extreme-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
     <br>
     <em>
       Figure 5.3.1: Bias in the 1-in-10 year high daily maximum temperature (relative to the AGCD dataset)
       for the "historical" assessment task.
       Results are shown for a GCM (top left),
-      RCM forced by that GCM (bottom left)
-      and various bias correction methods applied to those model data (rows).
+      RCM forced by that GCM (bottom left),
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -622,7 +634,10 @@ all three univariate methods (ECDFm, QME and QDM) tend to perform similarity (e.
 The relative ranking of the methods in terms of the spatial mean absolute error
 differs depending on exactly which RCM and variable is assessed.
 It does not appear to make much difference whether the data are dynamically downscaled
-prior to bias correction or not.
+prior to univariate bias correction or not.
+The univariate methods tend to outperform the multivariate methods,
+with the exception of MRNBC on maximum temperature extremes
+(it performs similarly to the univariate approaches).  
 
 <p align="center">
     <img src="tasmin_extreme-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
@@ -632,9 +647,10 @@ prior to bias correction or not.
       for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
-      various bias correction methods applied to those model data (rows),
-      and a reference case where the AGCD training data (1960-1989)
-      was simply duplicated for the assessment period (1990-2019) (bottom right).
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
+      A reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) is also shown (bottom right).
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -649,7 +665,7 @@ prior to bias correction or not.
 
 ### 5.4. Temperature trends
 
-> Summary: None of the univariate methods substantially modify model simulated temperature trends.
+> Summary: None of the univariate or multivariate methods substantially modify model simulated temperature trends.
 
 With respect to the simulated trend in annual mean daily maximum or minimum temperature,
 none of the methods substantially alter the model simulated trend (e.g. Figure 5.4.1).
@@ -661,8 +677,8 @@ In fact, dynamical downscaling appears to modify the model trend much more than 
     <em>
       Figure 5.4.1: Change in annual mean daily maximum temperature
       between 1980-2019 and 2060-2099 for the ssp370 experiment.
-      Results are shown for a GCM (left most panel),
-      RCM forced by that GCM (second from the left)
+      Results are shown for a GCM (top left panel),
+      RCM forced by that GCM (middle left panel)
       and various bias correction methods applied to those model data (remaining panels).
     </em>
 </p>
@@ -677,21 +693,26 @@ In fact, dynamical downscaling appears to modify the model trend much more than 
 
 > Summary: For the cross validation task,
 > relatively large biases persist in the precipitation climatology
-> even after applying the univariate methods.
+> even after applying bias correction.
 > A simple replication of the training data outperforms all methods.
-> The QDM method tends to perform better than QME,
+> For univariate methods, QDM tends to perform better than QME,
 > which in turn performs better than ECDFm.
+> The performance of the multivariate MRNBC method is comparable to the univariate methods,
+> but the MBCn method is much worse. 
 > While the raw RCM data tends to be less biased than the raw GCM data,
 > biases tend to be lower if the GCM data is not dynamically downscaled
-> prior to applying bias correction.
+> prior to applying univariate bias correction.
 
 With respect to precipitation,
-both bias correction methods do a good job of
+both univariate bias correction methods do a good job of
 representing the observed (AGCD) 1980-2019 annual mean (e.g. Figure 6.1.1)
 and seasonal cycle (e.g. Figure 6.1.2 and 6.1.3)
 when trained on that same 1980-2019 observed data.
 The ECDFm method tends to slightly outperform the QME method
 on this historical assessment task.
+The multivariate MRNBC tends to perform as well as
+(if not better than) ECDFm on the historical task,
+whereas the MBCn method performs very poorly.
 
 <p align="center">
     <img src="pr_mean-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
@@ -700,8 +721,9 @@ on this historical assessment task.
       Figure 6.1.1: Bias in annual mean precipitation (relative to the AGCD dataset)
       for the "historical" assessment task.
       Results are shown for a GCM (top left),
-      RCM forced by that GCM (bottom left)
-      and various bias correction methods applied to those model data (rows).
+      RCM forced by that GCM (bottom left),
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -724,12 +746,15 @@ on this historical assessment task.
 
 For the cross validation task,
 substantial biases remain in the precipitation climatology
-even after the application of the univariate methods.
+even after the application of the various univariate methods.
 In fact, a simple replication of the training data is the best performing "method",
 followed by QDM, QME and ECDFm (e.g. Figure 6.1.4 to 6.1.7).
+The MRNBC multivariate method performs as well as the best univariate method in relation to annual mean preciptation
+but slightly worse than the univariate methods on the seasonal cycle.
+The MBCn method performs poorly. 
 While the raw RCM data tends to be (but is not always) less biased than the raw GCM data,
 biases tend to be (but are not always) lower if the GCM data
-is not dynamically downscaled prior to applying bias correction.
+is not dynamically downscaled prior to applying univariate bias correction.
 
 <p align="center">
     <img src="pr_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
@@ -739,9 +764,10 @@ is not dynamically downscaled prior to applying bias correction.
       for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
-      various bias correction methods applied to those model data (rows),
-      and a reference case where the AGCD training data (1960-1989)
-      was simply duplicated for the assessment period (1990-2019) (bottom right).
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
+      A reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) is also shown (bottom right).
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -772,14 +798,15 @@ is not dynamically downscaled prior to applying bias correction.
 
 ### 6.2. Precipitation variability
 
-> TODO: Provide a detailed write-up of the precipitation variability metrics.
-> With respect to interannual variability, for the cross validation task
-> I'm guessing (from the QDM results) that a simple replication of the training data outperforms all methods.
-> The QDM method tends to perform better than QME,
-> which in turn performs better than ECDFm.
-> The differences between the methods are far less pronouced for multi-year variability
+> Summary: GCM biases in interannual precipitation variability 
+> aren't substantially modified by dynamical downscaling but are slightly improved with bias correction.
+> Univariate methods tend to outperform multivariate,
+> and there are small but consistent differences between the univariate methods.
+> Differences between the methods are far less pronouced for multi-year variability
 > (in fact, there isn't really any appreciable reduction in the GCM bias).
-> All three univariate methods substantially reduce the (well known) model bias in wet day frequency. 
+> Dynamical downscaling does improve the model bias in wet day frequency
+> and with the expection of the MBCn method on cross validation,
+> further improvements are achieved with bias correction.
 
 In general, dynamical downscaling does little to reduce GCM biases in interannual and multi-year precipitation variability.
 
@@ -821,9 +848,10 @@ and the relatively poor performance on cross validation.
       for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
-      various bias correction methods applied to those model data (rows),
-      and a reference case where the AGCD training data (1960-1989)
-      was simply duplicated for the assessment period (1990-2019) (bottom right).
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
+      A reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) is also shown (bottom right).
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -831,10 +859,19 @@ and the relatively poor performance on cross validation.
 The relative performance of the different methods are similar for multi-year variability
 but the differences are less pronouced.
 
-All three univariate methods substantially reduce the (well known) model bias in wet day frequency...
+Bias correction tends to substantially reduce model biases in wet day frequency.
+The only exception was the MBCn method on cross validation,
+otherwise all the methods performed similarly well (Figure 6.2.3). 
+A simple replication of the training data tended to marginally outperform all methods,
+while MRNBC tended to perform slightly better and QME slightly worse than the other (non-MBCn) methods.
 
-> TODO: Add wet day plots.
-
+<p align="center">
+    <img src="pr_wet-day-freq-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <br>
+    <em>
+      Figure 6.2.3: As per Figure 6.2.2 but for the wet day frequency metric defined in Table 1.
+    </em>
+</p>
 
 ### 6.3. Precipitation extremes
 
