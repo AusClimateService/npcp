@@ -395,7 +395,7 @@ https://github.com/AusClimateService/npcp/tree/master/results
 | Variability | Temporal auto-correlation | Correlation between the annual (or monthly) time series and a lag-1-shifted version of that annual (or monthly) time series |
 | Variability (temperature) | Warm-spell duration index (WSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmax > 90th percentile calculated for a 5-day window centred on each calendar day |
 | Variability (temperature) | Cold-spell duration index (CSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmin < 10th percentile calculated for a 5-day window centred on each calendar day |
-| Variability (rainfall) | Wet day frequency | Wet-day (pr > 1mm) fraction (%) per season (DJF, MAM, JJA, SON) |
+| Variability (rainfall) | Wet day frequency | Number of wet days (pr > 1mm) expressed as a fraction (%) of all days |
 | Extremes | 5-year maximum/minimum | The averaged 5-year maximum (or minimum for Tasmin) |
 | Extremes | 1-in-10 year event | Value corresponding to an annual return interval of 10 years |
 | Extremes | Extreme percentiles | The 99, 99.5 and 99.9 percentiles (or 1.0, 0.5 and 0.1 for Tasmin) |
@@ -798,14 +798,15 @@ is not dynamically downscaled prior to applying univariate bias correction.
 
 ### 6.2. Precipitation variability
 
-> TODO: Provide a detailed write-up of the precipitation variability metrics.
-> With respect to interannual variability, for the cross validation task
-> I'm guessing (from the QDM results) that a simple replication of the training data outperforms all methods.
-> The QDM method tends to perform better than QME,
-> which in turn performs better than ECDFm.
-> The differences between the methods are far less pronouced for multi-year variability
+> Summary: GCM biases in interannual precipitation variability 
+> aren't substantially modified by dynamical downscaling but are slightly improved with bias correction.
+> Univariate methods tend to outperform multivariate,
+> and there are small but consistent differences between the univariate methods.
+> Differences between the methods are far less pronouced for multi-year variability
 > (in fact, there isn't really any appreciable reduction in the GCM bias).
-> All three univariate methods substantially reduce the (well known) model bias in wet day frequency. 
+> Dynamical downscaling does improve the model bias in wet day frequency
+> and with the expection of the MBCn method on cross validation,
+> further improvements are achieved with bias correction.
 
 In general, dynamical downscaling does little to reduce GCM biases in interannual and multi-year precipitation variability.
 
@@ -858,10 +859,19 @@ and the relatively poor performance on cross validation.
 The relative performance of the different methods are similar for multi-year variability
 but the differences are less pronouced.
 
-All three univariate methods substantially reduce the (well known) model bias in wet day frequency...
+Bias correction tends to substantially reduce model biases in wet day frequency.
+The only exception was the MBCn method on cross validation,
+otherwise all the methods performed similarly well (Figure 6.2.3). 
+A simple replication of the training data tended to marginally outperform all methods,
+while MRNBC tended to perform slightly better and QME slightly worse than the other (non-MBCn) methods.
 
-> TODO: Add wet day plots.
-
+<p align="center">
+    <img src="pr_wet-day-freq-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <br>
+    <em>
+      Figure 6.2.3: As per Figure 6.2.2 but for the wet day frequency metric defined in Table 1.
+    </em>
+</p>
 
 ### 6.3. Precipitation extremes
 
