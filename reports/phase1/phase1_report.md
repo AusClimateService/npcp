@@ -497,17 +497,19 @@ univariate methods.
 ### 5.2. Temperature variability
 
 > Summary: GCM biases in interannual and multi-year temperature variability are relatively small
-> and aren't substantially modified by dynamical downscaling or univariate bias correction.
+> and aren't substantially modified by dynamical downscaling or bias correction.
 > In contrast, GCMs tend to overestimate the frequency of extended periods of persistent hot or cold weather.
 > Downscaling with RCMs tends to improve the representation of persistent extreme weather,
-> and the remaining bias is typically further reduced by applying the QDM method.
-> Univariate bias correction (ECDFm or QME) provides no appreciable improvement
+> and it is typically improved further still by the use of the QDM delta change method.
+> In constrast, bias correction (univariate or multivariate) provides no appreciable improvement
 > in the frequency of persistent extreme weather.
 
 When considering general measures of temperature variaiblity such as the standard deviation of the
 annual timeseries with ("multi-annual variability") and without ("interannual variability") a 5-year running mean applied,
 GCM biases are a similiar magnitude for the historical and cross validation tasks.
 These biases are not appreciably modified by dynamical downscaling, univariate or multivariate bias correction (e.g. Figure 5.2.1).
+(With the exception of the MRNBC method,
+which shows such large biases that there might be something wrong with the data provided for that method.)
 The bias between the training and assessment periods in the AGCD data is reflected in the QDM biases
 (given that QDM perturbs observations as opposed to model data),
 which are slighly larger than the bias correction methods in this case.
@@ -520,9 +522,10 @@ which are slighly larger than the bias correction methods in this case.
       for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
-      various bias correction methods applied to those model data (rows),
-      and a reference case where the AGCD training data (1960-1989)
-      was simply duplicated for the assessment period (1990-2019) (bottom right).
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
+      A reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) is also shown (bottom right).
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -541,7 +544,8 @@ and lower values in the south (Figure 5.2.2 and 5.2.3).
       Figure 5.2.2: WSDI values for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
-      and various bias correction methods applied to those model data (rows).
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
       The far right column shows the observed AGCD values
       for the assessment (1990-2019; top right) and training (1960-1989; bottom right) periods.
     </em>
@@ -557,8 +561,10 @@ and lower values in the south (Figure 5.2.2 and 5.2.3).
 
 Global climate models tend to overestimate the WSDI and CSDI,
 which is somewhat reduced with dynamical downscaling (Figure 5.2.4 and 5.3.5).
-The application of the QDM method to GCM or RCM data substantially reduces the model bias,
-whereas the univariate bias correction methods (ECDFm and QME) provide no appreciable bias reduction.
+The application of the QDM delta change method to GCM or RCM data substantially reduces the model bias,
+whereas the univariate and multivariate bias correction methods provide no appreciable bias reduction.
+(With the exception of the MRNBC method for the CSDI,
+which shows such large biases that there might be something wrong with the data provided for that method.)
 This is presumably related to the fact that the QDM (delta change) method
 pertubs the observed training data (which does a good job of representing the WSDI and CSDI),
 whereas the bias correction methods act on the model data.
@@ -571,9 +577,10 @@ whereas the bias correction methods act on the model data.
       for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
-      various bias correction methods applied to those model data (rows),
-      and a reference case where the AGCD training data (1960-1989)
-      was simply duplicated for the assessment period (1990-2019) (bottom right).
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
+      The far right column shows the observed AGCD values
+      for the assessment (1990-2019; top right) and training (1960-1989; bottom right) periods.
       (MAE = mean absolute error.)
     </em>
 </p>
