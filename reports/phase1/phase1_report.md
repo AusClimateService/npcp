@@ -579,8 +579,8 @@ whereas the bias correction methods act on the model data.
       RCM forced by that GCM (bottom left),
       and various bias correction methods applied to those GCM (top row, columns to the right)
       and RCM (middle and bottom rows, columns to the right) data.
-      The far right column shows the observed AGCD values
-      for the assessment (1990-2019; top right) and training (1960-1989; bottom right) periods.
+      A reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) is also shown (bottom right).
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -647,9 +647,10 @@ with the exception of MRNBC on maximum temperature extremes
       for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
-      various bias correction methods applied to those model data (rows),
-      and a reference case where the AGCD training data (1960-1989)
-      was simply duplicated for the assessment period (1990-2019) (bottom right).
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
+      A reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) is also shown (bottom right).
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -664,7 +665,7 @@ with the exception of MRNBC on maximum temperature extremes
 
 ### 5.4. Temperature trends
 
-> Summary: None of the univariate methods substantially modify model simulated temperature trends.
+> Summary: None of the univariate or multivariate methods substantially modify model simulated temperature trends.
 
 With respect to the simulated trend in annual mean daily maximum or minimum temperature,
 none of the methods substantially alter the model simulated trend (e.g. Figure 5.4.1).
@@ -676,8 +677,8 @@ In fact, dynamical downscaling appears to modify the model trend much more than 
     <em>
       Figure 5.4.1: Change in annual mean daily maximum temperature
       between 1980-2019 and 2060-2099 for the ssp370 experiment.
-      Results are shown for a GCM (left most panel),
-      RCM forced by that GCM (second from the left)
+      Results are shown for a GCM (top left panel),
+      RCM forced by that GCM (middle left panel)
       and various bias correction methods applied to those model data (remaining panels).
     </em>
 </p>
