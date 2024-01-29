@@ -672,7 +672,7 @@ none of the methods substantially alter the model simulated trend (e.g. Figure 5
 In fact, dynamical downscaling appears to modify the model trend much more than bias correction.
 
 <p align="center">
-    <img src="tasmax_trend_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <img src="tasmax_trend_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=80% height=80%>
     <br>
     <em>
       Figure 5.4.1: Change in annual mean daily maximum temperature
@@ -818,7 +818,7 @@ than both QME and ECDFm for the historical task,
 but MBCn does not (and in some cases perfoms markedly worse).
 
 <p align="center">
-    <img src="pr_interannual-variability-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <img src="pr_interannual-variability-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=70% height=70%>
     <br>
     <em>
       Figure 6.2.1: Bias in interannual precipitation variability (relative to the AGCD dataset)
@@ -953,7 +953,7 @@ none of the univariate methods substantially alter the model simulated trend (e.
 Dynamical downscaling appears to modify the model trend much more than bias correction.
 
 <p align="center">
-    <img src="pr_trend_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <img src="pr_trend_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=90% height=90%>
     <br>
     <em>
       Figure 6.4.1: Change in annual mean precipitation
@@ -965,7 +965,7 @@ Dynamical downscaling appears to modify the model trend much more than bias corr
 </p>
 
 <p align="center">
-    <img src="pr_trend-rcm_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=80% height=80%>
+    <img src="pr_trend-rcm_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
     <br>
     <em>
       Figure 6.4.2: Change in annual mean precipitation
