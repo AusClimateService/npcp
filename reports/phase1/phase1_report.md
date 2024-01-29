@@ -597,9 +597,10 @@ whereas the bias correction methods act on the model data.
 
 > Summary: There's essentially no difference between the univariate methods
 > with respect to the most extreme daily minimum and maximum temperatures.
+> All three univariate methods tend to outperform the multivariate methods.
 > While the raw RCM data is generally (but not always) less biased than the raw GCM data,
 > it also makes no difference whether the GCM data is dynamically downscaled or not
-> prior to applying bias correction.
+> prior to applying univariate bias correction.
 
 With respect to general extreme indices such as the 1-in-10 year event
 or the most extreme percentiles (e.g. 99th or 1st)
@@ -610,16 +611,20 @@ when trained on that same 1980-2019 observed data
 (i.e. the historical assessment task; e.g. Figure 5.3.1).
 The exception is frost days,
 where ECDFm tends to slightly outperform QME.
+The MRNBC multivariate method performs very poorly on the historical task,
+while the MBCn method performs slightly better than the univariate methods
+for extreme maximum temperatures but slightly worse for extreme minimums.
 
 <p align="center">
-    <img src="tasmax_extreme-bias_task-historical_CSIRO-ACCESS-ESM1-5_UQ-DES-CCAM-2105.png" width=65% height=65%>
+    <img src="tasmax_extreme-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
     <br>
     <em>
       Figure 5.3.1: Bias in the 1-in-10 year high daily maximum temperature (relative to the AGCD dataset)
       for the "historical" assessment task.
       Results are shown for a GCM (top left),
-      RCM forced by that GCM (bottom left)
-      and various bias correction methods applied to those model data (rows).
+      RCM forced by that GCM (bottom left),
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -629,7 +634,10 @@ all three univariate methods (ECDFm, QME and QDM) tend to perform similarity (e.
 The relative ranking of the methods in terms of the spatial mean absolute error
 differs depending on exactly which RCM and variable is assessed.
 It does not appear to make much difference whether the data are dynamically downscaled
-prior to bias correction or not.
+prior to univariate bias correction or not.
+The univariate methods tend to outperform the multivariate methods,
+with the exception of MRNBC on maximum temperature extremes
+(it performs similarly to the univariate approaches).  
 
 <p align="center">
     <img src="tasmin_extreme-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
