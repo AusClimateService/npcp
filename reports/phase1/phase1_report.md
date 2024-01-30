@@ -975,10 +975,12 @@ is not dynamically downscaled prior to applying bias correction.
 
 ### 6.5. Precipitation trends
 
-> Summary: The univariate methods only slightly modify model simulated precipitation trends.
+> Summary: Bias correction slightly modifies model simulated precipitation trends.
+> These modifications are smaller than those produced by dynamical downscaling
+> and tend to be slighly larger for multivariate bias correction.
 
 With respect to the simulated trend in annual mean rainfall,
-none of the univariate methods substantially alter the model simulated trend (e.g. Figure 6.5.1 and 6.5.2).
+the univariate and multivariate methods slightly alter the model simulated trend (e.g. Figure 6.5.1 and 6.5.2).
 Dynamical downscaling appears to modify the model trend much more than bias correction.
 
 <p align="center">
