@@ -822,8 +822,9 @@ but MBCn does not (and in some cases perfoms markedly worse).
       Figure 6.2.1: Bias in interannual precipitation variability (relative to the AGCD dataset)
       for the "historical" assessment task.
       Results are shown for a GCM (top left),
-      RCM forced by that GCM (bottom left)
-      and various bias correction methods applied to those model data (rows).
+      RCM forced by that GCM (bottom left),
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -900,9 +901,9 @@ and on cross validation MBCn was a poor outlier while the other methods performe
 
 > Summary: Relatively large biases persist
 > in the most extreme daily precipitation values
-> even after applying the univariate methods.
+> even after applying dynamical downscaling and bias correction.
 > A simple replication of the training data outperforms all methods on the cross validation task,
-> while the relaitve performance of QDM, QME and ECDFm differs between RCMs and extremes metrics.
+> while the various univariate and multivariate methods tend to perform similarly.
 > The raw RCM data tends to be more biased than the raw GCM data,
 > and biases tend to be lower if the GCM data is not dynamically downscaled
 > prior to applying bias correction.
@@ -915,6 +916,7 @@ both the univariate bias correction methods do a similar job of
 representing the observed (AGCD) 1980-2019 extremes
 when trained on that same 1980-2019 observed data
 (i.e. the historical assessment task; e.g. Figure 6.4.1).
+The MRNBC method tends to perform better than the univariate methods and MBCn worse.
 
 <p align="center">
     <img src="pr_extreme-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
@@ -923,15 +925,19 @@ when trained on that same 1980-2019 observed data
       Figure 6.4.1: Bias in the 1-in-10 year high daily precipitation (relative to the AGCD dataset)
       for the "historical" assessment task.
       Results are shown for a GCM (top left),
-      RCM forced by that GCM (bottom left)
-      and various bias correction methods applied to those model data (rows).
+      RCM forced by that GCM (bottom left),
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
       (MAE = mean absolute error.)
     </em>
 </p>
 
 For the cross validation task,
-a simple replication of the training data outperforms all the univariate methods.
-The relative performance of the methods differs between RCMs (e.g. Figure 6.4.2 to 6.4.4) and metrics.
+a simple replication of the training data outperforms all the correction methods.
+The MBCn method performs consistently worse than the other methods on the R95pTOT and R99pTOT metrics
+(possibly related to the precipitation distribution biases indentified in the pervious section), 
+but otherwise the performance of the methods on extreme precipitation metrics is similar and their
+relative performance differs between RCMs (e.g. Figure 6.4.2 to 6.4.4) and metrics.
 The raw RCM data is often (but not always) more biased than the raw GCM data,
 and biases tend to be (but are not always) lower if the GCM data
 is not dynamically downscaled prior to applying bias correction.
