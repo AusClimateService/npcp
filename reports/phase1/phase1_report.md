@@ -859,32 +859,42 @@ but the differences are less pronouced.
 
 ### 6.3. Precipitation distribution
 
-> Summary: Dynamical downscaling does improve the model bias in wet day frequency
-> and with the expection of the MBCn method on cross validation,
-> further improvements are achieved with bias correction.
+> Summary: Model biases in the annual precipitation distribution are typically
+> substantially reduced with bias correction.
+> On the cross validation task all methods besides MBCn (which performs poorly) perform similarly well.
 
-The precipitation distribution was assessed
-at the lower end by considering the wet day frequency
-(or conversely the number of relatively dry days)
-and towards the upper end by considering r10mm and r20mm.
+The lower end of the annual precipitation distribution was assessed
+by considering the wet day frequency (or conversely the number of relatively dry days),
+while the upper end was captured by the r10mm and r20mm metrics.
 
-Bias correction tends to substantially reduce model biases in wet day frequency.
-The only exception was the MBCn method on cross validation,
-otherwise all the methods performed similarly well (Figure 6.3.1). 
-A simple replication of the training data tended to marginally outperform all methods,
-while MRNBC tended to perform slightly better and QME slightly worse than the other (non-MBCn) methods.
+All the correction methods reduced the model bias in wet day frequency on the historical task,
+with the univariate methods outperforming the multivariate (not shown).
+On cross validation the MBCn method was a poor performing outlier,
+but otherwise all methods performed similarly with a tendency
+for MRNBC to perform slightly better and QME slightly worse than the others (Figure 6.3.1).
 
 <p align="center">
     <img src="pr_wet-day-freq-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
-      Figure 6.3.1:
+      Figure 6.3.1: Bias in wet day frequency (relative to the AGCD dataset)
+      for the "cross validation" assessment task.
+      Results are shown for a GCM (top left),
+      RCM forced by that GCM (bottom left),
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
+      A reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) is also shown (bottom right).
+      (MAE = mean absolute error.)
     </em>
 </p>
 
-> TODO: Add R10mm and R20mm results.
-> Historical task: ecdfm and qme tend to outperform mrnbc, which in turn is better than mbcn
-> Cross validation: MBCn was the worst. The others were a mix. 
+Similar results were found for the R10mm and R20mm metrics.
+Univariate methods outperformed multivariate on the historical task
+and on cross validation MBCn was a poor outlier while the other methods performed similarly
+(with the relative ranking of each method differing between models (Figure 6.3.2).
+
+> TODO: Include an R20mm plot.
 
 ### 6.4. Precipitation extremes
 
