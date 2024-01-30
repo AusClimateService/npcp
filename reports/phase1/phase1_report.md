@@ -19,8 +19,9 @@ _This report is currently in draft form and is not complete._
 [6. Results: Precipitation](#6-results-precipitation)  
 &ensp; [6.1. Precipitation climatology](#61-precipitation-climatology)  
 &ensp; [6.2. Precipitation variability](#62-precipitation-variability)  
-&ensp; [6.3. Precipitation extremes](#63-precipitation-extremes)  
-&ensp; [6.4. Precipitation trends](#64-precipitation-trends)  
+&ensp; [6.3. Precipitation distribution](#63-precipitation-distribution)  
+&ensp; [6.4. Precipitation extremes](#64-precipitation-extremes)  
+&ensp; [6.5. Precipitation trends](#65-precipitation-trends)  
 [7. Results: Link between variables](#7-results-link-between-variables)  
 [8. Discussion](#8-discussion)  
 
@@ -380,7 +381,7 @@ using the ECDFM and QDM methods.
 
 The data arising from each bias correction method was compared on a number of metrics
 relating to the ability to capture the observed
-climatology, variability, extremes, trends and the link between different variables.
+climatology, variability, distribution (precipitation only), extremes, trends and the link between different variables.
 The metrics presented and/or discussed in the results section of this report are listed in Table 1.
 Some additional metrics can be found at the following GitHub repository
 along with the complete results for all variable / RCM / metric combinations:  
@@ -395,14 +396,14 @@ https://github.com/AusClimateService/npcp/tree/master/results
 | Variability | Temporal auto-correlation | Correlation between the annual (or monthly) time series and a lag-1-shifted version of that annual (or monthly) time series |
 | Variability (temperature) | Warm-spell duration index (WSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmax > 90th percentile calculated for a 5-day window centred on each calendar day |
 | Variability (temperature) | Cold-spell duration index (CSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmin < 10th percentile calculated for a 5-day window centred on each calendar day |
-| Variability (rainfall) | Wet day frequency | Number of wet days (pr > 1mm) expressed as a fraction (%) of all days |
+| Distribution (rainfall) | Wet day frequency | Number of wet days (pr > 1mm) expressed as a fraction (%) of all days |  
+| Distribution (rainfall) | R10mm, R20mm | Annual number of heavy precipitation days (precipitation ≥ 10 mm or 20mm) |
 | Extremes | 5-year maximum/minimum | The averaged 5-year maximum (or minimum for Tasmin) |
 | Extremes | 1-in-10 year event | Value corresponding to an annual return interval of 10 years |
 | Extremes | Extreme percentiles | The 99, 99.5 and 99.9 percentiles (or 1.0, 0.5 and 0.1 for Tasmin) |
 | Extremes (temperature) | Frost day index | Annual number of days with a minimum temperature less than 0◦C |
 | Extremes (rainfall) | Drought intensity | Percentage difference between the minimum annual value and the mean annual value (also, with 2-year and 5-year running mean applied) |
 | Extremes (rainfall) | R95pTOT, R99pTOT | Fraction of total annual precipitation that falls on very wet days (> 95th or 99th percentile) |
-| Extremes (rainfall) | R10mm, R20mm | Annual number of heavy precipitation days (precipitation ≥ 10 mm or 20mm) |
 | Trends | Change signal | Change in the annual mean (future period minus the historical period) |
 | Links | PT cross correlation | Correlation between the anomaly timeseries of monthly mean maximum temperature and rainfall | 
 
@@ -804,9 +805,6 @@ is not dynamically downscaled prior to applying univariate bias correction.
 > and there are small but consistent differences between the univariate methods.
 > Differences between the methods are far less pronouced for multi-year variability
 > (in fact, there isn't really any appreciable reduction in the GCM bias).
-> Dynamical downscaling does improve the model bias in wet day frequency
-> and with the expection of the MBCn method on cross validation,
-> further improvements are achieved with bias correction.
 
 In general, dynamical downscaling does little to reduce GCM biases in interannual and multi-year precipitation variability.
 
@@ -859,9 +857,20 @@ and the relatively poor performance on cross validation.
 The relative performance of the different methods are similar for multi-year variability
 but the differences are less pronouced.
 
+### 6.3. Precipitation distribution
+
+> Summary: Dynamical downscaling does improve the model bias in wet day frequency
+> and with the expection of the MBCn method on cross validation,
+> further improvements are achieved with bias correction.
+
+The precipitation distribution was assessed
+at the lower end by considering the wet day frequency
+(or conversely the number of relatively dry days)
+and towards the upper end by considering r10mm and r20mm.
+
 Bias correction tends to substantially reduce model biases in wet day frequency.
 The only exception was the MBCn method on cross validation,
-otherwise all the methods performed similarly well (Figure 6.2.3). 
+otherwise all the methods performed similarly well (Figure 6.3.1). 
 A simple replication of the training data tended to marginally outperform all methods,
 while MRNBC tended to perform slightly better and QME slightly worse than the other (non-MBCn) methods.
 
@@ -869,11 +878,15 @@ while MRNBC tended to perform slightly better and QME slightly worse than the ot
     <img src="pr_wet-day-freq-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
-      Figure 6.2.3: As per Figure 6.2.2 but for the wet day frequency metric defined in Table 1.
+      Figure 6.3.1:
     </em>
 </p>
 
-### 6.3. Precipitation extremes
+> TODO: Add R10mm and R20mm results.
+> Historical task: ecdfm and qme tend to outperform mrnbc, which in turn is better than mbcn
+> Cross validation: MBCn was the worst. The others were a mix. 
+
+### 6.4. Precipitation extremes
 
 > Summary: Relatively large biases persist
 > in the most extreme daily precipitation values
@@ -885,19 +898,19 @@ while MRNBC tended to perform slightly better and QME slightly worse than the ot
 > prior to applying bias correction.
 
 With respect to extreme rainfall indices such as the 1-in-10 year event,
-R95pTOT, R99pTOT, R10mm, R20mm
+R95pTOT, R99pTOT,
 or the most extreme percentiles (e.g. 99th or 1st)
 of daily precipitation,
 both the univariate bias correction methods do a similar job of
 representing the observed (AGCD) 1980-2019 extremes
 when trained on that same 1980-2019 observed data
-(i.e. the historical assessment task; e.g. Figure 6.3.1).
+(i.e. the historical assessment task; e.g. Figure 6.4.1).
 
 <p align="center">
     <img src="pr_extreme-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
     <br>
     <em>
-      Figure 6.3.1: Bias in the 1-in-10 year high daily precipitation (relative to the AGCD dataset)
+      Figure 6.4.1: Bias in the 1-in-10 year high daily precipitation (relative to the AGCD dataset)
       for the "historical" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left)
@@ -908,7 +921,7 @@ when trained on that same 1980-2019 observed data
 
 For the cross validation task,
 a simple replication of the training data outperforms all the univariate methods.
-The relative performance of the methods differs between RCMs (e.g. Figure 6.3.2 to 6.3.4) and metrics.
+The relative performance of the methods differs between RCMs (e.g. Figure 6.4.2 to 6.4.4) and metrics.
 The raw RCM data is often (but not always) more biased than the raw GCM data,
 and biases tend to be (but are not always) lower if the GCM data
 is not dynamically downscaled prior to applying bias correction.
@@ -917,7 +930,7 @@ is not dynamically downscaled prior to applying bias correction.
     <img src="pr_extreme-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
     <br>
     <em>
-      Figure 6.3.2: Bias in the 1-in-10 year high daily precipitation (relative to the AGCD dataset)
+      Figure 6.4.2: Bias in the 1-in-10 year high daily precipitation (relative to the AGCD dataset)
       for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
@@ -932,7 +945,7 @@ is not dynamically downscaled prior to applying bias correction.
     <img src="pr_extreme-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_CSIRO-CCAM-2203.png">
     <br>
     <em>
-      Figure 6.3.3: As per Figure 6.3.2.
+      Figure 6.4.3: As per Figure 6.3.2.
     </em>
 </p>
 
@@ -940,23 +953,23 @@ is not dynamically downscaled prior to applying bias correction.
     <img src="pr_extreme-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_UQ-DES-CCAM-2105.png">
     <br>
     <em>
-      Figure 6.3.4: As per Figure 6.3.3.
+      Figure 6.4.4: As per Figure 6.3.3.
     </em>
 </p>
 
-### 6.4. Precipitation trends
+### 6.5. Precipitation trends
 
 > Summary: The univariate methods only slightly modify model simulated precipitation trends.
 
 With respect to the simulated trend in annual mean rainfall,
-none of the univariate methods substantially alter the model simulated trend (e.g. Figure 6.4.1 and 6.4.2).
+none of the univariate methods substantially alter the model simulated trend (e.g. Figure 6.5.1 and 6.5.2).
 Dynamical downscaling appears to modify the model trend much more than bias correction.
 
 <p align="center">
     <img src="pr_trend_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=90% height=90%>
     <br>
     <em>
-      Figure 6.4.1: Change in annual mean precipitation
+      Figure 6.5.1: Change in annual mean precipitation
       between 1980-2019 and 2060-2099 for the ssp370 experiment.
       Results are shown for a GCM (left most panel),
       RCM forced by that GCM (second from the left)
@@ -968,7 +981,7 @@ Dynamical downscaling appears to modify the model trend much more than bias corr
     <img src="pr_trend-rcm_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
     <br>
     <em>
-      Figure 6.4.2: Change in annual mean precipitation
+      Figure 6.5.2: Change in annual mean precipitation
       between 1980-2019 and 2060-2099 for the ssp370 experiment
       relative to the RCM change.
     </em>
