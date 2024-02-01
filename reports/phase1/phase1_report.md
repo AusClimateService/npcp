@@ -1042,4 +1042,61 @@ particularly the QDM method (Figure 7.2).
 </p>
 
 ## 8. Discussion
-TODO.
+
+While it can be informative to assess bias correction methods
+by adjusting data from the training period itself
+(e.g. to look for potential overfitting)
+a more difficult test that is more closely related to the typical real-world application
+of bias correction is cross validation
+(i.e. adjustment of data outside of the training period).
+
+When it comes to the assessment of daily minimum and maximum temperatures on cross validation,
+bias correction produced large bias reductions in the simulated climatology and extremes,
+but little or no change in biases associated with climate variability.
+There wasn't a substantial difference between the performance of the three univariate methods
+and they all tended to perform better than the multivariate methods.
+On the projections task,
+none of the univariate or multivariate methods substantively modified
+the long term temperature trends simulated by the model.
+
+With respect to cross validation of precipitation data,
+univariate bias correction produced modest bias reductions
+in the simulated climatology, variability, daily distribution and extremes.
+The multivariate MRNBC method also tended to produce modest bias reductions
+(with the exception of precipitation variability),
+whereas MBCn tended towards modest bias increases.
+The differences between the univariate methods were relatively small.
+The QDM method tended to outperform the others,
+usually (but not always) followed by QME and then ECDFm,
+but these differences were mostly relatively minor
+(especially between QME and ECDFm).
+All the univariate and multivariate methods slightly modified
+the long term precipitation trends simulated by the model,
+but less so than dynamical downscaling.
+
+We attempted to assess the link between temperature and precipitation
+by calculating the cross correlation,
+but none of the methods had an appreciable impact on the model bias
+(which was relatively small to begin with).
+Further work will be to explore alternative metrics that capture
+the link between multiple variables,
+which is an area where mutlivariate methods would presumably
+outperform univariate alternatives.
+
+Given that dynamically downscaled data isn't typically available for all GCMs,
+it is worth considering how the final "product" differs if GCM data
+is directly bias corrected instead (i.e. without downscaling first).
+It turns out that on the relatively simple temperature metrics that we assessed,
+the bias in the end product is much the same either way.
+The exceptions were the WSDI and CSDI,
+where dynamical downscaling led to reduced bias but bias correction did not.
+Presumably the downscaling produces more realistic meteorology (and thus weather persistence).
+It's possible that other more sophisticated metrics
+that are responsive to the simulation of nuanced weather features
+may also pick up a similar discrepancy between bias corrected data
+that has or has not been dynamically downscaled first.
+
+For precipitation,
+bias correcting GCM data directly can in some cases produce lower biases...
+TODO: Finish discussion. 
+
