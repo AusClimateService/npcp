@@ -1049,6 +1049,15 @@ by adjusting data from the training period itself
 a more difficult test that is more closely related to the typical real-world application
 of bias correction is cross validation
 (i.e. adjustment of data outside of the training period).
+Figure 8.1 attempts to summarise the results of the cross validation analysis.
+
+<p align="center">
+    <img src="figures/summary.png" width=100% height=100%>
+    <br>
+    <em>
+      Figure 8.1: Caption.
+    </em>
+</p>
 
 When it comes to the assessment of daily minimum and maximum temperatures on cross validation,
 bias correction produced large bias reductions in the simulated climatology and extremes,
