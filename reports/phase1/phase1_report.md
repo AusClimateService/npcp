@@ -579,7 +579,7 @@ whereas the bias correction methods act on the model data.
 With respect to general extreme indices such as the 1-in-10 year event
 or the most extreme percentiles (e.g. 99th or 1st)
 of daily minimum and maximum temperature,
-all three univariate methods (ECDFm, QME and QDM) tend to perform similarity
+all three univariate methods (ECDFm, QME and QDM) tend to perform similarly
 on cross validation (e.g. Figure 5.3.1 and 5.3.2).
 The relative ranking of the methods in terms of the spatial mean absolute error
 differs depending on exactly which RCM and variable is assessed.
