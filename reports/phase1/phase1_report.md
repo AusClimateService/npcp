@@ -431,7 +431,7 @@ the multivariate methods (and MBCn in particular)
 tend to have a larger bias than the RCM data on the historical task.
 
 <p align="center">
-    <img src="tasmax_mean-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
+    <img src="figures/tasmax_mean-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
     <br>
     <em>
       Figure 5.1.1: Bias in annual mean daily maximum temperature (relative to the AGCD dataset)
@@ -445,7 +445,7 @@ tend to have a larger bias than the RCM data on the historical task.
 </p>
 
 <p align="center">
-    <img src="tasmax_seasonal-cycle_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
+    <img src="figures/tasmax_seasonal-cycle_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
     <br>
     <em>
       Figure 5.1.2: As per Figure 5.1.1 but for the seasonal cycle bias metric defined in Table 1.
@@ -464,7 +464,7 @@ and the better of the two on cross validation (MBCn) performs only slightly wors
 univariate methods.
 
 <p align="center">
-    <img src="tasmin_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <img src="figures/tasmin_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
     <br>
     <em>
       Figure 5.1.3: Bias in annual mean daily minimum temperature (relative to the AGCD dataset)
@@ -480,7 +480,7 @@ univariate methods.
 </p>
 
 <p align="center">
-    <img src="tasmin_seasonal-cycle_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <img src="figures/tasmin_seasonal-cycle_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
       Figure 5.1.4: As per Figure 5.1.3 but for the seasonal cycle bias metric defined in Table 1.
@@ -488,7 +488,7 @@ univariate methods.
 </p>
 
 <p align="center">
-    <img src="tasmin_seasonal-cycle-cities_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <img src="figures/tasmin_seasonal-cycle-cities_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
       Figure 5.1.5: Daily minimum temperature seasonal climatology for the "cross validation" assessment task.
@@ -516,7 +516,7 @@ The bias between the training and assessment periods in the AGCD data is reflect
 which are slighly larger than the bias correction methods in this case.
 
 <p align="center">
-    <img src="tasmax_interannual-variability-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <img src="figures/tasmax_interannual-variability-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
     <br>
     <em>
       Figure 5.2.1: Bias in interannual variability (relative to the AGCD dataset)
@@ -539,7 +539,7 @@ Both indices show higher values in northern Australia
 and lower values in the south (Figure 5.2.2 and 5.2.3).
 
 <p align="center">
-    <img src="WSDI-values_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <img src="figures/WSDI-values_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
       Figure 5.2.2: WSDI values for the "cross validation" assessment task.
@@ -553,7 +553,7 @@ and lower values in the south (Figure 5.2.2 and 5.2.3).
 </p>
 
 <p align="center">
-    <img src="CSDI-values_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <img src="figures/CSDI-values_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
       Figure 5.2.3: As per Figure 5.2.2 but for the CSDI.
@@ -571,7 +571,7 @@ pertubs the observed training data (which does a good job of representing the WS
 whereas the bias correction methods act on the model data.
 
 <p align="center">
-    <img src="WSDI-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <img src="figures/WSDI-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
       Figure 5.2.4: Bias in the WSDI (relative to the AGCD dataset)
@@ -587,7 +587,7 @@ whereas the bias correction methods act on the model data.
 </p>
 
 <p align="center">
-    <img src="CSDI-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <img src="figures/CSDI-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
       Figure 5.2.5: As per Figure 5.2.4 but for the CSDI.
@@ -617,7 +617,7 @@ while the MBCn method performs slightly better than the univariate methods
 for extreme maximum temperatures but slightly worse for extreme minimums.
 
 <p align="center">
-    <img src="tasmax_extreme-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
+    <img src="figures/tasmax_extreme-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
     <br>
     <em>
       Figure 5.3.1: Bias in the 1-in-10 year high daily maximum temperature (relative to the AGCD dataset)
@@ -641,7 +641,7 @@ with the exception of MRNBC on maximum temperature extremes
 (it performs similarly to the univariate approaches).  
 
 <p align="center">
-    <img src="tasmin_extreme-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <img src="figures/tasmin_extreme-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
     <br>
     <em>
       Figure 5.3.2: Bias in the 1-in-10 year low daily minimum temperature (relative to the AGCD dataset)
@@ -657,7 +657,7 @@ with the exception of MRNBC on maximum temperature extremes
 </p>
 
 <p align="center">
-    <img src="FD-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <img src="figures/FD-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
     <br>
     <em>
       Figure 5.3.3: As per Figure 5.3.2 but for the frost day index.
@@ -673,7 +673,7 @@ none of the methods substantially alter the model simulated trend (e.g. Figure 5
 In fact, dynamical downscaling appears to modify the model trend much more than bias correction.
 
 <p align="center">
-    <img src="tasmax_trend_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=80% height=80%>
+    <img src="figures/tasmax_trend_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=80% height=80%>
     <br>
     <em>
       Figure 5.4.1: Change in annual mean daily maximum temperature
@@ -716,7 +716,7 @@ The multivariate MRNBC tends to perform as well as
 whereas the MBCn method performs very poorly.
 
 <p align="center">
-    <img src="pr_mean-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
+    <img src="figures/pr_mean-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
     <br>
     <em>
       Figure 6.1.1: Bias in annual mean precipitation (relative to the AGCD dataset)
@@ -730,7 +730,7 @@ whereas the MBCn method performs very poorly.
 </p>
 
 <p align="center">
-    <img src="pr_seasonal-cycle_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
+    <img src="figures/pr_seasonal-cycle_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
     <br>
     <em>
       Figure 6.1.2: As per Figure 6.1.1 but for the seasonal cycle bias metric defined in Table 1.
@@ -738,7 +738,7 @@ whereas the MBCn method performs very poorly.
 </p>
 
 <p align="center">
-    <img src="pr_seasonal-cycle-fraction_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
+    <img src="figures/pr_seasonal-cycle-fraction_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
     <br>
     <em>
       Figure 6.1.3: As per Figure 6.1.2 but the seasonal cycle bias metric is expressed as a fraction of the mean total annual precipitation.
@@ -758,7 +758,7 @@ biases tend to be (but are not always) lower if the GCM data
 is not dynamically downscaled prior to applying univariate bias correction.
 
 <p align="center">
-    <img src="pr_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <img src="figures/pr_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
     <br>
     <em>
       Figure 6.1.4: Bias in annual mean precipitation (relative to the AGCD dataset)
@@ -774,7 +774,7 @@ is not dynamically downscaled prior to applying univariate bias correction.
 </p>
 
 <p align="center">
-    <img src="pr_seasonal-cycle_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <img src="figures/pr_seasonal-cycle_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
       Figure 6.1.5: As per Figure 6.1.4 but for the seasonal cycle bias metric defined in Table 1.
@@ -782,7 +782,7 @@ is not dynamically downscaled prior to applying univariate bias correction.
 </p>
 
 <p align="center">
-    <img src="pr_seasonal-cycle-fraction_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <img src="figures/pr_seasonal-cycle-fraction_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
       Figure 6.1.6: As per Figure 6.1.5 but the seasonal cycle bias metric is expressed as a fraction of the mean total annual precipitation.
@@ -790,7 +790,7 @@ is not dynamically downscaled prior to applying univariate bias correction.
 </p>
 
 <p align="center">
-    <img src="pr_seasonal-cycle-cities_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <img src="figures/pr_seasonal-cycle-cities_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
       Figure 6.1.7: Precipitation seasonal climatology for the "cross validation" assessment task.
@@ -816,7 +816,7 @@ than both QME and ECDFm for the historical task,
 but MBCn does not (and in some cases perfoms markedly worse).
 
 <p align="center">
-    <img src="pr_interannual-variability-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=70% height=70%>
+    <img src="figures/pr_interannual-variability-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=70% height=70%>
     <br>
     <em>
       Figure 6.2.1: Bias in interannual precipitation variability (relative to the AGCD dataset)
@@ -840,7 +840,7 @@ There is a huge discrepancy between the impressive performance of MRNBC on the h
 and the relatively poor performance on cross validation.
 
 <p align="center">
-    <img src="pr_interannual-variability-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <img src="figures/pr_interannual-variability-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
     <br>
     <em>
       Figure 6.2.2: Bias in interannual precipitation variability (relative to the AGCD dataset)
@@ -875,7 +875,7 @@ but otherwise all methods performed similarly with a tendency
 for MRNBC to perform slightly better and QME slightly worse than the others (Figure 6.3.1).
 
 <p align="center">
-    <img src="pr_wet-day-freq-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <img src="figures/pr_wet-day-freq-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
       Figure 6.3.1: Bias in wet day frequency (relative to the AGCD dataset)
@@ -919,7 +919,7 @@ when trained on that same 1980-2019 observed data
 The MRNBC method tends to perform better than the univariate methods and MBCn worse.
 
 <p align="center">
-    <img src="pr_extreme-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
+    <img src="figures/pr_extreme-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=65% height=65%>
     <br>
     <em>
       Figure 6.4.1: Bias in the 1-in-10 year high daily precipitation (relative to the AGCD dataset)
@@ -943,7 +943,7 @@ and biases tend to be (but are not always) lower if the GCM data
 is not dynamically downscaled prior to applying bias correction.
 
 <p align="center">
-    <img src="pr_extreme-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <img src="figures/pr_extreme-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
     <br>
     <em>
       Figure 6.4.2: Bias in the 1-in-10 year high daily precipitation (relative to the AGCD dataset)
@@ -958,7 +958,7 @@ is not dynamically downscaled prior to applying bias correction.
 </p>
 
 <p align="center">
-    <img src="pr_extreme-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_CSIRO-CCAM-2203.png">
+    <img src="figures/pr_extreme-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_CSIRO-CCAM-2203.png">
     <br>
     <em>
       Figure 6.4.3: As per Figure 6.3.2.
@@ -966,7 +966,7 @@ is not dynamically downscaled prior to applying bias correction.
 </p>
 
 <p align="center">
-    <img src="pr_extreme-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_UQ-DES-CCAM-2105.png">
+    <img src="figures/pr_extreme-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_UQ-DES-CCAM-2105.png">
     <br>
     <em>
       Figure 6.4.4: As per Figure 6.3.3.
@@ -984,7 +984,7 @@ the univariate and multivariate methods slightly alter the model simulated trend
 Dynamical downscaling appears to modify the model trend much more than bias correction.
 
 <p align="center">
-    <img src="pr_trend_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=90% height=90%>
+    <img src="figures/pr_trend_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=90% height=90%>
     <br>
     <em>
       Figure 6.5.1: Change in annual mean precipitation
@@ -996,7 +996,7 @@ Dynamical downscaling appears to modify the model trend much more than bias corr
 </p>
 
 <p align="center">
-    <img src="pr_trend-rcm_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <img src="figures/pr_trend-rcm_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
     <br>
     <em>
       Figure 6.5.2: Change in annual mean precipitation
@@ -1018,7 +1018,7 @@ Dynamical downscaling and bias correction can slightly reduce the GCM biases,
 particularly the QDM method (Figure 7.2).
 
 <p align="center">
-    <img src="ptcorr-values_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <img src="figures/ptcorr-values_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
       Figure 7.1: Cross correlation between the monthly mean anomaly timeseries
@@ -1033,7 +1033,7 @@ particularly the QDM method (Figure 7.2).
 </p>
 
 <p align="center">
-    <img src="ptcorr-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <img src="figures/ptcorr-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
       Figure 7.2: As per Figure 7.1 but showing the difference in cross correlation
@@ -1052,10 +1052,12 @@ of bias correction is cross validation
 Figure 8.1 attempts to summarise the results of the cross validation analysis.
 
 <p align="center">
-    <img src="figures/summary.png" width=100% height=100%>
+    <img src="figures/summary.png" width=70% height=70%>
     <br>
     <em>
-      Figure 8.1: Caption.
+      Figure 8.1: Summary of the results of the cross validation task (and projections task for trends).
+      The colors represent a subjective ranking and where methods could be clearly and consistently
+      distinguished 
     </em>
 </p>
 
