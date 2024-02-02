@@ -396,14 +396,14 @@ https://github.com/AusClimateService/npcp/tree/master/results
 | Variability | Temporal auto-correlation | Correlation between the annual (or monthly) time series and a lag-1-shifted version of that annual (or monthly) time series |
 | Variability (temperature) | Warm-spell duration index (WSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmax > 90th percentile calculated for a 5-day window centred on each calendar day |
 | Variability (temperature) | Cold-spell duration index (CSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmin < 10th percentile calculated for a 5-day window centred on each calendar day |
-| Distribution (rainfall) | Wet day frequency | Number of wet days (pr > 1mm) expressed as a fraction (%) of all days |  
-| Distribution (rainfall) | R10mm, R20mm | Annual number of heavy precipitation days (precipitation ≥ 10 mm or 20mm) |
+| Daily distribution (precipitation) | Wet day frequency | Number of wet days (pr > 1mm) expressed as a fraction (%) of all days |  
+| Daily distribution (precipitation) | R10mm, R20mm | Annual number of heavy precipitation days (precipitation ≥ 10 mm or 20mm) |
 | Extremes | 5-year maximum/minimum | The averaged 5-year maximum (or minimum for Tasmin) |
 | Extremes | 1-in-10 year event | Value corresponding to an annual return interval of 10 years |
 | Extremes | Extreme percentiles | The 99, 99.5 and 99.9 percentiles (or 1.0, 0.5 and 0.1 for Tasmin) |
 | Extremes (temperature) | Frost day index | Annual number of days with a minimum temperature less than 0◦C |
-| Extremes (rainfall) | Drought intensity | Percentage difference between the minimum annual value and the mean annual value (also, with 2-year and 5-year running mean applied) |
-| Extremes (rainfall) | R95pTOT, R99pTOT | Fraction of total annual precipitation that falls on very wet days (> 95th or 99th percentile) |
+| Extremes (precipitation) | Drought intensity | Percentage difference between the minimum annual value and the mean annual value (also, with 2-year and 5-year running mean applied) |
+| Extremes (precipitation) | R95pTOT, R99pTOT | Fraction of total annual precipitation that falls on very wet days (> 95th or 99th percentile) |
 | Trends | Change signal | Change in the annual mean (future period minus the historical period) |
 | Links | PT cross correlation | Correlation between the anomaly timeseries of monthly mean maximum temperature and rainfall | 
 
@@ -930,7 +930,7 @@ whereas MBCn tended towards modest bias increases.
 The differences between the univariate methods were relatively small.
 The QDM method tended to outperform the others,
 usually (but not always) followed by QME and then ECDFm,
-but these differences were mostly relatively minor
+but these differences were mostly minor
 (especially between QME and ECDFm).
 All the univariate and multivariate methods slightly modified
 the long term precipitation trends simulated by the model,
@@ -945,20 +945,25 @@ the link between multiple variables,
 which is an area where mutlivariate methods would presumably
 outperform univariate alternatives.
 
-Given that dynamically downscaled data isn't typically available for all GCMs,
+Given that dynamically downscaled data is not typically available for all GCMs,
 it is worth considering how the final "product" differs if GCM data
 is directly bias corrected instead (i.e. without downscaling first).
 It turns out that on the relatively simple temperature metrics that we assessed,
 the bias in the end product is much the same either way.
 The exceptions were the WSDI and CSDI,
-where dynamical downscaling led to reduced bias but bias correction did not.
+where dynamical downscaling led to reduced bias but univariate bias correction did not.
 Presumably the downscaling produces more realistic meteorology (and thus weather persistence).
-It's possible that other more sophisticated metrics
-that are responsive to the simulation of nuanced weather features
+It is possible that other more sophisticated metrics
+that are responsive to the simulation of meteorological details
 may also pick up a similar discrepancy between bias corrected data
-that has or has not been dynamically downscaled first.
+that has and has not been dynamically downscaled first.
 
 For precipitation,
-bias correcting GCM data directly can in some cases produce lower biases...
-TODO: Finish discussion. 
+univariate bias correction of GCM data directly typically produced lower biases
+than if the data were dynamically downscaled first.
+This is possibly because the GCM data has less fine scale detail
+and is something of a smoother canvas for the bias correction to act upon.
+Having said that,
+there may be other metrics we have not processed here that
+(similar to WSDI and CSDI) highlight the advantages of downscaling precipitation data first. 
 
