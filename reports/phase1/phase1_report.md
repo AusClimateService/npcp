@@ -6,7 +6,7 @@ _This report is currently in draft form and is not complete._
 [2. Participating bias correction methods](#2-participating-bias-correction-methods)  
 &ensp; [2.1. ECDFm](#21-ecdfm)  
 &ensp; [2.2. QME](#22-qme)  
-&ensp; [2.3. QDM](#23-qdm)  
+&ensp; [2.3. QDC](#23-qdc)  
 &ensp; [2.4. MBCn](#24-mbcn)  
 &ensp; [2.5. MRNBC](#25-mrnbc)  
 [3. Data](#3-data)  
@@ -71,7 +71,7 @@ a number of individuals from the Australian Climate Service stepped forward
 with a bias correction method to contribute to the intercomparison:
 - Equi-distant/ratio Cumulative Density Function matching (ECDFm; univariate)
 - Quantile Matching for Extremes (QME; univariate)
-- Quantile Delta Mapping (QDM; univariate)
+- Quantile Delta Change (QDC; univariate)
 - N-Dimensional Multi-Variate Bias Correction (MBCn; multivariate)
 - Multivariate Recursive Nesting Bias Correction (MRNBC; multivariate)
 
@@ -90,15 +90,15 @@ the bias correction factors at the extreme ends of the distribution are also mod
 in an attempt to avoid potential overfitting or an excessive influence of very rare events.
 
 While it is technically a "delta change" method as opposed to a "bias correction" method,
-the QDM method was also included in the assessment.
+the QDC method was also included in the assessment.
 In contrast to bias correction,
 delta change approaches establish a transfer function between reference and future model outputs
 (e.g. from an historical model experiment and future climate emission scenario experiment)
 and then apply that transfer function to observations to create a future time series.
-Application ready climate data was produced using QDM for the
+Application ready climate data was produced using QDC for the
 [Climate Change in Australia](https://www.climatechangeinaustralia.gov.au/) project,
 so it is useful to compare that approach to traditional bias correction.
-The QDM method is conceptually very similar to ECDFm
+The QDC method is conceptually very similar to ECDFm
 and is essentially the most basic quantile-based delta change method available.
 
 Unlike the univariate approaches,
@@ -106,7 +106,7 @@ multivariate techniques tend to be iterative,
 whereby a bias correction method is applied repeatedly until convergence is reached
 (i.e. until the biases are no longer getting smaller).
 The MBCn method is quantile-based,
-repeatedly applying a multivariate orthogonal rotation to the data followed by the univariate QDM method.
+repeatedly applying a multivariate orthogonal rotation to the data followed by the univariate QDC method.
 In contrast, the MRNBC method is not quantile-based
 and instead attempts to address biases in serial dependence
 by correcting the data for biases in the mean, standard deviation and lag-0 and lag-1 auto and cross correlations
@@ -232,7 +232,7 @@ while the very latest version is available from Andrew by request.
 The Bureau of Meteorology has also written a Python implementation of the method
 that is openly available on [GitHub](https://github.com/AusClimateService/QME).
 
-There are a number of decisions to make when implementing the QDM method:
+There are a number of decisions to make when implementing the QDC method:
 - _Time grouping_:
   Similar to ECDFm, it is common to apply the QME method to individual seasons or months separately.
   Monthly time grouping was used for this NPCP intercomparsion.
@@ -252,7 +252,7 @@ There are a number of decisions to make when implementing the QDM method:
   does not substantially alter the model simulated trend.
   This option was applied for the temperature data in the projection assessment task (described below).
 
-### 2.3. QDM
+### 2.3. QDC
 
 #### 2.3.1 Method
 
@@ -262,13 +262,16 @@ the delta change approach calculates the relative change between a future and hi
 That relative change is then applied to observed data from the same historical time period in order to produce an "application ready" time series for the future period.
 
 While the simplest application of the delta change approach is to apply the mean model change to the observed data,
-a popular alternative is to calculate and apply the delta changes on a quantile by quantile basis.
+a popular alternative is to calculate and apply the delta changes on a quantile by quantile basis
+(i.e. to adjust the variance of the distribution as opposed to just the mean).
 For instance, if an observed historical temperature of $25^{\circ}$ Celsius corresponds to the 0.5 quantile (i.e. the median) in the observed data,
 the difference between the median value in the future and historical model data is added to that observed historical temperature
 in order to obtain the projected future temperature.
 
-This method is known as Quantile Delta Mapping (QDM; [Cannon et al 2015](https://doi.org/10.1175/JCLI-D-14-00754.1))
-and is expressed mathematically as follows:
+This *quantile delta change* (QDC) approach
+([Olsson et al 2009](https://doi.org/10.1016/j.atmosres.2009.01.015);
+[Willems & Vrac 2011](https://doi.org/10.1016/j.jhydrol.2011.02.030))
+is expressed mathematically as follows:
 $$x_{o,p} = x_{o,h} + F_{m,p}^{-1}(F_{o,h}(x_{o,h})) - F_{m,h}^{-1}(F_{o,h}(x_{o,h}))$$
 where $F$ is the CDF of either the observations ($o$) or model ($m$) for an historic ($h$) or future/projection period ($p$).
 That means $F_{m,p}^{-1}$ and $F_{m,h}^{-1}$ are the quantile functions (inverse CDF)
@@ -285,14 +288,14 @@ $$x_{o,p} = x_{o,h} \times (F_{m,p}^{-1}(F_{o,h}(x_{o,h})) \div F_{m,h}^{-1}(F_{
 #### 2.3.2. Software (and implementation choices)
 
 Since both methods are conceptually very similar,
-the QDM method is implemented using the same software as the ECDFm method.
+the QDC method is implemented using the same software as the ECDFm method.
 The same implementation choices are made regarding time grouping, quantiles and singularity stochastic removal.
-The only difference is when processing precipitation data (a multiplicative application of QDM)
+The only difference is when processing precipitation data (a multiplicative application of QDC)
 we've found that in many locations the model bias in the timing of the seasonal cycle
 means that monthly time grouping dramatically modifies the climate trend in the data
-(i.e. the mean change between the future data produced by QDM and the observations
+(i.e. the mean change between the future data produced by QDC and the observations
 is much different than the mean change between the future and historical model simulations).
-As such, we don't apply any time grouping when applying QDM to precipitation data
+As such, we don't apply any time grouping when applying QDC to precipitation data
 and use 1000 quantiles in order to still have 10-15 data values between each quantile. 
 
 ### 2.4. MBCn
@@ -364,7 +367,7 @@ This is the most basic test of a bias correction method - if a method cannot ade
 it is unlikely to be a useful method.
 Conversely, if a method performs too well at the historical task,
 this can in some cases be an indication of over-fitting.
-(The historical task was not completed for the QDM method since
+(The historical task was not completed for the QDC method since
 by definition that method would achieve a perfect score by simply returning the observations un-adjusted.)
 The cross validation task assesses how well the methods perform when producing data
 for a different time period than the training period,
@@ -377,7 +380,7 @@ some NPCP members are also interested in applying bias correction directly to GC
 In order to better understand how GCM outputs that have been dynamically downscaled and then bias corrected
 compare to GCM outputs that are directly bias corrected,
 the three assessment tasks were also completed on the ACCESS-ESM1-5 output
-using the ECDFM and QDM methods.
+using the ECDFM and QDC methods.
 
 The data arising from each bias correction method was compared on a number of metrics
 relating to the ability to capture the observed
@@ -474,7 +477,7 @@ univariate methods.
 > and aren't substantially modified by dynamical downscaling or bias correction.
 > In contrast, GCMs tend to overestimate the frequency of extended periods of persistent hot or cold weather.
 > Downscaling with RCMs tends to improve the representation of persistent extreme weather,
-> and it is typically improved further still by the use of the QDM delta change method.
+> and it is typically improved further still by the use of the QDC delta change method.
 > In constrast, bias correction (univariate or multivariate) provides no appreciable improvement
 > in the frequency of persistent extreme weather.
 
@@ -484,8 +487,8 @@ GCM biases are a similiar magnitude for the historical and cross validation task
 These biases are not appreciably modified by dynamical downscaling, univariate or multivariate bias correction (e.g. Figure 5.2.1).
 (With the exception of the MRNBC method,
 which shows such large biases that there might be something wrong with the data provided for that method.)
-The bias between the training and assessment periods in the AGCD data is reflected in the QDM biases
-(given that QDM perturbs observations as opposed to model data),
+The bias between the training and assessment periods in the AGCD data is reflected in the QDC biases
+(given that QDC perturbs observations as opposed to model data),
 which are slighly larger than the bias correction methods in this case.
 
 <p align="center">
@@ -535,11 +538,11 @@ and lower values in the south (Figure 5.2.2 and 5.2.3).
 
 Global climate models tend to overestimate the WSDI and CSDI,
 which is somewhat reduced with dynamical downscaling (Figure 5.2.4 and 5.3.5).
-The application of the QDM delta change method to GCM or RCM data substantially reduces the model bias,
+The application of the QDC delta change method to GCM or RCM data substantially reduces the model bias,
 whereas the univariate and multivariate bias correction methods provide no appreciable bias reduction.
 (With the exception of the MRNBC method for the CSDI,
 which shows such large biases that there might be something wrong with the data provided for that method.)
-This is presumably related to the fact that the QDM (delta change) method
+This is presumably related to the fact that the QDC (delta change) method
 pertubs the observed training data (which does a good job of representing the WSDI and CSDI),
 whereas the bias correction methods act on the model data.
 
@@ -579,7 +582,7 @@ whereas the bias correction methods act on the model data.
 With respect to general extreme indices such as the 1-in-10 year event
 or the most extreme percentiles (e.g. 99th or 1st)
 of daily minimum and maximum temperature,
-all three univariate methods (ECDFm, QME and QDM) tend to perform similarly
+all three univariate methods (ECDFm, QME and QDC) tend to perform similarly
 on cross validation (e.g. Figure 5.3.1 and 5.3.2).
 The relative ranking of the methods in terms of the spatial mean absolute error
 differs depending on exactly which RCM and variable is assessed.
@@ -644,7 +647,7 @@ In fact, dynamical downscaling appears to modify the model trend much more than 
 > Summary: Relatively large biases persist in the precipitation climatology
 > even after applying bias correction.
 > A simple replication of the training data outperforms all methods.
-> For univariate methods, QDM tends to perform better than QME,
+> For univariate methods, QDC tends to perform better than QME,
 > which in turn performs better than ECDFm.
 > The performance of the multivariate MRNBC method is comparable to the univariate methods,
 > but the MBCn method is much worse. 
@@ -655,7 +658,7 @@ In fact, dynamical downscaling appears to modify the model trend much more than 
 Substantial biases remain in the precipitation climatology on cross validation
 even after the application of the various univariate methods.
 In fact, a simple replication of the training data is the best performing "method",
-followed by QDM, QME and ECDFm (e.g. Figure 6.1.1 to 6.1.4).
+followed by QDC, QME and ECDFm (e.g. Figure 6.1.1 to 6.1.4).
 The MRNBC multivariate method performs as well as the best univariate method in relation to annual mean preciptation
 but slightly worse than the univariate methods on the seasonal cycle.
 The MBCn method performs poorly. 
@@ -715,7 +718,7 @@ is not dynamically downscaled prior to applying univariate bias correction.
 In general, dynamical downscaling does little to reduce GCM biases in interannual and multi-year precipitation variability.
 A simple replication of the training data outperforms all bias correction methods on cross validation (e.g. Figure 6.2.1).
 With respect to univariate methods,
-QDM tends to perform better than QME,
+QDC tends to perform better than QME,
 which in turn performs better than ECDFm.
 The multivariate methods perform no better than ECDFm
 and in some cases perform worse.
@@ -874,7 +877,7 @@ with the strongest correlation seen in the north and east of the country (Figure
 In other words, wet months tend to be associated with lower daily maximum temperatures.
 The ACCESS-ESM1-5 model does a reasonable job of capturing those negative cross correlations.
 Dynamical downscaling and bias correction can slightly reduce the GCM biases,
-particularly the QDM method (Figure 7.2).
+particularly the QDC method (Figure 7.2).
 
 <p align="center">
     <img src="figures/ptcorr-values_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
@@ -928,7 +931,7 @@ The multivariate MRNBC method also tended to produce modest bias reductions
 (with the exception of precipitation variability),
 whereas MBCn tended towards modest bias increases.
 The differences between the univariate methods were relatively small.
-The QDM method tended to outperform the others,
+The QDC method tended to outperform the others,
 usually (but not always) followed by QME and then ECDFm,
 but these differences were mostly minor
 (especially between QME and ECDFm).
