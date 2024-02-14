@@ -43,13 +43,14 @@ Naming conventions follow CORDEX wherever possible and can take the following va
   - `AWRA`: Australian Water Resource Assessment
 - `{bias-correction-method}`  
   - `raw`: No bias correction applied (i.e. input data for bias correction)
-  - `ecdfm`: Equi-distant/ratio CDF matching (Damien Irving; [Li et al 2010](https://doi.org/10.1029/2009JD012882), [Wang and Chen 2013](https://doi.org/10.1002/asl2.454))
-  - `qdm`: Quantile Delta Mapping (Damien Irving; [Cannon et al 2015](https://doi.org/10.1175/JCLI-D-14-00754.1))
+  - `ecdfm`: Equi-distant/ratio CDF matching (Damien Irving; [method description](https://github.com/climate-innovation-hub/qqscale/blob/master/docs/method_ecdfm.md))
+  - `qdc`: Quantile Delta Change (Damien Irving; [method description](https://github.com/climate-innovation-hub/qqscale/blob/master/docs/method_qdc.md))
   - `qme`: Quantile Matching for Extremes (Andrew Dowdy & Andrew Gammon; [Dowdy 2020](https://doi.org/10.1071/ES20001))
   - `mrnbc`: Multivariate Recursive Nesting Bias Correction (Arpit Kapoor; [Mehrotra & Sharma 2015](https://doi.org/10.1016/j.jhydrol.2014.11.037))
   - `mbcn`: N-Dimensional Multi-Variate Bias Correction (Thi Lan Dao; [Cannon 2018](https://doi.org/10.1007/s00382-017-3580-6))
   - `mbcp`: Multi-Variate Bias Correction (using Pearman correlation) (Ralph Trancoso; [Cannon 2016](https://doi.org/10.1175/JCLI-D-15-0679.1))
   - `3dbc`: Three Dimensional Bias Correction (Fei Ji; [Mehrotra & Sharma 2019](https://doi.org/10.1029/2018WR023270))
+  - `tqm`: Triple Quantile Mapping
 - `{task}`
   - `task-historical`: See "historical" bias correction task defined below
   - `task-projection`: See "projection" bias correction task defined below
