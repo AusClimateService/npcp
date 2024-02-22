@@ -423,7 +423,8 @@ Results for the historical task are available at the GitHub location listed abov
 
 > Summary: There's essentially no difference between the univariate methods
 > with respect to the daily minimum and maximum temperature climatologies.
-> All three univariate methods clearly outperform the multivariate methods.
+> The MRNBC multivariate method performs similarly to the univariate methods
+> whereas the MBCn method is slightly worse.
 > While the raw RCM data is less biased than the raw GCM data,
 > it also makes no difference whether the GCM data is dynamically downscaled or not
 > prior to applying univariate bias correction.
@@ -435,9 +436,8 @@ The relative ranking of the methods in terms of the spatial mean absolute error
 differs depending on exactly which RCM and variable is assessed.
 It does not appear to make much difference whether the data are dynamically downscaled
 prior to univariate bias correction or not.
-The relative performance of the multivariate methods is reversed relative to the historical task
-and the better of the two on cross validation (MBCn) performs only slightly worse than the
-univariate methods.
+The MRNBC multivariate method performs similarly to the univariate methods,
+while the MBCn method is slightly worse.
 
 <p align="center">
     <img src="figures/tasmin_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
