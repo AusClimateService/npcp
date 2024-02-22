@@ -423,7 +423,8 @@ Results for the historical task are available at the GitHub location listed abov
 
 > Summary: There's essentially no difference between the univariate methods
 > with respect to the daily minimum and maximum temperature climatologies.
-> All three univariate methods clearly outperform the multivariate methods.
+> The MRNBC multivariate method performs similarly to the univariate methods
+> whereas the MBCn method is slightly worse.
 > While the raw RCM data is less biased than the raw GCM data,
 > it also makes no difference whether the GCM data is dynamically downscaled or not
 > prior to applying univariate bias correction.
@@ -435,9 +436,8 @@ The relative ranking of the methods in terms of the spatial mean absolute error
 differs depending on exactly which RCM and variable is assessed.
 It does not appear to make much difference whether the data are dynamically downscaled
 prior to univariate bias correction or not.
-The relative performance of the multivariate methods is reversed relative to the historical task
-and the better of the two on cross validation (MBCn) performs only slightly worse than the
-univariate methods.
+The MRNBC multivariate method performs similarly to the univariate methods,
+while the MBCn method is slightly worse.
 
 <p align="center">
     <img src="figures/tasmin_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
@@ -485,8 +485,6 @@ When considering general measures of temperature variaiblity such as the standar
 annual timeseries with ("multi-annual variability") and without ("interannual variability") a 5-year running mean applied,
 GCM biases are a similiar magnitude for the historical and cross validation tasks.
 These biases are not appreciably modified by dynamical downscaling, univariate or multivariate bias correction (e.g. Figure 5.2.1).
-(With the exception of the MRNBC method,
-which shows such large biases that there might be something wrong with the data provided for that method.)
 The bias between the training and assessment periods in the AGCD data is reflected in the QDC biases
 (given that QDC perturbs observations as opposed to model data),
 which are slighly larger than the bias correction methods in this case.
@@ -540,8 +538,6 @@ Global climate models tend to overestimate the WSDI and CSDI,
 which is somewhat reduced with dynamical downscaling (Figure 5.2.4 and 5.3.5).
 The application of the QDC delta change method to GCM or RCM data substantially reduces the model bias,
 whereas the univariate and multivariate bias correction methods provide no appreciable bias reduction.
-(With the exception of the MRNBC method for the CSDI,
-which shows such large biases that there might be something wrong with the data provided for that method.)
 This is presumably related to the fact that the QDC (delta change) method
 pertubs the observed training data (which does a good job of representing the WSDI and CSDI),
 whereas the bias correction methods act on the model data.
