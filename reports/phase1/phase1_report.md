@@ -329,7 +329,7 @@ selected for dynamical downscaling by RCMs under a ‘sparse matrix’ framework
 
 For the purposes of the intercomparison,
 we used dynamically downscaled daily timescale temperature and precipitation data
-from simulations forced by GCM data from the ACCESS-ESM1-5 model for the
+from simulations forced by GCM data from the ACCESS-ESM1-5, CESM2 and EC-Earth3 models for the
 historical (available for the years 1960-2014)
 and SSP370 (2015-2100) experiments.
 Data from three different RCMs was assessed:
@@ -356,7 +356,7 @@ so all data was regridded to the 0.2 degree grid using conservative remapping.
 ## 4. Assessment
 
 Each contributor to the intercomparison was asked to use their bias correction software to complete three tasks
-(for each of the three RCMs):
+(for each of the GCM/RCM combinations):
 - **Task 1 (Historical)**: Produce bias corrected data for the 1980-2019 period, using 1980-2019 as a training period.
 - **Task 2 (Projection)**: Produce bias corrected data for the 2060-2099 period, using 1980-2019 as a training period.
 - **Task 3 (Cross validation)**: Produce bias corrected data for the 1990-2019 period, using 1960-1989 as a training period.
@@ -379,7 +379,7 @@ Since the ensemble of GCMs selected for dynamical downscaling by RCMs is only a 
 some NPCP members are also interested in applying bias correction directly to GCM output.
 In order to better understand how GCM outputs that have been dynamically downscaled and then bias corrected
 compare to GCM outputs that are directly bias corrected,
-the three assessment tasks were also completed on the ACCESS-ESM1-5 output
+the three assessment tasks were also completed on GCM output
 using the ECDFM and QDC methods.
 
 The data arising from each bias correction method was compared on a number of metrics
@@ -421,10 +421,10 @@ Results for the historical task are available at the GitHub location listed abov
 
 ### 5.1. Temperature climatology
 
-> Summary: There's essentially no difference between the univariate methods
-> with respect to the daily minimum and maximum temperature climatologies.
+> Summary: All methods reduce bias in the daily minimum and maximum temperature climatology.
+> There's essentially no difference between the univariate methods.
 > The MRNBC multivariate method performs similarly to the univariate methods
-> whereas the MBCn method is slightly worse.
+> whereas the MBCn method performs slightly worse.
 > While the raw RCM data is less biased than the raw GCM data,
 > it also makes no difference whether the GCM data is dynamically downscaled or not
 > prior to applying univariate bias correction.
@@ -568,8 +568,7 @@ whereas the bias correction methods act on the model data.
 
 ### 5.3. Temperature extremes
 
-> Summary: There's essentially no difference between the univariate methods
-> with respect to the most extreme daily minimum and maximum temperatures.
+> Summary: All methods reduce bias in extreme daily minimum and maximum temperatures.
 > All three univariate methods tend to outperform the multivariate methods.
 > While the raw RCM data is generally (but not always) less biased than the raw GCM data,
 > it also makes no difference whether the GCM data is dynamically downscaled or not
@@ -634,15 +633,10 @@ In fact, dynamical downscaling appears to modify the model trend much more than 
 
 ## 6. Results: Precipitation
 
-> TODO: The relative performance of each of the bias correction methods differs quite a bit from RCM to RCM,
-> so we should process the RCM data for another GCM or two to see whehter a consistent pattern in the results
-> can be identified. 
-
 ### 6.1. Precipitation climatology
 
-> Summary: Relatively large biases persist in the precipitation climatology
-> even after applying bias correction.
-> A simple replication of the training data outperforms all methods.
+> Summary: While bias correction does tend to reduce bias in the precipitation climatology,
+> relatively large biases still persist on cross validation even after applying bias correction.
 > For univariate methods, QDC tends to perform better than QME,
 > which in turn performs better than ECDFm.
 > The performance of the multivariate MRNBC method is comparable to the univariate methods,
@@ -704,21 +698,22 @@ is not dynamically downscaled prior to applying univariate bias correction.
 
 ### 6.2. Precipitation variability
 
-> Summary: GCM biases in interannual precipitation variability 
-> aren't substantially modified by dynamical downscaling but are slightly improved with bias correction.
-> Univariate methods tend to outperform multivariate,
-> and there are small but consistent differences between the univariate methods.
-> Differences between the methods are far less pronouced for multi-year variability
-> (in fact, there isn't really any appreciable reduction in the GCM bias).
+> Summary: On cross validation,
+> GCM biases in interannual precipitation variability 
+> weren't substantially modified by dynamical downscaling
+> and the application of bias correction was something of a mixed bag.
+> The QDC method tended to reduce bias,
+> the other univariate methods could increase or decrease bias depending on the model
+> and the multivariate methods tended to (but did not always) increase the bias
+> in interannual variability.
+> Differences between the methods were less pronouced for multi-year variability.
 
-In general, dynamical downscaling does little to reduce GCM biases in interannual and multi-year precipitation variability.
+In general, dynamical downscaling slightly reduces GCM biases in interannual and multi-year precipitation variability.
 A simple replication of the training data outperforms all bias correction methods on cross validation (e.g. Figure 6.2.1).
 With respect to univariate methods,
-QDC tends to perform better than QME,
-which in turn performs better than ECDFm.
-The multivariate methods perform no better than ECDFm
-and in some cases perform worse.
-There is a huge discrepancy between the impressive performance of MRNBC on the historical task
+QDC tended to perform better than QME and ECDFm and was the only method to consistently reduce bias.
+The multivariate methods tended to (but not always) increase the bias in interannual variability.
+There was a huge discrepancy between the impressive performance of MRNBC on the historical task
 and the relatively poor performance on cross validation.
 
 <p align="center">
@@ -742,8 +737,7 @@ but the differences are less pronouced.
 
 ### 6.3. Precipitation daily distribution
 
-> Summary: Model biases in the annual precipitation distribution are typically
-> substantially reduced with bias correction.
+> Summary: Model biases in the annual precipitation distribution are reduced with bias correction.
 > On the cross validation task all methods besides MBCn (which performs poorly) perform similarly well.
 
 The lower end of the annual precipitation distribution was assessed
@@ -751,8 +745,8 @@ by considering the wet day frequency (or conversely the number of relatively dry
 while the upper end was captured by the r10mm and r20mm metrics.
 
 With the exception of the MBCn method (which was a poor performing outlier)
-all the methods reduced the model bias in wet day frequency to a similar degree (Figure 6.3.1). 
-There was a tendency for MRNBC to perform slightly better and QME slightly worse than the others.
+all the methods reduced the model bias in wet day frequency to a similar degree (Figure 6.3.1).
+The relative performance of the QDC, QME, ECDFm and MRNBC methods differed between models. 
 
 <p align="center">
     <img src="figures/pr_wet-day-freq-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
@@ -774,15 +768,24 @@ Similar results were found for the R10mm and R20mm metrics.
 On cross validation MBCn was a poor outlier while the other methods performed similarly
 (with the relative ranking of each method differing between models; Figure 6.3.2).
 
-> TODO: Include an R20mm plot.
+<p align="center">
+    <img src="figures/R20mm-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <br>
+    <em>
+      Figure 6.3.2: As per Figure 6.3.1 but for the R20mm metric. 
+    </em>
+</p>
+
 
 ### 6.4. Precipitation extremes
 
 > Summary: Relatively large biases persist
 > in the most extreme daily precipitation values
 > even after applying dynamical downscaling and bias correction.
-> A simple replication of the training data outperforms all methods on the cross validation task,
-> while the various univariate and multivariate methods tend to perform similarly.
+> The QDC, QME and MRNBC methods tend to do no harm
+> (i.e. bias is reduced or relatively unchanged)
+> whereas the ECDFm and MBCn methods can increase or decrease bias
+> depending on the specific model. 
 > The raw RCM data tends to be more biased than the raw GCM data,
 > and biases tend to be lower if the GCM data is not dynamically downscaled
 > prior to applying bias correction.
@@ -792,10 +795,13 @@ R95pTOT, R99pTOT,
 or the most extreme percentiles (e.g. 99th or 1st)
 of daily precipitation,
 a simple replication of the training data outperforms all the correction methods on cross validation.
-The MBCn method performs consistently worse than the other methods on the R95pTOT and R99pTOT metrics
-(possibly related to the precipitation distribution biases indentified in the pervious section), 
-but otherwise the performance of the methods on extreme precipitation metrics is similar and their
-relative performance differs between RCMs (e.g. Figure 6.4.1 to 6.4.3) and metrics.
+The MBCn method performs consistently worse than the other methods on the R95pTOT and R99pTOT metrics,
+which is possibly related to the precipitation distribution biases indentified in the pervious section. 
+Otherwise the relative performance of the methods on extreme precipitation
+differs between RCMs (e.g. Figure 6.4.1 to 6.4.3) and metrics,
+but in general the QDC, QME and MRNBC methods (in that approximate order of relative performance)
+tend to always lead to a reduction or little change in bias,
+whereas the ECDFm and MBCn methods can in some cases lead to increased bias. 
 The raw RCM data is often (but not always) more biased than the raw GCM data,
 and biases tend to be (but are not always) lower if the GCM data
 is not dynamically downscaled prior to applying bias correction.
@@ -921,16 +927,14 @@ none of the univariate or multivariate methods substantively modified
 the long term temperature trends simulated by the model.
 
 With respect to cross validation of precipitation data,
-univariate bias correction produced modest bias reductions
+univariate bias correction tended to produce modest bias reductions
 in the simulated climatology, variability, daily distribution and extremes.
 The multivariate MRNBC method also tended to produce modest bias reductions
 (with the exception of precipitation variability),
 whereas MBCn tended towards modest bias increases.
 The differences between the univariate methods were relatively small.
 The QDC method tended to outperform the others,
-usually (but not always) followed by QME and then ECDFm,
-but these differences were mostly minor
-(especially between QME and ECDFm).
+usually followed by QME and then ECDFm.
 All the univariate and multivariate methods slightly modified
 the long term precipitation trends simulated by the model,
 but less so than dynamical downscaling.
@@ -949,7 +953,7 @@ it is worth considering how the final "product" differs if GCM data
 is directly bias corrected instead (i.e. without downscaling first).
 It turns out that on the relatively simple temperature metrics that we assessed,
 the bias in the end product is much the same either way.
-The exceptions were the WSDI and CSDI,
+The exceptions were the WSDI and CSDI metrics,
 where dynamical downscaling led to reduced bias but univariate bias correction did not.
 Presumably the downscaling produces more realistic meteorology (and thus weather persistence).
 It is possible that other more sophisticated metrics
@@ -964,5 +968,10 @@ This is possibly because the GCM data has less fine scale detail
 and is something of a smoother canvas for the bias correction to act upon.
 Having said that,
 there may be other metrics we have not processed here that
-(similar to WSDI and CSDI) highlight the advantages of downscaling precipitation data first. 
+(similar to WSDI and CSDI) highlight the advantages of downscaling precipitation data first.
+
+It should be noted that while three different GCMs and RCMs were used for the intercomparison,
+only one observational dataset was used and only one training and assessment period for cross validation.
+Further work will be done to establish the sentivity of the results to the choice of observational dataset
+and the choice of time period in that observational record for training and assessment. 
 
