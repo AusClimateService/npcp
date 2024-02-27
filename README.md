@@ -140,7 +140,7 @@ An additional **documentation** task involves submitting a pull request to this 
 to add a summary of how your bias correction method works
 and the details/location of code used to implement it to the [methods](https://github.com/AusClimateService/npcp/tree/master/methods) subdirectory. 
 
-The training data for each variable is the AGCD data archived at `/g/data/ia39/npcp/data/`
+The training data for each variable is archived at `/g/data/ia39/npcp/data/`
 following the data reference syntax described above.
 For example, to complete tasks 1-3 for ACCESS-ESM1-5 data downscaled using BARPA
 the observational and model data you'll need is at:
