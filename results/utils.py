@@ -70,7 +70,7 @@ def get_npcp_data(
     """Get data that has been submitted to the NPCP intercomparison project"""
     
     assert variable in ['tasmax', 'tasmin', 'pr']
-    assert driving_model in ['observations', 'CSIRO-ACCESS-ESM1-5', 'ECMWF-ERA5']
+    assert driving_model in ['observations', 'CSIRO-ACCESS-ESM1-5', 'NCAR-CESM2', 'EC-Earth-Consortium-EC-Earth3', 'ECMWF-ERA5']
     assert downscaling_model in ['AGCD', 'BOM-BARPA-R', 'UQ-DES-CCAM-2105', 'CSIRO-CCAM-2203', 'GCM']
     assert bias_correction_method in ['raw', 'ecdfm', 'qme', 'qdc', 'mbcn', 'mrnbc']
     assert task in ['task-reference', 'task-projection', 'task-historical', 'task-xvalidation']
@@ -112,7 +112,7 @@ def get_pr_weights(gcm, task):
     if task == 'historical':
         start_year = '1980'
         end_year = '2019'
-    elif (task == 'xvalidation') and (gcm == 'CSIRO-ACCESS-ESM1-5'):
+    elif (task == 'xvalidation') and (gcm in ['CSIRO-ACCESS-ESM1-5', 'NCAR-CESM2', 'EC-Earth-Consortium-EC-Earth3']):
         start_year = '1960'
         end_year = '1989'
     elif (task == 'xvalidation') and (gcm == 'ECMWF-ERA5'):
