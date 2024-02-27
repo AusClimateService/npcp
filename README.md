@@ -5,11 +5,12 @@ National Partnership for Climate Projections (NPCP) bias correction intercompari
 
 ## Results
 
-Results for the intercomparison are being progressively added to the
-[`results/`](https://github.com/AusClimateService/npcp/tree/master/results) directory
-in the form of notebooks that people can click on and view.
-Draft reports arising from the results can be found in the
-[`reports/`](https://github.com/AusClimateService/npcp/tree/master/reports) directory.
+See the draft [Phase 1 Report](https://github.com/AusClimateService/npcp/blob/master/reports/phase1/phase1_report.md)
+to read a summary of the results so far.
+
+For more detail than that covered in the report,
+see the [`results/`](https://github.com/AusClimateService/npcp/tree/master/results) directory
+for analysis notebooks that can be clicked on and viewed.
 
 ## Data
 
