@@ -148,11 +148,6 @@ the observational and model data you'll need is at:
 /g/data/ia39/npcp/data/pr/observations/AGCD/raw/task-reference/
 /g/data/ia39/npcp/data/pr/CSIRO-ACCESS-ESM1-5/BOM-BARPA-R/raw/task-reference/
 ```
-
-The model data requiring bias correction is the dynamically downscaled
-BOM-BARPA-R, CSIRO-CCAM-2203, UQ-DES-CCAM-2105 and NARCLIM-WRF data
-for the ECMWF-ERA5 and various CMIP6
-(i.e. CSIRO-ACCESS-ESM1-5, NCAR-CESM2 and EC-Earth-Consortium-EC-Earth3) parent models.
 Check the input data availability table above for an indication of
 which combinations of downscaling and parent models are available.
 
