@@ -142,6 +142,12 @@ and the details/location of code used to implement it to the [methods](https://g
 
 The training data for each variable is the AGCD data archived at `/g/data/ia39/npcp/data/`
 following the data reference syntax described above.
+For example, to complete tasks 1-3 for ACCESS-ESM1-5 data downscaled using BARPA
+the observational and model data you'll need is at:
+```
+/g/data/ia39/npcp/data/pr/observations/AGCD/raw/task-reference/
+/g/data/ia39/npcp/data/pr/CSIRO-ACCESS-ESM1-5/BOM-BARPA-R/raw/task-reference/
+```
 
 The model data requiring bias correction is the dynamically downscaled
 BOM-BARPA-R, CSIRO-CCAM-2203, UQ-DES-CCAM-2105 and NARCLIM-WRF data
