@@ -3,6 +3,14 @@
 This repository contains code and information relating to the
 National Partnership for Climate Projections (NPCP) bias correction intercomparison project.
 
+## Results
+
+Results for the intercomparison are being progressively added to the
+[`results/`](https://github.com/AusClimateService/npcp/tree/master/results) directory
+in the form of notebooks that people can click on and view.
+Draft reports arising from the results can be found in the
+[`reports/`](https://github.com/AusClimateService/npcp/tree/master/reports) directory.
+
 ## Data
 
 ### Data access
@@ -156,12 +164,3 @@ and the start and end time for the training period.
 
 There might be an opportunity for a second phase of the intercomparison.
 Ideas for that phase are being collected at https://github.com/AusClimateService/npcp/issues/3.
-
-
-## Results
-
-Results for the intercomparison are being progressively added to the
-[`results/`](https://github.com/AusClimateService/npcp/tree/master/results) directory
-in the form of notebooks that people can click on and view.
-Draft reports arising from the results can be found in the
-[`reports/`](https://github.com/AusClimateService/npcp/tree/master/reports) directory.
