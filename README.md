@@ -140,13 +140,14 @@ An additional **documentation** task involves submitting a pull request to this 
 to add a summary of how your bias correction method works
 and the details/location of code used to implement it to the [methods](https://github.com/AusClimateService/npcp/tree/master/methods) subdirectory. 
 
-The training data for each variable is the AGCD data archived at `/g/data/ia39/npcp/data/`
+The training data for each variable is archived at `/g/data/ia39/npcp/data/`
 following the data reference syntax described above.
-
-The model data requiring bias correction is the dynamically downscaled
-BOM-BARPA-R, CSIRO-CCAM-2203, UQ-DES-CCAM-2105 and NARCLIM-WRF data
-for the ECMWF-ERA5 and various CMIP6
-(i.e. CSIRO-ACCESS-ESM1-5, NCAR-CESM2 and EC-Earth-Consortium-EC-Earth3) parent models.
+For example, to complete tasks 1-3 for ACCESS-ESM1-5 data downscaled using BARPA
+the observational and model data you'll need is at:
+```
+/g/data/ia39/npcp/data/pr/observations/AGCD/raw/task-reference/
+/g/data/ia39/npcp/data/pr/CSIRO-ACCESS-ESM1-5/BOM-BARPA-R/raw/task-reference/
+```
 Check the input data availability table above for an indication of
 which combinations of downscaling and parent models are available.
 
