@@ -177,25 +177,46 @@ There are a number of decisions to make when implementing the ECDFm method:
 
 #### 2.2.1. Method
 
-The _quantile matching for extremes_ ([Dowdy 2023](http://www.bom.gov.au/research/publications/researchreports/BRR-087.pdf))
-method involves clipping the input data to a valid range
-and then scaling the clipped data to an integer value between 0 and 500 (typically)
-before applying the quantile-based transfer function.
-This scaling can be thought of as binning the data
-(in this case, a histogram with 500 bins).
+The _quantile matching for extremes_ (QME: [Dowdy 2023](http://www.bom.gov.au/research/publications/researchreports/BRR-087.pdf))
+method is a simple nonparametric bias correction approach designed for application to weather and climate data. 
+The method is based on quantile-quantile matching of histograms for the Input 
+Data (e.g., model data to be bias corrected) and Reference Data (e.g., observationsbased data). 
+500 histogram bins are used together with scaling of the data to help resolve details in 
+the sample extremes. It has been widely used in Australia including for the NHP project, ESCI project, ACS outputs to date 
+for various data delivery services, NESP and CMSI projections values. Some examples of past applications include 
+Dowdy et al. (2019, 2021), Srikanthan et al. (2022), Wilson et al. (2022), Vogel et al. (2023) and 
+Wasco et al. (2023). The method’s code has a modular structure for its components and is designed to be adaptable depending on 
+the application, including for other data types, regions, or for data with different time 
+steps (such as sub-daily, monthly, etc.), noting that other methods can subsequently be 
+applied to the bias corrected QME output data (such as if wanting to consider rarer 
+extremes using parametric approaches based on GEV distribution, etc.).
 
-A typical valid data range might be -30C to 60C for daily maximum temperature (tasmax),
--45C to 50C for daily minimum temperature (tasmin),
-or 0mm to 1250mm for daily precipitation (pr).
-The following scaling formulas (used in this intercomparison)
-map the valid range of data values across the 500 integer values/bins: 
-- (tasmax + 35) * 5
-- (tasmin + 55) * 5
-- alog(pr + 1) * 70, where alog is the natural logarithm 
+The histograms are populated from the data after some preprocessing steps of applying limits and scaling, 
+described as follows. Limits are used to ensure the data fit in the histograms, with default values being
+from -30 to 60 C for tasmax (daily maximum temperature), from -45 to 50 C for tasmin (daily minimum temperature), as well as from 0 to 1250 
+mm/day for pr (daily total precipitation), while noting that users can add their own scaling and limits including for 
+new variables they may like to run this code on. Other variables have been used 
+previously for QME applications, including wind speed, humidity, solar radiation and fire 
+weather measures (such as the FFDI). After the limits have been applied, the data are scaled 
+as follows for inclusion in the integer bins of the histogram:
+• (tasmax + 35) * 5
+• (tasmin + 55) * 5
+• alog(pr + 1) * 70, where alog is the natural logarithm 
+The rainfall (pr) scaling is designed to give detail at very low values as well as at 
+very high values, with a value of zero scaled to a value of zero. For example, a small 
+value, of 0.1 mm/day has a scaled value of alog(0.1 + 1) * 70 = 6.7 which is rounded to 
+an integer value of 7, such that it would be stored in the histogram bin number 7 (with 
+arrays starting from bin number 0 in IDL). For the example of a very large rainfall amount 
+of 1250 mm/day, the scaled value is alog(1250 + 1 ) * 70 = 499.2 which would be stored 
+in the second highest bin in the histogram (i.e., 499), noting that rainfall of 1250 mm/day 
+is set as the upper limit in the code (as mentioned above). These values are somewhat 
+arbitrary for the number of histogram bins used, or the limits and scaling applied, with 
+no notable influence of reults for some variations around these default options listed here.
 
-A small value of 0.1mm would have a scaled value of alog(0.1 + 1) * 70 = 6.7,
-which is rounded to an integer value / bin number of 7.
-The largest valid rainfall amount of 1250mm would have a scaled value of alog(1250 + 1 ) * 70 = 499.2 (rounded to 499).
+In other words, these steps may be described in a simple way as clipping the input data to 
+a valid range and then scaling the clipped data to an integer value between 0 and 500 (typically)
+before applying the quantile-based transfer function. This scaling can be thought of as binning 
+the data (in this case, a histogram with 500 bins).
 
 > TODO - Describe quantile matching process.
 >
@@ -214,14 +235,32 @@ The largest valid rainfall amount of 1250mm would have a scaled value of alog(12
 >     (and then applies the adjustment factor for that quantile).
 >   - If a future data value falls between two quantiles,
 >     does QME just apply the adjustment factor for the quantile it’s closest to?
+> AD: I have started on doing this, including with more details added above and some more below. I'll continue in coming days for more content below to clarify these points. I wasn't sure how to add references to the list, but will kepp trying ... 
 
-To avoid potential overfitting or an excessive influence of very rare events,
-before the adjustment factor for each ranked bin is applied to the target data
-the factors for the N most extreme high and extreme low bins (typically N=3)
-are replaced by the value from the neighbouring histogram bin
+At each grid cell location, a histogram (i.e., occurrence frequency distribution) is produced using 
+the steps as described above. This is done for the training period, including for both the Input 
+Data (e.g., model data to be bias corrected, also referred to as the 'target data') and for the Reference Data (e.g., observations data). The 
+quantile-quantile matching is then done for each of the model bins that have data in them. This is 
+somewhat different to how other quantile-quantile matching is done for some oter methods, in that 
+for the QME method the focus is more on the histogram bins than on the quantiles. It does this by 
+calculating the quantile of a histogram bin of the Input Data and matching that to the same quantile
+in the Reference Data. This means that it doesn't actually go through every single quantile (e.g., 
+from 1 to 100, such as for methods that might be using 100 quantiles).
+
+In addition to the quantile-matching process described above, to avoid potential overfitting or an 
+excessive influence of very rare events, before the adjustment factor for each ranked bin is applied to 
+the target data the factors for the N most extreme high and extreme low bins (typically N=3, as a default
+setting for this) are replaced by the value from the neighbouring histogram bin
 (i.e., the histogram bin that is one place less extreme than the third highest value in the sample).
 The reference to _extremes_ in the name of the method is a nod to these tweaks
 to the quantile adjustments in the tails of the distribution. 
+This way of handling the sample upper extremes, and similarly for the lower extremes, 
+can help avoid potentially excessive influences from very rare events that might 
+sometimes occur in a sample period. It is essentially just a simplification of the quantile-matching
+approach, by avoiding doing quantile matching for the very small sample sizes at both ends of the histogram 
+to avoid potential artfacts caused by outliers that might not be representative in some cases of the 
+underlying statistics (such as the shape of the histogram if a larger sample size was available).
+
 
 #### 2.2.2. Software (and implementation choices) 
 
