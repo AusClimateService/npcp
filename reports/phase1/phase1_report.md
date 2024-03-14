@@ -197,24 +197,6 @@ A small value of 0.1mm would have a scaled value of alog(0.1 + 1) * 70 = 6.7,
 which is rounded to an integer value / bin number of 7.
 The largest valid rainfall amount of 1250mm would have a scaled value of alog(1250 + 1 ) * 70 = 499.2 (rounded to 499).
 
-> TODO - Describe quantile matching process.
->
-> Things to clarify:
->   - How many quantiles does it calculate? 100?
->   - I’m assuming that for temperature data the input and reference quantiles are compared additively
->     (e.g. the bias / adjustment factor for the 0.2 quantile is the arithmetic difference
->     between the input 0.2 quantile and the reference 0.2 quantile).
->     For rainfall is it a multiplicative comparison (i.e. the bias is the ratio)
->     to avoid issues around potentially producing adjusted rainfall amounts less than zero?
->   - When it comes to correcting model data outside the training period (let’s call it future data),
->     let’s say you have a transformed future value of 150.
->     Does the QME method figure out what quantile 150 corresponds to in the input training data
->     (and then applies the adjustment factor for that quantile)
->     or does it figure out what quantile 150 corresponds to in the future data
->     (and then applies the adjustment factor for that quantile).
->   - If a future data value falls between two quantiles,
->     does QME just apply the adjustment factor for the quantile it’s closest to?
-
 To avoid potential overfitting or an excessive influence of very rare events,
 before the adjustment factor for each ranked bin is applied to the target data
 the factors for the N most extreme high and extreme low bins (typically N=3)
@@ -223,34 +205,121 @@ are replaced by the value from the neighbouring histogram bin
 The reference to _extremes_ in the name of the method is a nod to these tweaks
 to the quantile adjustments in the tails of the distribution. 
 
+Although there are some user options that can be selected such as noted above (and below here),
+it is also possible to simply use the default options without any modification. This is 
+how it has been run for the NPCP assessment application here, 
+by simply using the default settings as detailed in the QME documentation report (Dowdy 2023).
+
+As detailed in the QME documentation report, one of the optional features of this method can 
+be used to account for large shifts in a temperature distribution over time, by removing the long-term 
+trend from the temperature data prior to applying the bias correction, then adding the trend back in after 
+the bias correction has been applied. This can be useful for application to model projections of future 
+climate changes, with weather features (e.g., fronts, cyclones and highs) superimposing short-term temperature 
+variations on long-term climate trends.
+
+An optional sample size limit can be selected to prevent the code being run on 
+data with too few values, as well as checks for diversity of values in the histograms. A 
+default value of 50 is provided, as used for this NPCP application described here. 
+
+There is an optional feature that users can select so that each month’s histogram also uses data 
+from adjacent months to help increase the sample size (i.e., providing a 3-month moving average). The 
+default settings for this are a 3-month moving average for rainfall but not used at all for other variables.
+
+For quantile matching the values in the extreme tails of the histogram, the default settings can be 
+used, or users canselect this for the threshold of sample size where special focus occurs. The default 
+setting for this is to apply special care in values equal to or more extreme than the third highest value
+in the sample data (noting that the default recommendation is to use the third highest 
+value for this threshold. As noted previously above, for those values the bias 
+correction amount is used as calculated for the neighbouring histogram bin (i.e., the 
+histogram bin that is one place less extreme than the third highest value in the sample). 
+That same bias correction amount for those sample extremes is also used for bias 
+correction of values outside the range used for training (i.e., for values that might occur 
+in the model data in the future projected climate that might exceed those in the model 
+data during training period). Consistent with how this is done for high values, this 
+approach is also used for low values (e.g., for values equal to or lower than the third 
+lowest value in the sample data). An additive bias adjustment is used as default for these extreme 
+values, with a user option also available to use a multiplicative adjustment. Multiplicative 
+adjustment is sometimes recommended for rainfall in previous studies, while noting that for this nonparametric 
+method of QME that is typically applied based on a limited sample size an additive adjustment 
+may be more practical in some cases.
+
+Post-processing steps are applied for the bias correction factors including 
+checking limits for all variables (i.e., within the range 0 to 500 for the scaled values 
+consistent with the histogram range). For the case of rainfall, the default option is that a 
+value of 0 is unchanged by applying this bias correction, but if this option is not wanted 
+it can be removed as an option through the code (e.g., such as described in the QME documentation 
+report). The code also includes applying a running mean (boxcar) smoothing over the 
+array of bias correction values (i.e., over the range from 0 to 500, corresponding to the 
+histogram bins). This uses a 21-point moving average as the default, as well as noting 
+that users can choose their own number of points (rather than the default of 21) as might 
+be preferred for a particular application. In cases with relatively limited sample sizes, this
+smoothing may help provide more realistic variation in bias correction values over the 
+array range from 0 to 500 (e.g., smoothing out spurious spikes and dips that might not 
+be present if a larger sample size was available). However, this option is not essential to 
+use if users prefer not to (e.g., for large sample sizes the shape may already be smooth 
+and so this additional smoothing might not be essential)
+
+Another user option is to set a maximum limit of increase for the resultant bias 
+correction, as well as a minimum value of the data for when this limit starts to be applied
+to it, with this all using the unscaled values of a variable rather than the scaled values. 
+The default settings for rainfall in the code is for a maximum increase of 50% applied to 
+values great than or equal to 10, such that model rainfall data of 20 mm/day could 
+potentially be bias corrected up to a maximum value of 30 mm/day (i.e., a 50% limit for 
+the increase). This option is intended to be useful to help prevent large increases in some 
+cases that might be a result of a limited sample size rather than representative of what 
+would be the case if a longer time period of data was available. Users can select these 
+values depending on their preference for a given application, or this option can be not 
+used at all if that is preferred (e.g., as is the default suggested in general for other 
+variables apart from rainfall). For cases where the rainfall bias is very large, the default
+settings could still be used (as has been done for this NPCP application) with another option
+being to allow a larger maximum limit (e.g., a 75% limit for the increase instead of the default 50%
+limit described above), or potentially applying the QME method twice with the default settings 
+as another way to effectively increase the maximum percentage increase.
+
+This limit of 50% increase for rainfall bias correction used as the default option for QME was also tested 
+as part of the ECDFm method described above, finding that it led to some reduction in RMSE values including 
+for extremes. However, the QME still had notably lower average RMSE values than ECDFm, indicating that it is a 
+range of features of the QME that provides added value over some other methods that have been developed for bias 
+correction (noting several more features of QME described as follows below as well as above). As examples of the 
+differences in RMSE values for extreme rain (based on a 10-yr annual excedence probability), the average RMSE values
+for ECDFm are more than 40% larger than those for QME based on CSIRO-CCAM downscaling of 3 GCMs tested for this NPCP 
+application (ACCESS-ESM1-5, CESM2 and EC-Earth3) and more than 50% larger than those for QME based on BARPA 
+downcaling from those 3 GCMs. Similar results to this were also found for other data applications here, including for
+cross-validation using downscaling from ERA5 reanalysis (noting this provides direct relationships between days that 
+helps with insight for cross validation, in contrast to the case for GCM-based results). Further insight on why ECDFm 
+doesn't do as well as QME in cases such as these is provided from other examples where ECDFm appears to make the bias 
+quite large in some cases, whereas QME tends to make smaller changes or little improvement in some cases (rather than 
+making it notably worse). Examples are also seen for mean rainfall, such as for CESM with BARPA downscaling the 
+average annual RMSE is 109 mm for ECDFm but only 67 mm for QME and with CSIRO-CCAM downscaling 124 mm for ECDFm and 
+58 mm for QME.
+
+In summary, including considering a big-picture context around it, the QME method has 
+been widely assessed and used for many applications in Australia, such as 
+detailed in many peer-reviewed journal papers (e.g., see references above). Detailed documentation was 
+also provided in a Bureau Research Report (Dowdy 2023). The code in IDL was published in that documentation 
+report, as well as placed on archived online repositories, with a Python version of the code developed 
+and also put on archived code repositories (see section bloe with details on this) allowing full traceability 
+and documentation of the code and method. The code repository allows others to readily access 
+and apply the method as has been done by several people. The QME is ready to go now and quick to apply. In addition 
+to Andrew Gammon (Bureau of Meteorology) as the developer of the Python version of the code for ACS purposes and 
+the main person that has been running that version of the code, a Summer Research Scholarship undergraduate student 
+at the University of Melbourne has also been successfully running the Python version of the QME code and 
+found it very easy to understand and apply for her university research project that was successfully completed 
+recently. It is very quick and easy for people to apply it with just a relatively baisc knowledge of Python and data 
+processing required. Additionally, Justin Peter (Bureau of Meteorology) is another person for ACS that is confident 
+in being able to support this method going forward, including understanding how it works based on the documentation 
+report, discussions and collaborative research in ACS in recent years as well as past analysis and assessment of it 
+through the National Hydrological Projections (NHP) project in previous years.
+
 #### 2.2.2. Software (and implementation choices) 
 
-The original IDL code used to implement the QME method is maintained by Andrew Dowdy at the University of Melbourne.
-A copy of the code as at October 2023 is included in the appendix of the Bureau of Meteorology research report
-that documents the QME method ([Dowdy 2023](http://www.bom.gov.au/research/publications/researchreports/BRR-087.pdf)),
-while the very latest version is available from Andrew by request.
-The Bureau of Meteorology has also written a Python implementation of the method
-that is openly available on [GitHub](https://github.com/AusClimateService/QME).
-
-There are a number of decisions to make when implementing the QDC method:
-- _Time grouping_:
-  Similar to ECDFm, it is common to apply the QME method to individual seasons or months separately.
-  Monthly time grouping was used for this NPCP intercomparsion.
-- _Quantiles_:
-  TODO - Find out if there are options here.
-- _Adjustment factor smoothing_:
-  A 21-point moving average was applied over the range of bias correction values (i.e. for bins 0 to 500) for each month.
-  TODO: Check if this is correct.
-- _Adjustment limits_:
-  The software allows the user to specify a maximum adjustment/correction. 
-  The default setting for precipitation (used in this intercomparison)
-  is for a maximum increase of 50% applied to values great than or equal to 10mm.
-  For instance, a model daily precipitation value of 20mm could potentially be bias corrected
-  up to a maximum value of 30mm.
-- _Trend matching_: The long-term trend in the data can be removed prior to applying the bias correction,
-  and then added back in after the bias correction has been applied in order to ensure that the bias correction
-  does not substantially alter the model simulated trend.
-  This option was applied for the temperature data in the projection assessment task (described below).
+The Bureau of Meteorology has written a Python implementation of the QME method
+that is openly available on [GitHub](https://github.com/AusClimateService/QME). Justin Peter and Andrew Gammon are the 
+current contact people for the QME method including for ACS support going forward. The code is designed to be readily 
+adaptable and there are several options that can be selected if need be for specific purposes, as detailed in the QME 
+documentation report (Dowdy 2023). However, it is not essential to make these choices when applying the QME code 
+as the default settings can simply be used (as was done for all of the NPCP applications and analysis discussed in 
+this report). The previous IDL version of the code is also included in the appendix of the QME documentation report (Dowdy 2023).
 
 ### 2.3. QDC
 
