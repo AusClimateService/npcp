@@ -208,8 +208,8 @@ Those differences are then added to all the model data points in each bin respec
 
 > Question: Is it always additive adjustment or it is multiplicative for rainfall?
 > I'm aware that an additive bias adjustment is used as default for the N most extreme values/bins
-> with a user option to multiplicative...
-> but not sure what if that option extends to all bins?
+> with a user option for multiplicative...
+> but I'm not sure if that option extends to all bins?
 
 To avoid potential overfitting or an excessive influence of very rare events,
 before the adjustment factor for each bin is applied to the model data
@@ -259,7 +259,7 @@ There are also additional options as follows:
 > as well as checks for diversity of values in the histograms."
 > Does the size limit refer to the number of values in an individual bin?
 > What happens if there are bins with less than 50 values in them?
-> What are the checks for diversiy of values? 
+> What are the checks for diversity of values? 
 
 ### 2.3. QDC
 
