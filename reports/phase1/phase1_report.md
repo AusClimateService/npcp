@@ -89,6 +89,9 @@ Prior to removing the quantile biases from the model data of interest,
 the bias correction factors at the extreme ends of the distribution are also modified
 in an attempt to avoid potential overfitting or an excessive influence of very rare events.
 
+> TODO: Make a note that QME has been used for the NHP project and ESCI projects.
+> Relevant papers to cite include Dowdy et al. (2019, 2021), Srikanthan et al. (2022), Wilson et al. (2022), Vogel et al. (2023) and Wasco et al. (2023).
+
 While it is technically a "delta change" method as opposed to a "bias correction" method,
 the QDC method was also included in the assessment.
 In contrast to bias correction,
@@ -178,9 +181,9 @@ There are a number of decisions to make when implementing the ECDFm method:
 #### 2.2.1. Method
 
 The _quantile matching for extremes_ ([Dowdy 2023](http://www.bom.gov.au/research/publications/researchreports/BRR-087.pdf))
-method involves clipping the input data to a valid range
-and then scaling the clipped data to an integer value between 0 and 500 (typically)
-before applying the quantile-based transfer function.
+method involves clipping model and observed data to a valid range
+and then scaling that clipped data to an integer value between 0 and 500 (typically)
+before applying a quantile-based transfer function.
 This scaling can be thought of as binning the data
 (in this case, a histogram with 500 bins).
 
@@ -197,31 +200,22 @@ A small value of 0.1mm would have a scaled value of alog(0.1 + 1) * 70 = 6.7,
 which is rounded to an integer value / bin number of 7.
 The largest valid rainfall amount of 1250mm would have a scaled value of alog(1250 + 1 ) * 70 = 499.2 (rounded to 499).
 
-> TODO - Describe quantile matching process.
->
-> Things to clarify:
->   - How many quantiles does it calculate? 100?
->   - I’m assuming that for temperature data the input and reference quantiles are compared additively
->     (e.g. the bias / adjustment factor for the 0.2 quantile is the arithmetic difference
->     between the input 0.2 quantile and the reference 0.2 quantile).
->     For rainfall is it a multiplicative comparison (i.e. the bias is the ratio)
->     to avoid issues around potentially producing adjusted rainfall amounts less than zero?
->   - When it comes to correcting model data outside the training period (let’s call it future data),
->     let’s say you have a transformed future value of 150.
->     Does the QME method figure out what quantile 150 corresponds to in the input training data
->     (and then applies the adjustment factor for that quantile)
->     or does it figure out what quantile 150 corresponds to in the future data
->     (and then applies the adjustment factor for that quantile).
->   - If a future data value falls between two quantiles,
->     does QME just apply the adjustment factor for the quantile it’s closest to?
+Once the clipping and scaling has been performed (i.e. once the data has been binned), 
+the quantile corresponding to each of the populated bins in the scaled model data is determined.
+The transfer function represents the arithmetic difference
+between each model bin value and the value of the same quanilte in the scaled observations.
+Those differences are then added to all the model data points in each bin respectively.
+Similar to ECDFm, there is the option to apply the transfer function in a multiplicative
+rather than addition fashion,
+but additive is the default for all variables (even precipitation).
 
 To avoid potential overfitting or an excessive influence of very rare events,
-before the adjustment factor for each ranked bin is applied to the target data
+before the adjustment factor for each bin is applied to the model data
 the factors for the N most extreme high and extreme low bins (typically N=3)
 are replaced by the value from the neighbouring histogram bin
 (i.e., the histogram bin that is one place less extreme than the third highest value in the sample).
 The reference to _extremes_ in the name of the method is a nod to these tweaks
-to the quantile adjustments in the tails of the distribution. 
+to the bias adjustments in the tails of the distribution. 
 
 #### 2.2.2. Software (and implementation choices) 
 
@@ -232,21 +226,28 @@ while the very latest version is available from Andrew by request.
 The Bureau of Meteorology has also written a Python implementation of the method
 that is openly available on [GitHub](https://github.com/AusClimateService/QME).
 
-There are a number of decisions to make when implementing the QDC method:
+There are a number of decisions to make when implementing the QME method.
+All of the general features described above are customisable, including the
+valid range for data clipping,
+scaling formula,
+number of histogram bins,
+and the N most extreme bins.
+There are also additional options as follows:
 - _Time grouping_:
   Similar to ECDFm, it is common to apply the QME method to individual seasons or months separately.
-  Monthly time grouping was used for this NPCP intercomparsion.
-- _Quantiles_:
-  TODO - Find out if there are options here.
+  Each month’s histogram can also use data from adjacent months to increase the sample size (i.e., providing a 3-month moving average).
+  Monthly time grouping was used for this NPCP intercomparsion and adjacent months were included for precipitation.
 - _Adjustment factor smoothing_:
-  A 21-point moving average was applied over the range of bias correction values (i.e. for bins 0 to 500) for each month.
-  TODO: Check if this is correct.
+  A moving (boxcar) average can be applied over the range of bias correction values (i.e. for bins 0 to 500).
+  For this intercomparison a 21-point moving average was used.
 - _Adjustment limits_:
   The software allows the user to specify a maximum adjustment/correction. 
   The default setting for precipitation (used in this intercomparison)
   is for a maximum increase of 50% applied to values great than or equal to 10mm.
   For instance, a model daily precipitation value of 20mm could potentially be bias corrected
   up to a maximum value of 30mm.
+  For precipitation, there is an additional default option (which can be overriden)
+  that values of 0 rainfall be left unchanged (i.e. no bias correction is applied). 
 - _Trend matching_: The long-term trend in the data can be removed prior to applying the bias correction,
   and then added back in after the bias correction has been applied in order to ensure that the bias correction
   does not substantially alter the model simulated trend.
