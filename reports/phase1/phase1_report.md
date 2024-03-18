@@ -201,15 +201,13 @@ which is rounded to an integer value / bin number of 7.
 The largest valid rainfall amount of 1250mm would have a scaled value of alog(1250 + 1 ) * 70 = 499.2 (rounded to 499).
 
 Once the clipping and scaling has been performed (i.e. once the data has been binned), 
-the quantile corresponding each of the populated bins in the scaled model data is determined.
+the quantile corresponding to each of the populated bins in the scaled model data is determined.
 The transfer function represents the arithmetic difference
 between each model bin value and the value of the same quanilte in the scaled observations.
 Those differences are then added to all the model data points in each bin respectively.
-
-> Question: Is it always additive adjustment or it is multiplicative for rainfall?
-> I'm aware that an additive bias adjustment is used as default for the N most extreme values/bins
-> with a user option for multiplicative...
-> but I'm not sure if that option extends to all bins?
+Similar to ECDFm, there is the option to apply the transfer function in a multiplicative
+rather than addition fashion,
+but additive is the default for all variables (even precipitation).
 
 To avoid potential overfitting or an excessive influence of very rare events,
 before the adjustment factor for each bin is applied to the model data
@@ -254,12 +252,6 @@ There are also additional options as follows:
   and then added back in after the bias correction has been applied in order to ensure that the bias correction
   does not substantially alter the model simulated trend.
   This option was applied for the temperature data in the projection assessment task (described below).
-
-> Question: There is also "an optional sample size limit (default = 50) that can be selected to prevent the code being run on data with too few values,
-> as well as checks for diversity of values in the histograms."
-> Does the size limit refer to the number of values in an individual bin?
-> What happens if there are bins with less than 50 values in them?
-> What are the checks for diversity of values? 
 
 ### 2.3. QDC
 
