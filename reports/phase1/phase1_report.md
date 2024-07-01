@@ -429,6 +429,18 @@ of bias correction (i.e. adjustment of data outside of the training period),
 the results presented below focus on that task.
 Results for the historical task are available at the GitHub location listed above.
 
+> TODO: We need to decide the appropriate level of attention to give to the historical versus cross validation results.
+> The use of 'out-of-sample' validation and the more sophisticated k-fold cross validation
+> has been criticised as being insufficient to identify artificial skill or unskilful bias correction
+> ([Maraun, 2016](https://doi.org/10.1007/s40641-016-0050-x); [Maraun et al., 2017](https://doi.org/10.1038/nclimate3418)).
+> The issue is because there is no pairwise correspondence between predictors and predictands in climate models.
+> This differs from the use of k-fold validation in numerical weather prediction models where the correspondence occurs.
+> Essentially the use of cross validation for climate projections,
+> where there is no temporal synchronicity between the projections and the observations
+> may not be a useful indicator of the skill of the bias correction method.
+> Furthermore, the limitations are of cross validation are more severe if only the marginal aspects of the distribution are evaluated.
+> The Maraun paper/s makes the suggestion that one should therefore evaluate the non-marginal aspects that have not been calibrated.
+
 ## 5. Results: Temperature
 
 ### 5.1. Temperature climatology
