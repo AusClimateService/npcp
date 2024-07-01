@@ -121,7 +121,7 @@ Each of the methods is described in more detail below.
 
 #### 2.1.1. Method
 
-In *equidistant cumulative density function matching* ([Li et al, 2010](https://doi.org/10.1029/2009JD012882)),
+In _equidistant cumulative density function matching_ ([Li et al, 2010](https://doi.org/10.1029/2009JD012882)),
 the transfer function represents the distance (i.e. arithmetic difference)
 between the observations and model for each quantile of the training period.
 Those differences are then added to the target model data
@@ -313,11 +313,22 @@ and use 1000 quantiles in order to still have 10-15 data values between each qua
 
 #### 2.5.1. Method
 
-> TODO
+The _Multivariate Recursive Nested Bias Correction_ (MRNBC) method
+corrects multiple variables at the same time and preserves their interdependence at multiple time scales.
+It was progressively developed from the nested bias correction (NBC; [Johnson and Sharma, 2012](https://doi.org/10.1029/2011WR010464))
+and recursive nested bias correction techniques (RNBC; [Mehrotra and Sharma, 2012](https://doi.org/10.1029/2012WR012446)).
+The NBC corrects the distribution (mean and standard deviation) and persistence (lag 1 autocorrelation coefficient)
+at monthly, seasonal, and annual timescales using a standard autoregressive lag 1 model ([Srikanthan and Pegram, 2009](https://doi.org/10.1016/j.jhydrol.2009.03.025)).
+The MRNBC method is a multivariate version of the above RNBC method.
+It simultaneously corrects many model variables,
+using a multivariate first-order autoregressive model at daily, monthly, quarterly, and annual timescales
+to impart observed distributional and persistence properties of the input fields ([Mehrotra and Sharma, 2015](https://doi.org/10.1016/j.jhydrol.2014.11.037)).
+
+> TODO: Provide more details so it can be compared to / contrasted with the other methods used in this report.
 
 #### 2.5.2. Software (and implementation choices)
 
-> TODO
+> TODO: There was some talk of putting the MRNBC code up on the ACS GitHub Organisation.
 
 
 ## 3. Data
