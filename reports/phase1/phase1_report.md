@@ -56,6 +56,11 @@ participating in the Australian Climate Service (CSIRO and the Bureau of Meteoro
 for three climate variables (daily minimum temperature, daily maximum temperature and daily rainfall).
 Additional variables and bias correction methods from other institutions will be considered in subsequent phases of the project.
 
+> TODO: Note that there have been previous assessments of some of the methods over Australia
+> (e.g. [Vogel et al 2023](https://doi.org/10.1016/j.jhydrol.2023.129693), [Peter et al 2024](https://doi.org/10.5194/gmd-17-2755-2024))
+> but our assessment attempts to capture all the options:
+> bias correction vs. delta change; dynamical downscaling first or not; univariate or multivariate.
+
 ## 2. Participating bias correction methods
 
 The first step in a typical bias correction procedure involves establishing a statistical relationship or transfer function
@@ -88,9 +93,6 @@ before matching the model and observations by quantile.
 Prior to removing the quantile biases from the model data of interest,
 the bias correction factors at the extreme ends of the distribution are also modified
 in an attempt to avoid potential overfitting or an excessive influence of very rare events.
-
-> TODO: Make a note that QME has been used for the NHP project and ESCI projects.
-> Relevant papers to cite include Dowdy et al. (2019, 2021), Srikanthan et al. (2022), Wilson et al. (2022), Vogel et al. (2023) and Wasco et al. (2023).
 
 While it is technically a "delta change" method as opposed to a "bias correction" method,
 the QDC method was also included in the assessment.
