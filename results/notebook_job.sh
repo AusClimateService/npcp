@@ -1,9 +1,9 @@
 #!/bin/bash
 #PBS -P xv83
 #PBS -q normal
-#PBS -l walltime=2:00:00
+#PBS -l walltime=15:00:00
 #PBS -l mem=40GB
-#PBS -l storage=gdata/xv83+gdata/ia39
+#PBS -l storage=gdata/xv83+gdata/ia39+gdata/mn51
 #PBS -l wd
 #PBS -v notebook
 
