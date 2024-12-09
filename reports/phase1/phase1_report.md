@@ -345,7 +345,7 @@ For the purposes of the intercomparison,
 we used dynamically downscaled daily timescale temperature and precipitation data
 from simulations forced by GCM data from the ACCESS-ESM1-5, CESM2 and EC-Earth3 models for the
 historical (available for the years 1960-2014)
-and SSP370 (2015-2100) experiments.
+and SSP-3.70 (2015-2100) experiments.
 Data from three different RCMs was assessed:
 - `BOM-BARPA-R`:
   Bureau of Meteorology Atmospheric Regional Projections for Australia
@@ -407,7 +407,7 @@ https://github.com/AusClimateService/npcp/tree/master/results
 | Category | Metric | Description |
 | ---      | ---    | ---         |
 | Climatology | Annual climatology | Annual mean at each grid point |
-| Climatology | Seasonal cycle bias | Sum of the absolute value of the difference between the bias corrected model and observed climatological mean value for each month |
+| Climatology | Seasonal cycle | Sum of the absolute value of the difference between the bias corrected model and observed climatological mean value for each month |
 | Variability | Interannual variability | Standard deviation of the annual mean timeseries |
 | Variability | Multi-year variability | Standard deviation of the 5-year running mean timeseries |
 | Variability | Temporal auto-correlation | Correlation between the annual (or monthly) time series and a lag-1-shifted version of that annual (or monthly) time series |
@@ -417,7 +417,7 @@ https://github.com/AusClimateService/npcp/tree/master/results
 | Daily distribution (precipitation) | R10mm, R20mm | Annual number of heavy precipitation days (precipitation ≥ 10 mm or 20mm) |
 | Extremes | 5-year maximum/minimum | The averaged 5-year maximum (or minimum for Tasmin) |
 | Extremes | 1-in-10 year event | Value corresponding to an annual return interval of 10 years |
-| Extremes | Extreme percentiles | The 99, 99.5 and 99.9 percentiles (or 1.0, 0.5 and 0.1 for Tasmin) |
+| Extremes | 99th percentile | The 99 percentile (or 1.0 percentile for Tasmin) |
 | Extremes (temperature) | Frost day index | Annual number of days with a minimum temperature less than 0◦C |
 | Extremes (precipitation) | Drought intensity | Percentage difference between the minimum annual value and the mean annual value (also, with 2-year and 5-year running mean applied) |
 | Extremes (precipitation) | R95pTOT, R99pTOT | Fraction of total annual precipitation that falls on very wet days (> 95th or 99th percentile) |
@@ -425,11 +425,6 @@ https://github.com/AusClimateService/npcp/tree/master/results
 | Links | PT cross correlation | Correlation between the anomaly timeseries of monthly mean maximum temperature and rainfall | 
 
 _Table 1: Metrics used in the assessment._
-
-Given that the cross validation task is more closely related to the typical real-world application
-of bias correction (i.e. adjustment of data outside of the training period),
-the results presented below focus on that task.
-Results for the historical task are available at the GitHub location listed above.
 
 > TODO: We need to decide the appropriate level of attention to give to the historical versus cross validation results.
 > The use of 'out-of-sample' validation and the more sophisticated k-fold cross validation
@@ -443,7 +438,44 @@ Results for the historical task are available at the GitHub location listed abov
 > Furthermore, the limitations are of cross validation are more severe if only the marginal aspects of the distribution are evaluated.
 > The Maraun paper/s makes the suggestion that one should therefore evaluate the non-marginal aspects that have not been calibrated.
 
-## 5. Results: Temperature
+## 5. Results
+
+In order to provide an overview of the performance of each bias correction method,
+the results were condensed into a single summary table for the historical (Figure 1) and cross validation (Figure 2) tasks
+showing the bias in key metrics averaged over all grid points and GCM/RCM combinations.
+The results for each variable and assessment category are discussed below,
+with plots showing results for all grid points added for a representative RCM/GCM
+as required.
+
+<p align="center">
+    <img src="figures/hist_summary.png">
+    <br>
+    <em>
+      Figure 1: Mean absolute error/bias across all grid points and GCM/RCM combinations
+      for the historical assessment task.
+      Metrics include the
+      annual climatology (mean),
+      seasonal cycle (cycle),
+      interannual variability (std(1yr)),
+      warm spell duration index (WSDI),
+      cold spell duration index (CSDI),
+      99th or 1st percentile (pct99, pct01),
+      1-in-10 year event (1-in-10yr),
+      wet day frequency,
+      and the annual number of days with greater than 20mm rain (R20mm).
+      The number in each cell corresponds to the mean absolute error
+      (with units of Celsius, mm or days depending on the metric),
+      while the color is that value expressed as a percentage of the RCM value.
+    </em>
+</p>
+
+<p align="center">
+    <img src="figures/xval_summary.png">
+    <br>
+    <em>
+      Figure 2: As per Figure 1 but for the cross validation assessment task.
+    </em>
+</p>
 
 ### 5.1. Temperature climatology
 
@@ -932,16 +964,6 @@ particularly the QDC method (Figure 7.2).
 </p>
 
 ## 8. Discussion
-
-<p align="center">
-    <img src="figures/summary.png" width=70% height=70%>
-    <br>
-    <em>
-      Figure 8.1: Summary of the results of the cross validation task (and projections task for trends).
-      The colors represent a subjective ranking and where methods could be clearly and consistently
-      distinguished they are ranked from 1 (best performing) to 5 (worst performing).
-    </em>
-</p>
 
 When it comes to the assessment of daily minimum and maximum temperatures on cross validation,
 bias correction produced large bias reductions in the simulated climatology and extremes,
