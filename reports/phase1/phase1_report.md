@@ -451,7 +451,7 @@ as required.
 > (e.g. supplementary information or the notebooks on GitHub).
 
 <p align="center">
-    <img src="figures/hist_summary.png">
+    <img src="figures/hist_summary.png" width=70% height=70%>
     <br>
     <em>
       Figure 1: Mean absolute error/bias across all grid points and GCM/RCM combinations
@@ -473,7 +473,7 @@ as required.
 </p>
 
 <p align="center">
-    <img src="figures/xval_summary.png">
+    <img src="figures/xval_summary.png" width=70% height=70%>
     <br>
     <em>
       Figure 2: As per Figure 1 but for the cross validation assessment task.
@@ -500,7 +500,7 @@ it does not appear to make much difference whether the model data are dynamicall
 prior to applying bias correction.
 
 <p align="center">
-    <img src="figures/tasmax_mean-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <img src="figures/tasmax_mean-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=70% height=70%>
     <br>
     <em>
       Figure 3: Bias in annual mean daily maximum temperature (relative to the AGCD dataset)
