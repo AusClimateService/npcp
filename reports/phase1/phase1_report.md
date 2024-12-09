@@ -447,6 +447,9 @@ The results for each variable and assessment category are discussed below,
 with plots showing results for all grid points added for a representative RCM/GCM
 as required.
 
+> TODO: Provide information on where to find plots that weren't included in this report
+> (e.g. supplementary information or the notebooks on GitHub).
+
 <p align="center">
     <img src="figures/hist_summary.png">
     <br>
@@ -479,32 +482,45 @@ as required.
 
 ### 5.1. Temperature climatology
 
-> Summary: All methods reduce bias in the daily minimum and maximum temperature climatology.
-> There's essentially no difference between the univariate methods.
-> The MRNBC multivariate method performs similarly to the univariate methods
-> whereas the MBCn method performs slightly worse.
-> While the raw RCM data is less biased than the raw GCM data,
-> it also makes no difference whether the GCM data is dynamically downscaled or not
-> prior to applying univariate bias correction.
-
 With respect to daily minimum and maximum temperature,
-all three univariate methods perform similarity well on cross validation
-of the annual mean (e.g. Figure 5.1.1) and seasonal cycle (e.g. Figure 5.1.2 and 5.1.3).
-The relative ranking of the methods in terms of the spatial mean absolute error
-differs depending on exactly which RCM and variable is assessed.
-It does not appear to make much difference whether the data are dynamically downscaled
-prior to univariate bias correction or not.
-The MRNBC multivariate method performs similarly to the univariate methods,
-while the MBCn method is slightly worse.
+three methods (ECDFm, QME and MRNBC) dramatically reduced the historical assessment task bias in
+the annual climatology and seasonal cycle.
+The exception is the MBCn method,
+which showed a consistent warm bias over the entire continent
+for all GCM/RCM combinations (e.g. Figure 1).
+
+While smaller than the historical task,
+the bias reductions on cross validation were also substantial.
+The MBCn method was also the worst performing on cross validation,
+but unlike the historical task it did reduce the RCM bias (Figure 2).
+
+The results from applying the ECDFm and QDC methods to both RCM and GCM data
+indicate that with respect to the annual climatology and seasonal cycle
+it does not appear to make much difference whether the model data are dynamically downscaled or not
+prior to applying bias correction.
 
 <p align="center">
-    <img src="figures/tasmin_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <img src="figures/tasmax_mean-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
     <br>
     <em>
-      Figure 5.1.1: Bias in annual mean daily minimum temperature (relative to the AGCD dataset)
+      Figure 3: Bias in annual mean daily maximum temperature (relative to the AGCD dataset)
+      for the "historical" assessment task.
+      Results are shown for the ACCESS-ESM1-5 GCM (top left),
+      the CCAM RCM forced by that GCM (bottom left),
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
+      (MAE = mean absolute error.)
+    </em>
+</p>
+
+<p align="center">
+    <img src="figures/tasmax_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <br>
+    <em>
+      Figure 4: Bias in annual mean daily maximum temperature (relative to the AGCD dataset)
       for the "cross validation" assessment task.
-      Results are shown for a GCM (top left),
-      RCM forced by that GCM (bottom left),
+      Results are shown for the ACCESS-ESM1-5 GCM (top left),
+      the CCAM RCM forced by that GCM (bottom left),
       and various bias correction methods applied to those GCM (top row, columns to the right)
       and RCM (middle and bottom rows, columns to the right) data.
       A reference case where the AGCD training data (1960-1989)
@@ -513,21 +529,6 @@ while the MBCn method is slightly worse.
     </em>
 </p>
 
-<p align="center">
-    <img src="figures/tasmin_seasonal-cycle_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
-    <br>
-    <em>
-      Figure 5.1.2: As per Figure 5.1.3 but for the seasonal cycle bias metric defined in Table 1.
-    </em>
-</p>
-
-<p align="center">
-    <img src="figures/tasmin_seasonal-cycle-cities_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
-    <br>
-    <em>
-      Figure 5.1.3: Daily minimum temperature seasonal climatology for the "cross validation" assessment task.
-    </em>
-</p>
 
 ### 5.2. Temperature variability
 
