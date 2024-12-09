@@ -441,10 +441,11 @@ _Table 1: Metrics used in the assessment._
 ## 5. Results
 
 In order to provide an overview of the performance of each bias correction method,
-the results were condensed into a single summary table for the historical (Figure 1) and cross validation (Figure 2) tasks
+the results were condensed into a single summary table for the historical (Figure 1)
+and cross validation (Figure 2) tasks
 showing the bias in key metrics averaged over all grid points and GCM/RCM combinations.
 The results for each variable and assessment category are discussed below,
-with plots showing results for all grid points added for a representative RCM/GCM
+with maps showing results for all grid points added for a representative RCM/GCM
 as required.
 
 > TODO: Provide information on where to find plots that weren't included in this report
@@ -482,22 +483,25 @@ as required.
 
 ### 5.1. Temperature climatology
 
-With respect to daily minimum and maximum temperature,
-three methods (ECDFm, QME and MRNBC) dramatically reduced the historical assessment task bias in
-the annual climatology and seasonal cycle.
-The exception is the MBCn method,
+While RCM output was generally associated with smaller biases
+in the temperature annual climatology and seasonal cycle than corresponding GCM output,
+some bias still persisted and tended to have its own unique spatial characteristics (e.g. Figure 3).
+When bias correction was applied to RCM output
+following the historical assessment task protocol
+(i.e. with an overlapping training and correction period),
+those biases were typically almost completely eliminated.
+The exception was the MBCn method,
 which showed a consistent warm bias over the entire continent
-for all GCM/RCM combinations (e.g. Figure 1).
-
-While smaller than the historical task,
-the bias reductions on cross validation were also substantial.
-The MBCn method was also the worst performing on cross validation,
-but unlike the historical task it did reduce the RCM bias (Figure 2).
-
-The results from applying the ECDFm and QDC methods to both RCM and GCM data
-indicate that with respect to the annual climatology and seasonal cycle
-it does not appear to make much difference whether the model data are dynamically downscaled or not
-prior to applying bias correction.
+for all GCM/RCM combinations (e.g. Figure 3).
+Biases in the RCM output were also greatly reduced
+(but not completely eliminated) on the cross validation task.
+The MBCn method was again the worst performing on cross validation,
+but unlike for the historical task it did reduce the RCM bias (Figure 4).
+The residual bias after applying the ECDFm and QDC methods
+to RCM and GCM outputs was very similar (e.g. Figures 3 and 4).
+This suggests that in the context of the temperature annual climatology and seasonal cycle, 
+it does not appear to make much difference
+whether GCM data are dynamically downscaled or not prior to applying bias correction.
 
 <p align="center">
     <img src="figures/tasmax_mean-bias_task-historical_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=60% height=60%>
@@ -532,27 +536,21 @@ prior to applying bias correction.
 
 ### 5.2. Temperature variability
 
-> Summary: GCM biases in interannual and multi-year temperature variability are relatively small
-> and aren't substantially modified by dynamical downscaling or bias correction.
-> In contrast, GCMs tend to overestimate the frequency of extended periods of persistent hot or cold weather.
-> Downscaling with RCMs tends to improve the representation of persistent extreme weather,
-> and it is typically improved further still by the use of the QDC delta change method.
-> In constrast, bias correction (univariate or multivariate) provides no appreciable improvement
-> in the frequency of persistent extreme weather.
-
-When considering general measures of temperature variaiblity such as the standard deviation of the
-annual timeseries with ("multi-annual variability") and without ("interannual variability") a 5-year running mean applied,
-GCM biases are a similiar magnitude for the historical and cross validation tasks.
-These biases are not appreciably modified by dynamical downscaling, univariate or multivariate bias correction (e.g. Figure 5.2.1).
-The bias between the training and assessment periods in the AGCD data is reflected in the QDC biases
-(given that QDC perturbs observations as opposed to model data),
-which are slighly larger than the bias correction methods in this case.
+GCM biases in interannual and multi-year temperature variability were relatively small
+and were not substantially modified by dynamical downscaling
+or by most of the bias correction methods (e.g. Figure 5).
+The exception was the MNRBC method,
+which unlike the other methods does attempt to explicitly correct for
+biases in variability at multiple time scales (Section 2.5.1).
+The MRNBC method was able to reduce biases in interannual and multi-year temperature variability
+on the historical task but actually inflated those biases on cross validation.
+This may suggest a degree of overfitting by the MRNBC method.
 
 <p align="center">
     <img src="figures/tasmax_interannual-variability-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
     <br>
     <em>
-      Figure 5.2.1: Bias in interannual variability (relative to the AGCD dataset)
+      Figure 5: Bias in interannual variability (relative to the AGCD dataset)
       for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
@@ -564,48 +562,27 @@ which are slighly larger than the bias correction methods in this case.
     </em>
 </p>
 
-Extended periods of persistent hot or cold weather were captured with the WSDI and CSDI respectively,
-which count the annual number of days that are part of a streak of six or more days
+With respect to sub-annual variability,
+extended periods of persistent hot or cold weather were captured by the WSDI and CSDI respectively.
+These indices count the annual number of days that are part of a streak of six or more days
 above the 90th percentile (WSDI) or below the 10th percentile (CSDI). 
 Both indices show higher values in northern Australia
 (where the weather tends to be more persistent / less variable from day to day)
-and lower values in the south (Figure 5.2.2 and 5.2.3).
+and lower values in the south.
 
-<p align="center">
-    <img src="figures/WSDI-values_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
-    <br>
-    <em>
-      Figure 5.2.2: WSDI values for the "cross validation" assessment task.
-      Results are shown for a GCM (top left),
-      RCM forced by that GCM (bottom left),
-      and various bias correction methods applied to those GCM (top row, columns to the right)
-      and RCM (middle and bottom rows, columns to the right) data.
-      The far right column shows the observed AGCD values
-      for the assessment (1990-2019; top right) and training (1960-1989; bottom right) periods.
-    </em>
-</p>
-
-<p align="center">
-    <img src="figures/CSDI-values_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
-    <br>
-    <em>
-      Figure 5.2.3: As per Figure 5.2.2 but for the CSDI.
-    </em>
-</p>
-
-Global climate models tend to overestimate the WSDI and CSDI,
-which is somewhat reduced with dynamical downscaling (Figure 5.2.4 and 5.3.5).
-The application of the QDC delta change method to GCM or RCM data substantially reduces the model bias,
-whereas the univariate and multivariate bias correction methods provide no appreciable bias reduction.
+The GCM output tended to overestimate the WSDI and CSDI.
+Dynamical downscaling acted to reduce this overestimation (e.g. Figure 6),
+but bias correction of the RCM output made no difference.
+In contrast, the application of the QDC method to GCM or RCM output did reduced the model bias.
 This is presumably related to the fact that the QDC (delta change) method
-pertubs the observed training data (which does a good job of representing the WSDI and CSDI),
+pertubs the observed training data (which did a good job of representing the WSDI and CSDI),
 whereas the bias correction methods act on the model data.
 
 <p align="center">
     <img src="figures/WSDI-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
     <br>
     <em>
-      Figure 5.2.4: Bias in the WSDI (relative to the AGCD dataset)
+      Figure 6: Bias in the WSDI (relative to the AGCD dataset)
       for the "cross validation" assessment task.
       Results are shown for a GCM (top left),
       RCM forced by that GCM (bottom left),
@@ -617,13 +594,6 @@ whereas the bias correction methods act on the model data.
     </em>
 </p>
 
-<p align="center">
-    <img src="figures/CSDI-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
-    <br>
-    <em>
-      Figure 5.2.5: As per Figure 5.2.4 but for the CSDI.
-    </em>
-</p>
 
 ### 5.3. Temperature extremes
 
