@@ -467,9 +467,10 @@ as required.
       1-in-10 year event (1-in-10yr),
       wet day frequency,
       and the annual number of days with greater than 20mm rain (R20mm).
-      The number in each cell corresponds to the mean absolute error
+      The number in each cell corresponds to the mean absolute error/bias
       (with units of Celsius, mm or days depending on the metric),
-      while the color is that value expressed as a percentage of the RCM value.
+      while the color is that bias value expressed as a percentage change
+      relative to the RCM value.
     </em>
 </p>
 
