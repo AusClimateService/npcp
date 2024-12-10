@@ -548,7 +548,7 @@ on the historical task (Figure 5) but actually inflated those biases on cross va
 This may suggest a degree of overfitting by the MRNBC method.
 
 <p align="center">
-    <img src="figures/tasmax_interannual-variability-bias_task-historical_CSIRO-ACCESS-ESM1-5_UQ-DES-CCAM-2105.png">
+    <img src="figures/tasmax_interannual-variability-bias_task-historical_CSIRO-ACCESS-ESM1-5_UQ-DES-CCAM-2105.png" width=60% height=60%>
     <br>
     <em>
       Figure 6: Bias in interannual variability (relative to the AGCD dataset)
@@ -594,7 +594,7 @@ pertubs the observed training data (which did a good job of representing the WSD
 whereas the bias correction methods act on the model data.
 
 <p align="center">
-    <img src="figures/WSDI-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
+    <img src="figures/WSDI-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
     <br>
     <em>
       Figure 7: Bias in the WSDI (relative to the AGCD dataset)
