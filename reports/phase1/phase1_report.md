@@ -11,19 +11,18 @@ _This report is currently in draft form and is not complete._
 &ensp; [2.5. MRNBC](#25-mrnbc)  
 [3. Data](#3-data)  
 [4. Assessment](#4-assessment)  
-[5. Results: Temperature](#5-results-temperature)  
+[5. Results](#5-results)  
 &ensp; [5.1. Temperature climatology](#51-temperature-climatology)  
 &ensp; [5.2. Temperature variability](#52-temperature-variability)  
 &ensp; [5.3. Temperature extremes](#53-temperature-extremes)  
 &ensp; [5.4. Temperature trends](#54-temperature-trends)  
-[6. Results: Precipitation](#6-results-precipitation)  
-&ensp; [6.1. Precipitation climatology](#61-precipitation-climatology)  
-&ensp; [6.2. Precipitation variability](#62-precipitation-variability)  
-&ensp; [6.3. Precipitation daily distribution](#63-precipitation-daily-distribution)  
-&ensp; [6.4. Precipitation extremes](#64-precipitation-extremes)  
-&ensp; [6.5. Precipitation trends](#65-precipitation-trends)  
-[7. Results: Link between variables](#7-results-link-between-variables)  
-[8. Discussion](#8-discussion)  
+&ensp; [5.5. Precipitation climatology](#55-precipitation-climatology)  
+&ensp; [5.6. Precipitation variability](#56-precipitation-variability)  
+&ensp; [5.7. Precipitation daily distribution](#57-precipitation-daily-distribution)  
+&ensp; [5.8. Precipitation extremes](#58-precipitation-extremes)  
+&ensp; [5.9. Precipitation trends](#59-precipitation-trends)  
+&ensp; [5.10. Link between variables](#510-link-between-variables)  
+[6. Discussion](#6-discussion)  
 
 ## 1. Introduction
 
@@ -486,7 +485,8 @@ as required.
 
 While RCM output was generally associated with smaller biases
 in the temperature annual climatology and seasonal cycle than corresponding GCM output,
-some bias still persisted and tended to have its own unique spatial characteristics (e.g. Figure 3).
+some bias still persisted and tended to have its own unique spatial characteristics
+(i.e. different from the GCM; e.g. Figure 3).
 When bias correction was applied to RCM output
 following the historical assessment task protocol
 (i.e. with an overlapping training and correction period),
@@ -612,36 +612,44 @@ whereas the bias correction methods act on the model data.
 
 ### 5.3. Temperature extremes
 
-> Summary: All methods reduce bias in extreme daily minimum and maximum temperatures.
-> All three univariate methods tend to outperform the multivariate methods.
-> While the raw RCM data is generally (but not always) less biased than the raw GCM data,
-> it also makes no difference whether the GCM data is dynamically downscaled or not
-> prior to applying univariate bias correction.
+For extremes indices related to daily minimum temperature
+(i.e. the 1-in-10 year low temperature and the 1st percentile),
+RCM output was generally associated with smaller biases than corresponding GCM output.
+In contrast, for daily maximum temperature
+(i.e. the 1-in-10 year high temperature and the 99th percentile)
+RCM output was only associated with smaller biases
+for some RCM/GCM combinations but higher biases for others.
+For both temperature variables, some bias still persisted after dynamical downscaling
+and it tended to have its own unique spatial characteristics
+(i.e. different from the GCM; e.g. Figure 8).
 
-With respect to general extreme indices such as the 1-in-10 year event
-or the 99th or 1st percentile of daily minimum and maximum temperature,
-all three univariate methods (ECDFm, QME and QDC) tend to perform similarly
-on cross validation (e.g. Figure 5.3.1 and 5.3.2).
-The relative ranking of the methods in terms of the spatial mean absolute error
-differs depending on exactly which RCM and variable is assessed.
-It does not appear to make much difference whether the data are dynamically downscaled
-prior to univariate bias correction or not.
-The univariate methods tend to outperform the multivariate methods,
-with the exception of MRNBC on maximum temperature extremes
-(it performs similarly to the univariate approaches).  
+When bias correction was applied to RCM output for the historical task,
+those biases were greatly reduced but not completely eliminated.
+Similar to the climatology results,
+the MBCn method performed substantially worse than the other methods
+on daily maximum temperature extremes
+(and to a lesser extent daily minimum temperature)
+due to a warm bias across the entire continent (e.g. Figure 8).
+The MRNBC method performed similarly to ECDFm and QME
+for both the historical and cross validation tasks over most the of continent,
+but displayed substantial cool biases in minimum temperature extremes
+over high elevation areas in central Tasmania and along the Great Dividing Range (e.g. Figure 8).
+
+As with the temperature climatology metrics,
+it did not appear to make much difference for these temperature extremes metrics
+whether GCM data are dynamically downscaled or not prior to applying bias correction.
+
 
 <p align="center">
-    <img src="figures/tasmin_extreme-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <img src="figures/tasmin_extreme-bias_task-historical_EC-Earth-Consortium-EC-Earth3_BOM-BARPA-R.png">
     <br>
     <em>
-      Figure 5.3.1: Bias in the 1-in-10 year low daily minimum temperature (relative to the AGCD dataset)
-      for the "cross validation" assessment task.
-      Results are shown for a GCM (top left),
-      RCM forced by that GCM (bottom left),
+      Figure 8: Bias in the 1-in-10 year low daily minimum temperature (relative to the AGCD dataset)
+      for the "historical" assessment task.
+      Results are shown for the EC-Earth3 GCM (top left),
+      the BOM-BARPA-R RCM forced by that GCM (bottom left),
       and various bias correction methods applied to those GCM (top row, columns to the right)
       and RCM (middle and bottom rows, columns to the right) data.
-      A reference case where the AGCD training data (1960-1989)
-      was simply duplicated for the assessment period (1990-2019) is also shown (bottom right).
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -649,17 +657,15 @@ with the exception of MRNBC on maximum temperature extremes
 
 ### 5.4. Temperature trends
 
-> Summary: None of the univariate or multivariate methods substantially modify model simulated temperature trends.
-
 With respect to the simulated trend in annual mean daily maximum or minimum temperature,
-none of the methods substantially alter the model simulated trend (e.g. Figure 5.4.1).
+none of the methods substantially alter the model simulated trend (e.g. Figure 9).
 In fact, dynamical downscaling appears to modify the model trend much more than bias correction.
 
 <p align="center">
     <img src="figures/tasmax_trend_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=80% height=80%>
     <br>
     <em>
-      Figure 5.4.1: Change in annual mean daily maximum temperature
+      Figure 9: Change in annual mean daily maximum temperature
       between 1980-2019 and 2060-2099 for the ssp370 experiment.
       Results are shown for a GCM (top left panel),
       RCM forced by that GCM (middle left panel)
@@ -667,9 +673,8 @@ In fact, dynamical downscaling appears to modify the model trend much more than 
     </em>
 </p>
 
-## 6. Results: Precipitation
 
-### 6.1. Precipitation climatology
+### 5.5. Precipitation climatology
 
 > Summary: While bias correction does tend to reduce bias in the precipitation climatology,
 > relatively large biases still persist on cross validation even after applying bias correction.
@@ -732,7 +737,7 @@ is not dynamically downscaled prior to applying univariate bias correction.
     </em>
 </p>
 
-### 6.2. Precipitation variability
+### 5.6. Precipitation variability
 
 > Summary: On cross validation,
 > GCM biases in interannual precipitation variability 
@@ -771,7 +776,7 @@ and the relatively poor performance on cross validation.
 The relative performance of the different methods are similar for multi-year variability
 but the differences are less pronouced.
 
-### 6.3. Precipitation daily distribution
+### 5.7. Precipitation daily distribution
 
 > Summary: Model biases in the annual precipitation distribution are reduced with bias correction.
 > On the cross validation task all methods besides MBCn (which performs poorly) perform similarly well.
@@ -813,7 +818,7 @@ On cross validation MBCn was a poor outlier while the other methods performed si
 </p>
 
 
-### 6.4. Precipitation extremes
+### 5.8. Precipitation extremes
 
 > Summary: Relatively large biases persist
 > in the most extreme daily precipitation values
@@ -873,7 +878,7 @@ is not dynamically downscaled prior to applying bias correction.
     </em>
 </p>
 
-### 6.5. Precipitation trends
+### 5.9. Precipitation trends
 
 > Summary: Bias correction slightly modifies model simulated precipitation trends.
 > These modifications are smaller than those produced by dynamical downscaling
@@ -905,7 +910,7 @@ Dynamical downscaling appears to modify the model trend much more than bias corr
     </em>
 </p>
 
-## 7. Results: Link between variables
+### 5.10. Link between variables
 
 The link between temperature and rainfall was assessed by calculating the cross correlation
 between the monthly mean anomaly timeseries of precipitation and daily maximum temperature.
@@ -941,7 +946,7 @@ particularly the QDC method (Figure 7.2).
     </em>
 </p>
 
-## 8. Discussion
+## 6. Discussion
 
 When it comes to the assessment of daily minimum and maximum temperatures on cross validation,
 bias correction produced large bias reductions in the simulated climatology and extremes,
