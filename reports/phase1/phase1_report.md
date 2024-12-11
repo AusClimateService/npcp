@@ -641,7 +641,7 @@ whether GCM data are dynamically downscaled or not prior to applying bias correc
 
 
 <p align="center">
-    <img src="figures/tasmin_extreme-bias_task-historical_EC-Earth-Consortium-EC-Earth3_BOM-BARPA-R.png">
+    <img src="figures/tasmin_extreme-bias_task-historical_EC-Earth-Consortium-EC-Earth3_BOM-BARPA-R.png" width=60% height=60%>
     <br>
     <em>
       Figure 8: Bias in the 1-in-10 year low daily minimum temperature (relative to the AGCD dataset)
@@ -658,8 +658,8 @@ whether GCM data are dynamically downscaled or not prior to applying bias correc
 ### 5.4. Temperature trends
 
 With respect to the simulated trend in annual mean daily maximum or minimum temperature,
-none of the methods substantially alter the model simulated trend (e.g. Figure 9).
-In fact, dynamical downscaling appears to modify the model trend much more than bias correction.
+none of the methods substantially altered the model simulated trend (e.g. Figure 9).
+In fact, dynamical downscaling modified the model trend much more than bias correction.
 
 <p align="center">
     <img src="figures/tasmax_trend_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=80% height=80%>
@@ -880,35 +880,24 @@ is not dynamically downscaled prior to applying bias correction.
 
 ### 5.9. Precipitation trends
 
-> Summary: Bias correction slightly modifies model simulated precipitation trends.
-> These modifications are smaller than those produced by dynamical downscaling
-> and tend to be slighly larger for multivariate bias correction.
-
-With respect to the simulated trend in annual mean rainfall,
-the univariate and multivariate methods slightly alter the model simulated trend (e.g. Figure 6.5.1 and 6.5.2).
-Dynamical downscaling appears to modify the model trend much more than bias correction.
+Bias correction tended to slightly alter the model simulated rainfall trends (e.g. Figure).
+The grid point differences in percentage change in annual mean precipitation between 1980-2019 and 2060-2099
+beween the raw RCM data and the ECDFm, QME, MBCn and MRNBC data had a mean absolute error across all RCM/GCM cominations
+of 3.4%, 2.4%, 9.5% and 4.2%, respectively.a
+For all RCM/GCM combinations, dynamical downscaling modified the model trend more than bias correction.
 
 <p align="center">
-    <img src="figures/pr_trend_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=90% height=90%>
+    <img src="figures/pr_trend_task-projection_NCAR-CESM2_BOM-BARPA-R.png" width=90% height=90%>
     <br>
     <em>
-      Figure 6.5.1: Change in annual mean precipitation
-      between 1980-2019 and 2060-2099 for the ssp370 experiment.
-      Results are shown for a GCM (left most panel),
-      RCM forced by that GCM (second from the left)
+      Figure: Change in annual mean precipitation
+      between 1980-2019 and 2060-2099 for the SSP3-7.0 experiment.
+      Results are shown for the CESM2 GCM (left most panel),
+      the BOM-BARPA-R RCM forced by that GCM (second from the left)
       and various bias correction methods applied to those model data (remaining panels).
     </em>
 </p>
 
-<p align="center">
-    <img src="figures/pr_trend-rcm_task-projection_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
-    <br>
-    <em>
-      Figure 6.5.2: Change in annual mean precipitation
-      between 1980-2019 and 2060-2099 for the ssp370 experiment
-      relative to the RCM change.
-    </em>
-</p>
 
 ### 5.10. Link between variables
 
