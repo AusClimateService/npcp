@@ -676,35 +676,33 @@ In fact, dynamical downscaling modified the model trend much more than bias corr
 
 ### 5.5. Precipitation climatology
 
-> Summary: While bias correction does tend to reduce bias in the precipitation climatology,
-> relatively large biases still persist on cross validation even after applying bias correction.
-> For univariate methods, QDC tends to perform better than QME,
-> which in turn performs better than ECDFm.
-> The performance of the multivariate MRNBC method is comparable to the univariate methods,
-> but the MBCn method is much worse. 
-> While the raw RCM data tends to be less biased than the raw GCM data,
-> biases tend to be lower if the GCM data is not dynamically downscaled
-> prior to applying univariate bias correction.
-
-Substantial biases remain in the precipitation climatology on cross validation
-even after the application of the various univariate methods.
-In fact, a simple replication of the training data is the best performing "method",
-followed by QDC, QME and ECDFm (e.g. Figure 6.1.1 to 6.1.4).
-The MRNBC multivariate method performs as well as the best univariate method in relation to annual mean preciptation
-but slightly worse than the univariate methods on the seasonal cycle.
-The MBCn method performs poorly. 
-While the raw RCM data tends to be (but is not always) less biased than the raw GCM data,
-biases tend to be (but are not always) lower if the GCM data
-is not dynamically downscaled prior to applying univariate bias correction.
+Similar to the temperature results,
+RCM output was generally associated with smaller biases in
+the annual precipitation climatology and seasonal cycle than corresponding GCM output,
+but some bias still persisted and could have its own unique spatial characteristics.
+When bias correction was applied to RCM output for the historical task,
+those biases were typically dramatically reduced, especially for the MRNBC method.
+The exception was the MBCn method,
+which showed a consistently large wet bias over the entire continent
+for all GCM/RCM combinations.
+Biases in the RCM output were also reduced on the cross validation task,
+but to a lesser extent than for the historical task (e.g. Figure 10).
+The MRNBC method was no longer the stand out method,
+but the MBCn method was again the worst performing on cross validation
+due to a consistent wet bias. 
+While the raw RCM data tended to be (but was not always)
+less biased than the raw GCM data on cross validation,
+biases tended to be (but were not always) lower if the GCM data
+was not dynamically downscaled prior to applying bias correction (e.g. Figure 10).
 
 <p align="center">
     <img src="figures/pr_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
     <br>
     <em>
-      Figure 6.1.1: Bias in annual mean precipitation (relative to the AGCD dataset)
+      Figure 10: Bias in annual mean precipitation (relative to the AGCD dataset)
       for the "cross validation" assessment task.
-      Results are shown for a GCM (top left),
-      RCM forced by that GCM (bottom left),
+      Results are shown for the ACCESS-ESM1-5 GCM (top left),
+      the BOM-BARPA-R RCM forced by that GCM (bottom left),
       and various bias correction methods applied to those GCM (top row, columns to the right)
       and RCM (middle and bottom rows, columns to the right) data.
       A reference case where the AGCD training data (1960-1989)
@@ -713,29 +711,6 @@ is not dynamically downscaled prior to applying univariate bias correction.
     </em>
 </p>
 
-<p align="center">
-    <img src="figures/pr_seasonal-cycle_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
-    <br>
-    <em>
-      Figure 6.1.2: As per Figure 6.1.4 but for the seasonal cycle bias metric defined in Table 1.
-    </em>
-</p>
-
-<p align="center">
-    <img src="figures/pr_seasonal-cycle-fraction_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
-    <br>
-    <em>
-      Figure 6.1.3: As per Figure 6.1.5 but the seasonal cycle bias metric is expressed as a fraction of the mean total annual precipitation.
-    </em>
-</p>
-
-<p align="center">
-    <img src="figures/pr_seasonal-cycle-cities_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
-    <br>
-    <em>
-      Figure 6.1.4: Precipitation seasonal climatology for the "cross validation" assessment task.
-    </em>
-</p>
 
 ### 5.6. Precipitation variability
 
