@@ -714,32 +714,34 @@ was not dynamically downscaled prior to applying bias correction (e.g. Figure 10
 
 ### 5.6. Precipitation variability
 
-> Summary: On cross validation,
-> GCM biases in interannual precipitation variability 
-> weren't substantially modified by dynamical downscaling
-> and the application of bias correction was something of a mixed bag.
-> The QDC method tended to reduce bias,
-> the other univariate methods could increase or decrease bias depending on the model
-> and the multivariate methods tended to (but did not always) increase the bias
-> in interannual variability.
-> Differences between the methods were less pronouced for multi-year variability.
+RCM output was generally associated with similar or slightly reduced bias
+in interannual and multi-year precipitation variability (e.g. Figure 11 and 12).
+When bias correction was applied to RCM output for the historical task,
+those biases were typically reduced, especially for the MRNBC method.
+The exception was the MBCn method,
+which was consistently associated with larger biases than the RCM data.
+On cross validation, none of the bias correction methods
+were consistently associated with lower biases than the RCM data.
+The MBCn method was associated with consistently increased biases,
+while the ECDFm method differed greatly between GCMs.
+It maintained or reduced the mean absolute bias for
+dynamically downscaled ACCESS-ESM5-1 or EC-Earth3 data (e.g. Figure 11),
+but was associated with very large biases for CESM2 (e.g. Figure 12).
+In contrast to the bias correction methods,
+the QDC method was associated with consistently lower biases on cross validation (e.g. Figure 11 and 12).
+This is likely due to the fact that a simple replication of the training data clearly
+outperformed all methods on cross validation,
+and the QDC method effectively just applies a small perturbation to the training data.
 
-In general, dynamical downscaling slightly reduces GCM biases in interannual and multi-year precipitation variability.
-A simple replication of the training data outperforms all bias correction methods on cross validation (e.g. Figure 6.2.1).
-With respect to univariate methods,
-QDC tended to perform better than QME and ECDFm and was the only method to consistently reduce bias.
-The multivariate methods tended to (but not always) increase the bias in interannual variability.
-There was a huge discrepancy between the impressive performance of MRNBC on the historical task
-and the relatively poor performance on cross validation.
 
 <p align="center">
-    <img src="figures/pr_interannual-variability-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <img src="figures/pr_interannual-variability-bias_task-xvalidation_EC-Earth-Consortium-EC-Earth3_CSIRO-CCAM-2203.png">
     <br>
     <em>
-      Figure 6.2.1: Bias in interannual precipitation variability (relative to the AGCD dataset)
+      Figure 11: Bias in interannual precipitation variability (relative to the AGCD dataset)
       for the "cross validation" assessment task.
-      Results are shown for a GCM (top left),
-      RCM forced by that GCM (bottom left),
+      Results are shown for the EC-Earth3 GCM (top left),
+      the CSIRO-CCAM-2203 RCM forced by that GCM (bottom left),
       and various bias correction methods applied to those GCM (top row, columns to the right)
       and RCM (middle and bottom rows, columns to the right) data.
       A reference case where the AGCD training data (1960-1989)
@@ -748,8 +750,21 @@ and the relatively poor performance on cross validation.
     </em>
 </p>
 
-The relative performance of the different methods are similar for multi-year variability
-but the differences are less pronouced.
+<p align="center">
+    <img src="figures/pr_interannual-variability-bias_task-xvalidation_NCAR-CESM2_BOM-BARPA-R.png">
+    <br>
+    <em>
+      Figure 12: Bias in interannual precipitation variability (relative to the AGCD dataset)
+      for the "cross validation" assessment task.
+      Results are shown for the CESM2 GCM (top left),
+      the BOM-BARPA-R RCM forced by that GCM (bottom left),
+      and various bias correction methods applied to those GCM (top row, columns to the right)
+      and RCM (middle and bottom rows, columns to the right) data.
+      A reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) is also shown (bottom right).
+      (MAE = mean absolute error.)
+    </em>
+</p>
 
 ### 5.7. Precipitation daily distribution
 
