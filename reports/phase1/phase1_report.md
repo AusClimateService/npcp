@@ -450,6 +450,9 @@ as required.
 > TODO: Provide information on where to find plots that weren't included in this report
 > (e.g. supplementary information or the notebooks on GitHub).
 
+> TODO: Explain that it's obvious from Figures 1 and 2 that MBCn was an outlier 
+> and thus it won't really be talked about in the following.
+
 <p align="center">
     <img src="figures/hist_summary.png" width=60% height=60%>
     <br>
@@ -480,6 +483,7 @@ as required.
       Figure 2: As per Figure 1 but for the cross validation assessment task.
     </em>
 </p>
+
 
 ### 5.1. Temperature climatology
 
@@ -768,83 +772,50 @@ and the QDC method effectively just applies a small perturbation to the training
 
 ### 5.7. Precipitation daily distribution
 
-> Summary: Model biases in the annual precipitation distribution are reduced with bias correction.
-> On the cross validation task all methods besides MBCn (which performs poorly) perform similarly well.
-
 The lower end of the annual precipitation distribution was assessed
-by considering the wet day frequency (or conversely the number of relatively dry days),
-while the upper end was captured by the r10mm and r20mm metrics.
-
-With the exception of the MBCn method (which was a poor performing outlier)
-all the methods reduced the model bias in wet day frequency to a similar degree (Figure 6.3.1).
-The relative performance of the QDC, QME, ECDFm and MRNBC methods differed between models. 
-
-<p align="center">
-    <img src="figures/pr_wet-day-freq-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
-    <br>
-    <em>
-      Figure 6.3.1: Bias in wet day frequency (relative to the AGCD dataset)
-      for the "cross validation" assessment task.
-      Results are shown for a GCM (top left),
-      RCM forced by that GCM (bottom left),
-      and various bias correction methods applied to those GCM (top row, columns to the right)
-      and RCM (middle and bottom rows, columns to the right) data.
-      A reference case where the AGCD training data (1960-1989)
-      was simply duplicated for the assessment period (1990-2019) is also shown (bottom right).
-      (MAE = mean absolute error.)
-    </em>
-</p>
-
-Similar results were found for the R10mm and R20mm metrics.
-On cross validation MBCn was a poor outlier while the other methods performed similarly
-(with the relative ranking of each method differing between models; Figure 6.3.2).
-
-<p align="center">
-    <img src="figures/R20mm-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
-    <br>
-    <em>
-      Figure 6.3.2: As per Figure 6.3.1 but for the R20mm metric. 
-    </em>
-</p>
-
+by considering the wet day frequency (or conversely the annual number of relatively dry days),
+while the upper end was captured by the annual number of days with more than 
+10mm (r10mm) or 20mm (r20mm) of precipitation.
+Dynamical downscaling tended to reduce GCM bias in wet day frequency
+but made little difference to r10mm or r20mm biases.
+Bias correction tended to further the reduce the remaining RCM bias,
+almost eliminating it completely on the historical task. 
+The exception was again the MBCn method,
+for which biases either remained relatively unchanged or increased.
 
 ### 5.8. Precipitation extremes
 
-> Summary: Relatively large biases persist
-> in the most extreme daily precipitation values
-> even after applying dynamical downscaling and bias correction.
-> The QDC, QME and MRNBC methods tend to do no harm
-> (i.e. bias is reduced or relatively unchanged)
-> whereas the ECDFm and MBCn methods can increase or decrease bias
-> depending on the specific model. 
-> The raw RCM data tends to be more biased than the raw GCM data,
-> and biases tend to be lower if the GCM data is not dynamically downscaled
-> prior to applying bias correction.
+The extreme precipitation results differed depending on the severity of the extreme.
 
-With respect to extreme rainfall indices such as the 1-in-10 year event,
-R95pTOT, R99pTOT,
-or the most extreme percentiles (e.g. 99th or 1st)
-of daily precipitation,
-a simple replication of the training data outperforms all the correction methods on cross validation.
-The MBCn method performs consistently worse than the other methods on the R95pTOT and R99pTOT metrics,
-which is possibly related to the precipitation distribution biases indentified in the pervious section. 
-Otherwise the relative performance of the methods on extreme precipitation
-differs between RCMs (e.g. Figure 6.4.1 to 6.4.3) and metrics,
-but in general the QDC, QME and MRNBC methods (in that approximate order of relative performance)
-tend to always lead to a reduction or little change in bias,
-whereas the ECDFm and MBCn methods can in some cases lead to increased bias. 
-The raw RCM data is often (but not always) more biased than the raw GCM data,
-and biases tend to be (but are not always) lower if the GCM data
-is not dynamically downscaled prior to applying bias correction.
+For a less extreme metric like the 99th percentile
+(i.e. an event that happens a few times a year),
+dynamical downscaling was associated with a similar mean absolute bias
+as the corresponding GCM output (e.g. Figure 13).
+With the exception of the MBCn method,
+all methods reduced the bias in the RCM output on both the historical
+(and to a lesser extent) cross validation tasks.
+It was difficult to separate the methods as they all performed similarly.
+
+For a more extreme metric like the 1-in-10 year event,
+dynamical downscaling was associated with a larger mean absolute bias than
+the corresponding GCM output (e.g. Figure 14).
+On the historical task the various methods could be easily distiguished,
+with the MRNBC method reducing the RCM bias to the greatest degree,
+followed by the QME and then ECDFm methods.
+On cross validation,
+the QDC method outperformed all the bias correction methods.
+The MRNBC and QME methods performed similarly (a modest reduction in bias),
+while the ECDFm method tended not to reduce the RCM bias.
+
 
 <p align="center">
-    <img src="figures/pr_extreme-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <img src="figures/pr_pct99-bias_task-xvalidation_EC-Earth-Consortium-EC-Earth3_BOM-BARPA-R.png">
     <br>
     <em>
-      Figure 6.4.1: Bias in the 1-in-10 year high daily precipitation (relative to the AGCD dataset)
+      Figure 13: Bias in the 99th percentile daily precipitation (relative to the AGCD dataset)
       for the "cross validation" assessment task.
-      Results are shown for a GCM (top left),
-      RCM forced by that GCM (bottom left),
+      Results are shown for the EC-Earth3 GCM (top left),
+      the BOM-BARPA-R RCM forced by that GCM (bottom left),
       various bias correction methods applied to those model data (rows),
       and a reference case where the AGCD training data (1960-1989)
       was simply duplicated for the assessment period (1990-2019) (bottom right).
@@ -853,24 +824,25 @@ is not dynamically downscaled prior to applying bias correction.
 </p>
 
 <p align="center">
-    <img src="figures/pr_extreme-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_CSIRO-CCAM-2203.png">
+    <img src="figures/pr_extreme-bias_task-xvalidation_EC-Earth-Consortium-EC-Earth3_BOM-BARPA-R.png">
     <br>
     <em>
-      Figure 6.4.2: As per Figure 6.3.2.
+      Figure 14: Bias in the 1-in-10 year high daily precipitation (relative to the AGCD dataset)
+      for the "cross validation" assessment task.
+      Results are shown for the EC-Earth3 GCM (top left),
+      the BOM-BARPA-R RCM forced by that GCM (bottom left),
+      various bias correction methods applied to those model data (rows),
+      and a reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) (bottom right).
+      (MAE = mean absolute error.)
     </em>
 </p>
 
-<p align="center">
-    <img src="figures/pr_extreme-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_UQ-DES-CCAM-2105.png">
-    <br>
-    <em>
-      Figure 6.4.3: As per Figure 6.3.3.
-    </em>
-</p>
+
 
 ### 5.9. Precipitation trends
 
-Bias correction tended to slightly alter the model simulated rainfall trends (e.g. Figure).
+Bias correction tended to slightly alter the model simulated rainfall trends (e.g. Figure 15).
 The grid point differences in percentage change in annual mean precipitation between 1980-2019 and 2060-2099
 beween the raw RCM data and the ECDFm, QME, MBCn and MRNBC data had a mean absolute error across all RCM/GCM cominations
 of 3.4%, 2.4%, 9.5% and 4.2%, respectively.a
@@ -880,7 +852,7 @@ For all RCM/GCM combinations, dynamical downscaling modified the model trend mor
     <img src="figures/pr_trend_task-projection_NCAR-CESM2_BOM-BARPA-R.png" width=90% height=90%>
     <br>
     <em>
-      Figure: Change in annual mean precipitation
+      Figure 15: Change in annual mean precipitation
       between 1980-2019 and 2060-2099 for the SSP3-7.0 experiment.
       Results are shown for the CESM2 GCM (left most panel),
       the BOM-BARPA-R RCM forced by that GCM (second from the left)
