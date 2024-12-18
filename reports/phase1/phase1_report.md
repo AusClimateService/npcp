@@ -40,29 +40,42 @@ This involves model selection, downscaling models, bias correction and calibrati
 as well as secondary and next-level analysis (e.g., hazard modelling).
 
 When it comes to bias correction there is no "one size fits all" solution.
-Over the years, various different methods have been applied by the major projects, universities, and government agencies involved in the NPCP.
+Over the years, various different methods have been applied by the major projects,
+universities, and government agencies involved in the NPCP.
 Each of these methods have their own pros and cons and are suitable for different applications.
 The associated bias correction software also varies
 from code that was written for a specific research application (and sometimes subsequently abandoned)
 to code that is actively maintained by software engineers and regularly re-used.
-In order the deliver the projections data described in the Climate Projections Roadmap for Australia,
+
+In order to deliver the projections data described in the Climate Projections Roadmap for Australia,
 there was a clear need to establish an NPCP bias correction intercomparison project
 to identify the most appropriate bias correction methods and associated software.
+The first major initiative listed by the Roadmap is the production of
+national-scale climate projections by the Australian Climate Service (ACS).
+The first phase of the bias correction intercomparison was therefore
+designed to support that initiative.
+It focused on bias correction methods that are available to the ACS right now
+(i.e. with functional software that is sufficiently well documented)
+and applied those methods to a subset of the CORDEX (and corresponding CMIP6) data
+that will be used by the ACS in generating nation-wide projections.
+Since the existing bias correction assessments produced by NPCP partners
+only provide information on some of the available bias correction methods
+and only for specific contexts such as the Queensland spatial domain
+([Zhang et al 2024](https://doi.org/10.1002/met.2204)
+or for national hydrological modelling
+([Vogel et al 2023](https://doi.org/10.1016/j.jhydrol.2023.129693),
+[Peter et al 2024](https://doi.org/10.5194/gmd-17-2755-2024)),
+there was a need to produce a general Australia-wide assessment
+of all the available bias correction methods from scratch.
 
-This report summarises the findings of the first phase of the intercomparison project,
-which focuses on the bias correction methods used by the institutions
-participating in the Australian Climate Service (CSIRO and the Bureau of Meteorology) 
-for three climate variables (daily minimum temperature, daily maximum temperature and daily rainfall).
-Additional variables and bias correction methods from other institutions will be considered in subsequent phases of the project.
+The report documents the results of the first phase
+of the NPCP bias correction intercomparison project.
 
-> TODO: Note that there have been previous assessments of some of the methods over Australia
-> (e.g. [Vogel et al 2023](https://doi.org/10.1016/j.jhydrol.2023.129693), [Peter et al 2024](https://doi.org/10.5194/gmd-17-2755-2024))
-> but our assessment attempts to capture all the options:
-> bias correction vs. delta change; dynamical downscaling first or not; univariate or multivariate.
 
 ## 2. Participating bias correction methods
 
-The first step in a typical bias correction procedure involves establishing a statistical relationship or transfer function
+The first step in a typical bias correction procedure involves
+establishing a statistical relationship or transfer function
 between model outputs and observations over a reference (i.e. historical/training) time period.
 The established transfer function is then applied to the target model data
 (e.g. future model projections) in order to produce a "bias corrected" model time series.
@@ -78,6 +91,21 @@ with a bias correction method to contribute to the intercomparison:
 - Quantile Delta Change (QDC; univariate)
 - N-Dimensional Multi-Variate Bias Correction (MBCn; multivariate)
 - Multivariate Recursive Nesting Bias Correction (MRNBC; multivariate)
+
+Some of these methods have been used previously in major projects undertaken
+by the CSIRO and/or the Bureau of Meteorology.
+For instance, the QDC method was used to produce application ready climate data 
+for the [Climate Change in Australia](https://www.climatechangeinaustralia.gov.au/) project,
+while the QME and MRNBC methods were used to produce the latest
+national hydrological projections for Australia
+([Peter et al 2024](https://doi.org/10.5194/gmd-17-2755-2024)).
+The QME method has also been used by the National Environmental Science Program
+(e.g. [Dowdy et al 2019](https://doi.org/10.1038/s41598-019-46362-x))
+and the Energy Sector Climate Information project
+(e.g. [Dowdy et al 2021](https://www.climatechangeinaustralia.gov.au/media/ccia/2.2/cms_page_media/799/ESCI%20Technical%20Report%20-%20Standardised%20Method_1.pdf))
+In contrast, the ECDFm and MBCn methods have not yet been used in a
+major CSIRO or Bureau of Meteorology project,
+but there is interest in determining their potential for future projects.
 
 All three of the univariate methods are quantile-based,
 meaning the applied transfers are a function of quantile.
@@ -99,9 +127,6 @@ In contrast to bias correction,
 delta change approaches establish a transfer function between reference and future model outputs
 (e.g. from an historical model experiment and future climate emission scenario experiment)
 and then apply that transfer function to observations to create a future time series.
-Application ready climate data was produced using QDC for the
-[Climate Change in Australia](https://www.climatechangeinaustralia.gov.au/) project,
-so it is useful to compare that approach to traditional bias correction.
 The QDC method is conceptually very similar to ECDFm
 and is essentially the most basic quantile-based delta change method available.
 
@@ -122,20 +147,24 @@ Each of the methods is described in more detail below.
 
 #### 2.1.1. Method
 
-In _equidistant cumulative density function matching_ ([Li et al, 2010](https://doi.org/10.1029/2009JD012882)),
+In _equidistant cumulative density function matching_
+([Li et al, 2010](https://doi.org/10.1029/2009JD012882)),
 the transfer function represents the distance (i.e. arithmetic difference)
 between the observations and model for each quantile of the training period.
 Those differences are then added to the target model data
 according to the quantile each target data point represents over the target period.
-For instance, if a target temperature of $25^{\circ}$ Celsius corresponds to the 0.5 quantile (i.e. the median) in the target data,
+For instance, if a target temperature of $25^{\circ}$ Celsius corresponds to the 0.5 quantile
+(i.e. the median) in the target data,
 the difference between the median value in the observations and reference model data
 is added to the target value in order to obtain the bias adjusted value.
 The underlying assumption is that the distance between the model and observed quantiles during the training period
 also applies to the target period, hence the name *equidistant*.
 The reference to *CDF matching* is clear from the mathematical representation of the method:
 $$x_{m-adjust} = x_{m,p} + F_{o,h}^{-1}(F_{m,p}(x_{m,p})) - F_{m,h}^{-1}(F_{m,p}(x_{m,p}))$$
-where $F$ is the CDF of either the observations ($o$) or model ($m$) for a historic training period ($h$) or target period ($p$).
-That means $F_{o,h}^{-1}$ and $F_{m,h}^{-1}$ are the quantile functions (inverse CDF) corresponding to the observations and model respectively.
+where $F$ is the CDF of either the observations ($o$) or model ($m$)
+for a historic training period ($h$) or target period ($p$).
+That means $F_{o,h}^{-1}$ and $F_{m,h}^{-1}$ are the quantile functions (inverse CDF
+ corresponding to the observations and model respectively.
 Returning to our target median value of $25^{\circ}$ (i.e. $x_{m,p} = 25$),
 the corresponding CDF would return a value of 0.5 (i.e. $F_{m,p}(25) = 0.5$).
 The difference between the observed ( $F_{o,h}^{-1}(0.5)$ )
@@ -149,8 +178,8 @@ $$x_{m-adjust} = x_{m,p} \times (F_{o,h}^{-1}(F_{m,p}(x_{m,p})) \div F_{m,h}^{-1
 
 #### 2.1.2. Software (and implementation choices)
 
-The code used to implement the ECDFm method is maintained by the CSIRO Climate Innovation Hub
-and is openly available on [GitHub](https://github.com/climate-innovation-hub/qqscale).
+The code used to implement the ECDFm method is maintained by the CSIRO
+and is openly available on [GitHub](https://github.com/AusClimateService/qqscale).
 The code basically implements the [bias adjustment and downscaling](https://xclim.readthedocs.io/en/stable/sdba.html)
 functionality available in the widely used open source xclim library.
 
@@ -899,61 +928,5 @@ particularly the QDC method (Figure 7.2).
 
 ## 6. Discussion
 
-When it comes to the assessment of daily minimum and maximum temperatures on cross validation,
-bias correction produced large bias reductions in the simulated climatology and extremes,
-but little or no change in biases associated with climate variability.
-There wasn't a substantial difference between the performance of the three univariate methods
-and they all tended to perform better than the multivariate methods.
-On the projections task,
-none of the univariate or multivariate methods substantively modified
-the long term temperature trends simulated by the model.
-
-With respect to cross validation of precipitation data,
-univariate bias correction tended to produce modest bias reductions
-in the simulated climatology, variability, daily distribution and extremes.
-The multivariate MRNBC method also tended to produce modest bias reductions
-(with the exception of precipitation variability),
-whereas MBCn tended towards modest bias increases.
-The differences between the univariate methods were relatively small.
-The QDC method tended to outperform the others,
-usually followed by QME and then ECDFm.
-All the univariate and multivariate methods slightly modified
-the long term precipitation trends simulated by the model,
-but less so than dynamical downscaling.
-
-We attempted to assess the link between temperature and precipitation
-by calculating the cross correlation,
-but none of the methods had an appreciable impact on the model bias
-(which was relatively small to begin with).
-Further work will be to explore alternative metrics that capture
-the link between multiple variables,
-which is an area where mutlivariate methods would presumably
-outperform univariate alternatives.
-
-Given that dynamically downscaled data is not typically available for all GCMs,
-it is worth considering how the final "product" differs if GCM data
-is directly bias corrected instead (i.e. without downscaling first).
-It turns out that on the relatively simple temperature metrics that we assessed,
-the bias in the end product is much the same either way.
-The exceptions were the WSDI and CSDI metrics,
-where dynamical downscaling led to reduced bias but univariate bias correction did not.
-Presumably the downscaling produces more realistic meteorology (and thus weather persistence).
-It is possible that other more sophisticated metrics
-that are responsive to the simulation of meteorological details
-may also pick up a similar discrepancy between bias corrected data
-that has and has not been dynamically downscaled first.
-
-For precipitation,
-univariate bias correction of GCM data directly typically produced lower biases
-than if the data were dynamically downscaled first.
-This is possibly because the GCM data has less fine scale detail
-and is something of a smoother canvas for the bias correction to act upon.
-Having said that,
-there may be other metrics we have not processed here that
-(similar to WSDI and CSDI) highlight the advantages of downscaling precipitation data first.
-
-It should be noted that while three different GCMs and RCMs were used for the intercomparison,
-only one observational dataset was used and only one training and assessment period for cross validation.
-Further work will be done to establish the sentivity of the results to the choice of observational dataset
-and the choice of time period in that observational record for training and assessment. 
+> To come.
 
