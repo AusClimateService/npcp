@@ -27,7 +27,7 @@ _This report is currently in draft form and is not complete._
 ## 1. Introduction
 
 The [Climate Projections Roadmap for Australia](https://www.dcceew.gov.au/climate-change/publications/climate-projections-roadmap-for-australia)
-has been developed by the Department of Climate Change, Energy, the Environment and Water (DCCEEW)
+has been developed by the Department of Climate Change, Energy, the Environment and Water
 through a collaborative effort of the Australian climate projections community.
 The roadmap is shared vision statement of this new partnership,
 called the National Partnership for Climate Projections (NPCP),
@@ -49,7 +49,7 @@ to code that is actively maintained by software engineers and regularly re-used.
 
 In order to deliver the projections data described in the Climate Projections Roadmap for Australia,
 there was a clear need to establish an NPCP bias correction intercomparison project
-to identify the most appropriate bias correction methods and associated software.
+to identify the most appropriate bias correction methods.
 The first major initiative listed by the Roadmap is the production of
 national-scale climate projections by the Australian Climate Service (ACS).
 The first phase of the bias correction intercomparison was therefore
@@ -57,11 +57,11 @@ designed to support that initiative.
 It focused on bias correction methods that are available to the ACS right now
 (i.e. with functional software that is sufficiently well documented)
 and applied those methods to a subset of the CORDEX (and corresponding CMIP6) data
-that will be used by the ACS in generating nation-wide projections.
-Since the existing bias correction assessments produced by NPCP partners
+that will be used by the ACS to generate nation-wide projections.
+Since existing bias correction assessments produced by NPCP partners
 only provide information on some of the available bias correction methods
-and only for specific contexts such as the Queensland spatial domain
-([Zhang et al 2024](https://doi.org/10.1002/met.2204)
+for specific contexts such as the Queensland spatial domain
+([Zhang et al 2024](https://doi.org/10.1002/met.2204))
 or for national hydrological modelling
 ([Vogel et al 2023](https://doi.org/10.1016/j.jhydrol.2023.129693),
 [Peter et al 2024](https://doi.org/10.5194/gmd-17-2755-2024)),
