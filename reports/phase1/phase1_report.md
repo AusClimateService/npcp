@@ -176,6 +176,7 @@ would then be added to the target value of $25^{\circ}$ to get a bias corrected 
 For precipitation, multiplicative as opposed to additive bias correction is preferred
 to avoid the possibility of getting bias corrected values less than zero.
 In this case, *equiratio CDF matching* ([Wang and Chen, 2013](https://doi.org/10.1002/asl2.454)) is used:
+
 $$x_{m-adjust} = x_{m,p} \times (F_{o,h}^{-1}(F_{m,p}(x_{m,p})) \div F_{m,h}^{-1}(F_{m,p}(x_{m,p})))$$
 
 #### 2.1.2. Software (and implementation choices)
@@ -422,7 +423,7 @@ The cross validation task assesses how well the methods perform when producing d
 for a different time period than the training period,
 which is a more difficult test (and also the typical application for bias correction methods).
 The projection task was included to see if the bias correction methods substantially modify the trend simulated by the models.
-Trend modification is a problem for many bias correction methods (find reference).
+Trend modification is a problem for many bias correction methods (e.g. [Zhang et al 2024](https://doi.org/10.1002/met.2204)).
 
 Since the ensemble of GCMs selected for dynamical downscaling by RCMs is only a subset of the full CMIP6 ensemble,
 some NPCP members are also interested in applying bias correction directly to GCM output.
@@ -433,61 +434,55 @@ using the ECDFm and QDC methods.
 
 The data arising from each bias correction method was compared on a number of metrics
 relating to the ability to capture the observed
-climatology, variability, distribution (precipitation only), extremes, trends and the link between different variables.
-The metrics presented and/or discussed in the results section of this report are listed in Table 1.
-Some additional metrics can be found at the following GitHub repository
-along with the complete results for all variable / RCM / metric combinations:  
-https://github.com/AusClimateService/npcp/tree/master/results
+climatology, variability, distribution (precipitation only), extremes, trends and the link between different variables (Table 1).
+A number of additional metrics were assessed during the drafting of the report
+(e.g. give examples),
+but they did not add to the broad conclusions captured by the metrics listed in Table 1.
 
 | Category | Metric | Description |
 | ---      | ---    | ---         |
-| Climatology | Annual climatology | Annual mean at each grid point |
+| Climatology | Annual climatology | Annual mean |
 | Climatology | Seasonal cycle | Sum of the absolute value of the difference between the bias corrected model and observed climatological mean value for each month |
 | Variability | Interannual variability | Standard deviation of the annual mean timeseries |
 | Variability | Multi-year variability | Standard deviation of the 5-year running mean timeseries |
-| Variability | Temporal auto-correlation | Correlation between the annual (or monthly) time series and a lag-1-shifted version of that annual (or monthly) time series |
 | Variability (temperature) | Warm-spell duration index (WSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmax > 90th percentile calculated for a 5-day window centred on each calendar day |
 | Variability (temperature) | Cold-spell duration index (CSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmin < 10th percentile calculated for a 5-day window centred on each calendar day |
-| Daily distribution (precipitation) | Wet day frequency | Number of wet days (pr > 1mm) expressed as a fraction (%) of all days |  
+| Daily distribution (precipitation) | Wet day frequency | Number of wet days (precipitation > 1mm) expressed as a fraction (%) of all days |  
 | Daily distribution (precipitation) | R10mm, R20mm | Annual number of heavy precipitation days (precipitation ≥ 10 mm or 20mm) |
-| Extremes | 5-year maximum/minimum | The averaged 5-year maximum (or minimum for Tasmin) |
 | Extremes | 1-in-10 year event | Value corresponding to an annual return interval of 10 years |
-| Extremes | 99th percentile | The 99 percentile (or 1.0 percentile for Tasmin) |
+| Extremes | 99th percentile | The 99 percentile (or 1.0 percentile for minimum temperature) |
 | Extremes (temperature) | Frost day index | Annual number of days with a minimum temperature less than 0◦C |
 | Extremes (precipitation) | Drought intensity | Percentage difference between the minimum annual value and the mean annual value (also, with 2-year and 5-year running mean applied) |
 | Extremes (precipitation) | R95pTOT, R99pTOT | Fraction of total annual precipitation that falls on very wet days (> 95th or 99th percentile) |
 | Trends | Change signal | Change in the annual mean (future period minus the historical period) |
 | Links | PT cross correlation | Correlation between the anomaly timeseries of monthly mean maximum temperature and rainfall | 
 
-_Table 1: Metrics used in the assessment._
+_Table 1: Metrics calculated at each grid point across Australia._
 
-> TODO: We need to decide the appropriate level of attention to give to the historical versus cross validation results.
-> The use of 'out-of-sample' validation and the more sophisticated k-fold cross validation
-> has been criticised as being insufficient to identify artificial skill or unskilful bias correction
-> ([Maraun, 2016](https://doi.org/10.1007/s40641-016-0050-x); [Maraun et al., 2017](https://doi.org/10.1038/nclimate3418)).
-> The issue is because there is no pairwise correspondence between predictors and predictands in climate models.
-> This differs from the use of k-fold validation in numerical weather prediction models where the correspondence occurs.
-> Essentially the use of cross validation for climate projections,
-> where there is no temporal synchronicity between the projections and the observations
-> may not be a useful indicator of the skill of the bias correction method.
-> Furthermore, the limitations are of cross validation are more severe if only the marginal aspects of the distribution are evaluated.
-> The Maraun paper/s makes the suggestion that one should therefore evaluate the non-marginal aspects that have not been calibrated.
 
 ## 5. Results
 
 In order to provide an overview of the performance of each bias correction method,
 the results were condensed into a single summary table for the historical (Figure 1)
-and cross validation (Figure 2) tasks
-showing the bias in key metrics averaged over all grid points and GCM/RCM combinations.
+and cross validation (Figure 2) tasks.
+The tables show the bias in key metrics averaged (using the mean absolute error/bias)
+over all grid points and GCM/RCM combinations.
+A few of the metrics in Table 1 do not appear in the summary result tables
+(e.g. multi-year variability, R10mm)
+because they are very similar to closely related metrics
+(e.g. interannual variability, R20mm).
+
 The results for each variable and assessment category are discussed below,
-with maps showing results for all grid points added for a representative RCM/GCM
-as required.
+with maps showing the results for all grid points for a representative RCM/GCM as required.
+In addition to showing the results for bias corrected RCM and GCM data,
+the maps for the cross validation task also show an "AGCD (training data)" result.
+This result is derived from simply replicating the AGCD training data
+rather than applying a bias correction method.
 
 > TODO: Provide information on where to find plots that weren't included in this report
 > (e.g. supplementary information or the notebooks on GitHub).
 
-> TODO: Explain that it's obvious from Figures 1 and 2 that MBCn was an outlier 
-> and thus it won't really be talked about in the following.
+> TODO: Explain why some metrics in Table 1 aren't in the summary figures.
 
 <p align="center">
     <img src="figures/hist_summary.png" width=60% height=60%>
@@ -540,7 +535,8 @@ The MBCn method was again the worst performing on cross validation,
 but unlike for the historical task it did reduce the RCM bias (Figure 4).
 The residual bias after applying the ECDFm and QDC methods
 to RCM and GCM outputs was very similar (e.g. Figures 3 and 4).
-This suggests that in the context of the temperature annual climatology and seasonal cycle, 
+This suggests that in the context of producing data with low bias
+in the temperature annual climatology and seasonal cycle, 
 it does not appear to make much difference
 whether GCM data are dynamically downscaled or not prior to applying bias correction.
 
@@ -628,7 +624,7 @@ and lower values in the south.
 The GCM output tended to overestimate the WSDI and CSDI.
 Dynamical downscaling acted to reduce this overestimation (e.g. Figure 7),
 but bias correction of the RCM output made no difference.
-In contrast, the application of the QDC method to GCM or RCM output did reduce the model bias.
+In contrast, the QDC method was associated with smaller biases than the RCM data.
 This is presumably related to the fact that the QDC (delta change) method
 pertubs the observed training data (which did a good job of representing the WSDI and CSDI),
 whereas the bias correction methods act on the model data.
@@ -717,7 +713,7 @@ In fact, dynamical downscaling modified the model trend much more than bias corr
 ### 5.5. Precipitation climatology
 
 Similar to the temperature results,
-RCM output was generally associated with smaller biases in
+RCM output was generally (but not always) associated with smaller biases in
 the annual precipitation climatology and seasonal cycle than corresponding GCM output,
 but some bias still persisted and could have its own unique spatial characteristics.
 When bias correction was applied to RCM output for the historical task,
@@ -730,10 +726,9 @@ but to a lesser extent than for the historical task (e.g. Figure 10).
 The MRNBC method was no longer the stand out method,
 but the MBCn method was again the worst performing on cross validation
 due to a consistent wet bias. 
-While the raw RCM data tended to be (but was not always)
-less biased than the raw GCM data on cross validation,
-biases tended to be (but were not always) lower if the GCM data
-was not dynamically downscaled prior to applying bias correction (e.g. Figure 10).
+On cross validation,
+biases also tended to be (but were not always) lower if the GCM data
+were not dynamically downscaled prior to applying bias correction (e.g. Figure 10).
 
 <p align="center">
     <img src="figures/pr_mean-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
@@ -881,7 +876,7 @@ while the ECDFm method tended not to reduce the RCM bias.
 Bias correction tended to slightly alter the model simulated rainfall trends (e.g. Figure 15).
 The grid point differences in percentage change in annual mean precipitation between 1980-2019 and 2060-2099
 beween the raw RCM data and the ECDFm, QME, MBCn and MRNBC data had a mean absolute error across all RCM/GCM cominations
-of 3.4%, 2.4%, 9.5% and 4.2%, respectively.a
+of 3.4%, 2.4%, 9.5% and 4.2%, respectively.
 For all RCM/GCM combinations, dynamical downscaling modified the model trend more than bias correction.
 
 <p align="center">
@@ -935,5 +930,51 @@ particularly the QDC method (Figure 7.2).
 
 ## 6. Discussion
 
-> To come.
+> The following is just draft notes that need to be further edited.
+
+General conclusions:
+- There's something wrong (either methodologically or implementationally) with the MBCn method.
+- The ECDFm method can make things worse in some cases (precipitation extremes and variability).
+  From a "do no harm" perspective, QME is therefore a safer option for univariate bias correction
+  (despite the fact the method is a little harder to explain to a non-expert audience).
+  We hypothesise that it's the data transform that makes QME safer/better than ECDFm.
+- MRNBC performed very well on the historical task.
+  This might be indicative of a bit of an overfitting problem
+  as it was less of a stand out on cross validation (especially variability)
+  but in general it still compared well with the univariate methods . 
+- QDC compares very favourably to bias correction.
+  It generally performs as well as the best performing bias correction method,
+  and much better on metrics like CSDI and WSDI where weather sequencing is important.
+  If the limitations aren't a problem for you
+  (e.g. you can generally only produce 20-40 year time slices as opposed to continuous timeseries
+  and you're stuck with the observed sequence of events) then it's a good option.
+- Directly bias correcting GCM data (i.e. without dynamical downscaling first)
+  appears to be a valid option
+  (if low bias on simple metrics like the ones we looked at is important for you application).
+
+Caveats:
+- We need to discuss the appropriate level of attention to give to the historical versus cross validation results.
+  The use of 'out-of-sample' validation and the more sophisticated k-fold cross validation
+  has been criticised as being insufficient to identify artificial skill or unskilful bias correction
+  ([Maraun, 2016](https://doi.org/10.1007/s40641-016-0050-x); [Maraun et al., 2017](https://doi.org/10.1038/nclimate3418)).
+  The issue is because there is no pairwise correspondence between predictors and predictands in climate models.
+  This differs from the use of k-fold validation in numerical weather prediction models where the correspondence occurs.
+  Essentially the use of cross validation for climate projections,
+  where there is no temporal synchronicity between the projections and the observations
+  may not be a useful indicator of the skill of the bias correction method.
+  Furthermore, the limitations are of cross validation are more severe if only the marginal aspects of the distribution are evaluated.
+  The Maraun paper/s makes the suggestion that one should therefore evaluate the non-marginal aspects that have not been calibrated.
+- Our metrics are pretty simple.
+  It could be that we'd see different results with more complex metrics.
+  For instance, [Vogel et al 2023](https://doi.org/10.1016/j.jhydrol.2023.129693) find MRNBC
+  to be superior after bias corrected inputs for multiple variables
+  are passed through a hydrological model. 
+
+What we did with this information:
+- We bias corrected the entire CORDEX-CMIP6 archive (for selected variables)
+  using the QME and MRBNC methods (dataset DOI to come)
+- We created a QDC-CMIP6 dataset by applying the QDC method to GCM data
+  ([Irving and Macadam 2024](https://doi.org/10.25919/03by-9y62); dataset DOI to come).
+  In the first instance we used the same GCMs that were downscaled,
+  but that dataset can be expanded to include other GCMs.
 
