@@ -66,9 +66,9 @@ or for national hydrological modelling
 ([Vogel et al 2023](https://doi.org/10.1016/j.jhydrol.2023.129693),
 [Peter et al 2024](https://doi.org/10.5194/gmd-17-2755-2024)),
 there was a need to produce a general Australia-wide assessment
-of all the available bias correction methods from scratch.
+of all the available bias correction methods.
 
-The report documents the results of the first phase
+This report documents the results of the first phase
 of the NPCP bias correction intercomparison project.
 
 
@@ -84,8 +84,7 @@ ranging from relatively simple methods that take a single variable as input
 to more sophisticated multi-variate approaches.
 
 Through a series of NPCP meetings and workshops on the topic of bias correction,
-a number of individuals from the Australian Climate Service stepped forward
-with a bias correction method to contribute to the intercomparison:
+five methods were identified as being available for use by the ACS right now:
 - Equi-distant/ratio Cumulative Density Function matching (ECDFm; univariate)
 - Quantile Matching for Extremes (QME; univariate)
 - Quantile Delta Change (QDC; univariate)
@@ -107,17 +106,18 @@ In contrast, the ECDFm and MBCn methods have not yet been used in a
 major CSIRO or Bureau of Meteorology project,
 but there is interest in determining their potential for future projects.
 
-All three of the univariate methods are quantile-based,
-meaning the applied transfers are a function of quantile.
-Quantile methods are a popular and slightly more sophisticated approach than mean scaling,
-where the bias (i.e. a difference or ratio) in the mean between the model and observations is
-removed from all model data points of interest.
+The most simple bias correction procedure is mean scaling,
+where the difference or ratio between the mean model and observed value
+over the reference/training period (i.e. the mean bias)
+is removed (via subtraction or division) from the target model data
+in order to produce the bias corrected model time series.
+Quantile-based methods are a popular and slightly more sophisticated approach,
+where the bias is calculated for a series of quantiles (instead of just the mean)
+and then removed from the corresponding quantiles of the target model data.
 The ECDFm method is essentially the most basic quantile-based bias correction method available.
-The bias is calculated for a series of quantiles (instead of just the mean)
-and then removed from the corresponding quantiles of the model data of interest.
 The QME method is slightly more complicated in that it involves scaling the data
 before matching the model and observations by quantile.
-Prior to removing the quantile biases from the model data of interest,
+Prior to removing the quantile biases from the target model,
 the bias correction factors at the extreme ends of the distribution are also modified
 in an attempt to avoid potential overfitting or an excessive influence of very rare events.
 
@@ -160,11 +160,13 @@ is added to the target value in order to obtain the bias adjusted value.
 The underlying assumption is that the distance between the model and observed quantiles during the training period
 also applies to the target period, hence the name *equidistant*.
 The reference to *CDF matching* is clear from the mathematical representation of the method:
+
 $$x_{m-adjust} = x_{m,p} + F_{o,h}^{-1}(F_{m,p}(x_{m,p})) - F_{m,h}^{-1}(F_{m,p}(x_{m,p}))$$
+
 where $F$ is the CDF of either the observations ($o$) or model ($m$)
 for a historic training period ($h$) or target period ($p$).
 That means $F_{o,h}^{-1}$ and $F_{m,h}^{-1}$ are the quantile functions (inverse CDF
- corresponding to the observations and model respectively.
+corresponding to the observations and model respectively.
 Returning to our target median value of $25^{\circ}$ (i.e. $x_{m,p} = 25$),
 the corresponding CDF would return a value of 0.5 (i.e. $F_{m,p}(25) = 0.5$).
 The difference between the observed ( $F_{o,h}^{-1}(0.5)$ )
@@ -179,9 +181,10 @@ $$x_{m-adjust} = x_{m,p} \times (F_{o,h}^{-1}(F_{m,p}(x_{m,p})) \div F_{m,h}^{-1
 #### 2.1.2. Software (and implementation choices)
 
 The code used to implement the ECDFm method is maintained by the CSIRO
-and is openly available on [GitHub](https://github.com/AusClimateService/qqscale).
+and is openly available on GitHub ([Irving 2024](https://doi.org/10.5281/zenodo.12523625)).
 The code basically implements the [bias adjustment and downscaling](https://xclim.readthedocs.io/en/stable/sdba.html)
-functionality available in the widely used open source xclim library.
+functionality available in the widely used open source xclim library
+([Bourgault et al, 2023](https://doi.org/10.21105/joss.05415)).
 
 There are a number of decisions to make when implementing the ECDFm method:
 - _Time grouping_:
@@ -191,7 +194,7 @@ There are a number of decisions to make when implementing the ECDFm method:
   For the NPCP intercomparsion, adjustment factors were calculated for each month.
 - _Quantiles_:
   The software allows the user to specify the number of quantiles for which to calculate an adjustment factor.
-  We've found that it's best to have approximately 10-15 data values between each quantile.
+  We aim to have approximately 10-15 data values between each quantile.
   For the NPCP bias correction tasks (that train on 30 or 40 years of daily data),
   that means 100 quantiles for each month.
 - _Adjustment factor smoothing_:
@@ -200,7 +203,7 @@ There are a number of decisions to make when implementing the ECDFm method:
   and linear interpolation/smoothing is applied along the month axis.
   That means the adjustment factor for a target data point from 29 July that corresponds to the 0.651 quantile
   will be a linear combination of the adjustment factors for the nearest quantile (0.65) from both July and August.
-- _Singularity stochastic removal_ ([Vrac et al 2016](https://doi.org/10.1002/2015JD024511))
+- _Singularity stochastic removal_ ([Vrac et al, 2016](https://doi.org/10.1002/2015JD024511))
   is used to avoid divide by zero errors in the analysis of precipitation data.
   All near-zero values (i.e. values less than a very small positive threshold value)
   are set to a small random non-zero value prior to data processing,
@@ -220,7 +223,7 @@ This scaling can be thought of as binning the data
 A typical valid data range might be -30C to 60C for daily maximum temperature (tasmax),
 -45C to 50C for daily minimum temperature (tasmin),
 or 0mm to 1250mm for daily precipitation (pr).
-The following scaling formulas (used in this intercomparison)
+The following scaling formulas (used in the NPCP intercomparison)
 map the valid range of data values across the 500 integer values/bins: 
 - (tasmax + 35) * 5
 - (tasmin + 55) * 5
@@ -303,7 +306,9 @@ This *quantile delta change* (QDC) approach
 ([Olsson et al 2009](https://doi.org/10.1016/j.atmosres.2009.01.015);
 [Willems & Vrac 2011](https://doi.org/10.1016/j.jhydrol.2011.02.030))
 is expressed mathematically as follows:
+
 $$x_{o,p} = x_{o,h} + F_{m,p}^{-1}(F_{o,h}(x_{o,h})) - F_{m,h}^{-1}(F_{o,h}(x_{o,h}))$$
+
 where $F$ is the CDF of either the observations ($o$) or model ($m$) for an historic ($h$) or future/projection period ($p$).
 That means $F_{m,p}^{-1}$ and $F_{m,h}^{-1}$ are the quantile functions (inverse CDF)
 corresponding to the future and historical model simulations respectively.
@@ -314,12 +319,14 @@ would then be added to the observed value of $25^{\circ}$ to get the projected f
 
 For variables like precipitation, multiplicative as opposed to additive mapping is preferred
 to avoid the possibility of producing future values less than zero:
+
 $$x_{o,p} = x_{o,h} \times (F_{m,p}^{-1}(F_{o,h}(x_{o,h})) \div F_{m,h}^{-1}(F_{o,h}(x_{o,h})))$$
 
 #### 2.3.2. Software (and implementation choices)
 
 Since both methods are conceptually very similar,
-the QDC method is implemented using the same software as the ECDFm method.
+the QDC method is implemented using the same software as the ECDFm method
+([Irving 2024](https://doi.org/10.5281/zenodo.12523625)).
 The same implementation choices are made regarding time grouping, quantiles and singularity stochastic removal.
 The only difference is when processing precipitation data (a multiplicative application of QDC)
 we've found that in many locations the model bias in the timing of the seasonal cycle
@@ -365,27 +372,27 @@ to impart observed distributional and persistence properties of the input fields
 
 The model data used for the intercomparison was taken from the multi-scenario,
 multi-model ensemble of simulations from regional climate models (RCMs)
-that will form the basis for much of the climate projection information delivered by NPCP members.
-The ensemble represents a subset of realisations from CMIP6 global climate models (GCMs)
-selected for dynamical downscaling by RCMs under a ‘sparse matrix’ framework ([Grose et al 2023](https://doi.org/10.1016/j.cliser.2023.100368)).
+produced by NPCP partner organisations.
+These data will ultimately be submitted to the Coordinated Regional Climate Downscaling Experiment (CORDEX)
+and will form the basis for much of the climate projection information delivered by NPCP members.
 
-For the purposes of the intercomparison,
-we used dynamically downscaled daily timescale temperature and precipitation data
-from simulations forced by GCM data from the ACCESS-ESM1-5, CESM2 and EC-Earth3 models for the
+We used daily timescale temperature and precipitation data
+from RCM simulations forced by Coupled Model Intercomparsion Project phase 6
+(CMIP6; [Eyring et al 2016](https://doi.org/10.5194/gmd-9-1937-2016))
+global climate model (GCM) data from the
+ACCESS-ESM1-5, CESM2 and EC-Earth3 models for the
 historical (available for the years 1960-2014)
 and SSP-3.70 (2015-2100) experiments.
-Data from three different RCMs was assessed:
-- `BOM-BARPA-R`:
-  Bureau of Meteorology Atmospheric Regional Projections for Australia
-  (BARPA; [Su et al 2022](http://www.bom.gov.au/research/publications/researchreports/BRR-069.pdf)),
-  run by the Bureau of Meteorology
-- `CSIRO-CCAM-2203`:
-  Conformal Cubic Atmospheric Model (CCAM),
-  run by CSIRO
-- `UQ-DES-CCAM-2105`:
-  CCAM,
-  run by the University of Queensland and the Queensland Department of Environment and Science
-  ([Chapman et al 2023](https://doi.org/10.1029/2023EF003548))
+Data from three different RCM modelling groups was assessed: 
+a `BOM-BARPA-R` submission from the Bureau of Meteorology produced by running the 
+Bureau of Meteorology Atmospheric Regional Projections for Australia
+(BARPA; [Su et al, 2022](http://www.bom.gov.au/research/publications/researchreports/BRR-069.pdf)) RCM,
+a `CSIRO-CCAM-2203` submission from CSIRO produced by running the 
+Conformal Cubic Atmospheric Model (CCAM; find reference) RCM,
+and a `UQ-DES-CCAM-2105` submission from the
+University of Queensland and the Queensland Department of Environment and Science
+produced by running a different configuration of CCAM
+([Chapman et al, 2023](https://doi.org/10.1029/2023EF003548)).
 
 The observational / reference data used for the bias correction
 was the Australian Gridded Climate Data (AGCD) dataset
@@ -397,15 +404,15 @@ so all data was regridded to the 0.2 degree grid using conservative remapping.
 
 ## 4. Assessment
 
-Each contributor to the intercomparison was asked to use their bias correction software to complete three tasks
-(for each of the GCM/RCM combinations):
+Three tasks were completed for each of the bias correction methods (for each of the GCM/RCM combinations):
 - **Task 1 (Historical)**: Produce bias corrected data for the 1980-2019 period, using 1980-2019 as a training period.
 - **Task 2 (Projection)**: Produce bias corrected data for the 2060-2099 period, using 1980-2019 as a training period.
 - **Task 3 (Cross validation)**: Produce bias corrected data for the 1990-2019 period, using 1960-1989 as a training period.
 
 The rationale for the historical task was to assess how well the bias correction methods perform
 when they train on exactly the same data that they correct.
-This is the most basic test of a bias correction method - if a method cannot adequately correct the very data it trained on,
+This is the most basic test of a bias correction method -
+if a method cannot adequately correct the very data it trained on,
 it is unlikely to be a useful method.
 Conversely, if a method performs too well at the historical task,
 this can in some cases be an indication of over-fitting.
@@ -415,14 +422,14 @@ The cross validation task assesses how well the methods perform when producing d
 for a different time period than the training period,
 which is a more difficult test (and also the typical application for bias correction methods).
 The projection task was included to see if the bias correction methods substantially modify the trend simulated by the models.
-Trend modification is a problem for many bias correction methods.
+Trend modification is a problem for many bias correction methods (find reference).
 
 Since the ensemble of GCMs selected for dynamical downscaling by RCMs is only a subset of the full CMIP6 ensemble,
 some NPCP members are also interested in applying bias correction directly to GCM output.
 In order to better understand how GCM outputs that have been dynamically downscaled and then bias corrected
 compare to GCM outputs that are directly bias corrected,
 the three assessment tasks were also completed on GCM output
-using the ECDFM and QDC methods.
+using the ECDFm and QDC methods.
 
 The data arising from each bias correction method was compared on a number of metrics
 relating to the ability to capture the observed
