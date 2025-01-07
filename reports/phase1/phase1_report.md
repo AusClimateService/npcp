@@ -20,8 +20,7 @@ _This report is currently in draft form and is not complete._
 &ensp; [5.6. Precipitation variability](#56-precipitation-variability)  
 &ensp; [5.7. Precipitation daily distribution](#57-precipitation-daily-distribution)  
 &ensp; [5.8. Precipitation extremes](#58-precipitation-extremes)  
-&ensp; [5.9. Precipitation trends](#59-precipitation-trends)  
-&ensp; [5.10. Link between variables](#510-link-between-variables)  
+&ensp; [5.9. Precipitation trends](#59-precipitation-trends)   
 [6. Discussion](#6-discussion)  
 
 ## 1. Introduction
@@ -455,7 +454,6 @@ but they did not add to the broad conclusions captured by the metrics listed in 
 | Extremes (precipitation) | Drought intensity | Percentage difference between the minimum annual value and the mean annual value (also, with 2-year and 5-year running mean applied) |
 | Extremes (precipitation) | R95pTOT, R99pTOT | Fraction of total annual precipitation that falls on very wet days (> 95th or 99th percentile) |
 | Trends | Change signal | Change in the annual mean (future period minus the historical period) |
-| Links | PT cross correlation | Correlation between the anomaly timeseries of monthly mean maximum temperature and rainfall | 
 
 _Table 1: Metrics calculated at each grid point across Australia._
 
@@ -515,7 +513,6 @@ rather than applying a bias correction method.
     </em>
 </p>
 
-
 ### 5.1. Temperature climatology
 
 While RCM output was generally associated with smaller biases
@@ -569,7 +566,6 @@ whether GCM data are dynamically downscaled or not prior to applying bias correc
       (MAE = mean absolute error.)
     </em>
 </p>
-
 
 ### 5.2. Temperature variability
 
@@ -645,7 +641,6 @@ whereas the bias correction methods act on the model data.
     </em>
 </p>
 
-
 ### 5.3. Temperature extremes
 
 For extremes indices related to daily minimum temperature
@@ -675,7 +670,6 @@ As with the temperature climatology metrics,
 it did not appear to make much difference for these temperature extremes metrics
 whether GCM data are dynamically downscaled or not prior to applying bias correction.
 
-
 <p align="center">
     <img src="figures/tasmin_extreme-bias_task-historical_EC-Earth-Consortium-EC-Earth3_BOM-BARPA-R.png" width=60% height=60%>
     <br>
@@ -689,7 +683,6 @@ whether GCM data are dynamically downscaled or not prior to applying bias correc
       (MAE = mean absolute error.)
     </em>
 </p>
-
 
 ### 5.4. Temperature trends
 
@@ -708,7 +701,6 @@ In fact, dynamical downscaling modified the model trend much more than bias corr
       and various bias correction methods applied to those model data (remaining panels).
     </em>
 </p>
-
 
 ### 5.5. Precipitation climatology
 
@@ -746,7 +738,6 @@ were not dynamically downscaled prior to applying bias correction (e.g. Figure 1
     </em>
 </p>
 
-
 ### 5.6. Precipitation variability
 
 RCM output was generally associated with similar or slightly reduced bias
@@ -767,7 +758,6 @@ the QDC method was associated with consistently lower biases on cross validation
 This is likely due to the fact that a simple replication of the training data clearly
 outperformed all methods on cross validation,
 and the QDC method effectively just applies a small perturbation to the training data.
-
 
 <p align="center">
     <img src="figures/pr_interannual-variability-bias_task-xvalidation_EC-Earth-Consortium-EC-Earth3_CSIRO-CCAM-2203.png">
@@ -869,8 +859,6 @@ while the ECDFm method tended not to reduce the RCM bias.
     </em>
 </p>
 
-
-
 ### 5.9. Precipitation trends
 
 Bias correction tended to slightly alter the model simulated rainfall trends (e.g. Figure 15).
@@ -891,42 +879,6 @@ For all RCM/GCM combinations, dynamical downscaling modified the model trend mor
     </em>
 </p>
 
-
-### 5.10. Link between variables
-
-The link between temperature and rainfall was assessed by calculating the cross correlation
-between the monthly mean anomaly timeseries of precipitation and daily maximum temperature.
-In observations,
-there is a negative correlation between the two variables across the whole of Australia
-with the strongest correlation seen in the north and east of the country (Figure 7.1).
-In other words, wet months tend to be associated with lower daily maximum temperatures.
-The ACCESS-ESM1-5 model does a reasonable job of capturing those negative cross correlations.
-Dynamical downscaling and bias correction can slightly reduce the GCM biases,
-particularly the QDC method (Figure 7.2).
-
-<p align="center">
-    <img src="figures/ptcorr-values_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
-    <br>
-    <em>
-      Figure 7.1: Cross correlation between the monthly mean anomaly timeseries
-      of precipitation and daily maximum temperature
-      for the "cross validation" assessment task.
-      Results are shown for a GCM (top left),
-      RCM forced by that GCM (bottom left),
-      and various bias correction methods applied to those model data (rows).
-      The far right column shows the observed AGCD cross correlation
-      for the assessment (1990-2019; top right) and training (1960-1989; bottom right) periods.
-    </em>
-</p>
-
-<p align="center">
-    <img src="figures/ptcorr-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png" width=100% height=100%>
-    <br>
-    <em>
-      Figure 7.2: As per Figure 7.1 but showing the difference in cross correlation
-      relative to the observed AGCD correlation.
-    </em>
-</p>
 
 ## 6. Discussion
 
@@ -968,7 +920,12 @@ Caveats:
   It could be that we'd see different results with more complex metrics.
   For instance, [Vogel et al 2023](https://doi.org/10.1016/j.jhydrol.2023.129693) find MRNBC
   to be superior after bias corrected inputs for multiple variables
-  are passed through a hydrological model. 
+  are passed through a hydrological model.
+- We looked at the link between temperature and rainfall by calculating the cross correlation
+  between the monthly mean anomaly timeseries of precipitation and daily maximum temperature.
+  The GCMs did a reasonable job,
+  biases were slightly reduced by dynamical downscaling, bias corrected and QDC,
+  but the improvement was small/subtle. 
 
 What we did with this information:
 - We bias corrected the entire CORDEX-CMIP6 archive (for selected variables)
@@ -978,3 +935,5 @@ What we did with this information:
   In the first instance we used the same GCMs that were downscaled,
   but that dataset can be expanded to include other GCMs.
 
+What would be the focus of a future phase of the NPCP bias correction intercomparison?
+- sub-daily timescales
