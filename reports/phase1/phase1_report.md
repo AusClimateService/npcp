@@ -376,7 +376,8 @@ produced by NPCP partner organisations.
 These data will ultimately be submitted to the Coordinated Regional Climate Downscaling Experiment (CORDEX)
 and will form the basis for much of the climate projection information delivered by NPCP members.
 
-We used daily timescale temperature and precipitation data
+The subset of the NPCP CORDEX data we used
+was the daily timescale temperature and precipitation data
 from RCM simulations forced by Coupled Model Intercomparsion Project phase 6
 (CMIP6; [Eyring et al 2016](https://doi.org/10.5194/gmd-9-1937-2016))
 global climate model (GCM) data from the
@@ -394,38 +395,63 @@ University of Queensland and the Queensland Department of Environment and Scienc
 produced by running a different configuration of CCAM
 ([Chapman et al, 2023](https://doi.org/10.1029/2023EF003548)).
 
-The observational / reference data used for the bias correction
-was the Australian Gridded Climate Data (AGCD) dataset
+The observational / reference data used was the Australian Gridded Climate Data (AGCD) dataset
 ([Evans et al 2020](http://www.bom.gov.au/research/publications/researchreports/BRR-041.pdf),
 [Jones et al 2009](http://www.bom.gov.au/jshess/docs/2009/jones.pdf)).
-The spatial resolution of the datasets ranged from 0.5 degrees of latitude and longitude (AGCD)
-to 0.2 degrees (UQ-DES-CCAM-2015) over the entire landmass of Australia,
-so all data was regridded to the 0.2 degree grid using conservative remapping.
+
+The spatial resolution of the datasets ranged from 0.05 degrees of latitude and longitude for AGCD
+to 0.2 degrees for UQ-DES-CCAM-2015 over the entire landmass of Australia.
+When comparing RCM data against observations of higher spatial resolution,
+differences can arise not only from model bias/errors (which bias correction seeks to remove),
+but also from the resolution (or scale) gap between the datasets.
+The latter discrepancy — which is not a model error —
+is known as the representativeness problem
+([Zwiers et al 2011](https://doi.org/10.1007/978-94-007-6692-1_13)).
+In order to avoid this problem in the intercomparison,
+all data were regridded to the 0.2 degree grid using conservative remapping.
 
 ## 4. Assessment
 
 Three tasks were completed for each of the bias correction methods (for each of the GCM/RCM combinations):
 - **Task 1 (Historical)**: Produce bias corrected data for the 1980-2019 period, using 1980-2019 as a training period.
-- **Task 2 (Projection)**: Produce bias corrected data for the 2060-2099 period, using 1980-2019 as a training period.
-- **Task 3 (Cross validation)**: Produce bias corrected data for the 1990-2019 period, using 1960-1989 as a training period.
+- **Task 2 (Cross validation)**: Produce bias corrected data for the 1990-2019 period, using 1960-1989 as a training period.
+- **Task 3 (Projection)**: Produce bias corrected data for the 2060-2099 period, using 1980-2019 as a training period.
 
 The rationale for the historical task was to assess how well the bias correction methods perform
 when they train on exactly the same data that they correct.
 This is the most basic test of a bias correction method -
-if a method cannot adequately correct the very data it trained on,
+if a method cannot adequately correct the very data it was trained upon,
 it is unlikely to be a useful method.
 Conversely, if a method performs too well at the historical task,
 this can in some cases be an indication of over-fitting.
-(The historical task was not completed for the QDC method since
-by definition that method would achieve a perfect score by simply returning the observations un-adjusted.)
-The cross validation task assesses how well the methods perform when producing data
-for a different time period than the training period,
-which is a more difficult test (and also the typical application for bias correction methods).
-The projection task was included to see if the bias correction methods substantially modify the trend simulated by the models.
-Trend modification is a problem for many bias correction methods (e.g. [Zhang et al 2024](https://doi.org/10.1002/met.2204)).
+In other words,
+validating a bias correction method on the same data that was used for calibration
+can give the impression that the method is more skilful than it actually is.
+
+The rationale for the cross validation task was to avoid the impression of artificial skill
+by validating the bias correction methods on data that was not used for calibration.
+It also allowed for the QDC method to be directly compared to the bias correction methods,
+because for the historical task the QDC method simply reproduces the original observations.
+Cross validation is the gold standard for weather forecast verification,
+because temporal synchronicity is expected between the forecast data and observations.
+In the context bias correction validation,
+the value of cross validation is limited by internal climate variability
+(i.e. temporal synchronicity is not expected between the RCM data and observations;
+[Maraun 2016](https://doi.org/10.1007/s40641-016-0050-x),
+[Maraun et al 2017](https://doi.org/10.1038/nclimate3418)),
+but it is still a widely used approach.
+Performing both an historical and cross validation task
+allowed for comparison of results from two approaches with different
+(artificial skill versus internal variability), non-overlapping limitations.
+
+Finally, the projection task was included to see if the bias correction methods
+substantially modify the trend simulated by the models.
+Trend modification is a problem for many bias correction methods
+(e.g. [Zhang et al 2024](https://doi.org/10.1002/met.2204)).
 
 Since the ensemble of GCMs selected for dynamical downscaling by RCMs is only a subset of the full CMIP6 ensemble,
-some NPCP members are also interested in applying bias correction directly to GCM output.
+some scientists and institutions participating in the NPCP
+are also interested in applying bias correction directly to GCM output.
 In order to better understand how GCM outputs that have been dynamically downscaled and then bias corrected
 compare to GCM outputs that are directly bias corrected,
 the three assessment tasks were also completed on GCM output
@@ -470,12 +496,23 @@ A few of the metrics in Table 1 do not appear in the summary result tables
 because they are very similar to closely related metrics
 (e.g. interannual variability, R20mm).
 
-The results for each variable and assessment category are discussed below,
+The results for each variable and assessment category are discussed in the sections below,
 with maps showing the results for all grid points for a representative RCM/GCM as required.
 In addition to showing the results for bias corrected RCM and GCM data,
 the maps for the cross validation task also show an "AGCD (training data)" result.
 This result is derived from simply replicating the AGCD training data
 rather than applying a bias correction method.
+
+It is clear from Table 1 and 2 that the bias correction methods
+perform better on the historical task than the cross validation task.
+This is to be expected given the influence of internal variability on cross validation (as discussed earlier).
+Having said that, the broad conclusions that can be drawn from those Tables
+about relative performance of the bias correction methods and
+whether or not they provide any substantial benefit
+are similar between the historical and cross validation tasks.
+In the results presented below,
+discussion will therefore mostly summarise both tasks simultaneously,
+drawing out key differences where they arise.
 
 > TODO: Provide information on where to find plots that weren't included in this report
 > (e.g. supplementary information or the notebooks on GitHub).
@@ -903,29 +940,31 @@ General conclusions:
 - Directly bias correcting GCM data (i.e. without dynamical downscaling first)
   appears to be a valid option
   (if low bias on simple metrics like the ones we looked at is important for you application).
+  Although as noted by previous authors,
+  it is difficult to demonstrate added value of an RCM,
+  after both GCM and RCM have been bias corrected
+  (e.g. [Eden et al 2014](https://doi.org/10.1002/2014JD021732)).
 
 Caveats:
-- We need to discuss the appropriate level of attention to give to the historical versus cross validation results.
-  The use of 'out-of-sample' validation and the more sophisticated k-fold cross validation
-  has been criticised as being insufficient to identify artificial skill or unskilful bias correction
-  ([Maraun, 2016](https://doi.org/10.1007/s40641-016-0050-x); [Maraun et al., 2017](https://doi.org/10.1038/nclimate3418)).
-  The issue is because there is no pairwise correspondence between predictors and predictands in climate models.
-  This differs from the use of k-fold validation in numerical weather prediction models where the correspondence occurs.
-  Essentially the use of cross validation for climate projections,
-  where there is no temporal synchronicity between the projections and the observations
-  may not be a useful indicator of the skill of the bias correction method.
-  Furthermore, the limitations are of cross validation are more severe if only the marginal aspects of the distribution are evaluated.
-  The Maraun paper/s makes the suggestion that one should therefore evaluate the non-marginal aspects that have not been calibrated.
 - Our metrics are pretty simple.
   It could be that we'd see different results with more complex metrics.
   For instance, [Vogel et al 2023](https://doi.org/10.1016/j.jhydrol.2023.129693) find MRNBC
   to be superior after bias corrected inputs for multiple variables
   are passed through a hydrological model.
+- Rather than simple/complex,
+  it might be better to discuss our metrics in relation to the framing used by
+  [Maraun et al (2015)](https://doi.org/10.1002/2014EF000259)
+  who consider the climate system as a multivariate distribution having marginal, temporal, spatial, and inter-variable aspects.
+  Examples of those aspects are listed [here](https://www.value-cost.eu/indices).
 - We looked at the link between temperature and rainfall by calculating the cross correlation
   between the monthly mean anomaly timeseries of precipitation and daily maximum temperature.
   The GCMs did a reasonable job,
   biases were slightly reduced by dynamical downscaling, bias corrected and QDC,
-  but the improvement was small/subtle. 
+  but the improvement was small/subtle.
+- Bias correction is not a cure-all. Fundamental model errors cannot be corrected by bias correction.
+  Current bias correction methods might improve the applicability of climate simulations,
+  but in general cannot improve low model credibility
+  ([Maraun et al 2017](https://doi.org/10.1038/nclimate3418)).
 
 What we did with this information:
 - We bias corrected the entire CORDEX-CMIP6 archive (for selected variables)
