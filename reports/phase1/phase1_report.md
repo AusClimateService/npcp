@@ -413,25 +413,25 @@ all data were regridded to the 0.2 degree grid using conservative remapping.
 ## 4. Assessment
 
 Three tasks were completed for each of the bias correction methods (for each of the GCM/RCM combinations):
-- **Task 1 (Historical)**: Produce bias corrected data for the 1980-2019 period, using 1980-2019 as a training period.
+- **Task 1 (Calibration)**: Produce bias corrected data for the 1980-2019 period, using 1980-2019 as a training period.
 - **Task 2 (Cross validation)**: Produce bias corrected data for the 1990-2019 period, using 1960-1989 as a training period.
 - **Task 3 (Projection)**: Produce bias corrected data for the 2060-2099 period, using 1980-2019 as a training period.
 
-The rationale for the historical task was to assess how well the bias correction methods perform
+The rationale for the calibration task was to assess how well the bias correction methods perform
 when they train on exactly the same data that they correct.
 This is the most basic test of a bias correction method -
 if a method cannot adequately correct the very data it was trained upon,
 it is unlikely to be a useful method.
-Conversely, if a method performs too well at the historical task,
+Conversely, if a method performs too well on the calibration task,
 this can in some cases be an indication of over-fitting.
 In other words,
-validating a bias correction method on the same data that was used for calibration
+validating a bias correction method on the same data that was used to calibrate the method
 can give the impression that the method is more skilful than it actually is.
 
 The rationale for the cross validation task was to avoid the impression of artificial skill
 by validating the bias correction methods on data that was not used for calibration.
 It also allowed for the QDC method to be directly compared to the bias correction methods,
-because for the historical task the QDC method simply reproduces the original observations.
+because for the calibration task the QDC method simply reproduces the original observations.
 Cross validation is the gold standard for weather forecast verification,
 because temporal synchronicity is expected between the forecast data and observations.
 In the context bias correction validation,
@@ -440,9 +440,9 @@ the value of cross validation is limited by internal climate variability
 [Maraun 2016](https://doi.org/10.1007/s40641-016-0050-x),
 [Maraun et al 2017](https://doi.org/10.1038/nclimate3418)),
 but it is still a widely used approach.
-Performing both an historical and cross validation task
-allowed for comparison of results from two approaches with different
-(artificial skill versus internal variability), non-overlapping limitations.
+Performing both a calibration and cross validation task
+allowed for comparison of results from two approaches with different, non-overlapping limitations
+(i.e. artificial skill versus internal variability).
 
 Finally, the projection task was included to see if the bias correction methods
 substantially modify the trend simulated by the models.
@@ -487,7 +487,7 @@ _Table 1: Metrics calculated at each grid point across Australia._
 ## 5. Results
 
 In order to provide an overview of the performance of each bias correction method,
-the results were condensed into a single summary table for the historical (Figure 1)
+the results were condensed into a single summary table for the calibration (Figure 1)
 and cross validation (Figure 2) tasks.
 The tables show the bias in key metrics averaged (using the mean absolute error/bias)
 over all grid points and GCM/RCM combinations.
@@ -503,17 +503,6 @@ the maps for the cross validation task also show an "AGCD (training data)" resul
 This result is derived from simply replicating the AGCD training data
 rather than applying a bias correction method.
 
-It is clear from Table 1 and 2 that the bias correction methods
-perform better on the historical task than the cross validation task.
-This is to be expected given the influence of internal variability on cross validation (as discussed earlier).
-Having said that, the broad conclusions that can be drawn from those Tables
-about relative performance of the bias correction methods and
-whether or not they provide any substantial benefit
-are similar between the historical and cross validation tasks.
-In the results presented below,
-discussion will therefore mostly summarise both tasks simultaneously,
-drawing out key differences where they arise.
-
 > TODO: Provide information on where to find plots that weren't included in this report
 > (e.g. supplementary information or the notebooks on GitHub).
 
@@ -524,7 +513,7 @@ drawing out key differences where they arise.
     <br>
     <em>
       Figure 1: Mean absolute error/bias across all grid points and GCM/RCM combinations
-      for the historical assessment task.
+      for the calibration assessment task.
       Metrics include the
       annual climatology (mean),
       seasonal cycle (cycle),
@@ -557,7 +546,7 @@ in the temperature annual climatology and seasonal cycle than corresponding GCM 
 some bias still persisted and tended to have its own unique spatial characteristics
 (i.e. different from the GCM; e.g. Figure 3).
 When bias correction was applied to RCM output
-following the historical assessment task protocol
+following the calibration assessment task protocol
 (i.e. with an overlapping training and correction period),
 those biases were typically almost completely eliminated.
 The exception was the MBCn method,
@@ -566,7 +555,7 @@ for all GCM/RCM combinations (e.g. Figure 3).
 Biases in the RCM output were also greatly reduced
 (but not completely eliminated) on the cross validation task.
 The MBCn method was again the worst performing on cross validation,
-but unlike for the historical task it did reduce the RCM bias (Figure 4).
+but unlike for the calibration task it did reduce the RCM bias (Figure 4).
 The residual bias after applying the ECDFm and QDC methods
 to RCM and GCM outputs was very similar (e.g. Figures 3 and 4).
 This suggests that in the context of producing data with low bias
@@ -579,7 +568,7 @@ whether GCM data are dynamically downscaled or not prior to applying bias correc
     <br>
     <em>
       Figure 3: Bias in annual mean daily maximum temperature (relative to the AGCD dataset)
-      for the "historical" assessment task.
+      for the "calibration" assessment task.
       Results are shown for the ACCESS-ESM1-5 GCM (top left),
       the BOM-BARPA-R RCM forced by that GCM (bottom left),
       and various bias correction methods applied to those GCM (top row, columns to the right)
@@ -613,7 +602,7 @@ The exception was the MNRBC method,
 which unlike the other methods does attempt to explicitly correct for
 biases in variability at multiple time scales (Section 2.5.1).
 The MRNBC method was able to reduce biases in interannual and multi-year temperature variability
-on the historical task (Figure 5) but actually inflated those biases on cross validation (Figure 6).
+on the calibration task (Figure 5) but actually inflated those biases on cross validation (Figure 6).
 This may suggest a degree of overfitting by the MRNBC method.
 
 <p align="center">
@@ -621,7 +610,7 @@ This may suggest a degree of overfitting by the MRNBC method.
     <br>
     <em>
       Figure 6: Bias in interannual variability (relative to the AGCD dataset)
-      for the "historical" assessment task.
+      for the "calibration" assessment task.
       Results are shown for the ACCESS-ESM1-5 GCM (top left),
       the UQ-DES-CCAM-2105 RCM forced by that GCM (bottom left),
       and various bias correction methods applied to those GCM (top row, columns to the right)
@@ -691,7 +680,7 @@ For both temperature variables, some bias still persisted after dynamical downsc
 and it tended to have its own unique spatial characteristics
 (i.e. different from the GCM; e.g. Figure 8).
 
-When bias correction was applied to RCM output for the historical task,
+When bias correction was applied to RCM output for the calibration task,
 those biases were greatly reduced but not completely eliminated.
 Similar to the climatology results,
 the MBCn method performed substantially worse than the other methods
@@ -699,7 +688,7 @@ on daily maximum temperature extremes
 (and to a lesser extent daily minimum temperature)
 due to a warm bias across the entire continent (e.g. Figure 8).
 The MRNBC method performed similarly to ECDFm and QME
-for both the historical and cross validation tasks over most the of continent,
+for both the calibration and cross validation tasks over most the of continent,
 but displayed substantial cool biases in minimum temperature extremes
 over high elevation areas in central Tasmania and along the Great Dividing Range (e.g. Figure 8).
 
@@ -712,7 +701,7 @@ whether GCM data are dynamically downscaled or not prior to applying bias correc
     <br>
     <em>
       Figure 8: Bias in the 1-in-10 year low daily minimum temperature (relative to the AGCD dataset)
-      for the "historical" assessment task.
+      for the "calibration" assessment task.
       Results are shown for the EC-Earth3 GCM (top left),
       the BOM-BARPA-R RCM forced by that GCM (bottom left),
       and various bias correction methods applied to those GCM (top row, columns to the right)
@@ -745,13 +734,13 @@ Similar to the temperature results,
 RCM output was generally (but not always) associated with smaller biases in
 the annual precipitation climatology and seasonal cycle than corresponding GCM output,
 but some bias still persisted and could have its own unique spatial characteristics.
-When bias correction was applied to RCM output for the historical task,
+When bias correction was applied to RCM output for the calibration task,
 those biases were typically dramatically reduced, especially for the MRNBC method.
 The exception was the MBCn method,
 which showed a consistently large wet bias over the entire continent
 for all GCM/RCM combinations.
 Biases in the RCM output were also reduced on the cross validation task,
-but to a lesser extent than for the historical task (e.g. Figure 10).
+but to a lesser extent than for the calibration task (e.g. Figure 10).
 The MRNBC method was no longer the stand out method,
 but the MBCn method was again the worst performing on cross validation
 due to a consistent wet bias. 
@@ -779,7 +768,7 @@ were not dynamically downscaled prior to applying bias correction (e.g. Figure 1
 
 RCM output was generally associated with similar or slightly reduced bias
 in interannual and multi-year precipitation variability (e.g. Figure 11 and 12).
-When bias correction was applied to RCM output for the historical task,
+When bias correction was applied to RCM output for the calibration task,
 those biases were typically reduced, especially for the MRNBC method.
 The exception was the MBCn method,
 which was consistently associated with larger biases than the RCM data.
@@ -837,7 +826,7 @@ while the upper end was captured by the annual number of days with more than
 Dynamical downscaling tended to reduce GCM bias in wet day frequency
 but made little difference to r10mm or r20mm biases.
 Bias correction tended to further the reduce the remaining RCM bias,
-almost eliminating it completely on the historical task. 
+almost eliminating it completely on the calibration task. 
 The exception was again the MBCn method,
 for which biases either remained relatively unchanged or increased.
 
@@ -850,14 +839,14 @@ For a less extreme metric like the 99th percentile
 dynamical downscaling was associated with a similar mean absolute bias
 as the corresponding GCM output (e.g. Figure 13).
 With the exception of the MBCn method,
-all methods reduced the bias in the RCM output on both the historical
+all methods reduced the bias in the RCM output on both the calibration
 (and to a lesser extent) cross validation tasks.
 It was difficult to separate the methods as they all performed similarly.
 
 For a more extreme metric like the 1-in-10 year event,
 dynamical downscaling was associated with a larger mean absolute bias than
 the corresponding GCM output (e.g. Figure 14).
-On the historical task the various methods could be easily distiguished,
+On the calibration task the various methods could be easily distiguished,
 with the MRNBC method reducing the RCM bias to the greatest degree,
 followed by the QME and then ECDFm methods.
 On cross validation,
@@ -921,13 +910,32 @@ For all RCM/GCM combinations, dynamical downscaling modified the model trend mor
 
 > The following is just draft notes that need to be further edited.
 
+The first major initiative on the Climate Projections Roadmap for Australia
+is the production of national-scale climate projections.
+A primary data source for the next generation of national projections is the CMIP6 GCMs,
+but they provide neither regional-scale nor unbiased information.
+A number of modelling groups have used RCMs to dynamically downscale CMIP6 output over Australia
+(i.e. to partly address these issues),
+but these RCM data still have substantial biases, partly inherited from the driving GCMs.
+As such, for many applications (e.g. regional impact modelling)
+some form of bias correction of the RCM (or GCM) data will be required.
+In order to identify the most appropriate bias correction methods,
+the NPCP established a bias correction intercomparison project.
+This paper presents the results of the first phase of that intercomparison.
+
 General conclusions:
+- The bias correction methods perform better on the calibration task than the cross validation task.
+  This is to be expected given the influence of internal variability on cross validation (as discussed earlier).
+  Having said that, the broad conclusions that can be drawn from those Tables
+  about relative performance of the bias correction methods and
+  whether or not they provide any substantial benefit
+  are similar between the calibration and cross validation tasks.
 - There's something wrong (either methodologically or implementationally) with the MBCn method.
 - The ECDFm method can make things worse in some cases (precipitation extremes and variability).
   From a "do no harm" perspective, QME is therefore a safer option for univariate bias correction
   (despite the fact the method is a little harder to explain to a non-expert audience).
   We hypothesise that it's the data transform that makes QME safer/better than ECDFm.
-- MRNBC performed very well on the historical task.
+- MRNBC performed very well on the calibration task.
   This might be indicative of a bit of an overfitting problem
   as it was less of a stand out on cross validation (especially variability)
   but in general it still compared well with the univariate methods . 
@@ -940,10 +948,13 @@ General conclusions:
 - Directly bias correcting GCM data (i.e. without dynamical downscaling first)
   appears to be a valid option
   (if low bias on simple metrics like the ones we looked at is important for you application).
-  Although as noted by previous authors,
-  it is difficult to demonstrate added value of an RCM,
+  Similar to previous authors,
+  we found it was difficult to demonstrate added value of an RCM,
   after both GCM and RCM have been bias corrected
   (e.g. [Eden et al 2014](https://doi.org/10.1002/2014JD021732)).
+  The exception was the CSDI and WSDI,
+  which were improved by dynamical downscaling but not bias correction.
+
 
 Caveats:
 - Our metrics are pretty simple.
