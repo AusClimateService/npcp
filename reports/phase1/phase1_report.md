@@ -257,7 +257,7 @@ A copy of the code as at October 2023 is included in the appendix of the Bureau 
 that documents the QME method ([Dowdy 2023](http://www.bom.gov.au/research/publications/researchreports/BRR-087.pdf)),
 while the very latest version is available from Andrew by request.
 The Bureau of Meteorology has also written a Python implementation of the method
-that is openly available on [GitHub](https://github.com/AusClimateService/QME).
+that is openly available on GitHub ([Gammon 2025](https://doi.org/10.5281/zenodo.14635627)).
 
 There are a number of decisions to make when implementing the QME method.
 All of the general features described above are customisable, including the
@@ -365,7 +365,7 @@ to impart observed distributional and persistence properties of the input fields
 
 #### 2.5.2. Software (and implementation choices)
 
-> TODO: There was some talk of putting the MRNBC code up on the ACS GitHub Organisation.
+> TODO: The MRNBC code will be available on [GitHub](https://github.com/AusClimateService/MRNBC).
 
 
 ## 3. Data
@@ -917,11 +917,14 @@ but they provide neither regional-scale nor unbiased information.
 A number of modelling groups have used RCMs to dynamically downscale CMIP6 output over Australia
 (i.e. to partly address these issues),
 but these RCM data still have substantial biases, partly inherited from the driving GCMs.
-As such, for many applications (e.g. regional impact modelling)
-some form of bias correction of the RCM (or GCM) data will be required.
+That means for many applications (e.g. regional impact modelling)
+some form of bias correction of RCM (and/or GCM) data is required.
 In order to identify the most appropriate bias correction methods,
 the NPCP established a bias correction intercomparison project.
 This paper presents the results of the first phase of that intercomparison.
+
+
+
 
 General conclusions:
 - The bias correction methods perform better on the calibration task than the cross validation task.
@@ -954,7 +957,6 @@ General conclusions:
   (e.g. [Eden et al 2014](https://doi.org/10.1002/2014JD021732)).
   The exception was the CSDI and WSDI,
   which were improved by dynamical downscaling but not bias correction.
-
 
 Caveats:
 - Our metrics are pretty simple.
