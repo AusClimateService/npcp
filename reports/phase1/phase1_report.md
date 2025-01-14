@@ -365,7 +365,7 @@ to impart observed distributional and persistence properties of the input fields
 
 #### 2.5.2. Software (and implementation choices)
 
-> TODO: The MRNBC code will be available on [GitHub](https://github.com/AusClimateService/MRNBC).
+> TODO: The MRNBC code is available on GitHub ([Gammon and Kapoor, 2025](https://doi.org/10.5281/zenodo.14641854)).
 
 
 ## 3. Data
