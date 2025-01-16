@@ -911,28 +911,34 @@ For all RCM/GCM combinations, dynamical downscaling modified the model trend mor
 > The following is just draft notes that need to be further edited.
 
 The first major initiative on the Climate Projections Roadmap for Australia
-is the production of national-scale climate projections.
-A primary data source for the next generation of national projections is the CMIP6 GCMs,
-but they provide neither regional-scale nor unbiased information.
-A number of modelling groups have used RCMs to dynamically downscale CMIP6 output over Australia
-(i.e. to partly address these issues),
-but these RCM data still have substantial biases, partly inherited from the driving GCMs.
-That means for many applications (e.g. regional impact modelling)
-some form of bias correction of RCM (and/or GCM) data is required.
-In order to identify the most appropriate bias correction methods,
+is the production of next generation national-scale climate projections.
+A primary data source for those projections is the CMIP6 ensemble,
+but that dataset does not provide regional-scale or unbiased information.
+For many applications (e.g. regional impact modelling),
+that means some form of downscaling and bias correction is required.
+A number of modelling groups have used RCMs to dynamically downscale CMIP6 data over Australia,
+but the resulting CORDEX dataset still has substantial biases
+(partly inherited from the driving GCMs).
+In order to help select the most appropriate methods for bias correction,
 the NPCP established a bias correction intercomparison project.
-This paper presents the results of the first phase of that intercomparison.
+This paper presents the results of the first phase of that intercomparison,
+which focused on the methods available to the ACS right now
+for producing a general purpose bias corrected version/s of the CORDEX Australasia dataset.
 
+The intercomparison involved validating the various bias correction methods
+against the same observational data (the "calibration" task)
+and then against different observational data (the "cross validation" task)
+than was used to calibrate the methods.
+These validation approaches each have their have own limitations,
+so results that held up across both were considered more robust. 
+Indeed, aside from an obvious difference in the magnitude of the residual bias after bias correction
+(cross validation is associated with higher biases due to internal variability)
+the relative performance of the bias correction methods
+and whether or not they provided any substantial benefit
+was similar between the calibration and cross validation tasks.
+That meant a clear hierarchy between the methods could be identified.
 
-
-
-General conclusions:
-- The bias correction methods perform better on the calibration task than the cross validation task.
-  This is to be expected given the influence of internal variability on cross validation (as discussed earlier).
-  Having said that, the broad conclusions that can be drawn from those Tables
-  about relative performance of the bias correction methods and
-  whether or not they provide any substantial benefit
-  are similar between the calibration and cross validation tasks.
+General results:
 - There's something wrong (either methodologically or implementationally) with the MBCn method.
 - The ECDFm method can make things worse in some cases (precipitation extremes and variability).
   From a "do no harm" perspective, QME is therefore a safer option for univariate bias correction
