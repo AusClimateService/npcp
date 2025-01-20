@@ -908,8 +908,6 @@ For all RCM/GCM combinations, dynamical downscaling modified the model trend mor
 
 ## 6. Discussion
 
-> The following is just draft notes that need to be further edited.
-
 The first major initiative on the Climate Projections Roadmap for Australia
 is the production of next generation national-scale climate projections.
 A primary data source for those projections is the CMIP6 ensemble,
@@ -922,38 +920,70 @@ but the resulting CORDEX dataset still has substantial biases
 In order to help select the most appropriate methods for bias correction,
 the NPCP established a bias correction intercomparison project.
 This paper presents the results of the first phase of that intercomparison,
-which focused on the methods available to the ACS right now
+which focused on assessing the methods available to the ACS right now
 for producing a general purpose bias corrected version/s of the CORDEX Australasia dataset.
 
 The intercomparison involved validating the various bias correction methods
-against the same observational data (the "calibration" task)
-and then against different observational data (the "cross validation" task)
-than was used to calibrate the methods.
-These validation approaches each have their have own limitations,
+against the same observational data that was used to calibrate the methods (the "calibration" task)
+and then against different observational data (the "cross validation" task).
+These two validation approaches each have their have own limitations,
 so results that held up across both were considered more robust. 
 Indeed, aside from an obvious difference in the magnitude of the residual bias after bias correction
 (cross validation is associated with higher biases due to internal variability)
 the relative performance of the bias correction methods
 and whether or not they provided any substantial benefit
-was similar between the calibration and cross validation tasks.
+was similar between the two tasks.
 That meant a clear hierarchy between the methods could be identified.
 
+The best performing bias correction methods were QME and MRNBC.
+Both methods were effective in reducing model bias for most but not quite all of the assessment metrics.
+To understand why bias correction is not equally effective on all metrics,
+it is useful to consider the climate system as a multivariate distribution having
+marginal, temporal, spatial, and inter-variable aspects
+([Maraun et al 2015)](https://doi.org/10.1002/2014EF000259)).
+As a quantile-based univariate method applied to each month separately,
+the QME method directly modifies the marginal aspects of the distribution
+(e.g. the univariate mean and variance)
+and also some temporal aspects
+(e.g. quantiles, amplitude of the annual cycle, number of threshold exceedances),
+but does not modify other temporal aspects (e.g. sequencing, variability)
+or any spatial or inter-variable aspects.
+It was therefore not surprising that the QME method
+had little impact on model bias for
+interannual and multi-year variability and weather sequencing (CSDI and WSDI),
+which relate to temporal aspects that are not modified by that method. 
+
+The MRNBC method does modify temporal variability,
+so its performance on the interannual and multi-year variability metrics
+was particularly interesting.
+It tended to reduce model bias on the calibration task
+but increased it on the cross validation task,
+possibly suggesting a degree of overfitting by the method.
+The impact of the multivariate MRNBC method on the inter-variable aspects of the distribution
+was difficult to assess with the simple metrics employed in our analysis.
+For instance, bias in the cross correlation between the monthly mean anomaly timeseries
+of precipitation and daily maximum temperature
+showed little change with dynamical downscaling or bias correction of any kind (not shown).
+Having said that,
+when multiple variables are bias corrected for input into a hydrological model
+(i.e. a much more sophisticated inter-variable assessment)
+it has been shown that the MRNBC method outperforms univariate alternatives over Australia
+([Vogel et al 2023](https://doi.org/10.1016/j.jhydrol.2023.129693)).
+ 
+> The remainder of the discussion is just draft notes that need to be further edited.
+
 General results:
-- There's something wrong (either methodologically or implementationally) with the MBCn method.
 - The ECDFm method can make things worse in some cases (precipitation extremes and variability).
   From a "do no harm" perspective, QME is therefore a safer option for univariate bias correction
   (despite the fact the method is a little harder to explain to a non-expert audience).
   We hypothesise that it's the data transform that makes QME safer/better than ECDFm.
-- MRNBC performed very well on the calibration task.
-  This might be indicative of a bit of an overfitting problem
-  as it was less of a stand out on cross validation (especially variability)
-  but in general it still compared well with the univariate methods . 
 - QDC compares very favourably to bias correction.
   It generally performs as well as the best performing bias correction method,
   and much better on metrics like CSDI and WSDI where weather sequencing is important.
   If the limitations aren't a problem for you
   (e.g. you can generally only produce 20-40 year time slices as opposed to continuous timeseries
   and you're stuck with the observed sequence of events) then it's a good option.
+- There's something wrong (either methodologically or implementationally) with the MBCn method.
 - Directly bias correcting GCM data (i.e. without dynamical downscaling first)
   appears to be a valid option
   (if low bias on simple metrics like the ones we looked at is important for you application).
@@ -965,21 +995,6 @@ General results:
   which were improved by dynamical downscaling but not bias correction.
 
 Caveats:
-- Our metrics are pretty simple.
-  It could be that we'd see different results with more complex metrics.
-  For instance, [Vogel et al 2023](https://doi.org/10.1016/j.jhydrol.2023.129693) find MRNBC
-  to be superior after bias corrected inputs for multiple variables
-  are passed through a hydrological model.
-- Rather than simple/complex,
-  it might be better to discuss our metrics in relation to the framing used by
-  [Maraun et al (2015)](https://doi.org/10.1002/2014EF000259)
-  who consider the climate system as a multivariate distribution having marginal, temporal, spatial, and inter-variable aspects.
-  Examples of those aspects are listed [here](https://www.value-cost.eu/indices).
-- We looked at the link between temperature and rainfall by calculating the cross correlation
-  between the monthly mean anomaly timeseries of precipitation and daily maximum temperature.
-  The GCMs did a reasonable job,
-  biases were slightly reduced by dynamical downscaling, bias corrected and QDC,
-  but the improvement was small/subtle.
 - Bias correction is not a cure-all. Fundamental model errors cannot be corrected by bias correction.
   Current bias correction methods might improve the applicability of climate simulations,
   but in general cannot improve low model credibility
@@ -987,7 +1002,7 @@ Caveats:
 
 What we did with this information:
 - We bias corrected the entire CORDEX-CMIP6 archive (for selected variables)
-  using the QME and MRBNC methods (dataset DOI to come)
+  using the QME and MRBNC methods ([NCI 2025](https://doi.org/10.25914/xeca-pw53))
 - We created a QDC-CMIP6 dataset by applying the QDC method to GCM data
   ([Irving and Macadam 2024](https://doi.org/10.25919/03by-9y62); dataset DOI to come).
   In the first instance we used the same GCMs that were downscaled,
