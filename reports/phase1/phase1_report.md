@@ -344,7 +344,7 @@ and use 1000 quantiles in order to still have 10-15 data values between each qua
 
 #### 2.4.2. Software (and implementation choices)
 
-> TODO
+> TODO: The MBCn code is available on GitHub ([Gammon and Dao, 2025](https://doi.org/10.5281/zenodo.14708960)).
 
 ### 2.5. MRNBC
 
