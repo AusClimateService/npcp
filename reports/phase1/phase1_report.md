@@ -958,7 +958,12 @@ so its performance on the interannual and multi-year variability metrics
 was particularly interesting.
 It tended to reduce model bias on the calibration task
 but increased it on the cross validation task,
-possibly suggesting a degree of overfitting by the method.
+suggesting a degree of overfitting by the method.
+(Due to internal climate variability,
+to be more certain of an overfitting problem the
+cross validation would need to be repeated for multiple different
+calibration and assessment periods,
+which was beyond the scope of this study.)
 The impact of the multivariate MRNBC method on the inter-variable aspects of the distribution
 was difficult to assess with the simple metrics employed in our analysis.
 For instance, bias in the cross correlation between the monthly mean anomaly timeseries
@@ -967,7 +972,8 @@ showed little change with dynamical downscaling or bias correction of any kind (
 Having said that,
 when multiple variables are bias corrected for input into a hydrological model
 (i.e. a much more sophisticated inter-variable assessment)
-it has been shown that the MRNBC method outperforms univariate alternatives over Australia
+it has been shown on assessments similar to our calibration (as opposed to cross-validation) task 
+that the MRNBC method outperforms univariate alternatives over Australia
 ([Vogel et al 2023](https://doi.org/10.1016/j.jhydrol.2023.129693)).
  
 > The remainder of the discussion is just draft notes that need to be further edited.
