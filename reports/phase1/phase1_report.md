@@ -953,7 +953,7 @@ had little impact on model bias for
 interannual and multi-year variability and weather sequencing (CSDI and WSDI),
 which relate to temporal aspects that are not modified by that method. 
 
-The MRNBC method does modify temporal variability,
+The MRNBC method is specifically designed to modify temporal variability,
 so its performance on the interannual and multi-year variability metrics
 was particularly interesting.
 It tended to reduce model bias on the calibration task
@@ -974,21 +974,39 @@ when multiple variables are bias corrected for input into a hydrological model
 (i.e. a much more sophisticated inter-variable assessment)
 it has been shown on assessments similar to our calibration (as opposed to cross-validation) task 
 that the MRNBC method outperforms univariate alternatives over Australia
+when the hydrological model outputs are compared to observations
 ([Vogel et al 2023](https://doi.org/10.1016/j.jhydrol.2023.129693)).
  
-> The remainder of the discussion is just draft notes that need to be further edited.
+For most assessment metrics, the ECDFm method performed similarly to QME and MRNBC.
+An exception was the two metrics relating to precipitation variability,
+for which the ECDFm method ranged from reducing to dramatically increasing the model bias
+depending on which RCM/GCM combination was assessed.
+The other exception was very extreme precipitation (i.e. the 1-in-10 year event),
+for which ECDFm tended to have little effect on the model bias.
+In contrast, the QME method (i.e. the other option for univariate bias correction)
+essentially did no harm and did not dramatically inflate the model bias
+for particular metrics and RCM/GCM combinations.
+A detailed analysis of why the QME and ECDFm method performed differently in
+specific instances despite their obvious methodological similarities
+was beyond the scope of this paper,
+but we hypothesise that it could be related to the data transform that the QME method
+implements before any quantile matching is performed.
+
+The QDC method compared very favourably to the bias correction methods.
+On any given metric it generally performed as well as the best performing bias correction method,
+and much better on metrics like CSDI and WSDI where weather sequencing is important.
+The method essentially represents a (relatively small) perturbation to the observational record,
+so it naturally produces very realistic output.
+There are some practical limitations to using the QDC method
+(e.g. you can generally only produce 20-40 year time slices as opposed to a continuous timeseries
+and you are stuck with the observed sequence of weather events;
+[Irving and Macadam 2024](https://doi.org/10.25919/03by-9y62)),
+but if those are not a barrier then it appears to be a good option
+for producing projections data.
+
+> The points below are still in draft form and need to be incorporated into the text.
 
 General results:
-- The ECDFm method can make things worse in some cases (precipitation extremes and variability).
-  From a "do no harm" perspective, QME is therefore a safer option for univariate bias correction
-  (despite the fact the method is a little harder to explain to a non-expert audience).
-  We hypothesise that it's the data transform that makes QME safer/better than ECDFm.
-- QDC compares very favourably to bias correction.
-  It generally performs as well as the best performing bias correction method,
-  and much better on metrics like CSDI and WSDI where weather sequencing is important.
-  If the limitations aren't a problem for you
-  (e.g. you can generally only produce 20-40 year time slices as opposed to continuous timeseries
-  and you're stuck with the observed sequence of events) then it's a good option.
 - There's something wrong (either methodologically or implementationally) with the MBCn method.
 - Directly bias correcting GCM data (i.e. without dynamical downscaling first)
   appears to be a valid option
