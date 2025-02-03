@@ -925,11 +925,13 @@ for producing a general purpose bias corrected version/s of the CORDEX Australas
 
 The intercomparison involved validating the various bias correction methods
 against the same observational data that was used to calibrate the methods (the "calibration" task)
-and then against different observational data (the "cross validation" task).
+and then against different observational data
+by calibrating on the first half of the observational record
+and then validating on the second half (the "cross validation" task).
 These two validation approaches each have their have own limitations,
-so results that held up across both were considered more robust. 
+so results that were consistent across both were considered more robust. 
 Indeed, aside from an obvious difference in the magnitude of the residual bias after bias correction
-(cross validation is associated with higher biases due to internal variability)
+(cross validation is associated with higher biases due to internal climate variability)
 the relative performance of the bias correction methods
 and whether or not they provided any substantial benefit
 was similar between the two tasks.
@@ -972,13 +974,13 @@ showed little change with dynamical downscaling or bias correction of any kind (
 Having said that,
 when multiple variables are bias corrected for input into a hydrological model
 (i.e. a much more sophisticated inter-variable assessment)
-it has been shown on assessments similar to our calibration (as opposed to cross-validation) task 
+it has been shown on assessments similar to our calibration task 
 that the MRNBC method outperforms univariate alternatives over Australia
 when the hydrological model outputs are compared to observations
 ([Vogel et al 2023](https://doi.org/10.1016/j.jhydrol.2023.129693)).
  
 For most assessment metrics, the ECDFm method performed similarly to QME and MRNBC.
-An exception was the two metrics relating to precipitation variability,
+An exception was the metrics relating to precipitation variability,
 for which the ECDFm method ranged from reducing to dramatically increasing the model bias
 depending on which RCM/GCM combination was assessed.
 The other exception was very extreme precipitation (i.e. the 1-in-10 year event),
@@ -1004,33 +1006,32 @@ and you are stuck with the observed sequence of weather events;
 but if those are not a barrier then it appears to be a good option
 for producing projections data.
 
-> The points below are still in draft form and need to be incorporated into the text.
+The MBCn method was clearly the worst performing method,
+dramatically increasing the bias on a number of metrics.
+Given that the method is used elsewhere (REFS),
+it is possible that this poor performance relates to software implementation issues
+rather than the method itself.
 
-General results:
-- There's something wrong (either methodologically or implementationally) with the MBCn method.
-- Directly bias correcting GCM data (i.e. without dynamical downscaling first)
-  appears to be a valid option
-  (if low bias on simple metrics like the ones we looked at is important for you application).
-  Similar to previous authors,
-  we found it was difficult to demonstrate added value of an RCM,
-  after both GCM and RCM have been bias corrected
-  (e.g. [Eden et al 2014](https://doi.org/10.1002/2014JD021732)).
-  The exception was the CSDI and WSDI,
-  which were improved by dynamical downscaling but not bias correction.
+A final observation from this first phase of the NPCP bias correction intercomparison
+is that directly bias correcting GCM data
+(i.e. without using an RCM to dynamically downscale the GCM data first)
+tended to result in similar (for temperature) or better (for precipitation)
+bias reductions for most of the metrics that we assessed.
+This result is consistent with a previous analysis of precipitation
+across the United Kingdom
+(e.g. [Eden et al 2014](https://doi.org/10.1002/2014JD021732)).
+An exception was the metrics related to weather sequencing (the CSDI and WSDI),
+which were improved by dynamical downscaling but not bias correction.
+It could therefore be the case that metrics relating to
+temporal, spatial or inter-variable aspects of the climate system that we did not assess
+would highlight the benefits of dynamical downscaling prior to bias correction.
 
-Caveats:
-- Bias correction is not a cure-all. Fundamental model errors cannot be corrected by bias correction.
-  Current bias correction methods might improve the applicability of climate simulations,
-  but in general cannot improve low model credibility
-  ([Maraun et al 2017](https://doi.org/10.1038/nclimate3418)).
-
-What we did with this information:
-- We bias corrected the entire CORDEX-CMIP6 archive (for selected variables)
-  using the QME and MRBNC methods ([NCI 2025](https://doi.org/10.25914/xeca-pw53))
-- We created a QDC-CMIP6 dataset by applying the QDC method to GCM data
-  ([Irving and Macadam 2024](https://doi.org/10.25919/03by-9y62); dataset DOI to come).
-  In the first instance we used the same GCMs that were downscaled,
-  but that dataset can be expanded to include other GCMs.
-
-What would be the focus of a future phase of the NPCP bias correction intercomparison?
-- sub-daily timescales
+On the basis of these results,
+the Australian Climate Service went ahead and bias corrected
+the entire CORDEX-CMIP6 Australasia archive (for selected variables)
+using the QME and MRBNC methods ([NCI 2025](https://doi.org/10.25914/xeca-pw53)).
+A QDC-CMIP6 dataset was also produced by applying the QDC method to daily GCM data
+for selected CMIP6 models and variables
+([Irving and Macadam 2024](https://doi.org/10.25919/03by-9y62); dataset DOI to come).
+Future phases of the NPCP bias correction intercomparison may focus on topics such as
+bias correction of sub-daily timescale data.
