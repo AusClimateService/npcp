@@ -31,8 +31,8 @@ through a collaborative effort of the Australian climate projections community.
 The roadmap is shared vision statement of this new partnership,
 called the National Partnership for Climate Projections (NPCP),
 that aims to develop a consistent approach to deliver comparable,
-robust, fit-for-purpose future climate information to assess climate risks and inform adaptation planning.
-
+robust, fit-for-purpose future climate information
+to assess climate risks and inform adaptation planning.
 The roadmap identifies a number of priorities areas of collaboration for the NPCP,
 including the delivery of national and regional downscaled climate projections.
 This involves model selection, downscaling models, bias correction and calibration,
@@ -44,7 +44,7 @@ universities, and government agencies involved in the NPCP.
 Each of these methods have their own pros and cons and are suitable for different applications.
 The associated bias correction software also varies
 from code that was written for a specific research application (and sometimes subsequently abandoned)
-to code that is actively maintained by software engineers and regularly re-used.
+to code that is actively maintained by research software engineers and regularly re-used.
 
 In order to deliver the projections data described in the Climate Projections Roadmap for Australia,
 there was a clear need to establish an NPCP bias correction intercomparison project
@@ -53,8 +53,8 @@ The first major initiative listed by the Roadmap is the production of
 national-scale climate projections by the Australian Climate Service (ACS).
 The first phase of the bias correction intercomparison was therefore
 designed to support that initiative.
-It focused on bias correction methods that are available to the ACS right now
-(i.e. with functional software that is sufficiently well documented)
+It focused on bias correction methods that were available to the ACS right now
+(i.e. with functional software that was sufficiently well documented)
 and applied those methods to a subset of the CORDEX (and corresponding CMIP6) data
 that will be used by the ACS to generate nation-wide projections.
 Since existing bias correction assessments produced by NPCP partners
@@ -67,7 +67,7 @@ or for national hydrological modelling
 there was a need to produce a general Australia-wide assessment
 of all the available bias correction methods.
 
-This report documents the results of the first phase
+This report documents the results of this first phase
 of the NPCP bias correction intercomparison project.
 
 
@@ -75,7 +75,7 @@ of the NPCP bias correction intercomparison project.
 
 The first step in a typical bias correction procedure involves
 establishing a statistical relationship or transfer function
-between model outputs and observations over a reference (i.e. historical/training) time period.
+between model outputs and observations over a calibration (i.e. historical/training) time period.
 The established transfer function is then applied to the target model data
 (e.g. future model projections) in order to produce a "bias corrected" model time series.
 There are a wide variety of transfer functions / bias correction methodologies out there,
@@ -84,14 +84,15 @@ to more sophisticated multi-variate approaches.
 
 Through a series of NPCP meetings and workshops on the topic of bias correction,
 five methods were identified as being available for use by the ACS right now:
-- Equi-distant/ratio Cumulative Density Function matching (ECDFm; univariate)
+- Equi-distant/ratio Cumulative Density Function (CDF) matching (ECDFm; univariate)
 - Quantile Matching for Extremes (QME; univariate)
 - Quantile Delta Change (QDC; univariate)
 - N-Dimensional Multi-Variate Bias Correction (MBCn; multivariate)
 - Multivariate Recursive Nesting Bias Correction (MRNBC; multivariate)
 
 Some of these methods have been used previously in major projects undertaken
-by the CSIRO and/or the Bureau of Meteorology.
+by the Commonwealth Scientific and Industrial Research Organisation (CSIRO)
+and/or the Bureau of Meteorology (who are working together on the ACS).
 For instance, the QDC method was used to produce application ready climate data 
 for the [Climate Change in Australia](https://www.climatechangeinaustralia.gov.au/) project,
 while the QME and MRNBC methods were used to produce the latest
@@ -107,7 +108,7 @@ but there is interest in determining their potential for future projects.
 
 The most simple bias correction procedure is mean scaling,
 where the difference or ratio between the mean model and observed value
-over the reference/training period (i.e. the mean bias)
+over the calibration period (i.e. the mean bias)
 is removed (via subtraction or division) from the target model data
 in order to produce the bias corrected model time series.
 Quantile-based methods are a popular and slightly more sophisticated approach,
@@ -117,15 +118,16 @@ The ECDFm method is essentially the most basic quantile-based bias correction me
 The QME method is slightly more complicated in that it involves scaling the data
 before matching the model and observations by quantile.
 Prior to removing the quantile biases from the target model,
-the bias correction factors at the extreme ends of the distribution are also modified
+the bias correction factors at the extreme ends of the distribution are also modified by the QME method
 in an attempt to avoid potential overfitting or an excessive influence of very rare events.
 
 While it is technically a "delta change" method as opposed to a "bias correction" method,
 the QDC method was also included in the assessment.
 In contrast to bias correction,
-delta change approaches establish a transfer function between reference and future model outputs
+delta change approaches establish a transfer function between baseline and future model outputs
 (e.g. from an historical model experiment and future climate emission scenario experiment)
-and then apply that transfer function to observations to create a future time series.
+and then apply that transfer function to observations from the same baseline period
+to create a future time series.
 The QDC method is conceptually very similar to ECDFm
 and is essentially the most basic quantile-based delta change method available.
 
@@ -149,27 +151,28 @@ Each of the methods is described in more detail below.
 In _equidistant cumulative density function matching_
 ([Li et al, 2010](https://doi.org/10.1029/2009JD012882)),
 the transfer function represents the distance (i.e. arithmetic difference)
-between the observations and model for each quantile of the training period.
+between the observations and model for each quantile of the calibration period.
 Those differences are then added to the target model data
 according to the quantile each target data point represents over the target period.
 For instance, if a target temperature of $25^{\circ}$ Celsius corresponds to the 0.5 quantile
 (i.e. the median) in the target data,
-the difference between the median value in the observations and reference model data
+the difference between the median value in the observations and calibration model data
 is added to the target value in order to obtain the bias adjusted value.
-The underlying assumption is that the distance between the model and observed quantiles during the training period
+The underlying assumption is that the distance between the model and observed quantiles
+during the calibration period
 also applies to the target period, hence the name *equidistant*.
 The reference to *CDF matching* is clear from the mathematical representation of the method:
 
 $$x_{m-adjust} = x_{m,p} + F_{o,h}^{-1}(F_{m,p}(x_{m,p})) - F_{m,h}^{-1}(F_{m,p}(x_{m,p}))$$
 
 where $F$ is the CDF of either the observations ($o$) or model ($m$)
-for a historic training period ($h$) or target period ($p$).
+for a historical calibration period ($h$) or target period ($p$).
 That means $F_{o,h}^{-1}$ and $F_{m,h}^{-1}$ are the quantile functions (inverse CDF
 corresponding to the observations and model respectively.
 Returning to our target median value of $25^{\circ}$ (i.e. $x_{m,p} = 25$),
 the corresponding CDF would return a value of 0.5 (i.e. $F_{m,p}(25) = 0.5$).
 The difference between the observed ( $F_{o,h}^{-1}(0.5)$ )
-and reference model ( $F_{m,h}^{-1}(0.5)$ ) median values
+and calibration model ( $F_{m,h}^{-1}(0.5)$ ) median values
 would then be added to the target value of $25^{\circ}$ to get a bias corrected value.
 
 For precipitation, multiplicative as opposed to additive bias correction is preferred
@@ -252,12 +255,8 @@ to the bias adjustments in the tails of the distribution.
 
 #### 2.2.2. Software (and implementation choices) 
 
-The original IDL code used to implement the QME method is maintained by Andrew Dowdy at the University of Melbourne.
-A copy of the code as at October 2023 is included in the appendix of the Bureau of Meteorology research report
-that documents the QME method ([Dowdy 2023](http://www.bom.gov.au/research/publications/researchreports/BRR-087.pdf)),
-while the very latest version is available from Andrew by request.
-The Bureau of Meteorology has also written a Python implementation of the method
-that is openly available on GitHub ([Gammon 2025](https://doi.org/10.5281/zenodo.14635627)).
+The code used to implement the QME method is maintained by the Bureau of Meteorology
+and is openly available on GitHub ([Gammon 2025](https://doi.org/10.5281/zenodo.14635627)).
 
 There are a number of decisions to make when implementing the QME method.
 All of the general features described above are customisable, including the
@@ -268,14 +267,15 @@ and the N most extreme bins.
 There are also additional options as follows:
 - _Time grouping_:
   Similar to ECDFm, it is common to apply the QME method to individual seasons or months separately.
-  Each month’s histogram can also use data from adjacent months to increase the sample size (i.e., providing a 3-month moving average).
-  Monthly time grouping was used for this NPCP intercomparsion and adjacent months were included for precipitation.
+  Each month’s histogram can also use data from adjacent months to increase the sample size
+  (i.e., providing a 3-month moving average).
+  Monthly time grouping was used for the NPCP intercomparsion and adjacent months were included for precipitation.
 - _Adjustment factor smoothing_:
   A moving (boxcar) average can be applied over the range of bias correction values (i.e. for bins 0 to 500).
-  For this intercomparison a 21-point moving average was used.
+  For the intercomparison a 21-point moving average was used.
 - _Adjustment limits_:
   The software allows the user to specify a maximum adjustment/correction. 
-  The default setting for precipitation (used in this intercomparison)
+  The default setting for precipitation (used in the intercomparison)
   is for a maximum increase of 50% applied to values great than or equal to 10mm.
   For instance, a model daily precipitation value of 20mm could potentially be bias corrected
   up to a maximum value of 30mm.
@@ -290,16 +290,22 @@ There are also additional options as follows:
 
 #### 2.3.1 Method
 
-One of the most widely used methods for producing climate projection data is the so-called "delta change" approach.
+One of the most widely used methods for producing climate projection data
+is the so-called "delta change" approach.
 Rather than use the data from a model simulation of the future climate directly,
-the delta change approach calculates the relative change between a future and historical modelled time period.
-That relative change is then applied to observed data from the same historical time period in order to produce an "application ready" time series for the future period.
+the delta change approach calculates the relative change
+between a future and historical modelled time period.
+That relative change is then applied to observed data from the same historical time period
+in order to produce an "application ready" time series for the future period.
 
-While the simplest application of the delta change approach is to apply the mean model change to the observed data,
+While the simplest application of the delta change approach
+is to apply the mean model change to the observed data,
 a popular alternative is to calculate and apply the delta changes on a quantile by quantile basis
 (i.e. to adjust the variance of the distribution as opposed to just the mean).
-For instance, if an observed historical temperature of $25^{\circ}$ Celsius corresponds to the 0.5 quantile (i.e. the median) in the observed data,
-the difference between the median value in the future and historical model data is added to that observed historical temperature
+For instance, if an observed historical temperature of $25^{\circ}$ Celsius
+corresponds to the 0.5 quantile (i.e. the median) in the observed data,
+the difference between the median value in the future and historical model data
+is added to that observed historical temperature
 in order to obtain the projected future temperature.
 
 This *quantile delta change* (QDC) approach
@@ -309,12 +315,14 @@ is expressed mathematically as follows:
 
 $$x_{o,p} = x_{o,h} + F_{m,p}^{-1}(F_{o,h}(x_{o,h})) - F_{m,h}^{-1}(F_{o,h}(x_{o,h}))$$
 
-where $F$ is the CDF of either the observations ($o$) or model ($m$) for an historic ($h$) or future/projection period ($p$).
+where $F$ is the CDF of either the observations ($o$) or model ($m$)
+for an historic ($h$) or future/projection period ($p$).
 That means $F_{m,p}^{-1}$ and $F_{m,h}^{-1}$ are the quantile functions (inverse CDF)
 corresponding to the future and historical model simulations respectively.
 Returning to our observed median value of $25^{\circ}$ (i.e. $x_{o,h} = 25$),
 the corresponding CDF would return a value of 0.5 (i.e. $F_{o,h}(25) = 0.5$).
-The difference between the future ( $F_{m,p}^{-1}(0.5)$ ) and historical model ( $F_{m,h}^{-1}(0.5)$ ) median values
+The difference between the future ( $F_{m,p}^{-1}(0.5)$ ) and
+historical model ( $F_{m,h}^{-1}(0.5)$ ) median values
 would then be added to the observed value of $25^{\circ}$ to get the projected future temperature.
 
 For variables like precipitation, multiplicative as opposed to additive mapping is preferred
@@ -327,24 +335,33 @@ $$x_{o,p} = x_{o,h} \times (F_{m,p}^{-1}(F_{o,h}(x_{o,h})) \div F_{m,h}^{-1}(F_{
 Since both methods are conceptually very similar,
 the QDC method is implemented using the same software as the ECDFm method
 ([Irving 2024](https://doi.org/10.5281/zenodo.12523625)).
-The same implementation choices are made regarding time grouping, quantiles and singularity stochastic removal.
-The only difference is when processing precipitation data (a multiplicative application of QDC)
-we've found that in many locations the model bias in the timing of the seasonal cycle
-means that monthly time grouping dramatically modifies the climate trend in the data
-(i.e. the mean change between the future data produced by QDC and the observations
-is much different than the mean change between the future and historical model simulations).
-As such, we don't apply any time grouping when applying QDC to precipitation data
-and use 1000 quantiles in order to still have 10-15 data values between each quantile. 
+The same implementation choices are made regarding
+time grouping, quantiles and singularity stochastic removal.
+
+Model biases in the simulated precipitation distribution can cause the QDC method
+to produce unrealistically large adjustment factors under special circumstances
+(when there is an increasing rainfall trend and a dry model bias at marginal rainfall values;
+[Irving and Macadam 2024](https://doi.org/10.25919/03by-9y62)).
+Following [Irving and Macadam (2024)](https://doi.org/10.25919/03by-9y62),
+for the intercomparison we limited the adjustment factors to 5.0 or less
+when applying the QDC method to precipitation data.
+A common multiplicative scaling factor was also applied to every data
+point to make sure the annual mean percentage change
+in the QDC precipitation data matched the model.
+
 
 ### 2.4. MBCn
 
 #### 2.4.1. Method
 
-> TODO
+> TODO: Add detailed method description.
 
 #### 2.4.2. Software (and implementation choices)
 
-> TODO: The MBCn code is available on GitHub ([Gammon and Dao, 2025](https://doi.org/10.5281/zenodo.14708960)).
+The code used to implement the MBCn method is maintained by the Bureau of Meteorology
+and is openly available on GitHub ([Gammon and Dao, 2025](https://doi.org/10.5281/zenodo.14708960)).
+
+> TODO: Describe any implementation choices.
 
 ### 2.5. MRNBC
 
@@ -352,20 +369,28 @@ and use 1000 quantiles in order to still have 10-15 data values between each qua
 
 The _Multivariate Recursive Nested Bias Correction_ (MRNBC) method
 corrects multiple variables at the same time and preserves their interdependence at multiple time scales.
-It was progressively developed from the nested bias correction (NBC; [Johnson and Sharma, 2012](https://doi.org/10.1029/2011WR010464))
-and recursive nested bias correction techniques (RNBC; [Mehrotra and Sharma, 2012](https://doi.org/10.1029/2012WR012446)).
-The NBC corrects the distribution (mean and standard deviation) and persistence (lag 1 autocorrelation coefficient)
-at monthly, seasonal, and annual timescales using a standard autoregressive lag 1 model ([Srikanthan and Pegram, 2009](https://doi.org/10.1016/j.jhydrol.2009.03.025)).
+It was progressively developed from the nested bias correction
+(NBC; [Johnson and Sharma, 2012](https://doi.org/10.1029/2011WR010464))
+and recursive nested bias correction techniques
+(RNBC; [Mehrotra and Sharma, 2012](https://doi.org/10.1029/2012WR012446)).
+The NBC corrects the distribution (mean and standard deviation) and
+persistence (lag 1 autocorrelation coefficient)
+at monthly, seasonal, and annual timescales using a standard autoregressive lag 1 model
+([Srikanthan and Pegram, 2009](https://doi.org/10.1016/j.jhydrol.2009.03.025)).
 The MRNBC method is a multivariate version of the above RNBC method.
 It simultaneously corrects many model variables,
 using a multivariate first-order autoregressive model at daily, monthly, quarterly, and annual timescales
-to impart observed distributional and persistence properties of the input fields ([Mehrotra and Sharma, 2015](https://doi.org/10.1016/j.jhydrol.2014.11.037)).
+to impart observed distributional and persistence properties of the input fields
+([Mehrotra and Sharma, 2015](https://doi.org/10.1016/j.jhydrol.2014.11.037)).
 
 > TODO: Provide more details so it can be compared to / contrasted with the other methods used in this report.
 
 #### 2.5.2. Software (and implementation choices)
 
-> TODO: The MRNBC code is available on GitHub ([Gammon and Kapoor, 2025](https://doi.org/10.5281/zenodo.14641854)).
+The code used to implement the MRNBC method is maintained by the Bureau of Meteorology
+and is openly available on GitHub ([Gammon and Kapoor, 2025](https://doi.org/10.5281/zenodo.14641854)).
+
+> TODO: Describe any implementation choices.
 
 
 ## 3. Data
@@ -373,14 +398,16 @@ to impart observed distributional and persistence properties of the input fields
 The model data used for the intercomparison was taken from the multi-scenario,
 multi-model ensemble of simulations from regional climate models (RCMs)
 produced by NPCP partner organisations.
-These data will ultimately be submitted to the Coordinated Regional Climate Downscaling Experiment (CORDEX)
-and will form the basis for much of the climate projection information delivered by NPCP members.
-
-The subset of the NPCP CORDEX data we used
-was the daily timescale temperature and precipitation data
-from RCM simulations forced by Coupled Model Intercomparsion Project phase 6
+The RCMs were forced by global climate model (GCM) data
+from the Coupled Model Intercomparsion Project phase 6
 (CMIP6; [Eyring et al 2016](https://doi.org/10.5194/gmd-9-1937-2016))
-global climate model (GCM) data from the
+and will ultimately be submitted to the
+Coordinated Regional Climate Downscaling Experiment ([CORDEX](https://cordex.org/)),
+forming the basis for much of the climate projection information delivered by NPCP members.
+
+The subset of the NPCP CORDEX-CMIP6 data we used
+was the daily timescale temperature and precipitation data
+from RCM simulations forced by the
 ACCESS-ESM1-5, CESM2 and EC-Earth3 models for the
 historical (available for the years 1960-2014)
 and SSP-3.70 (2015-2100) experiments.
@@ -389,14 +416,17 @@ a `BOM-BARPA-R` submission from the Bureau of Meteorology produced by running th
 Bureau of Meteorology Atmospheric Regional Projections for Australia
 (BARPA; [Su et al, 2022](http://www.bom.gov.au/research/publications/researchreports/BRR-069.pdf)) RCM,
 a `CSIRO-CCAM-2203` submission from CSIRO produced by running the 
-Conformal Cubic Atmospheric Model (CCAM; find reference) RCM,
+Conformal Cubic Atmospheric Model
+(CCAM; [McGregor and Dix 2008](https://doi.org/10.1007/978-0-387-49791-4_4)) RCM,
 and a `UQ-DES-CCAM-2105` submission from the
 University of Queensland and the Queensland Department of Environment and Science
 produced by running a different configuration of CCAM
 ([Chapman et al, 2023](https://doi.org/10.1029/2023EF003548)).
 
-The observational / reference data used was the Australian Gridded Climate Data (AGCD) dataset
-([Evans et al 2020](http://www.bom.gov.au/research/publications/researchreports/BRR-041.pdf),
+The daily timescale observational / reference data was version 1.0.1 the
+Australian Gridded Climate Data (AGCD) dataset
+([Australian Bureau of Meteorology 2023](https://dx.doi.org/10.25914/hjqj-0x55),
+[Evans et al 2020](http://www.bom.gov.au/research/publications/researchreports/BRR-041.pdf),
 [Jones et al 2009](http://www.bom.gov.au/jshess/docs/2009/jones.pdf)).
 
 The spatial resolution of the datasets ranged from 0.05 degrees of latitude and longitude for AGCD
@@ -449,20 +479,20 @@ substantially modify the trend simulated by the models.
 Trend modification is a problem for many bias correction methods
 (e.g. [Zhang et al 2024](https://doi.org/10.1002/met.2204)).
 
-Since the ensemble of GCMs selected for dynamical downscaling by RCMs is only a subset of the full CMIP6 ensemble,
+Since the ensemble of GCMs selected for dynamical downscaling by RCMs
+is only a subset of the full CMIP6 ensemble,
 some scientists and institutions participating in the NPCP
 are also interested in applying bias correction directly to GCM output.
-In order to better understand how GCM outputs that have been dynamically downscaled and then bias corrected
+In order to better understand how GCM outputs that have been
+dynamically downscaled and then bias corrected
 compare to GCM outputs that are directly bias corrected,
 the three assessment tasks were also completed on GCM output
 using the ECDFm and QDC methods.
 
 The data arising from each bias correction method was compared on a number of metrics
 relating to the ability to capture the observed
-climatology, variability, distribution (precipitation only), extremes, trends and the link between different variables (Table 1).
-A number of additional metrics were assessed during the drafting of the report
-(e.g. give examples),
-but they did not add to the broad conclusions captured by the metrics listed in Table 1.
+climatology, variability, distribution (precipitation only), extremes and trends (Table 1).
+
 
 | Category | Metric | Description |
 | ---      | ---    | ---         |
@@ -483,6 +513,7 @@ but they did not add to the broad conclusions captured by the metrics listed in 
 
 _Table 1: Metrics calculated at each grid point across Australia._
 
+> TODO: Tighten up this list of variables.
 
 ## 5. Results
 
@@ -495,18 +526,6 @@ A few of the metrics in Table 1 do not appear in the summary result tables
 (e.g. multi-year variability, R10mm)
 because they are very similar to closely related metrics
 (e.g. interannual variability, R20mm).
-
-The results for each variable and assessment category are discussed in the sections below,
-with maps showing the results for all grid points for a representative RCM/GCM as required.
-In addition to showing the results for bias corrected RCM and GCM data,
-the maps for the cross validation task also show an "AGCD (training data)" result.
-This result is derived from simply replicating the AGCD training data
-rather than applying a bias correction method.
-
-> TODO: Provide information on where to find plots that weren't included in this report
-> (e.g. supplementary information or the notebooks on GitHub).
-
-> TODO: Explain why some metrics in Table 1 aren't in the summary figures.
 
 <p align="center">
     <img src="figures/hist_summary.png" width=60% height=60%>
@@ -538,6 +557,17 @@ rather than applying a bias correction method.
       Figure 2: As per Figure 1 but for the cross validation assessment task.
     </em>
 </p>
+
+The results for each variable and assessment category are discussed in the sections below,
+with maps showing the results for all grid points for a representative RCM/GCM as required.
+See the supplementary materials (insert Zenodo link) for the map
+for every metric and RCM/GCM combination.
+
+In addition to showing the results for bias corrected RCM and GCM data,
+the maps for the cross validation task also show an "AGCD (training data)" result.
+This result is derived from simply replicating the AGCD training data
+rather than applying a bias correction method.
+
 
 ### 5.1. Temperature climatology
 
