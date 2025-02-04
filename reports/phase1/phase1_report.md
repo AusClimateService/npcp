@@ -492,6 +492,10 @@ using the ECDFm and QDC methods.
 The data arising from each bias correction method was compared on a number of metrics
 relating to the ability to capture the observed
 climatology, variability, distribution (precipitation only), extremes and trends (Table 1).
+In order to aid compatibility with related studies in the literature,
+wherever possible we employed metrics from the widely used list of climate indices
+recommended by the Expert Team on Climate Change Detection and Indices
+(ETCCDI; e.g. [Alexander et al 2006](https://doi.org/10.1029/2005JD006290)).
 
 
 | Category | Metric | Description |
@@ -560,8 +564,8 @@ because they are very similar to closely related metrics
 
 The results for each variable and assessment category are discussed in the sections below,
 with maps showing the results for all grid points for a representative RCM/GCM as required.
-See the supplementary materials (insert Zenodo link) for the map
-for every metric and RCM/GCM combination.
+See the supplementary materials for the map
+for every metric and RCM/GCM combination (insert Zenodo link).
 
 In addition to showing the results for bias corrected RCM and GCM data,
 the maps for the cross validation task also show an "AGCD (training data)" result.
@@ -1038,7 +1042,9 @@ for producing projections data.
 
 The MBCn method was clearly the worst performing method,
 dramatically increasing the bias on a number of metrics.
-Given that the method is used elsewhere (REFS),
+Given that the method has been used elsewhere with relative success
+(e.g. [Dieng et al 2022](https://doi.org/10.1029/2021JD034836),
+[François et al 2020](https://doi.org/10.5194/esd-11-537-2020)),
 it is possible that this poor performance relates to software implementation issues
 rather than the method itself.
 
