@@ -412,14 +412,15 @@ ACCESS-ESM1-5, CESM2 and EC-Earth3 models for the
 historical (available for the years 1960-2014)
 and SSP-3.70 (2015-2100) experiments.
 Data from three different RCM modelling groups was assessed: 
-a `BOM-BARPA-R` submission from the Bureau of Meteorology produced by running the 
-Bureau of Meteorology Atmospheric Regional Projections for Australia
+a `BARPA-R` submission from the Bureau of Meteorology ([NCI 2024a]( https://dx.doi.org/10.25914/gjzx-kr91))
+produced by running the Bureau of Meteorology Atmospheric Regional Projections for Australia
 (BARPA; [Su et al, 2022](http://www.bom.gov.au/research/publications/researchreports/BRR-069.pdf)) RCM,
-a `CSIRO-CCAM-2203` submission from CSIRO produced by running the 
-Conformal Cubic Atmospheric Model
+a `CCAM-v2203-SN` submission from CSIRO ([NCI 2024b](https://dx.doi.org/10.25914/rd73-4m38))
+produced by running the Conformal Cubic Atmospheric Model
 (CCAM; [McGregor and Dix 2008](https://doi.org/10.1007/978-0-387-49791-4_4)) RCM,
-and a `UQ-DES-CCAM-2105` submission from the
+and a `CCAM-v2105` submission from the
 University of Queensland and the Queensland Department of Environment and Science
+([NCI 2024c](https://dx.doi.org/10.25914/h0bx-be42))
 produced by running a different configuration of CCAM
 ([Chapman et al, 2023](https://doi.org/10.1029/2023EF003548)).
 
@@ -575,25 +576,21 @@ rather than applying a bias correction method.
 
 ### 5.1. Temperature climatology
 
-While RCM output was generally associated with smaller biases
-in the temperature annual climatology and seasonal cycle than corresponding GCM output,
-some bias still persisted and tended to have its own unique spatial characteristics
-(i.e. different from the GCM; e.g. Figure 3).
 When bias correction was applied to RCM output
 following the calibration assessment task protocol
 (i.e. with an overlapping training and correction period),
-those biases were typically almost completely eliminated.
+biases in the temperature annual climatology and seasonal cycle
+were typically almost completely eliminated (e.g. Figure 3).
 The exception was the MBCn method,
 which showed a consistent warm bias over the entire continent
-for all GCM/RCM combinations (e.g. Figure 3).
+for all GCM/RCM combinations.
 Biases in the RCM output were also greatly reduced
 (but not completely eliminated) on the cross validation task.
 The MBCn method was again the worst performing on cross validation,
-but unlike for the calibration task it did reduce the RCM bias (Figure 4).
+but unlike for the calibration task it did reduce the RCM bias (e.g. Figure 4).
 The residual bias after applying the ECDFm and QDC methods
 to RCM and GCM outputs was very similar (e.g. Figures 3 and 4).
-This suggests that in the context of producing data with low bias
-in the temperature annual climatology and seasonal cycle, 
+This suggests that in the context of the temperature annual climatology and seasonal cycle, 
 it does not appear to make much difference
 whether GCM data are dynamically downscaled or not prior to applying bias correction.
 
@@ -636,7 +633,7 @@ The exception was the MNRBC method,
 which unlike the other methods does attempt to explicitly correct for
 biases in variability at multiple time scales (Section 2.5.1).
 The MRNBC method was able to reduce biases in interannual and multi-year temperature variability
-on the calibration task (Figure 5) but actually inflated those biases on cross validation (Figure 6).
+on the calibration task (e.g. Figure 5) but actually inflated those biases on cross validation (Figure 6).
 This may suggest a degree of overfitting by the MRNBC method.
 
 <p align="center">
