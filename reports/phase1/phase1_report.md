@@ -600,10 +600,10 @@ whether GCM data are dynamically downscaled or not prior to applying bias correc
     <em>
       Figure 3: Bias in annual mean daily maximum temperature (relative to the AGCD dataset)
       for the "calibration" assessment task.
-      Results are shown for the ACCESS-ESM1-5 GCM (top left),
-      the BOM-BARPA-R RCM forced by that GCM (bottom left),
-      and various bias correction methods applied to those GCM (top row, columns to the right)
-      and RCM (middle and bottom rows, columns to the right) data.
+      Results are shown for the ACCESS-ESM1-5 GCM (panel a),
+      the BARPA-R RCM forced by that GCM (panel c),
+      and various bias correction methods applied to those
+      GCM (panel b) and RCM (panels d-g) data.
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -614,12 +614,12 @@ whether GCM data are dynamically downscaled or not prior to applying bias correc
     <em>
       Figure 4: Bias in annual mean daily maximum temperature (relative to the AGCD dataset)
       for the "cross validation" assessment task.
-      Results are shown for the ACCESS-ESM1-5 GCM (top left),
-      the BOM-BARPA-R RCM forced by that GCM (bottom left),
-      and various bias correction methods applied to those GCM (top row, columns to the right)
-      and RCM (middle and bottom rows, columns to the right) data.
+      Results are shown for the ACCESS-ESM1-5 GCM (panel a),
+      the BARPA-R RCM forced by that GCM (panel d),
+      and various bias correction methods applied to those
+      GCM (panels b and c) and RCM (panels e, f, g, i and j) data.
       A reference case where the AGCD training data (1960-1989)
-      was simply duplicated for the assessment period (1990-2019) is also shown (bottom right).
+      was simply duplicated for the assessment period (1990-2019) is also shown (panel h).
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -785,12 +785,14 @@ were not dynamically downscaled prior to applying bias correction (e.g. Figure 1
     <em>
       Figure 10: Bias in annual mean precipitation (relative to the AGCD dataset)
       for the "cross validation" assessment task.
-      Results are shown for the ACCESS-ESM1-5 GCM (top left),
-      the BOM-BARPA-R RCM forced by that GCM (bottom left),
-      and various bias correction methods applied to those GCM (top row, columns to the right)
-      and RCM (middle and bottom rows, columns to the right) data.
+      Results are shown for the ACCESS-ESM1-5 GCM (panel a),
+      the BARPA-R RCM forced by that GCM (panel d),
+      and various bias correction methods applied to those
+      GCM (panels b and c) and RCM (panels e, f, g, i and j) data.
       A reference case where the AGCD training data (1960-1989)
-      was simply duplicated for the assessment period (1990-2019) is also shown (bottom right).
+      was simply duplicated for the assessment period (1990-2019) is also shown (panel h).
+      Land areas where the AGCD data are unreliable due to weather station sparsity
+      have been masked in white. 
       (MAE = mean absolute error.)
     </em>
 </p>
