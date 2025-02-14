@@ -12,12 +12,6 @@ var_names = {
     'tasmin': 'daily minimum temperature',
 }
 
-metric_names = {
-    'mean-bias': 'annual mean',
-    'seasonal-cycle': 'seasonal cycle of',
-    'interannual-variability-bias': 'interannual variability',
-}
-
 gcm_names = {
     'CSIRO-ACCESS-ESM1-5': 'ACCESS-ESM1-5',
     'EC-Earth-Consortium-EC-Earth3': 'EC-Earth3',
@@ -31,7 +25,6 @@ rcm_names = {
 }
 
 valid_vars = list(var_names.keys())
-valid_metrics = list(metric_names.keys())
 gcms = list(gcm_names.keys())
 rcms = list(rcm_names.keys())
 
@@ -40,6 +33,12 @@ def main(args):
     """Run the program."""
 
     var_name = var_names[args.var]
+    metric_names = {
+        'mean-bias': f'annual mean {var_name}',
+        'seasonal-cycle': f'the seasonal cycle of {var_name}',
+        'interannual-variability-bias': f'the interannual variability of annual mean {var_name}',
+        'CSDI-bias': 'the Cold Spell Duration Index (CSDI)',
+    }
     metric_name = metric_names[args.metric]
 
     pdf = FPDF()
@@ -58,7 +57,7 @@ def main(args):
     pdf.ln()
     pdf.set_font('Times', size=11)
     pdf.multi_cell(
-        text=f'This document presents supplementary figures showing the bias in {metric_name} {var_name}.',
+        text=f'This document presents supplementary figures showing bias in {metric_name}.',
         w=pdf.epw,
         align='L',
         new_x='LEFT'
@@ -93,9 +92,9 @@ def main(args):
                 else:
                     extra_text = abbrev_text 
                 if (gcm_name == 'CESM2') and 'tas' in args.var:
-                    caption = f"Figure S{fignum}: Bias in {metric_name} {var_name} (relative to the AGCD dataset) for the calibration assessment task. Results are shown for the {rcm_name} RCM forced by the {gcm_name} GCM (panel a) and various bias correction methods applied to those RCM data (panels b-e) data. Unlike the other GCMs, no raw CESM2 data were available.{extra_text}"
+                    caption = f"Figure S{fignum}: Bias in {metric_name} (relative to the AGCD dataset) for the calibration assessment task. Results are shown for the {rcm_name} RCM forced by the {gcm_name} GCM (panel a) and various bias correction methods applied to those RCM data (panels b-e) data. Unlike the other GCMs, no raw CESM2 data were available.{extra_text}"
                 else:
-                    caption = f"Figure S{fignum}: Bias in {metric_name} {var_name} (relative to the AGCD dataset) for the calibration assessment task. Results are shown for the {gcm_name} GCM (panel a), the {rcm_name} RCM forced by that GCM (panel c), and various bias correction methods applied to those GCM (panel b) and RCM (panels d-g) data.{extra_text}"
+                    caption = f"Figure S{fignum}: Bias in {metric_name} (relative to the AGCD dataset) for the calibration assessment task. Results are shown for the {gcm_name} GCM (panel a), the {rcm_name} RCM forced by that GCM (panel c), and various bias correction methods applied to those GCM (panel b) and RCM (panels d-g) data.{extra_text}"
                 pdf.multi_cell(text=caption, w=pdf.epw, new_x='LEFT')
                 if fignum in [2, 4, 6]:
                     pdf.add_page()
@@ -136,9 +135,9 @@ def main(args):
                 else:
                     extra_text = abbrev_text
                 if (gcm_name == 'CESM2') and 'tas' in args.var:
-                    caption = f"Figure S{fignum}: Bias in {metric_name} {var_name} (relative to the AGCD dataset) for the cross validation assessment task. Results are shown for the {rcm_name} RCM forced by the {gcm_name} GCM (panel a) and various bias correction methods applied to those RCM data (panels b, c, d, f and g). A reference case where the AGCD training data (1960-1989) was simply duplicated for the assessment period (1990-2019) is also shown (panel e). Unlike the other GCMs, no raw CESM2 data were available.{extra_text}"
+                    caption = f"Figure S{fignum}: Bias in {metric_name} (relative to the AGCD dataset) for the cross validation assessment task. Results are shown for the {rcm_name} RCM forced by the {gcm_name} GCM (panel a) and various bias correction methods applied to those RCM data (panels b, c, d, f and g). A reference case where the AGCD training data (1960-1989) was simply duplicated for the assessment period (1990-2019) is also shown (panel e). Unlike the other GCMs, no raw CESM2 data were available.{extra_text}"
                 else:
-                    caption = f"Figure S{fignum}: Bias in {metric_name} {var_name} (relative to the AGCD dataset) for the cross validation assessment task. Results are shown for the {gcm_name} GCM (panel a), the {rcm_name} RCM forced by that GCM (panel d), and various bias correction methods applied to those GCM (panels b and c) and RCM (panels e, f, g, i and j) data. A reference case where the AGCD training data (1960-1989) was simply duplicated for the assessment period (1990-2019) is also shown (panel h).{extra_text}"
+                    caption = f"Figure S{fignum}: Bias in {metric_name} (relative to the AGCD dataset) for the cross validation assessment task. Results are shown for the {gcm_name} GCM (panel a), the {rcm_name} RCM forced by that GCM (panel d), and various bias correction methods applied to those GCM (panels b and c) and RCM (panels e, f, g, i and j) data. A reference case where the AGCD training data (1960-1989) was simply duplicated for the assessment period (1990-2019) is also shown (panel h).{extra_text}"
                 pdf.multi_cell(text=caption, w=pdf.epw, new_x='LEFT')
                 if fignum in [9, 11, 13]:
                     pdf.add_page()
@@ -161,6 +160,12 @@ if __name__ == '__main__':
         formatter_class=argparse.RawDescriptionHelpFormatter
     )     
     parser.add_argument("var", choices=valid_vars, type=str, help="variable")
+    valid_metrics = [
+        'mean-bias',
+        'seasonal-cycle',
+        'interannual-variability-bias',
+        'CSDI-bias',
+    ]
     parser.add_argument("metric", choices=valid_metrics, type=str, help="metric")
     args = parser.parse_args()
     main(args)

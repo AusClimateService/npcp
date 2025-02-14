@@ -429,6 +429,15 @@ Australian Gridded Climate Data (AGCD) dataset
 ([Australian Bureau of Meteorology 2023](https://dx.doi.org/10.25914/hjqj-0x55),
 [Evans et al 2020](http://www.bom.gov.au/research/publications/researchreports/BRR-041.pdf),
 [Jones et al 2009](http://www.bom.gov.au/jshess/docs/2009/jones.pdf)).
+In addition to daily maximum temperature, daily minimum temperature and daily precipitation,
+the AGCD precipitation weights data were used to mask land areas
+where the precipitation values are unreliable due to weather station sparsity.
+The weights indicate whether observations (i.e. from weather stations)
+influenced the analysed value in the AGCD dataset at every grid point and time step.
+In some remote locations such as central Australia,
+there is little or no influence from observations at most or all time steps.
+For precipitation related metrics we masked all grid points
+that were not influenced by observations on 90% or more days over the 1960-2019 period.
 
 The spatial resolution of the datasets ranged from 0.05 degrees of latitude and longitude for AGCD
 to 0.2 degrees for UQ-DES-CCAM-2015 over the entire landmass of Australia.
@@ -566,7 +575,9 @@ because they are very similar to closely related metrics
 The results for each variable and assessment category are discussed in the sections below,
 with maps showing the results for all grid points for a representative RCM/GCM as required.
 See the supplementary materials for the map
-for every metric and RCM/GCM combination (insert Zenodo link).
+for every metric and RCM/GCM combination
+(see [GitHub](https://github.com/AusClimateService/npcp/tree/master/reports/phase1/supplementary)
+for now - will be uploaded to Zenodo).
 
 In addition to showing the results for bias corrected RCM and GCM data,
 the maps for the cross validation task also show an "AGCD (training data)" result.
@@ -640,14 +651,12 @@ This may suggest a degree of overfitting by the MRNBC method.
     <img src="figures/tasmax_interannual-variability-bias_task-historical_CSIRO-ACCESS-ESM1-5_UQ-DES-CCAM-2105.png" width=60% height=60%>
     <br>
     <em>
-      Figure 6: Bias in interannual variability (relative to the AGCD dataset)
+      Figure 6: Bias in the interannual variability of annual mean daily maximum temperature (relative to the AGCD dataset)
       for the "calibration" assessment task.
-      Results are shown for the ACCESS-ESM1-5 GCM (top left),
-      the UQ-DES-CCAM-2105 RCM forced by that GCM (bottom left),
-      and various bias correction methods applied to those GCM (top row, columns to the right)
-      and RCM (middle and bottom rows, columns to the right) data.
-      A reference case where the AGCD training data (1960-1989)
-      was simply duplicated for the assessment period (1990-2019) is also shown (bottom right).
+      Results are shown for the ACCESS-ESM1-5 GCM (panel a),
+      the CCAM-v2105 RCM forced by that GCM (panel c),
+      and various bias correction methods applied to those
+      GCM (panel b) and RCM (panels d-g) data.
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -656,12 +665,14 @@ This may suggest a degree of overfitting by the MRNBC method.
     <img src="figures/tasmax_interannual-variability-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_UQ-DES-CCAM-2105.png">
     <br>
     <em>
-      Figure 6: Bias in interannual variability (relative to the AGCD dataset)
+      Figure 6: Bias in the interannual variability of annual mean daily maximum temperature (relative to the AGCD dataset)
       for the "cross validation" assessment task.
-      Results are shown for the ACCESS-ESM1-5 GCM (top left),
-      the UQ-DES-CCAM-2105 RCM forced by that GCM (bottom left),
-      and various bias correction methods applied to those GCM (top row, columns to the right)
-      and RCM (middle and bottom rows, columns to the right) data.
+      Results are shown for the ACCESS-ESM1-5 GCM (panel a),
+      the CCAM-v2105 RCM forced by that GCM (panel d),
+      and various bias correction methods applied to those
+      GCM (panels b and c) and RCM (panels e, f, g, i and j) data.
+      A reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) is also shown (panel h).
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -822,14 +833,16 @@ and the QDC method effectively just applies a small perturbation to the training
     <img src="figures/pr_interannual-variability-bias_task-xvalidation_EC-Earth-Consortium-EC-Earth3_CSIRO-CCAM-2203.png">
     <br>
     <em>
-      Figure 11: Bias in interannual precipitation variability (relative to the AGCD dataset)
+      Figure 11: Bias in the interannual variability of annual mean precipitation (relative to the AGCD dataset)
       for the "cross validation" assessment task.
-      Results are shown for the EC-Earth3 GCM (top left),
-      the CSIRO-CCAM-2203 RCM forced by that GCM (bottom left),
-      and various bias correction methods applied to those GCM (top row, columns to the right)
-      and RCM (middle and bottom rows, columns to the right) data.
+      Results are shown for the EC-Earth GCM (panel a),
+      the CCAM-v2203-SN RCM forced by that GCM (panel d),
+      and various bias correction methods applied to those
+      GCM (panels b and c) and RCM (panels e, f, g, i and j) data.
       A reference case where the AGCD training data (1960-1989)
-      was simply duplicated for the assessment period (1990-2019) is also shown (bottom right).
+      was simply duplicated for the assessment period (1990-2019) is also shown (panel h).
+      Land areas where the AGCD data are unreliable due to weather station sparsity
+      have been masked in white.
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -838,14 +851,16 @@ and the QDC method effectively just applies a small perturbation to the training
     <img src="figures/pr_interannual-variability-bias_task-xvalidation_NCAR-CESM2_BOM-BARPA-R.png">
     <br>
     <em>
-      Figure 12: Bias in interannual precipitation variability (relative to the AGCD dataset)
+      Figure 12: Bias in the interannual variability of annual mean precipitation (relative to the AGCD dataset)
       for the "cross validation" assessment task.
-      Results are shown for the CESM2 GCM (top left),
-      the BOM-BARPA-R RCM forced by that GCM (bottom left),
-      and various bias correction methods applied to those GCM (top row, columns to the right)
-      and RCM (middle and bottom rows, columns to the right) data.
+      Results are shown for the CESM2 GCM (panel a),
+      the BARPA-R RCM forced by that GCM (panel d),
+      and various bias correction methods applied to those
+      GCM (panels b and c) and RCM (panels e, f, g, i and j) data.
       A reference case where the AGCD training data (1960-1989)
-      was simply duplicated for the assessment period (1990-2019) is also shown (bottom right).
+      was simply duplicated for the assessment period (1990-2019) is also shown (panel h).
+      Land areas where the AGCD data are unreliable due to weather station sparsity
+      have been masked in white.
       (MAE = mean absolute error.)
     </em>
 </p>
