@@ -15,7 +15,7 @@ var_names = {
 metric_names = {
     'mean-bias': 'annual mean',
     'seasonal-cycle': 'seasonal cycle of',
-    'interannual-variaiblity': 'interannual variability',
+    'interannual-variability-bias': 'interannual variability',
 }
 
 gcm_names = {
