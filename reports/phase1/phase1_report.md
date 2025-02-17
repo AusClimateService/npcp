@@ -872,8 +872,8 @@ by considering the wet day frequency (or conversely the annual number of relativ
 while the upper end was captured by the annual number of days with more than 
 10mm (r10mm) or 20mm (r20mm) of precipitation.
 Dynamical downscaling tended to reduce GCM bias in wet day frequency
-but made little difference to r10mm or r20mm biases.
-Bias correction tended to further the reduce the remaining RCM bias,
+but made little difference to r10mm or r20mm biases (supplementary information).
+Bias correction (and the QDC method) tended to reduce model bias,
 almost eliminating it completely on the calibration task. 
 The exception was again the MBCn method,
 for which biases either remained relatively unchanged or increased.
