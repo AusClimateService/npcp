@@ -38,6 +38,7 @@ def main(args):
         'seasonal-cycle': f'the seasonal cycle of {var_name}',
         'interannual-variability-bias': f'the interannual variability of annual mean {var_name}',
         'CSDI-bias': 'the Cold Spell Duration Index (CSDI)',
+        'WSDI-bias': 'the Warm Spell Duration Index (WSDI)',
     }
     metric_name = metric_names[args.metric]
 
@@ -165,6 +166,7 @@ if __name__ == '__main__':
         'seasonal-cycle',
         'interannual-variability-bias',
         'CSDI-bias',
+        'WSDI-bias',
     ]
     parser.add_argument("metric", choices=valid_metrics, type=str, help="metric")
     args = parser.parse_args()

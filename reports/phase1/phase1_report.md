@@ -694,17 +694,17 @@ pertubs the observed training data (which did a good job of representing the WSD
 whereas the bias correction methods act on the model data.
 
 <p align="center">
-    <img src="figures/WSDI-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
+    <img src="figures/tasmax_WSDI-bias_task-xvalidation_CSIRO-ACCESS-ESM1-5_BOM-BARPA-R.png">
     <br>
     <em>
       Figure 7: Bias in the WSDI (relative to the AGCD dataset)
       for the "cross validation" assessment task.
-      Results are shown for the ACCESS-ESM1-5 GCM (top left),
-      the BOM-BARPA-R RCM forced by that GCM (bottom left),
-      and various bias correction methods applied to those GCM (top row, columns to the right)
-      and RCM (middle and bottom rows, columns to the right) data.
+      Results are shown for the ACCESS-ESM1-5 GCM (panel a),
+      the BARPA-R RCM forced by that GCM (panel d),
+      and various bias correction methods applied to those
+      GCM (panels b and c) and RCM (panels e, f, g, i and j) data.
       A reference case where the AGCD training data (1960-1989)
-      was simply duplicated for the assessment period (1990-2019) is also shown (bottom right).
+      was simply duplicated for the assessment period (1990-2019) is also shown (panel h).
       (MAE = mean absolute error.)
     </em>
 </p>
