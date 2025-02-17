@@ -40,6 +40,10 @@ def main(args):
         'CSDI-bias': 'the Cold Spell Duration Index (CSDI)',
         'WSDI-bias': 'the Warm Spell Duration Index (WSDI)',
         'wet-day-freq': 'wet day frequency',
+        'R10mm-bias': 'the annual number of heavy precipitation days (>10mm)',
+        'R20mm-bias': 'the annual number of very heavy precipitation days (>20mm)',
+        'pct99-bias': f'the 99th percentile of {var_name}',
+        'pct01-bias': f'the 1st percentile of {var_name}',
     }
     metric_name = metric_names[args.metric]
 
@@ -169,6 +173,10 @@ if __name__ == '__main__':
         'CSDI-bias',
         'WSDI-bias',
         'wet-day-freq',
+        'R10mm-bias',
+        'R20mm-bias',
+        'pct99',
+        'pct01',
     ]
     parser.add_argument("metric", choices=valid_metrics, type=str, help="metric")
     args = parser.parse_args()
