@@ -739,15 +739,15 @@ it did not appear to make much difference for these temperature extremes metrics
 whether GCM data are dynamically downscaled or not prior to applying bias correction.
 
 <p align="center">
-    <img src="figures/tasmin_extreme-bias_task-historical_EC-Earth-Consortium-EC-Earth3_BOM-BARPA-R.png" width=60% height=60%>
+    <img src="figures/tasmin_1-in-10yr-bias_task-historical_EC-Earth-Consortium-EC-Earth3_BOM-BARPA-R.png" width=60% height=60%>
     <br>
     <em>
       Figure 8: Bias in the 1-in-10 year low daily minimum temperature (relative to the AGCD dataset)
       for the "calibration" assessment task.
-      Results are shown for the EC-Earth3 GCM (top left),
-      the BOM-BARPA-R RCM forced by that GCM (bottom left),
-      and various bias correction methods applied to those GCM (top row, columns to the right)
-      and RCM (middle and bottom rows, columns to the right) data.
+      Results are shown for the EC-Earth3 GCM (panel a),
+      the BARPA-R RCM forced by that GCM (panel c),
+      and various bias correction methods applied to those
+      GCM (panel b) and RCM (panels d-g) data.
       (MAE = mean absolute error.)
     </em>
 </p>
@@ -909,26 +909,32 @@ while the ECDFm method tended not to reduce the RCM bias.
     <em>
       Figure 13: Bias in the 99th percentile daily precipitation (relative to the AGCD dataset)
       for the "cross validation" assessment task.
-      Results are shown for the EC-Earth3 GCM (top left),
-      the BOM-BARPA-R RCM forced by that GCM (bottom left),
-      various bias correction methods applied to those model data (rows),
-      and a reference case where the AGCD training data (1960-1989)
-      was simply duplicated for the assessment period (1990-2019) (bottom right).
+      Results are shown for the EC-Earth3 GCM (panel a),
+      the BARPA-R RCM forced by that GCM (panel d),
+      and various bias correction methods applied to those
+      GCM (panels b and c) and RCM (panels e, f, g, i and j) data.
+      A reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) is also shown (panel h).
+      Land areas where the AGCD data are unreliable due to weather station sparsity
+      have been masked in white.
       (MAE = mean absolute error.)
     </em>
 </p>
 
 <p align="center">
-    <img src="figures/pr_extreme-bias_task-xvalidation_EC-Earth-Consortium-EC-Earth3_BOM-BARPA-R.png">
+    <img src="figures/pr_1-in-10yr-bias_task-xvalidation_EC-Earth-Consortium-EC-Earth3_BOM-BARPA-R.png">
     <br>
     <em>
       Figure 14: Bias in the 1-in-10 year high daily precipitation (relative to the AGCD dataset)
       for the "cross validation" assessment task.
-      Results are shown for the EC-Earth3 GCM (top left),
-      the BOM-BARPA-R RCM forced by that GCM (bottom left),
-      various bias correction methods applied to those model data (rows),
-      and a reference case where the AGCD training data (1960-1989)
-      was simply duplicated for the assessment period (1990-2019) (bottom right).
+      Results are shown for the EC-Earth3 GCM (panel a),
+      the BARPA-R RCM forced by that GCM (panel d),
+      and various bias correction methods applied to those
+      GCM (panels b and c) and RCM (panels e, f, g, i and j) data.
+      A reference case where the AGCD training data (1960-1989)
+      was simply duplicated for the assessment period (1990-2019) is also shown (panel h).
+      Land areas where the AGCD data are unreliable due to weather station sparsity
+      have been masked in white.
       (MAE = mean absolute error.)
     </em>
 </p>

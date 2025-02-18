@@ -33,6 +33,8 @@ def main(args):
     """Run the program."""
 
     var_name = var_names[args.var]
+    if args.metric in ['pct99-bias', '1-in-10yr-bias'] and args.var == 'pr':
+        var_name = 'daily precipitation'
     metric_names = {
         'mean-bias': f'annual mean {var_name}',
         'seasonal-cycle': f'the seasonal cycle of {var_name}',
@@ -44,6 +46,7 @@ def main(args):
         'R20mm-bias': 'the annual number of very heavy precipitation days (>20mm)',
         'pct99-bias': f'the 99th percentile of {var_name}',
         'pct01-bias': f'the 1st percentile of {var_name}',
+        '1-in-10yr-bias': f'the 1-in-10 year {var_name}'
     }
     metric_name = metric_names[args.metric]
 
@@ -175,8 +178,9 @@ if __name__ == '__main__':
         'wet-day-freq',
         'R10mm-bias',
         'R20mm-bias',
-        'pct99',
-        'pct01',
+        'pct99-bias',
+        'pct01-bias',
+        '1-in-10yr-bias',
     ]
     parser.add_argument("metric", choices=valid_metrics, type=str, help="metric")
     args = parser.parse_args()
