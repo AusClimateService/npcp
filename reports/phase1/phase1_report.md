@@ -763,10 +763,10 @@ In fact, dynamical downscaling modified the model trend much more than bias corr
     <br>
     <em>
       Figure 9: Change in annual mean daily maximum temperature
-      between 1980-2019 and 2060-2099 for the ssp370 experiment.
-      Results are shown for a GCM (top left panel),
-      RCM forced by that GCM (middle left panel)
-      and various bias correction methods applied to those model data (remaining panels).
+      between 1980-2019 and 2060-2099 for the "projection" assessment task.
+      Results are shown for the ACCESS-ESM1-5 GCM (panel a),
+      the BARPA-R RCM forced by that GCM (panel b)
+      and various bias correction methods applied to those RCM data (panels c-g).
     </em>
 </p>
 
@@ -952,10 +952,10 @@ For all RCM/GCM combinations, dynamical downscaling modified the model trend mor
     <br>
     <em>
       Figure 15: Change in annual mean precipitation
-      between 1980-2019 and 2060-2099 for the SSP3-7.0 experiment.
-      Results are shown for the CESM2 GCM (left most panel),
-      the BOM-BARPA-R RCM forced by that GCM (second from the left)
-      and various bias correction methods applied to those model data (remaining panels).
+      between 1980-2019 and 2060-2099 for the "projection" assessment task.
+      Results are shown for the CESM2 GCM (panel a),
+      the BARPA-R RCM forced by that GCM (panel b)
+      and various bias correction methods applied to those RCM data (panels c-g).
     </em>
 </p>
 
