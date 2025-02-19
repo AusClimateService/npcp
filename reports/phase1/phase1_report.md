@@ -516,13 +516,11 @@ recommended by the Expert Team on Climate Change Detection and Indices
 | Variability | Multi-year variability | Standard deviation of the 5-year running mean timeseries |
 | Variability (temperature) | Warm-spell duration index (WSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmax > 90th percentile calculated for a 5-day window centred on each calendar day |
 | Variability (temperature) | Cold-spell duration index (CSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmin < 10th percentile calculated for a 5-day window centred on each calendar day |
-| Daily distribution (precipitation) | Wet day frequency | Number of wet days (precipitation > 1mm) expressed as a fraction (%) of all days |  
+| Daily distribution (precipitation) | Wet day frequency | Number of wet days (precipitation > 1mm) expressed as a fraction (%) of all days |
 | Daily distribution (precipitation) | R10mm, R20mm | Annual number of heavy precipitation days (precipitation ≥ 10 mm or 20mm) |
+| Daily distribution (precipitation) | R95pTOT, R99pTOT | Fraction of total annual precipitation that falls on very wet days (> 95th or 99th percentile) |
 | Extremes | 1-in-10 year event | Value corresponding to an annual return interval of 10 years |
 | Extremes | 99th percentile | The 99 percentile (or 1.0 percentile for minimum temperature) |
-| Extremes (temperature) | Frost day index | Annual number of days with a minimum temperature less than 0◦C |
-| Extremes (precipitation) | Drought intensity | Percentage difference between the minimum annual value and the mean annual value (also, with 2-year and 5-year running mean applied) |
-| Extremes (precipitation) | R95pTOT, R99pTOT | Fraction of total annual precipitation that falls on very wet days (> 95th or 99th percentile) |
 | Trends | Change signal | Change in the annual mean (future period minus the historical period) |
 
 _Table 1: Metrics calculated at each grid point across Australia._

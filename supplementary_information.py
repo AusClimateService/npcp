@@ -46,7 +46,9 @@ def main(args):
         'R20mm-bias': 'the annual number of very heavy precipitation days (>20mm)',
         'pct99-bias': f'the 99th percentile of {var_name}',
         'pct01-bias': f'the 1st percentile of {var_name}',
-        '1-in-10yr-bias': f'the 1-in-10 year {var_name}'
+        '1-in-10yr-bias': f'the 1-in-10 year {var_name}',
+        'R95pTOT-bias': 'the fraction of annual precipitation that falls on very wet days (>95th percentile; R95pTOT)',
+        'R99pTOT-bias': 'the fraction of annual precipitation that falls on extremely wet days (>99th percentile; R99pTOT)',
     }
     metric_name = metric_names[args.metric]
 
@@ -181,6 +183,8 @@ if __name__ == '__main__':
         'pct99-bias',
         'pct01-bias',
         '1-in-10yr-bias',
+        'R95pTOT-bias',
+        'R99pTOT-bias',
     ]
     parser.add_argument("metric", choices=valid_metrics, type=str, help="metric")
     args = parser.parse_args()
