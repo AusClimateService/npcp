@@ -512,32 +512,26 @@ recommended by the Expert Team on Climate Change Detection and Indices
 | ---      | ---    | ---         |
 | Climatology | Annual climatology | Annual mean |
 | Climatology | Seasonal cycle | Sum of the absolute value of the difference between the bias corrected model and observed climatological mean value for each month |
-| Variability | Interannual variability | Standard deviation of the annual mean timeseries |
-| Variability | Multi-year variability | Standard deviation of the 5-year running mean timeseries |
+| Variability | Interannual variability (std(1yr)) | Standard deviation of the annual mean timeseries |
 | Variability (temperature) | Warm-spell duration index (WSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmax > 90th percentile calculated for a 5-day window centred on each calendar day |
 | Variability (temperature) | Cold-spell duration index (CSDI) | Numer of days where, in intervals of at least 6 consecutive days, daily Tmin < 10th percentile calculated for a 5-day window centred on each calendar day |
 | Daily distribution (precipitation) | Wet day frequency | Number of wet days (precipitation > 1mm) expressed as a fraction (%) of all days |
 | Daily distribution (precipitation) | R10mm, R20mm | Annual number of heavy precipitation days (precipitation ≥ 10 mm or 20mm) |
 | Daily distribution (precipitation) | R95pTOT, R99pTOT | Fraction of total annual precipitation that falls on very wet days (> 95th or 99th percentile) |
 | Extremes | 1-in-10 year event | Value corresponding to an annual return interval of 10 years |
-| Extremes | 99th percentile | The 99 percentile (or 1.0 percentile for minimum temperature) |
+| Extremes | 99th or 1st percentile (pct99, pct01) | The 99 percentile (or 1.0 percentile for minimum temperature) |
 | Trends | Change signal | Change in the annual mean (future period minus the historical period) |
 
 _Table 1: Metrics calculated at each grid point across Australia._
 
-> TODO: Tighten up this list of variables.
 
 ## 5. Results
 
 In order to provide an overview of the performance of each bias correction method,
-the results were condensed into a single summary table for the calibration (Figure 1)
-and cross validation (Figure 2) tasks.
-The tables show the bias in key metrics averaged (using the mean absolute error/bias)
+the results were condensed into a single summary table
+for the calibration (Figure 1) and cross validation (Figure 2) tasks.
+The tables show the bias in each metric averaged (using the mean absolute error/bias)
 over all grid points and GCM/RCM combinations.
-A few of the metrics in Table 1 do not appear in the summary result tables
-(e.g. multi-year variability, R10mm)
-because they are very similar to closely related metrics
-(e.g. interannual variability, R20mm).
 
 <p align="center">
     <img src="figures/hist_summary.png" width=60% height=60%>
@@ -545,16 +539,7 @@ because they are very similar to closely related metrics
     <em>
       Figure 1: Mean absolute error/bias across all grid points and GCM/RCM combinations
       for the calibration assessment task.
-      Metrics include the
-      annual climatology (mean),
-      seasonal cycle (cycle),
-      interannual variability (std(1yr)),
-      warm spell duration index (WSDI),
-      cold spell duration index (CSDI),
-      99th or 1st percentile (pct99, pct01),
-      1-in-10 year event (1-in-10yr),
-      wet day frequency,
-      and the annual number of days with greater than 20mm rain (R20mm).
+      The metrics corresponding to each row label are defined in Table 1.
       The number in each cell corresponds to the mean absolute error/bias
       (with units of Celsius, mm or days depending on the metric),
       while the color is that bias value expressed as a percentage change
@@ -635,13 +620,13 @@ whether GCM data are dynamically downscaled or not prior to applying bias correc
 
 ### 5.2. Temperature variability
 
-GCM biases in interannual and multi-year temperature variability were relatively small
+GCM biases in interannual temperature variability were relatively small
 and were not substantially modified by dynamical downscaling
 or by most of the bias correction methods (e.g. Figure 5).
 The exception was the MNRBC method,
 which unlike the other methods does attempt to explicitly correct for
 biases in variability at multiple time scales (Section 2.5.1).
-The MRNBC method was able to reduce biases in interannual and multi-year temperature variability
+The MRNBC method was able to reduce biases in interannual temperature variability
 on the calibration task (e.g. Figure 5) but actually inflated those biases on cross validation (Figure 6).
 This may suggest a degree of overfitting by the MRNBC method.
 
@@ -809,7 +794,7 @@ were not dynamically downscaled prior to applying bias correction (e.g. Figure 1
 ### 5.6. Precipitation variability
 
 RCM output was generally associated with similar or slightly reduced bias
-in interannual and multi-year precipitation variability (e.g. Figure 11 and 12).
+in interannual precipitation variability (e.g. Figure 11 and 12).
 When bias correction was applied to RCM output for the calibration task,
 those biases were typically reduced, especially for the MRNBC method.
 The exception was the MBCn method,
@@ -867,12 +852,14 @@ and the QDC method effectively just applies a small perturbation to the training
 
 The lower end of the annual precipitation distribution was assessed
 by considering the wet day frequency (or conversely the annual number of relatively dry days),
-while the upper end was captured by the annual number of days with more than 
-10mm (r10mm) or 20mm (r20mm) of precipitation.
-Dynamical downscaling tended to reduce GCM bias in wet day frequency
-but made little difference to r10mm or r20mm biases (supplementary information).
+while the upper end was captured by a series of metrics that used absolute (r10mm and r20mm)
+or relative (R95pTOT and R99pTOT) thresholds.
+
+Dynamical downscaling tended to reduce GCM bias
+at the lower end of the precipitation distribution (wet day frequency and r10mm)
+but increase GCM bias at the upper end (R95pTOT and R99pTOT).
 Bias correction (and the QDC method) tended to reduce model bias,
-almost eliminating it completely on the calibration task. 
+with each model performing similarly. 
 The exception was again the MBCn method,
 for which biases either remained relatively unchanged or increased.
 
@@ -1004,11 +991,11 @@ but does not modify other temporal aspects (e.g. sequencing, variability)
 or any spatial or inter-variable aspects.
 It was therefore not surprising that the QME method
 had little impact on model bias for
-interannual and multi-year variability and weather sequencing (CSDI and WSDI),
+interannual variability and weather sequencing (CSDI and WSDI),
 which relate to temporal aspects that are not modified by that method. 
 
 The MRNBC method is specifically designed to modify temporal variability,
-so its performance on the interannual and multi-year variability metrics
+so its performance on the interannual variability metric
 was particularly interesting.
 It tended to reduce model bias on the calibration task
 but increased it on the cross validation task,
