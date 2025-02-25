@@ -59,7 +59,7 @@ Naming conventions follow CORDEX wherever possible and can take the following va
   - `mbcn`: N-Dimensional Multi-Variate Bias Correction (Thi Lan Dao; [Cannon 2018](https://doi.org/10.1007/s00382-017-3580-6))
   - `mbcp`: Multi-Variate Bias Correction (using Pearman correlation) (Ralph Trancoso; [Cannon 2016](https://doi.org/10.1175/JCLI-D-15-0679.1))
   - `3dbc`: Three Dimensional Bias Correction (Fei Ji; [Mehrotra & Sharma 2019](https://doi.org/10.1029/2018WR023270))
-  - `tqm`: Triple Quantile Mapping
+  - `tqm`: Triple Quantile Mapping ([NBIC](https://doi.org/10.25919/avj5-ss75); [Song et al 2022](https://doi.org/10.5194/hess-2022-107))
 - `{task}`
   - `task-historical`: See "historical" bias correction task defined below
   - `task-projection`: See "projection" bias correction task defined below
