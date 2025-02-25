@@ -55,8 +55,9 @@ The first phase of the bias correction intercomparison was therefore
 designed to support that initiative.
 It focused on bias correction methods that were available to the ACS right now
 (i.e. with functional software that was sufficiently well documented)
-and applied those methods to a subset of the CORDEX (and corresponding CMIP6) data
-that will be used by the ACS to generate nation-wide projections.
+and applied those methods to a subset of the
+Coordinated Regional Climate Downscaling Experiment (CORDEX; https://cordex.org/)
+data that will be used by the ACS to generate nation-wide projections.
 Since existing bias correction assessments produced by NPCP partners
 only provide information on some of the available bias correction methods
 for specific contexts such as the Queensland spatial domain
@@ -105,9 +106,9 @@ and the Energy Sector Climate Information project
 (e.g. [Dowdy et al 2021](https://www.climatechangeinaustralia.gov.au/media/ccia/2.2/cms_page_media/799/ESCI%20Technical%20Report%20-%20Standardised%20Method_1.pdf)).
 In contrast, the ECDFm and MBCn methods have not yet been used in a
 major CSIRO or Bureau of Meteorology project,
-but there is interest in determining their potential for future projects.
+but there was interest in determining their potential for future projects.
 
-The most simple bias correction procedure is mean scaling,
+The simplest bias correction procedure is mean scaling,
 where the difference or ratio between the mean model and observed value
 over the calibration period (i.e. the mean bias)
 is removed (via subtraction or division) from the target model data
@@ -402,8 +403,7 @@ produced by NPCP partner organisations.
 The RCMs were forced by global climate model (GCM) data
 from the Coupled Model Intercomparsion Project phase 6
 (CMIP6; [Eyring et al 2016](https://doi.org/10.5194/gmd-9-1937-2016))
-and will ultimately be submitted to the
-Coordinated Regional Climate Downscaling Experiment ([CORDEX](https://cordex.org/)),
+and will ultimately be submitted to CORDEX,
 forming the basis for much of the climate projection information delivered by NPCP members.
 
 The subset of the NPCP CORDEX-CMIP6 data used for the intercomparison
