@@ -13,6 +13,7 @@ var_names = {
 }
 
 gcm_names = {
+    'ECMWF-ERA5': 'ERA5',
     'CSIRO-ACCESS-ESM1-5': 'ACCESS-ESM1-5',
     'EC-Earth-Consortium-EC-Earth3': 'EC-Earth3',
     'NCAR-CESM2': 'CESM2',
@@ -22,6 +23,31 @@ rcm_names = {
     'BOM-BARPA-R': 'BARPA-R',
     'CSIRO-CCAM-2203': 'CCAM-v2203-SN',
     'UQ-DES-CCAM-2105': 'CCAM-v2105',
+}
+
+file_numbers = {
+    ('mean-bias', 'tasmin'): '02',
+    ('mean-bias', 'tasmax'): '03',
+    ('seasonal-cycle', 'tasmin'): '04',
+    ('seasonal-cycle', 'tasmax'): '05',
+    ('interannual-variability-bias', 'tasmin'): '06',
+    ('interannual-variability-bias', 'tasmax'): '07',
+    ('CSDI-bias', 'tasmin'): '08',
+    ('WSDI-bias', 'tasmax'): '09',
+    ('pct01-bias', 'tasmin'): '10',
+    ('pct99-bias', 'tasmax'): '11',
+    ('1-in-10yr-bias', 'tasmin'): '12',
+    ('1-in-10yr-bias', 'tasmax'): '13',
+    ('mean-bias', 'pr'): '14',
+    ('seasonal-cycle', 'pr'): '15',
+    ('interannual-variability-bias', 'pr'): '16',
+    ('wet-day-freq', 'pr'): '17',
+    ('R10mm-bias', 'pr'): '18',
+    ('R20mm-bias', 'pr'): '19',
+    ('R95pTOT-bias', 'pr'): '20',
+    ('R99pTOT-bias', 'pr'): '21',
+    ('pct99-bias', 'pr'): '22',
+    ('1-in-10yr-bias', 'pr'): '23',
 }
 
 valid_vars = list(var_names.keys())
@@ -107,7 +133,7 @@ def main(args):
                 else:
                     caption = f"Figure S{fignum}: Bias in {metric_name} (relative to the AGCD dataset) for the calibration assessment task. Results are shown for the {gcm_name} GCM (panel a), the {rcm_name} RCM forced by that GCM (panel c), and various bias correction methods applied to those GCM (panel b) and RCM (panels d-g) data.{extra_text}"
                 pdf.multi_cell(text=caption, w=pdf.epw, new_x='LEFT')
-                if fignum in [2, 4, 6]:
+                if fignum in [2, 4, 6, 8]:
                     pdf.add_page()
                     pdf.ln()
                     pdf.ln()
@@ -150,7 +176,7 @@ def main(args):
                 else:
                     caption = f"Figure S{fignum}: Bias in {metric_name} (relative to the AGCD dataset) for the cross validation assessment task. Results are shown for the {gcm_name} GCM (panel a), the {rcm_name} RCM forced by that GCM (panel d), and various bias correction methods applied to those GCM (panels b and c) and RCM (panels e, f, g, i and j) data. A reference case where the AGCD training data (1960-1989) was simply duplicated for the assessment period (1990-2019) is also shown (panel h).{extra_text}"
                 pdf.multi_cell(text=caption, w=pdf.epw, new_x='LEFT')
-                if fignum in [9, 11, 13]:
+                if fignum in [12, 14, 16, 18]:
                     pdf.add_page()
                     pdf.ln()
                     pdf.ln()
@@ -162,7 +188,13 @@ def main(args):
             else:
                 print(f"{infile} does not exist")
 
-    pdf.output(f"/g/data/ia39/npcp/code/reports/phase1/supplementary/{args.var}_{args.metric}_supplementary_information.pdf")
+    file_number = file_numbers[(args.metric, args.var)]
+    if not 'bias' in args.metric:
+        file_metric = f'{args.metric}-bias'
+    else:
+        file_metric = args.metric
+
+    pdf.output(f"/g/data/ia39/npcp/code/reports/phase1/supplementary/supplementary-file{file_number}_{args.var}_{file_metric}.pdf")
 
 
 if __name__ == '__main__':
