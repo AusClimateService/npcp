@@ -424,7 +424,10 @@ University of Queensland and the Queensland Department of Environment and Scienc
 ([NCI 2024c](https://dx.doi.org/10.25914/h0bx-be42))
 produced by running a different configuration of CCAM
 ([Chapman et al, 2023](https://doi.org/10.1029/2023EF003548)).
-
+Each modelling group also ran their RCM with forcing from the
+ERA5 reanalysis dataset ([Hersbach et al 2020](https://doi.org/10.1002/qj.3803)).
+These downscaled ERA5 data were also included in the intercomparison.
+  
 The daily timescale observational / reference data was version 1.0.1 the
 Australian Gridded Climate Data (AGCD) dataset
 ([Australian Bureau of Meteorology 2023](https://dx.doi.org/10.25914/hjqj-0x55),
@@ -507,22 +510,24 @@ In order to aid compatibility with related studies in the literature,
 wherever possible we employed metrics from the widely used list of climate indices
 recommended by the Expert Team on Climate Change Detection and Indices
 (ETCCDI; e.g. [Alexander et al 2006](https://doi.org/10.1029/2005JD006290)).
+The complete results for each variable and metric are available in a series of supplementary files
+([GitHub link](https://github.com/AusClimateService/npcp/tree/master/reports/phase1/supplementary)
+to be replaced with Zenodo DOI),
+so Table 1 also indicates which supplementary files correspond to each metric.
 
-
-| Category | Metric | Description |
-| ---      | ---    | ---         |
-| Climatology | Annual mean |  |
-| Climatology | Seasonal cycle | Mean value for each month. (Bias is calculated as the sum of the absolute value of the difference between the model and observed mean value for each month.) |
-| Variability | Interannual variability (std(1yr)) | Standard deviation of the annual mean timeseries. |
-| Variability (temperature) | Warm-spell duration index (WSDI) | Number of days where, in intervals of at least 6 consecutive days, daily Tmax > 90th percentile calculated for a 5-day window centred on each calendar day. |
-| Variability (temperature) | Cold-spell duration index (CSDI) | Number of days where, in intervals of at least 6 consecutive days, daily Tmin < 10th percentile calculated for a 5-day window centred on each calendar day. |
-| Daily distribution (precipitation) | Wet day frequency | Number of wet days (precipitation > 1mm) expressed as a fraction (%) of all days. |
-| Daily distribution (precipitation) | R10mm, R20mm | Annual number of heavy precipitation days (precipitation ≥ 10 mm or 20mm). |
-| Daily distribution (precipitation) | R95pTOT, R99pTOT | Fraction of total annual precipitation that falls on very wet days (> 95th or 99th percentile). |
-| Extremes | 99th or 1st percentile (pct99, pct01) | 99th percentile of precipitation and daily maximum temperature, 1st percentile of daily minimum temperature. |
-| Extremes | 1-in-10 year event | Percentile corresponding to an annual return interval of 10 years. |
-| Trends | Change signal | Change in the climatological mean (future period minus the historical period). |
-
+| Category | Metric | Description | Supplementary File/s |
+| ---      | ---    | ---         | ---                |
+| Climatology | Annual mean |  | 2 (Tmin), 3 (Tmax), 14 (pr) | 
+| Climatology | Seasonal cycle | Mean value for each month. (Bias is calculated as the sum of the absolute value of the difference between the model and observed mean value for each month.) | 4 (Tmin), 5 (Tmax), 15 (pr) |
+| Variability | Interannual variability (std(1yr)) | Standard deviation of the annual mean timeseries. | 6 (Tmin), 7 (Tmax), 16 (pr) |
+| Variability (temperature) | Warm-spell duration index (WSDI) | Number of days where, in intervals of at least 6 consecutive days, daily Tmax > 90th percentile calculated for a 5-day window centred on each calendar day. | 8 |
+| Variability (temperature) | Cold-spell duration index (CSDI) | Number of days where, in intervals of at least 6 consecutive days, daily Tmin < 10th percentile calculated for a 5-day window centred on each calendar day. | 9 |
+| Daily distribution (precipitation) | Wet day frequency | Number of wet days (precipitation > 1mm) expressed as a fraction (%) of all days. | 17 |
+| Daily distribution (precipitation) | R10mm, R20mm | Annual number of heavy precipitation days (precipitation ≥ 10 mm or 20mm). | 18, 19 |
+| Daily distribution (precipitation) | R95pTOT, R99pTOT | Fraction of total annual precipitation that falls on very wet days (> 95th or 99th percentile). | 20, 21 |
+| Extremes | 99th or 1st percentile (pct99, pct01) | 99th percentile of precipitation and daily maximum temperature, 1st percentile of daily minimum temperature. | 10 (Tmin), 11 (Tmax), 22 (pr) |
+| Extremes | 1-in-10 year event | Percentile corresponding to an annual return interval of 10 years. | 12 (Tmin), 13 (Tmax), 23 (pr) |
+| Trends | Change signal | Change in the climatological mean (future period minus the historical period). | 24 (Tmin), 25 (Tmax), 26 (pr) |
 _Table 1: Metrics calculated at each grid point across Australia._
 
 
@@ -532,13 +537,13 @@ In order to provide an overview of the performance of each bias correction metho
 the results were condensed into a single summary table
 for the calibration (Figure 1) and cross validation (Figure 2) tasks.
 The tables show the bias in each metric averaged (using the mean absolute error/bias)
-over all grid points and GCM/RCM combinations.
+over all grid points and all CMIP6 GCM/RCM combinations.
 
 <p align="center">
     <img src="figures/hist_summary.png" width=60% height=60%>
     <br>
     <em>
-      Figure 1: Mean absolute error/bias across all grid points and GCM/RCM combinations
+      Figure 1: Mean absolute error/bias across all grid points and CMIP6 GCM/RCM combinations
       for the calibration assessment task.
       The metrics corresponding to each row label are defined in Table 1.
       The number in each cell corresponds to the mean absolute error/bias
@@ -556,12 +561,33 @@ over all grid points and GCM/RCM combinations.
     </em>
 </p>
 
+As discussed in Section 2,
+bias correction involves comparing model data and observations
+over a calibration/training period in order to define a transfer function
+that can be used to "correct" target model data.
+Since any given historical CMIP6 simulation does not match the observed phasing
+of climate variability (e.g. of major modes like the El Nino Southern Oscillation),
+the transfer function effectively corrects for both model errors and
+the mismatch in climate variability.
+Since climate variability in the ERA5 dataset does match observations,
+we present separate summary tables for all ERA5/RCM combinations in Supplementary File 1.
+The residual biases after bias correction were typically smaller for the ERA5-based data,
+which was to be expected since the ERA5 data is less biased (relative to AGCD) to begin with and
+because the calibration process produces a transfer function
+that is free from contamination by internal variability.
+Aside from this difference in the magnitude of the residual bias,
+the relative performance of each of the bias correction methods was similar for both
+the ERA5 and CMIP6-based data. 
+This suggests that any climate variability mismatch over the calibration period
+did not systematically skew the CMIP6-based results.
+We therefore focus the presentation and discussion of results on the CMIP6-based data.
+
 The results for each variable and assessment category are discussed in the sections below,
 with maps showing the results for all grid points for a representative RCM/GCM as required.
 See the supplementary materials for the map
 for every metric and RCM/GCM combination
-(see [GitHub](https://github.com/AusClimateService/npcp/tree/master/reports/phase1/supplementary)
-for now - will be uploaded to Zenodo).
+([GitHub link](https://github.com/AusClimateService/npcp/tree/master/reports/phase1/supplementary)
+to be replaced with Zenodo DOI).
 In addition to showing the results for bias corrected RCM and GCM data,
 the maps for the cross validation task also show an "AGCD (training data)" result.
 This result is derived from a simple replication the AGCD training data
