@@ -515,35 +515,37 @@ The complete results for each variable and metric are available in a series of s
 to be replaced with Zenodo DOI),
 so Table 1 also indicates which supplementary files correspond to each metric.
 
-| Category | Metric | Description | Supplementary File/s |
+| Category | Metric | Description | Supplementary file number/s |
 | ---      | ---    | ---         | ---                |
-| Climatology | Annual mean |  | 2 (Tmin), 3 (Tmax), 14 (pr) | 
-| Climatology | Seasonal cycle | Mean value for each month. (Bias is calculated as the sum of the absolute value of the difference between the model and observed mean value for each month.) | 4 (Tmin), 5 (Tmax), 15 (pr) |
-| Variability | Interannual variability (std(1yr)) | Standard deviation of the annual mean timeseries. | 6 (Tmin), 7 (Tmax), 16 (pr) |
-| Variability (temperature) | Warm-spell duration index (WSDI) | Number of days where, in intervals of at least 6 consecutive days, daily Tmax > 90th percentile calculated for a 5-day window centred on each calendar day. | 8 |
-| Variability (temperature) | Cold-spell duration index (CSDI) | Number of days where, in intervals of at least 6 consecutive days, daily Tmin < 10th percentile calculated for a 5-day window centred on each calendar day. | 9 |
-| Daily distribution (precipitation) | Wet day frequency | Number of wet days (precipitation > 1mm) expressed as a fraction (%) of all days. | 17 |
-| Daily distribution (precipitation) | R10mm, R20mm | Annual number of heavy precipitation days (precipitation ≥ 10 mm or 20mm). | 18, 19 |
-| Daily distribution (precipitation) | R95pTOT, R99pTOT | Fraction of total annual precipitation that falls on very wet days (> 95th or 99th percentile). | 20, 21 |
-| Extremes | 99th or 1st percentile (pct99, pct01) | 99th percentile of precipitation and daily maximum temperature, 1st percentile of daily minimum temperature. | 10 (Tmin), 11 (Tmax), 22 (pr) |
-| Extremes | 1-in-10 year event | Percentile corresponding to an annual return interval of 10 years. | 12 (Tmin), 13 (Tmax), 23 (pr) |
-| Trends | Change signal | Change in the climatological mean (future period minus the historical period). | 24 (Tmin), 25 (Tmax), 26 (pr) |
+| Climatology | Annual mean |  | 1-3 | 
+| Climatology | Seasonal cycle | Mean value for each month. (Bias is calculated as the sum of the absolute value of the difference between the model and observed mean value for each month.) | 4-6 |
+| Variability | Interannual variability (std(1yr)) | Standard deviation of the annual mean timeseries. | 7-9 |
+| Variability (temperature) | Warm-spell duration index (WSDI) | Number of days where, in intervals of at least 6 consecutive days, daily Tmax > 90th percentile calculated for a 5-day window centred on each calendar day. | 10 |
+| Variability (temperature) | Cold-spell duration index (CSDI) | Number of days where, in intervals of at least 6 consecutive days, daily Tmin < 10th percentile calculated for a 5-day window centred on each calendar day. | 11 |
+| Daily distribution (precipitation) | Wet day frequency | Number of wet days (precipitation > 1mm) expressed as a fraction (%) of all days. | 12 |
+| Daily distribution (precipitation) | R10mm, R20mm | Annual number of heavy precipitation days (precipitation ≥ 10 mm or 20mm). | 13, 14 |
+| Daily distribution (precipitation) | R95pTOT, R99pTOT | Fraction of total annual precipitation that falls on very wet days (> 95th or 99th percentile). | 15, 16 |
+| Extremes | 99th or 1st percentile (pct99, pct01) | 99th percentile of precipitation and daily maximum temperature, 1st percentile of daily minimum temperature. | 17-19 |
+| Extremes | 1-in-10 year event | Percentile corresponding to an annual return interval of 10 years. | 20-22 |
+| Trends | Change signal | Change in the climatological mean (future period minus the historical period). | 23-25 |
 _Table 1: Metrics calculated at each grid point across Australia._
 
 
 ## 5. Results
 
 In order to provide an overview of the performance of each bias correction method,
-the results were condensed into a single summary table
+the results were condensed into summary tables
 for the calibration (Figure 1) and cross validation (Figure 2) tasks.
 The tables show the bias in each metric averaged (using the mean absolute error/bias)
-over all grid points and all CMIP6 GCM/RCM combinations.
+over all grid points and all CMIP6 GCM/RCM combinations (left column)
+or all ERA5/RCM combinations (right column).
 
 <p align="center">
-    <img src="figures/hist_summary.png" width=60% height=60%>
+    <img src="figures/hist_CMIP6-ERA5_summary.png" width=60% height=60%>
     <br>
     <em>
-      Figure 1: Mean absolute error/bias across all grid points and CMIP6 GCM/RCM combinations
+      Figure 1: Mean absolute error/bias across all grid points
+      and all CMIP6 GCM/RCM (left column) or ERA5/RCM (right column) combinations
       for the calibration assessment task.
       The metrics corresponding to each row label are defined in Table 1.
       The number in each cell corresponds to the mean absolute error/bias
@@ -554,33 +556,38 @@ over all grid points and all CMIP6 GCM/RCM combinations.
 </p>
 
 <p align="center">
-    <img src="figures/xval_summary.png" width=60% height=60%>
+    <img src="figures/xval_CMIP6-ERA5_summary.png" width=60% height=60%>
     <br>
     <em>
       Figure 2: As per Figure 1 but for the cross validation assessment task.
     </em>
 </p>
 
-As discussed in Section 2,
-bias correction involves comparing model data and observations
-over a calibration/training period in order to define a transfer function
-that can be used to "correct" target model data.
-Since any given historical CMIP6 simulation does not match the observed phasing
-of climate variability (e.g. of major modes like the El Nino Southern Oscillation),
-the transfer function effectively corrects for both model errors and
-the mismatch in climate variability.
-Since climate variability in the ERA5 dataset does match observations,
-we present separate summary tables for all ERA5/RCM combinations in Supplementary File 1.
-The residual biases after bias correction were typically smaller for the ERA5-based data,
-which was to be expected since the ERA5 data is less biased (relative to AGCD) to begin with and
-because the calibration process produces a transfer function
-that is free from contamination by internal variability.
-Aside from this difference in the magnitude of the residual bias,
-the relative performance of each of the bias correction methods was similar for both
-the ERA5 and CMIP6-based data. 
-This suggests that any climate variability mismatch over the calibration period
-did not systematically skew the CMIP6-based results.
-We therefore focus the presentation and discussion of results on the CMIP6-based data.
+After a bias correction method has been applied,
+any residual bias on the calibration task
+(i.e. an in-sample test, where the training and target data are the same)
+may be attributed to the method doing an imperfect job of quantifying and removing the model error.
+Since historical CMIP6 simulations do not match the observed phasing of climate variability,
+this "error" consists of both true model error and also a component related to
+the mismatch in climate variability between the model and observations.
+On the cross validation task (an out-of-sample test),
+the residual bias is typically larger than for the calibration task
+because the variability mismatch makes the training less accurate and
+persists over the target time period as well.
+Any time-varying component of the model error
+can also lead to a higher residual bias on cross validation,
+as does the fact that the training period is finite and thus unable to sample
+all possible weather/climate states that can occur (in both the model and observations)
+outside of that period.
+
+The ERA5-based data used in the intercomparison is unique
+in the sense that its climate variability does match observations,
+so it was presented separately in Figure 1 and 2.
+The magnitude of the residual bias and the relative performance of each of the bias correction methods
+was similar for both the ERA5 and CMIP6-based data,
+which suggests that any mismatch in climate variability between the CMIP6 historical data
+and observations was a minor factor.
+We therefore focus the remaining presentation and discussion of results on the CMIP6-based data.
 
 The results for each variable and assessment category are discussed in the sections below,
 with maps showing the results for all grid points for a representative RCM/GCM as required.
