@@ -528,6 +528,7 @@ so Table 1 also indicates which supplementary files correspond to each metric.
 | Extremes | 99th or 1st percentile (pct99, pct01) | 99th percentile of precipitation and daily maximum temperature, 1st percentile of daily minimum temperature. | 17-19 |
 | Extremes | 1-in-10 year event | Percentile corresponding to an annual return interval of 10 years. | 20-22 |
 | Trends | Change signal | Change in the climatological mean (future period minus the historical period). | 23-25 |
+
 _Table 1: Metrics calculated at each grid point across Australia._
 
 
