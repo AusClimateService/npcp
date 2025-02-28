@@ -988,7 +988,7 @@ and then validating on the second half (the "cross validation" task).
 These two validation approaches each have their have own limitations,
 so results that were consistent across both were considered more robust. 
 Indeed, aside from an obvious difference in the magnitude of the residual bias after bias correction
-(cross validation is associated with higher biases due to internal climate variability)
+(cross validation is associated with higher biases)
 the relative performance of the bias correction methods
 and whether or not they provided any substantial benefit
 was mostly similar between the two tasks.
