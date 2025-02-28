@@ -541,7 +541,7 @@ over all grid points and all CMIP6 GCM/RCM combinations (left column)
 or all ERA5/RCM combinations (right column).
 
 <p align="center">
-    <img src="figures/hist_CMIP6-ERA5_summary.png" width=60% height=60%>
+    <img src="figures/hist_CMIP6-ERA5_summary.png" width=100% height=100%>
     <br>
     <em>
       Figure 1: Mean absolute error/bias across all grid points
@@ -556,7 +556,7 @@ or all ERA5/RCM combinations (right column).
 </p>
 
 <p align="center">
-    <img src="figures/xval_CMIP6-ERA5_summary.png" width=60% height=60%>
+    <img src="figures/xval_CMIP6-ERA5_summary.png" width=100% height=100%>
     <br>
     <em>
       Figure 2: As per Figure 1 but for the cross validation assessment task.
