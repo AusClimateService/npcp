@@ -520,8 +520,8 @@ so Table 1 also indicates which supplementary files correspond to each metric.
 | Climatology | Annual mean |  | 1-3 | 
 | Climatology | Seasonal cycle | Mean value for each month. (Bias is calculated as the sum of the absolute value of the difference between the model and observed mean value for each month.) | 4-6 |
 | Variability | Interannual variability (std(1yr)) | Standard deviation of the annual mean timeseries. | 7-9 |
-| Variability (temperature) | Warm-spell duration index (WSDI) | Number of days where, in intervals of at least 6 consecutive days, daily Tmax > 90th percentile calculated for a 5-day window centred on each calendar day. | 10 |
-| Variability (temperature) | Cold-spell duration index (CSDI) | Number of days where, in intervals of at least 6 consecutive days, daily Tmin < 10th percentile calculated for a 5-day window centred on each calendar day. | 11 |
+| Variability (temperature) | Cold-spell duration index (CSDI) | Number of days where, in intervals of at least 6 consecutive days, daily Tmin < 10th percentile calculated for a 5-day window centred on each calendar day. | 10 |
+| Variability (temperature) | Warm-spell duration index (WSDI) | Number of days where, in intervals of at least 6 consecutive days, daily Tmax > 90th percentile calculated for a 5-day window centred on each calendar day. | 11 |
 | Daily distribution (precipitation) | Wet day frequency | Number of wet days (precipitation > 1mm) expressed as a fraction (%) of all days. | 12 |
 | Daily distribution (precipitation) | R10mm, R20mm | Annual number of heavy precipitation days (precipitation ≥ 10 mm or 20mm). | 13, 14 |
 | Daily distribution (precipitation) | R95pTOT, R99pTOT | Fraction of total annual precipitation that falls on very wet days (> 95th or 99th percentile). | 15, 16 |

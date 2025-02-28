@@ -24,6 +24,12 @@ rcm_names = {
     'UQ-DES-CCAM-2105': 'CCAM-v2105',
 }
 
+file_numbers = {
+    'tasmin': '23',
+    'tasmax': '24',
+    'pr': '25',
+}
+
 valid_vars = list(var_names.keys())
 gcms = list(gcm_names.keys())
 rcms = list(rcm_names.keys())
@@ -98,8 +104,8 @@ def main(args):
             else:
                 print(f"{infile} does not exist")
 
-
-    pdf.output(f"/g/data/ia39/npcp/code/reports/phase1/supplementary/{args.var}_trend_supplementary_information.pdf")
+    file_number = file_numbers[args.var]
+    pdf.output(f"/g/data/ia39/npcp/code/reports/phase1/supplementary/supplementary-file{file_number}_{args.var}_trend.pdf")
 
 
 if __name__ == '__main__':
