@@ -450,7 +450,7 @@ differences can arise not only from model bias/errors (which bias correction see
 but also from the resolution (or scale) gap between the datasets.
 The latter discrepancy — which is not a model error —
 is known as the representativeness problem
-([Zwiers et al 2011](https://doi.org/10.1007/978-94-007-6692-1_13)).
+([Zwiers et al 2013](https://doi.org/10.1007/978-94-007-6692-1_13)).
 In order to avoid this problem in the intercomparison,
 all data were regridded to the 0.2 degree grid using conservative remapping.
 
