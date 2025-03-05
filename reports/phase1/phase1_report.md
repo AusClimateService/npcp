@@ -33,7 +33,7 @@ called the National Partnership for Climate Projections (NPCP),
 that aims to develop a consistent approach to deliver comparable,
 robust, fit-for-purpose future climate information
 to assess climate risks and inform adaptation planning.
-The roadmap identifies a number of priorities areas of collaboration for the NPCP,
+The roadmap identifies a number of priority areas of collaboration for the NPCP,
 including the delivery of national and regional downscaled climate projections.
 This involves model selection, downscaling models, bias correction and calibration,
 as well as secondary and next-level analysis (e.g., hazard modelling).
@@ -57,7 +57,8 @@ It focused on bias correction methods that were available to the ACS right now
 (i.e. with functional software that was sufficiently well documented)
 and applied those methods to a subset of the
 Coordinated Regional Climate Downscaling Experiment (CORDEX; https://cordex.org/)
-data that will be used by the ACS to generate nation-wide projections.
+data that has been produced by NPCP partner organisations and
+will be used by the ACS to generate nation-wide projections.
 Since existing bias correction assessments produced by NPCP partners
 only provide information on some of the available bias correction methods
 for specific contexts such as the Queensland spatial domain
@@ -437,15 +438,15 @@ Australian Gridded Climate Data (AGCD) dataset
 In addition to daily maximum temperature, daily minimum temperature and daily precipitation,
 the AGCD precipitation weights data were used to mask land areas
 where the precipitation values are unreliable due to weather station sparsity.
-The weights indicate whether observations (i.e. from weather stations)
+The weights indicate if observations (i.e. from weather stations)
 influenced the analysed value in the AGCD dataset at every grid point and time step.
-In some remote locations such as central Australia,
+In some remote locations such as central Australia
 there is little or no influence from observations at most or all time steps.
-For precipitation related metrics we masked all grid points
+For precipitation related metrics, we masked all grid points
 that were not influenced by observations on 90% or more days over the 1960-2019 period.
 
 The spatial resolution of the datasets ranged from 0.05 degrees of latitude and longitude for AGCD
-to 0.2 degrees for UQ-DES-CCAM-2015 over the entire landmass of Australia.
+to 0.2 degrees for CCAM-v2105 over the entire landmass of Australia.
 When comparing RCM data against observations of higher spatial resolution,
 differences can arise not only from model bias/errors (which bias correction seeks to remove),
 but also from the resolution (or scale) gap between the datasets.
@@ -453,11 +454,11 @@ The latter discrepancy — which is not a model error —
 is known as the representativeness problem
 ([Zwiers et al 2013](https://doi.org/10.1007/978-94-007-6692-1_13)).
 In order to avoid this problem in the intercomparison,
-all data were regridded to the 0.2 degree grid using conservative remapping.
+all data were regridded to the 0.2 degrees grid using conservative remapping.
 
 ## 4. Assessment
 
-Three tasks were completed for each of the bias correction methods (for each of the GCM/RCM combinations):
+Three tasks were completed for each of the bias correction methods (for each GCM/RCM combination):
 - **Task 1 (Calibration)**: Produce bias corrected data for the 1980-2019 period, using 1980-2019 as a training period.
 - **Task 2 (cross-validation)**: Produce bias corrected data for the 1990-2019 period, using 1960-1989 as a training period.
 - **Task 3 (Projection)**: Produce bias corrected data for the 2060-2099 period, using 1980-2019 as a training period.
@@ -516,8 +517,8 @@ recommended by the Expert Team on Climate Change Detection and Indices
 (ETCCDI; e.g. [Alexander et al 2006](https://doi.org/10.1029/2005JD006290)).
 The complete results for each variable and metric are available in a series of supplementary files
 ([GitHub link](https://github.com/AusClimateService/npcp/tree/master/reports/phase1/supplementary)
-to be replaced with Zenodo DOI),
-so Table 1 also indicates which supplementary files correspond to each metric.
+to be replaced with Zenodo DOI);
+Table 1 indicates which supplementary files correspond to each metric.
 
 | Category | Metric | Description | Supplementary file number/s |
 | ---      | ---    | ---         | ---                |
@@ -529,7 +530,7 @@ so Table 1 also indicates which supplementary files correspond to each metric.
 | Daily distribution (precipitation) | Wet day frequency | Number of wet days (precipitation > 1mm) expressed as a fraction (%) of all days. | 12 |
 | Daily distribution (precipitation) | R10mm, R20mm | Annual number of heavy precipitation days (precipitation ≥ 10 mm or 20mm). | 13, 14 |
 | Daily distribution (precipitation) | R95pTOT, R99pTOT | Fraction of total annual precipitation that falls on very wet days (> 95th or 99th percentile). | 15, 16 |
-| Extremes | 99th or 1st percentile (pct99, pct01) | 99th percentile of precipitation and daily maximum temperature, 1st percentile of daily minimum temperature. | 17-19 |
+| Extremes | 99th or 1st percentile (pct99, pct01) | 99th percentile of precipitation and daily maximum temperature. 1st percentile of daily minimum temperature. | 17-19 |
 | Extremes | 1-in-10 year event | Percentile corresponding to an annual return interval of 10 years. | 20-22 |
 | Trends | Change signal | Change in the climatological mean (future period minus the historical period). | 23-25 |
 
@@ -578,7 +579,7 @@ the mismatch in climate variability between the model and observations.
 On the cross-validation task (an out-of-sample test),
 the residual bias is typically larger than for the calibration task
 because the variability mismatch makes the training less accurate and
-persists over the target time period as well.
+the mismatch exists over the target time period as well.
 Any time-varying component of the model error
 can also lead to a higher residual bias on cross-validation,
 as does the fact that the training period is finite and thus unable to sample
