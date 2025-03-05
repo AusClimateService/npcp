@@ -187,7 +187,8 @@ $$x_{m-adjust} = x_{m,p} \times (F_{o,h}^{-1}(F_{m,p}(x_{m,p})) \div F_{m,h}^{-1
 #### 2.1.2. Software (and implementation choices)
 
 The code used to implement the ECDFm method is maintained by the CSIRO
-and is openly available on GitHub ([Irving 2024](https://doi.org/10.5281/zenodo.12523625)).
+and is openly available on GitHub (https://github.com/AusClimateService/qqscale)
+with snapshots archived on Zenodo (https://doi.org/10.5281/zenodo.12523625).
 The code basically implements the [bias adjustment and downscaling](https://xclim.readthedocs.io/en/stable/sdba.html)
 functionality available in the widely used open source xclim library
 ([Bourgault et al, 2023](https://doi.org/10.21105/joss.05415)).
@@ -242,7 +243,7 @@ The largest valid rainfall amount of 1250mm would have a scaled value of alog(12
 Once the clipping and scaling has been performed (i.e. once the data has been binned), 
 the quantile corresponding to each of the populated bins in the scaled model data is determined.
 The transfer function represents the arithmetic difference
-between each model bin value and the value of the same quanilte in the scaled observations.
+between each model bin value and the value of the same quantile in the scaled observations.
 Those differences are then added to all the model data points in each bin respectively.
 Similar to ECDFm, there is the option to apply the transfer function in a multiplicative
 rather than addition fashion,
@@ -282,7 +283,7 @@ There are also additional options as follows:
   is for a maximum increase of 50% applied to values greater than or equal to 10mm.
   For instance, a model daily precipitation value of 20mm could potentially be bias corrected
   up to a maximum value of 30mm.
-  For precipitation, there is an additional default option (which can be overriden)
+  For precipitation, there is an additional default option (which can be overridden)
   that values of 0 rainfall be left unchanged (i.e. no bias correction is applied). 
 - _Trend matching_: The long-term trend in the data can be removed prior to applying the bias correction
   and then added back in afterwards to ensure that the bias correction
@@ -882,7 +883,7 @@ and the QDC method effectively just applies a small perturbation to the training
 
 ### 5.7. Precipitation daily distribution
 
-The lower end of the annual precipitation distribution was assessed
+The lower end of the daily precipitation distribution was assessed
 by considering the wet day frequency (or conversely the annual number of relatively dry days),
 while the upper end was captured by a series of metrics that used absolute (r10mm and r20mm)
 or relative (R95pTOT and R99pTOT) thresholds.
@@ -891,7 +892,7 @@ Dynamical downscaling tended to reduce GCM bias
 at the lower end of the precipitation distribution (wet day frequency and r10mm)
 but increase GCM bias at the upper end (R95pTOT and R99pTOT) (Figure 1c and 2c).
 Bias correction (and the QDC method) tended to reduce model bias,
-with each model performing similarly. 
+with each method performing similarly. 
 The exception was again the MBCn method,
 for which biases either remained relatively unchanged or increased.
 
@@ -1041,7 +1042,7 @@ for which ECDFm tended to have little effect on the model bias.
 In contrast, the QME method (i.e. the other option for univariate bias correction)
 essentially "did no harm" in the sense that it did not dramatically inflate the model bias
 for particular metrics and RCM/GCM combinations.
-A detailed analysis of why the QME and ECDFm method performed differently in
+A detailed analysis of why the QME and ECDFm methods performed differently in
 specific instances despite their obvious methodological similarities
 was beyond the scope of this paper,
 but we hypothesise that it could be related to the data transform that the QME method
