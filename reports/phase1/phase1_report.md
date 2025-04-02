@@ -28,20 +28,19 @@ _This report is currently in draft form and is not complete._
 The [Climate Projections Roadmap for Australia](https://www.dcceew.gov.au/climate-change/publications/climate-projections-roadmap-for-australia)
 has been developed by the Department of Climate Change, Energy, the Environment and Water
 through a collaborative effort of the Australian climate projections community.
-The roadmap is shared vision statement of this new partnership,
+The roadmap is a shared vision statement of this new partnership,
 called the National Partnership for Climate Projections (NPCP),
 that aims to develop a consistent approach to deliver comparable,
 robust, fit-for-purpose future climate information
 to assess climate risks and inform adaptation planning.
 The roadmap identifies a number of priority areas of collaboration for the NPCP,
 including the delivery of national and regional downscaled climate projections.
-This involves model selection, downscaling models, bias correction and calibration,
+This involves model selection, downscaling and bias correction,
 as well as secondary and next-level analysis (e.g., hazard modelling).
 
 When it comes to bias correction there is no "one size fits all" solution.
-Over the years, various different methods have been applied by the major projects,
-universities, and government agencies involved in the NPCP.
-Each of these methods have their own pros and cons and are suitable for different applications.
+Over the years, various different methods have been applied in Australia.
+Each of these methods has its own pros and cons and is suitable for different applications.
 The associated bias correction software also varies
 from code that was written for a specific research application (and sometimes subsequently abandoned)
 to code that is actively maintained by research software engineers and regularly re-used.
@@ -53,13 +52,21 @@ The first major initiative listed by the Roadmap is the production of
 national-scale climate projections by the Australian Climate Service (ACS).
 The first phase of the bias correction intercomparison was therefore
 designed to support that initiative.
-It focused on bias correction methods that were available to the ACS right now
+
+It focused on bias correction methods that were available to the ACS at that time
 (i.e. with functional software that was sufficiently well documented)
-and applied those methods to a subset of the
-Coordinated Regional Climate Downscaling Experiment (CORDEX; https://cordex.org/)
-data that has been produced by NPCP partner organisations and
-will be used by the ACS to generate nation-wide projections.
-Since existing bias correction assessments produced by NPCP partners
+and applied those methods to a subset of the multi-scenario, multi-model ensemble
+of regional climate model (RCM) simulations produced by NPCP partner organisations.
+The RCMs were forced by data from a selection
+(described by [Grose et al 2023](https://doi.org/10.1016/j.cliser.2023.100368))
+of global climate models (GCMs) participating in the
+Coupled Model Intercomparsion Project phase 6
+(CMIP6; [Eyring et al 2016](https://doi.org/10.5194/gmd-9-1937-2016))
+and their output will ultimately be submitted to the
+Coordinated Regional Climate Downscaling Experiment (CORDEX; https://cordex.org/).
+The resulting CORDEX-CMIP6 dataset will form the basis for the ACS national projections
+as well as much of the climate projection information delivered by other NPCP members.
+Since existing bias correction assessments produced for Australia
 only provide information on some of the available bias correction methods
 for specific contexts such as the Queensland spatial domain
 ([Zhang et al 2024](https://doi.org/10.1002/met.2204))
@@ -71,6 +78,12 @@ of all the available bias correction methods.
 
 This report documents the results of this first phase
 of the NPCP bias correction intercomparison project.
+Notable features of the study include the use of cross-validation
+(i.e. validation on a segment of the observational record
+that was not used for calibrating the bias correction methods)
+and comparison of bias correction applied to downscaled CMIP6 data
+(i.e. CORDEX-CMIP6) with bias correction applied directly
+to CMIP6 data and to downscaled reanalysis data.
 
 
 ## 2. Participating bias correction methods
@@ -85,7 +98,7 @@ ranging from relatively simple methods that take a single variable as input
 to more sophisticated multi-variate approaches.
 
 Through a series of NPCP meetings and workshops on the topic of bias correction,
-five methods were identified as being available for use by the ACS right now:
+five methods were identified as being available for use by the ACS at that time:
 - Equi-distant/ratio Cumulative Density Function (CDF) matching (ECDFm; univariate)
 - Quantile Matching for Extremes (QME; univariate)
 - Quantile Delta Change (QDC; univariate)
@@ -95,7 +108,7 @@ five methods were identified as being available for use by the ACS right now:
 Some of these methods have been used previously in major projects undertaken
 by the Commonwealth Scientific and Industrial Research Organisation (CSIRO)
 and/or the Bureau of Meteorology (who are working together on the ACS).
-For instance, the QDC method was used to produce application ready climate data 
+For instance, the QDC method was used to produce application-ready climate data 
 for the Climate Change in Australia project
 ([CSIRO and Bureau of Meteorology, 2015](https://www.climatechangeinaustralia.gov.au/en/communication-resources/reports/)),
 while the QME and MRNBC methods were used to produce the latest
@@ -109,7 +122,7 @@ In contrast, the ECDFm and MBCn methods have not yet been used in a
 major CSIRO or Bureau of Meteorology project,
 but there was interest in determining their potential for future projects.
 
-The simplest bias correction procedure is mean scaling,
+The simplest bias correction procedure is a mean correction,
 where the difference or ratio between the mean model and observed value
 over the calibration period (i.e. the mean bias)
 is removed (via subtraction or division) from the target model data
@@ -119,10 +132,11 @@ where the bias is calculated for a series of quantiles (instead of just the mean
 and then removed from the corresponding quantiles of the target model data.
 The ECDFm method is essentially the most basic quantile-based bias correction method available.
 The QME method is slightly more complicated in that it involves scaling the data
-before matching the model and observations by quantile.
+before matching the model and observations by quantile
+to help resolve detail in the tails of the distribution (Dowdy 2023).
 Prior to removing the quantile biases from the target model,
 the bias correction factors at the extreme ends of the distribution are also modified by the QME method
-in an attempt to avoid potential overfitting or an excessive influence of very rare events.
+to reduce the risk of overfitting or an excessive influence of very rare events.
 
 While it is technically a "delta change" method as opposed to a "bias correction" method,
 the QDC method was also included in the assessment.
@@ -190,7 +204,7 @@ The code used to implement the ECDFm method is maintained by the CSIRO
 and is openly available on GitHub (https://github.com/AusClimateService/qqscale)
 with snapshots archived on Zenodo (https://doi.org/10.5281/zenodo.12523625).
 The code basically implements the [bias adjustment and downscaling](https://xclim.readthedocs.io/en/stable/sdba.html)
-functionality available in the widely used open source xclim library
+functionality available in the widely used open-source xclim library
 ([Bourgault et al, 2023](https://doi.org/10.21105/joss.05415)).
 
 There are a number of decisions to make when implementing the ECDFm method:
@@ -227,31 +241,32 @@ before applying a quantile-based transfer function.
 This scaling can be thought of as binning the data
 (in this case, a histogram with 500 bins).
 
-A typical valid data range might be -30C to 60C for daily maximum temperature (tasmax),
+The default options for the QME method were used in this study.
+Valid values ranged from -30C to 60C for daily maximum temperature (tasmax),
 -45C to 50C for daily minimum temperature (tasmin),
-or 0mm to 1250mm for daily precipitation (pr).
-The following scaling formulas (used in the NPCP intercomparison)
-map the valid range of data values across the 500 integer values/bins: 
+or 0mm to 1250mm for daily precipitation (pr),
+and the following scaling functions were applied: 
 - (tasmax + 35) * 5
 - (tasmin + 55) * 5
 - alog(pr + 1) * 70, where alog is the natural logarithm 
 
-A small value of 0.1mm would have a scaled value of alog(0.1 + 1) * 70 = 6.7,
+For example, a small value of 0.1mm would have a scaled value of alog(0.1 + 1) * 70 = 6.7,
 which is rounded to an integer value / bin number of 7.
-The largest valid rainfall amount of 1250mm would have a scaled value of alog(1250 + 1 ) * 70 = 499.2 (rounded to 499).
+Similarly, the largest valid rainfall amount of 1250mm
+would have a scaled value of alog(1250 + 1 ) * 70 = 499.2 (rounded to 499).
 
 Once the clipping and scaling has been performed (i.e. once the data has been binned), 
 the quantile corresponding to each of the populated bins in the scaled model data is determined.
 The transfer function represents the arithmetic difference
 between each model bin value and the value of the same quantile in the scaled observations.
-Those differences are then added to all the model data points in each bin respectively.
+Those differences are then added to all the model data points in each bin, respectively.
 Similar to ECDFm, there is the option to apply the transfer function in a multiplicative
-rather than addition fashion,
+rather than additive fashion,
 but additive is the default for all variables (even precipitation).
 
 To avoid potential overfitting or an excessive influence of very rare events,
 before the adjustment factor for each bin is applied to the model data
-the factors for the N most extreme high and extreme low bins (typically N=3)
+the factors for the N most extreme high and extreme low bins (the default value of N=3 was used here)
 are replaced by the value from the neighbouring histogram bin
 (i.e., the histogram bin that is one place less extreme than the third highest value in the sample).
 The reference to _extremes_ in the name of the method is a nod to these tweaks
@@ -276,7 +291,7 @@ There are also additional options as follows:
   Monthly time grouping was used for the NPCP intercomparsion and adjacent months were included for precipitation.
 - _Adjustment factor smoothing_:
   A moving (boxcar) average can be applied over the range of bias correction values (i.e. for bins 0 to 500).
-  For the intercomparison a 21-point moving average was used.
+  For the intercomparison, a 21-point moving average was used.
 - _Adjustment limits_:
   The software allows the user to specify a maximum adjustment/correction. 
   The default setting for precipitation (used in the intercomparison)
@@ -322,7 +337,7 @@ $$x_{o,p} = x_{o,h} + F_{m,p}^{-1}(F_{o,h}(x_{o,h})) - F_{m,h}^{-1}(F_{o,h}(x_{o
 where $F$ is the CDF of either the observations ($o$) or model ($m$)
 for an historic ($h$) or future/projection period ($p$).
 That means $F_{m,p}^{-1}$ and $F_{m,h}^{-1}$ are the quantile functions (inverse CDF)
-corresponding to the future and historical model simulations respectively.
+corresponding to the future and historical model simulations, respectively.
 Returning to our observed median value of $25^{\circ}$ (i.e. $x_{o,h} = 25$),
 the corresponding CDF would return a value of 0.5 (i.e. $F_{o,h}(25) = 0.5$).
 The difference between the future ( $F_{m,p}^{-1}(0.5)$ ) and
@@ -399,22 +414,19 @@ and is openly available on GitHub ([Gammon and Kapoor, 2025](https://doi.org/10.
 
 ## 3. Data
 
-The model data used for the intercomparison was taken from the multi-scenario,
-multi-model ensemble of simulations from regional climate models (RCMs)
-produced by NPCP partner organisations.
-The RCMs were forced by global climate model (GCM) data
-from the Coupled Model Intercomparsion Project phase 6
-(CMIP6; [Eyring et al 2016](https://doi.org/10.5194/gmd-9-1937-2016))
-and will ultimately be submitted to CORDEX,
-forming the basis for much of the climate projection information delivered by NPCP members.
+The subset of the CORDEX-CMIP6 dataset used for the intercomparison
+was daily timescale temperature and precipitation data
+from RCM simulations forced by the ACCESS-ESM1-5, CESM2 and EC-Earth3 models
+for the historical (available for the years 1960-2014) and SSP-3.70 (2015-2100) experiments.
+Three different GCMs were selected in order to sample a range of different model biases
+and projected changes driving the RCM simulations.
+For instance, the ACCESS-ESM1-5 model simulates a strong drying trend over Australia,
+EC-Earth3 a strong increase in rainfall and
+CESM2 a mix of increasing and decreasing rainfall across the country
+(see [Grose et al 2023](https://doi.org/10.1016/j.cliser.2023.100368) for a detailed comparison). 
 
-The subset of the NPCP CORDEX-CMIP6 data used for the intercomparison
-was the daily timescale temperature and precipitation data
-from RCM simulations forced by the
-ACCESS-ESM1-5, CESM2 and EC-Earth3 models for the
-historical (available for the years 1960-2014)
-and SSP-3.70 (2015-2100) experiments.
-Data from three different RCM modelling groups was assessed: 
+Similarly, data from three different RCM modelling groups was assessed
+in order to sample a range of different RCM biases: 
 a `BARPA-R` submission from the Bureau of Meteorology ([NCI 2024a]( https://dx.doi.org/10.25914/gjzx-kr91))
 produced by running the Bureau of Meteorology Atmospheric Regional Projections for Australia
 (BARPA; [Su et al, 2022](http://www.bom.gov.au/research/publications/researchreports/BRR-069.pdf)) RCM,
@@ -426,24 +438,28 @@ University of Queensland and the Queensland Department of Environment and Scienc
 ([NCI 2024c](https://dx.doi.org/10.25914/h0bx-be42))
 produced by running a different configuration of CCAM
 ([Chapman et al, 2023](https://doi.org/10.1029/2023EF003548)).
+Data from the New South Wales and Australian Regional Climate Modelling (NARCliM2.0)
+submission to CORDEX-CMIP6 ([Di Virgilio et al, 2025](https://doi.org/10.5194/gmd-18-671-2025))
+was not available at the time the intercomparison was conducted.
 Each modelling group also ran their RCM with forcing from the
-ERA5 reanalysis dataset ([Hersbach et al 2020](https://doi.org/10.1002/qj.3803)),
+fifth generation European Centre for Medium-Range Weather Forecasts atmospheric reanalysis of the global climate
+(ERA5; [Hersbach et al 2020](https://doi.org/10.1002/qj.3803)),
 These downscaled ERA5 data are available for the years 1980-2020
 and were also included in the intercomparison.
   
-The daily timescale observational / reference data was version 1.0.1 the
+The daily timescale observational / reference data was version 1.0.1 of the
 Australian Gridded Climate Data (AGCD) dataset
 ([Australian Bureau of Meteorology 2023](https://dx.doi.org/10.25914/hjqj-0x55),
 [Evans et al 2020](http://www.bom.gov.au/research/publications/researchreports/BRR-041.pdf),
 [Jones et al 2009](http://www.bom.gov.au/jshess/docs/2009/jones.pdf)).
 In addition to daily maximum temperature, daily minimum temperature and daily precipitation,
-the AGCD precipitation weights data were used to mask land areas
+the AGCD precipitation weights-data were used to mask land areas
 where the precipitation values are unreliable due to weather station sparsity.
 The weights indicate if observations (i.e. from weather stations)
 influenced the analysed value in the AGCD dataset at every grid point and time step.
 In some remote locations such as central Australia
 there is little or no influence from observations at most or all time steps.
-For precipitation related metrics, we masked all grid points
+For precipitation-related metrics, we masked all grid points
 that were not influenced by observations on 90% or more days over the 1960-2019 period.
 
 The spatial resolution of the datasets ranged from 0.05 degrees of latitude and longitude for AGCD
@@ -470,7 +486,7 @@ This is the most basic test of a bias correction method -
 if a method cannot adequately correct the very data it was trained upon,
 it is unlikely to be a useful method.
 Conversely, if a method performs too well on the calibration task,
-this can in some cases be an indication of over-fitting.
+this might be an indication of over-fitting.
 In other words,
 validating a bias correction method on the same data that was used to calibrate the method
 can give the impression that the method is more skilful than it actually is.
@@ -478,7 +494,7 @@ can give the impression that the method is more skilful than it actually is.
 The rationale for the cross-validation task was to avoid the impression of artificial skill
 by validating the bias correction methods on data that was not used for calibration.
 It also allowed for the QDC method to be directly compared to the bias correction methods,
-because for the calibration task the QDC method simply reproduces the original observations.
+because on the calibration task the QDC method simply reproduces the original observations.
 cross-validation is the gold standard for weather forecast verification,
 because temporal synchronicity is expected between the forecast data and observations.
 In the context of bias correction validation,
@@ -488,7 +504,7 @@ the value of cross-validation is limited by internal climate variability
 [Maraun et al 2017](https://doi.org/10.1038/nclimate3418)),
 but it is still a widely used approach.
 Performing both a calibration and cross-validation task
-allowed for comparison of results from two approaches with different, non-overlapping limitations
+allowed for the comparison of results from two approaches with different, non-overlapping limitations
 (i.e. artificial skill versus internal variability).
 Given that downscaled data is only available back to 1980 for ERA5,
 the cross-validation task for that dataset was modified to
@@ -512,8 +528,10 @@ using the ECDFm and QDC methods.
 The data arising from each bias correction method was compared on a number of metrics
 relating to the ability to capture the observed
 climatology, variability, distribution (precipitation only), extremes and trends (Table 1).
-In order to aid compatibility with related studies in the literature,
-wherever possible we employed metrics from the widely used list of climate indices
+In order to aid cross-study comparability,
+we employed metrics that were used by previous bias correction assessments for Australia
+(e.g. [Vogel et al 2023](https://doi.org/10.1016/j.jhydrol.2023.129693))
+and/or the widely used list of climate indices
 recommended by the Expert Team on Climate Change Detection and Indices
 (ETCCDI; e.g. [Alexander et al 2006](https://doi.org/10.1029/2005JD006290)).
 The complete results for each variable and metric are available in a series of supplementary files
@@ -523,7 +541,7 @@ Table 1 indicates which supplementary files correspond to each metric.
 
 | Category | Metric | Description | Supplementary file number/s |
 | ---      | ---    | ---         | ---                |
-| Climatology | Annual mean |  | 1-3 | 
+| Climatology | Annual mean | Annual mean value. | 1-3 | 
 | Climatology | Seasonal cycle | Mean value for each month. (Bias is calculated as the sum of the absolute value of the difference between the model and observed mean value for each month.) | 4-6 |
 | Variability | Interannual variability (std(1yr)) | Standard deviation of the annual mean timeseries. | 7-9 |
 | Variability (temperature) | Cold-spell duration index (CSDI) | Number of days where, in intervals of at least 6 consecutive days, daily Tmin < 10th percentile calculated for a 5-day window centred on each calendar day. | 10 |
@@ -556,8 +574,8 @@ or all ERA5/RCM combinations (right column).
       for the calibration assessment task.
       The metrics corresponding to each row label are defined in Table 1.
       The number in each cell corresponds to the mean absolute error/bias
-      (with units of Celsius, mm or days depending on the metric),
-      while the color is that bias value expressed as a percentage change
+      (with units of Celsius, mm or days, depending on the metric),
+      while the colour is that bias value expressed as a percentage change
       relative to the RCM value.
     </em>
 </p>
@@ -597,14 +615,14 @@ and observations was a minor factor.
 We therefore focus the remaining presentation and discussion of results on the CMIP6-based data.
 
 The results for each variable and assessment category are discussed in the sections below,
-with maps showing the results for all grid points for a representative RCM/GCM as required.
+with maps showing the results for all grid points for a representative RCM/GCM combination as required.
 See the supplementary materials for the map
-for every metric and RCM/GCM combination
+for every metric and RCM/GCM combination that was assessed
 ([GitHub link](https://github.com/AusClimateService/npcp/tree/master/reports/phase1/supplementary)
 to be replaced with Zenodo DOI).
 In addition to showing the results for bias corrected RCM and GCM data,
 the maps for the cross-validation task also show an "AGCD (training data)" result.
-This result is derived from a simple replication the AGCD training data
+This result is derived from a simple replication of the AGCD training data
 rather than applying a bias correction method.
 
 
@@ -620,7 +638,7 @@ which showed a consistent warm bias over the entire continent
 for all GCM/RCM combinations (Figure 1a,b; e.g. Figure 3f).
 Biases in the RCM output were also greatly reduced
 (but not completely eliminated) on the cross-validation task.
-The MBCn method was again the worst performing on cross-validation,
+The MBCn method was again the worst-performing on cross-validation,
 but unlike for the calibration task it did reduce the RCM bias (Figure 2a,b; e.g. Figure 4i).
 The residual bias after applying the ECDFm and QDC methods
 to RCM and GCM outputs was very similar (e.g. Figures 3b,d and 4b,c,e,g).
@@ -663,7 +681,7 @@ whether GCM data are dynamically downscaled or not prior to applying bias correc
 GCM biases in interannual temperature variability were relatively small
 and were not substantially modified by dynamical downscaling
 or by most of the bias correction methods (Figure 1a,b and 2a,b; e.g. Figure 5).
-The exception was the MNRBC method,
+The exception was the MRNBC method,
 which unlike the other methods does attempt to explicitly correct for
 biases in variability at multiple time scales (Section 2.5.1).
 The MRNBC method was able to reduce biases in interannual temperature variability
@@ -702,7 +720,7 @@ This may suggest a degree of overfitting by the MRNBC method.
 </p>
 
 With respect to sub-annual variability,
-extended periods of persistent hot or cold weather were captured by the WSDI and CSDI respectively.
+extended periods of persistent hot or cold weather were captured by the WSDI and CSDI, respectively.
 These indices count the annual number of days that are part of a streak of six or more days
 above the 90th percentile (WSDI) or below the 10th percentile (CSDI). 
 Both indices show higher values in northern Australia
@@ -737,11 +755,11 @@ whereas the bias correction methods act on the model data.
 ### 5.3. Temperature extremes
 
 For extremes indices related to daily minimum temperature
-(i.e. the 1-in-10 year low temperature and the 1st percentile),
+(i.e. the 1-in-10-year low temperature and the 1st percentile),
 RCM output was generally associated with smaller biases than corresponding GCM output
 (Figure 1a and 2a).
 In contrast, for daily maximum temperature
-(i.e. the 1-in-10 year high temperature and the 99th percentile)
+(i.e. the 1-in-10-year high temperature and the 99th percentile)
 RCM output was only associated with smaller biases
 for some RCM/GCM combinations but higher biases for others
 (Figure 1b and 2b; e.g. Figure 8).
@@ -752,14 +770,14 @@ and also reduced (but to a lesser extent) on cross-validation (Figure 2a,b).
 The MBCn method performed substantially worse than the other methods
 on daily maximum temperature extremes for the calibration task (Figure 1b)
 due to a warm bias across the entire continent (e.g. Figure 8f).
-The MRNBC method performed similarly to ECDFm and QME over most the of continent,
+The MRNBC method performed similarly to ECDFm and QME over most of the continent,
 but displayed substantial cool biases in minimum temperature extremes
 over high elevation areas in central Tasmania and along the Great Dividing Range
 (e.g. Figure 8g).
 
 As with the temperature climatology metrics,
 it did not appear to make much difference for these temperature extremes metrics
-whether GCM data are dynamically downscaled or not prior to applying bias correction.
+whether GCM data were dynamically downscaled or not prior to bias correction.
 
 <p align="center">
     <img src="figures/tasmin_1-in-10yr-bias_task-historical_EC-Earth-Consortium-EC-Earth3_BOM-BARPA-R.png" width=60% height=60%>
@@ -777,7 +795,7 @@ whether GCM data are dynamically downscaled or not prior to applying bias correc
 
 ### 5.4. Temperature trends
 
-With respect to the simulated trend in annual mean daily maximum or minimum temperature,
+With respect to the simulated projected trend in annual mean daily maximum or minimum temperature,
 none of the methods substantially altered the model simulated trend (e.g. Figure 9).
 In fact, dynamical downscaling modified the model trend much more than bias correction.
 
@@ -808,7 +826,7 @@ for all GCM/RCM combinations.
 Biases in the RCM output were also reduced on the cross-validation task,
 but to a lesser extent than for the calibration task (Figure 2c; e.g. Figure 10).
 The MRNBC method was no longer the stand out method,
-but the MBCn method was again the worst performing on cross-validation
+but the MBCn method was again the worst-performing on cross-validation
 due to a consistent wet bias (e.g. Figure 10i). 
 On cross-validation,
 biases also tended to be (but were not always) lower if the GCM data
@@ -844,8 +862,8 @@ which was consistently associated with larger biases than the RCM data.
 On cross-validation, none of the bias correction methods
 were consistently associated with lower biases than the RCM data (Figure 2c).
 The MBCn method was associated with consistently increased biases,
-while the ECDFm method differed greatly between GCMs.
-It maintained or reduced the mean absolute bias for
+while the ECDFm method differed greatly between GCMs;
+it maintained or reduced the mean absolute bias for
 dynamically downscaled ACCESS-ESM5-1 or EC-Earth3 data (e.g. Figure 11e),
 but was associated with very large biases for CESM2 (e.g. Figure 12e).
 In contrast to the bias correction methods,
@@ -884,7 +902,7 @@ and the QDC method effectively just applies a small perturbation to the training
 ### 5.7. Precipitation daily distribution
 
 The lower end of the daily precipitation distribution was assessed
-by considering the wet day frequency (or conversely the annual number of relatively dry days),
+by considering the wet day frequency (or, conversely, the annual number of relatively dry days),
 while the upper end was captured by a series of metrics that used absolute (r10mm and r20mm)
 or relative (R95pTOT and R99pTOT) thresholds.
 
@@ -909,7 +927,7 @@ all methods reduced the bias in the RCM output on both the calibration (Figure 1
 and (to a lesser extent) cross-validation tasks (Figure 2c).
 It was difficult to separate the methods as they all performed similarly.
 
-For a more extreme metric like the 1-in-10 year event,
+For a more extreme metric like the 1-in-10-year event,
 dynamical downscaling was associated with a larger mean absolute bias than
 the corresponding GCM output (Figure 1c; e.g. Figure 13a,d).
 On the calibration task the various methods could be easily distinguished,
@@ -924,7 +942,7 @@ while the ECDFm method tended not to reduce the RCM bias.
     <img src="figures/pr_1-in-10yr-bias_task-xvalidation_EC-Earth-Consortium-EC-Earth3_BOM-BARPA-R.png">
     <br>
     <em>
-      Figure 13: Bias in the 1-in-10 year high daily precipitation (relative to the AGCD dataset)
+      Figure 13: Bias in the 1-in-10-year high daily precipitation (relative to the AGCD dataset)
       for the "cross-validation" assessment task.
       Results are shown for the EC-Earth3 GCM (panel a),
       the BARPA-R RCM forced by that GCM (panel d),
@@ -942,8 +960,8 @@ while the ECDFm method tended not to reduce the RCM bias.
 
 Bias correction tended to slightly alter the model simulated rainfall trends (e.g. Figure 14).
 The grid point differences in percentage change in annual mean precipitation from 1980-2019 to 2060-2099
-between the raw RCM data and the ECDFm, QME, MBCn and MRNBC data had a mean absolute error across all RCM/GCM combinations
-of 3.4%, 2.4%, 9.5% and 4.2%, respectively.
+between the original RCM data and the ECDFm, QME, MBCn and MRNBC bias corrected data
+had a mean absolute error across all RCM/GCM combinations of 3.4%, 2.4%, 9.5% and 4.2%, respectively.
 For all RCM/GCM combinations, dynamical downscaling modified the model trend more than bias correction.
 
 <p align="center">
@@ -962,26 +980,26 @@ For all RCM/GCM combinations, dynamical downscaling modified the model trend mor
 ## 6. Discussion
 
 The first major initiative on the Climate Projections Roadmap for Australia
-is the production of next generation national-scale climate projections.
+is the production of next-generation national-scale climate projections.
 A primary data source for those projections is the CMIP6 ensemble,
 but that dataset does not provide regional-scale or unbiased information.
 For many applications (e.g. regional impact modelling),
 that means some form of downscaling and bias correction is required.
 A number of modelling groups have used RCMs to dynamically downscale CMIP6 data over Australia,
-but the resulting CORDEX dataset still has substantial biases
+but the resulting CORDEX-CMIP6 dataset still has substantial biases
 (partly inherited from the driving GCMs).
 In order to help select the most appropriate methods for bias correction,
 the NPCP established a bias correction intercomparison project.
 This paper presents the results of the first phase of that intercomparison,
-which focused on assessing the methods available to the ACS right now
-for producing a general-purpose bias corrected version of the CORDEX Australasia dataset.
+which focused on assessing the methods available to the ACS at the time of writing
+for producing a general-purpose bias corrected version of the CORDEX-CMIP6 Australasia dataset.
 
 The intercomparison involved validating the various bias correction methods
 against the same observational data that was used to calibrate the methods (the "calibration" task)
 and then against different observational data
 by calibrating on the first half of the observational record
 and then validating on the second half (the "cross-validation" task).
-These two validation approaches each have their have own limitations,
+These two validation tasks each have their have own limitations,
 so results that were consistent across both were considered more robust. 
 Indeed, aside from an obvious difference in the magnitude of the residual bias after bias correction
 (cross-validation is associated with higher biases)
@@ -990,23 +1008,22 @@ and whether or not they provided any substantial benefit
 was mostly similar between the two tasks.
 That meant a clear hierarchy between the methods could be identified.
 
-The best performing bias correction methods were QME and MRNBC.
+The best-performing bias correction methods were QME and MRNBC
+for univariate and multivariate approaches, respectively.
 Both methods were effective in reducing model bias for most but not quite all of the assessment metrics.
 To understand why bias correction is not equally effective on all metrics,
 it is useful to consider the climate system as a multivariate distribution having
 marginal, temporal, spatial, and inter-variable aspects
 ([Maraun et al 2015](https://doi.org/10.1002/2014EF000259)).
-As a quantile-based univariate method applied to each month separately,
+As a non-parametric quantile-based univariate method applied to each month separately,
 the QME method directly modifies the marginal aspects of the distribution
-(e.g. the univariate mean and variance)
-and also some temporal aspects
-(e.g. quantiles, amplitude of the seasonal cycle, number of threshold exceedances),
+(e.g. the univariate mean and variance) and also some temporal aspects
+(e.g. amplitude of the seasonal cycle, number of threshold exceedances),
 but does not modify other temporal aspects (e.g. sequencing, variability)
 or any spatial or inter-variable aspects.
-It was therefore not surprising that the QME method
-had little impact on model bias for
-interannual variability and weather sequencing (CSDI and WSDI),
-which relate to temporal aspects that are not modified by that method. 
+It was therefore not surprising that the QME method had little impact
+on model bias for interannual variability and weather sequencing (CSDI and WSDI),
+which relate to temporal aspects that are not likely to be modified by that method. 
 
 The MRNBC method is specifically designed to modify temporal variability,
 so its performance on the interannual variability metric
@@ -1021,7 +1038,7 @@ calibration and assessment periods,
 which was beyond the scope of this study.)
 The impact of the multivariate MRNBC method on the inter-variable aspects of the distribution
 was difficult to assess with the simple metrics employed in our analysis.
-For instance, bias in the cross correlation between the monthly mean anomaly timeseries
+For instance, bias in the cross-correlation between the monthly mean anomaly timeseries
 of precipitation and daily maximum temperature
 (a metric we ultimately decided not to include)
 showed little change with dynamical downscaling or bias correction of any kind.
@@ -1037,13 +1054,13 @@ For most assessment metrics, the ECDFm method performed similarly to QME and MRN
 An exception was the metrics relating to precipitation variability,
 for which the ECDFm method ranged from reducing to dramatically increasing the model bias
 depending on which RCM/GCM combination was assessed.
-The other exception was very extreme precipitation (i.e. the 1-in-10 year event),
+The other exception was very extreme precipitation (i.e. the 1-in-10-year event),
 for which ECDFm tended to have little effect on the model bias.
 In contrast, the QME method (i.e. the other option for univariate bias correction)
 essentially "did no harm" in the sense that it did not dramatically inflate the model bias
 for particular metrics and RCM/GCM combinations.
 A detailed analysis of why the QME and ECDFm methods performed differently in
-specific instances despite their obvious methodological similarities
+specific instances despite some methodological similarities
 was beyond the scope of this paper,
 but we hypothesise that it could be related to the data transform that the QME method
 implements before any quantile matching is performed.
@@ -1062,11 +1079,11 @@ for producing projections data.
 
 The MBCn method was clearly the worst performing method,
 dramatically increasing the bias on a number of metrics.
-Given that the method has been used elsewhere with relative success
-(e.g. [Dieng et al 2022](https://doi.org/10.1029/2021JD034836),
-[François et al 2020](https://doi.org/10.5194/esd-11-537-2020)),
-it is possible that this poor performance relates to software implementation issues
-rather than the method itself.
+Given that it is a widely used method that has been applied in many different contexts
+without displaying such dramatically poor performance
+(including in Australia; [Weeding et al 2024](https://doi.org/10.1007/s00484-024-02622-8)),
+future work is for the authors to investigate whether this poor performance
+relates to software implementation issues rather than the method itself.
 
 A final observation from this first phase of the NPCP bias correction intercomparison
 is that directly bias correcting GCM data
@@ -1083,7 +1100,7 @@ temporal, spatial or inter-variable aspects of the climate system that we did no
 would highlight the benefits of dynamical downscaling prior to bias correction.
 
 On the basis of these results,
-the Australian Climate Service went ahead and bias corrected
+the ACS went ahead and bias corrected
 the entire CORDEX-CMIP6 Australasia archive (for selected variables)
 using the QME and MRBNC methods ([NCI 2025](https://doi.org/10.25914/xeca-pw53)).
 A QDC-CMIP6 dataset was also produced by applying the QDC method to daily GCM data
