@@ -3,16 +3,19 @@
 This repository contains code and information relating to the
 National Partnership for Climate Projections (NPCP) bias correction intercomparison project.
 
-## Results
+Phase 1 of the intercomparison is now complete.
 
-See the draft [Phase 1 Report](https://github.com/AusClimateService/npcp/blob/master/reports/phase1/phase1_report.md)
-to read a summary of the results so far.
+There might be an opportunity for a second phase of the intercomparison.
+Ideas for that phase are being collected at https://github.com/AusClimateService/npcp/issues/3.
 
-For more detail than that covered in the report,
-see the [`results/`](https://github.com/AusClimateService/npcp/tree/master/results) directory
-for analysis notebooks that can be clicked on and viewed.
+## Information for interested parties
 
-## Data
+A report on Phase 1 of the intercomparison will be submitted to the Journal of Southern Hemisphere of Earth System Science,
+to be included in a special issue relating to the Australian Climate Service.
+
+In the meantime, that report can be viewed [here](https://github.com/AusClimateService/npcp/blob/master/reports/phase1/phase1_report.md).
+
+## Information for participants
 
 ### Data access
 
@@ -109,7 +112,7 @@ summarise the availability of `pr`, `tasmax` and `tasmin` data.
 
 *The ERA5 data is only available from 1979 onwards.  
 
-## Bias correction tasks
+### Bias correction tasks (phase 1)
 
 Researchers who are interested in participting in the intercomparison project
 (i.e. by applying their bias correction method/code)
@@ -121,9 +124,7 @@ you'll need to apply for access to the
 NCI project ia39 writers group (ia39_w) at the following link:  
 https://my.nci.org.au/mancini/project/ia39_w
 
-### Phase 1
-
-Phase 1 of the intercomparison will focus on daily timescale
+Phase 1 of the intercomparison focuses on daily timescale
 `tasmax`, `tasmin` and `pr` data on the `NPCP-20i` grid.
 For each variable and downscaling model there are 5 tasks to complete...
 
@@ -161,8 +162,3 @@ Bias corrected data files written to `ia39` for each task should look something 
 The files have the same reference syntax as the input files with an additional field
 after the final `_` indicating the bias correction method, observational dataset
 and the start and end time for the training period.
-
-### Phase 2
-
-There might be an opportunity for a second phase of the intercomparison.
-Ideas for that phase are being collected at https://github.com/AusClimateService/npcp/issues/3.
