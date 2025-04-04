@@ -10,7 +10,7 @@ Ideas for that phase are being collected at https://github.com/AusClimateService
 
 ## Information for interested parties
 
-A report on Phase 1 of the intercomparison will be submitted to the Journal of Southern Hemisphere of Earth System Science,
+A report on Phase 1 of the intercomparison will be submitted to the Journal of Southern Hemisphere of Earth System Science
 to be included in a special issue relating to the Australian Climate Service.
 In the meantime, the report can be viewed [here](https://github.com/AusClimateService/npcp/blob/master/reports/phase1/phase1_report.md).
 
