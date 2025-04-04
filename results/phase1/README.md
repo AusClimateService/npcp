@@ -1,22 +1,5 @@
-## Results
+## Results (Phase 1)
 
-Results from the intercomparison will be progressively added to this directory.
-The basic idea is that there's a separate jupyter notebook displaying results for each different evaluation metric.
+Results from Phase 1 of the intercomparison were generated using the notebooks in this directory.
 
-The notebooks in this main results directory are up-to-date,
-whereas the notebooks in the `dev/` sub-directory are either under development or out-of-date. 
-
-The evaluation metrics we calculatd are for the most part a combination of the evaluation metrics used in
-[Vogel et al. (2023)](https://doi.org/10.1016/j.jhydrol.2023.129693) and
-Schroeter et al. (2023; Manuscript in preparation).
-
-We're keeping track of the metrics still to come [here](https://github.com/AusClimateService/npcp/issues/8).
-If you'd like to contribute a notebook for a particular metric or suggest a new metric,
-you can open an issue to discuss [here](https://github.com/AusClimateService/npcp/issues).
-
-
-### References:
-Vogel, E., Johnson, F., Marshall, L., Bende-Michl, U., Wilson, L., Peter, J.R., Wasko, C., Srikanthan, S., Sharples, W., Dowdy, A. and Hope, P., 2023. 
-An evaluation framework for downscaling and bias correction in climate change impact studies. Journal of Hydrology, p.129693.
-
-Schroeter, B., Ng, B., Takbash, A., Rafter, T., Thatcher, M., 2023. A comprehensive evaluation of mean and extreme climate for the Conformal Cubic Atmospheric Model (CCAM). Manuscript in preparation.
+Notebooks in the `dev/` sub-directory are out-of-date and were ultimately not used in producing the Phase 1 report. 
