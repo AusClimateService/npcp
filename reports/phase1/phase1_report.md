@@ -95,7 +95,7 @@ The established transfer function is then applied to the target model data
 (e.g. future model projections) in order to produce a "bias corrected" model time series.
 There are a wide variety of transfer functions / bias correction methodologies out there,
 ranging from relatively simple methods that take a single variable as input
-to more sophisticated multi-variate approaches.
+to more sophisticated multivariate approaches.
 
 Through a series of NPCP meetings and workshops on the topic of bias correction,
 five methods were identified as being available for use by the ACS at that time:
@@ -148,16 +148,16 @@ to create a future time series.
 The QDC method is conceptually very similar to ECDFm
 and is essentially the most basic quantile-based delta change method available.
 
-Unlike the univariate approaches,
-multivariate techniques tend to be iterative,
+Unlike the univariate approaches, multivariate techniques tend to be iterative,
 whereby a bias correction method is applied repeatedly until convergence is reached
-(i.e. until the biases are no longer getting smaller).
-The MBCn method is quantile-based,
-repeatedly applying a multivariate orthogonal rotation to the data followed by the univariate QDC method.
-In contrast, the MRNBC method is not quantile-based
-and instead attempts to address biases in serial dependence
+(i.e. until the biases are no longer getting smaller)
+The MBCn method is quantile-based, repeatedly applying a multivariate orthogonal rotation
+to the data followed by the univariate QDC method
+([Cannon 2018](https://doi.org/10.1007/s00382-017-3580-6))
+The MRNBC method is also quantile-based and attempts to address biases in serial dependence
 by correcting the data for biases in the mean, standard deviation and lag-0 and lag-1 auto and cross correlations
-at multiple timescales (daily, monthly, seasonal and annual).
+at multiple timescales (daily, monthly, seasonal and annual;
+[Mehrotra and Sharma 2015](https://doi.org/10.1016/j.jhydrol.2014.11.037)).
 
 Each of the methods is described in more detail below.
 
@@ -373,20 +373,41 @@ in the QDC precipitation data matched the model.
 
 #### 2.4.1. Method
 
-> TODO: Add detailed method description.
+The N-dimensional Multivariate Bias Correction
+(MBCn; [Cannon 2018](https://doi.org/10.1007/s00382-017-3580-6)) method
+was developed from the N-pdft image processing algorithm,
+which maps from a continuous N-dimensional multivariate source distribution
+to a continuous target distribution of the same dimension
+(Pitié et al. [2005](https://doi.org/10.1109/ICCV.2005.166),
+[2007](https://doi.org/10.1016/j.cviu.2006.11.011)).
+A random orthogonal rotation is applied to the source distributions,
+and quantile mapping is then applied to the rotated distributions.
+The rotation enables linear combinations of each of the variables to be constructed
+and quantile mapping is applied to these to enable a multivariate quantile mapping,
+rather than univariate mapping of the marginal distributions.
+These steps are combined in sequence and repeated
+until the source multivariate distribution matches the target distributions.
+In brief, the algorithm consists of three steps:
+(a) apply an orthogonal rotation to the source and target data;
+(b) correct the marginal distributions of the rotated source data via empirical quantile mapping; and
+(c) apply the inverse rotation to the resulting data.
 
 #### 2.4.2. Software (and implementation choices)
 
 The code used to implement the MBCn method is maintained by the Bureau of Meteorology
 and is openly available on GitHub ([Gammon and Dao, 2025](https://doi.org/10.5281/zenodo.14708960)).
+There are two main "tuneable" parameters:
+the number of quantiles used for applying the quantile matching to the reference data set
+and the number of iterations performed for convergence.
+These were set at 100 quantiles spaced evenly along [0, 1.0] in 0.01 increments
+and 50 iterations for algorithm convergence.
 
-> TODO: Describe any implementation choices.
 
 ### 2.5. MRNBC
 
 #### 2.5.1. Method
 
-The _Multivariate Recursive Nested Bias Correction_ (MRNBC) method
+The Multivariate Recursive Nested Bias Correction (MRNBC) method
 corrects multiple variables at the same time and preserves their interdependence at multiple time scales.
 It was progressively developed from the nested bias correction
 (NBC; [Johnson and Sharma, 2012](https://doi.org/10.1029/2011WR010464))
@@ -402,14 +423,15 @@ using a multivariate first-order autoregressive model at daily, monthly, quarter
 to impart observed distributional and persistence properties of the input fields
 ([Mehrotra and Sharma, 2015](https://doi.org/10.1016/j.jhydrol.2014.11.037)).
 
-> TODO: Provide more details so it can be compared to / contrasted with the other methods used in this report.
 
 #### 2.5.2. Software (and implementation choices)
 
 The code used to implement the MRNBC method is maintained by the Bureau of Meteorology
 and is openly available on GitHub ([Gammon and Kapoor, 2025](https://doi.org/10.5281/zenodo.14641854)).
-
-> TODO: Describe any implementation choices.
+All three analysis variables (precipitation, daily maximum temperature and daily minimum temperature)
+were corrected simultaneously and the input data were clipped
+to realistic physical bounds
+(0 to 1000 mm/day for precipitation and -20 to 65C for temperature) prior to use.
 
 
 ## 3. Data
@@ -509,7 +531,6 @@ allowed for the comparison of results from two approaches with different, non-ov
 Given that downscaled data is only available back to 1980 for ERA5,
 the cross-validation task for that dataset was modified to
 produce bias corrected data for the 2000-2019 period using 1980-1999 as a training period.
-
 Finally, the projection task was included to see if the bias correction methods
 substantially modify the trend simulated by the models.
 Trend modification is a problem for many bias correction methods
@@ -528,7 +549,7 @@ using the ECDFm and QDC methods.
 The data arising from each bias correction method was compared on a number of metrics
 relating to the ability to capture the observed
 climatology, variability, distribution (precipitation only), extremes and trends (Table 1).
-In order to aid cross-study comparability,
+To aid cross-study comparability,
 we employed metrics that were used by previous bias correction assessments for Australia
 (e.g. [Vogel et al 2023](https://doi.org/10.1016/j.jhydrol.2023.129693))
 and/or the widely used list of climate indices
@@ -558,7 +579,7 @@ _Table 1: Metrics calculated at each grid point across Australia._
 
 ## 5. Results
 
-In order to provide an overview of the performance of each bias correction method,
+To provide an overview of the performance of each bias correction method,
 the results were condensed into summary tables
 for the calibration (Figure 1) and cross-validation (Figure 2) tasks.
 The tables show the bias in each metric averaged (using the mean absolute error/bias)
@@ -1082,8 +1103,9 @@ dramatically increasing the bias on a number of metrics.
 Given that it is a widely used method that has been applied in many different contexts
 without displaying such dramatically poor performance
 (including in Australia; [Weeding et al 2024](https://doi.org/10.1007/s00484-024-02622-8)),
-future work is for the authors to investigate whether this poor performance
-relates to software implementation issues rather than the method itself.
+future work is for the authors to investigate how the method was implemented
+including whether performance can be improved by modifying the various input parameters
+(e.g. limits on the number of iterations to convergence, the number of quantiles).
 
 A final observation from this first phase of the NPCP bias correction intercomparison
 is that directly bias correcting GCM data
