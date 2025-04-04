@@ -447,19 +447,25 @@ EC-Earth3 a strong increase in rainfall and
 CESM2 a mix of increasing and decreasing rainfall across the country
 (see [Grose et al 2023](https://doi.org/10.1016/j.cliser.2023.100368) for a detailed comparison). 
 
+https://doi.org/10.1175/JAMC-D-24-0004.1
+
 Similarly, data from three different RCM modelling groups was assessed
 in order to sample a range of different RCM biases: 
-a `BARPA-R` submission from the Bureau of Meteorology ([NCI 2024a]( https://dx.doi.org/10.25914/gjzx-kr91))
+a `BARPA-R` submission from the Bureau of Meteorology
+([Howard et al 2024](https://doi.org/10.5194/gmd-17-731-2024),
+[NCI 2024a](https://dx.doi.org/10.25914/gjzx-kr91))
 produced by running the Bureau of Meteorology Atmospheric Regional Projections for Australia
 (BARPA; [Su et al, 2022](http://www.bom.gov.au/research/publications/researchreports/BRR-069.pdf)) RCM,
-a `CCAM-v2203-SN` submission from CSIRO ([NCI 2024b](https://dx.doi.org/10.25914/rd73-4m38))
+a `CCAM-v2203-SN` submission from CSIRO
+([Schroeter et al 2024](https://doi.org/10.1175/JAMC-D-24-0004.1),
+[NCI 2024b](https://dx.doi.org/10.25914/rd73-4m38))
 produced by running the Conformal Cubic Atmospheric Model
 (CCAM; [McGregor and Dix 2008](https://doi.org/10.1007/978-0-387-49791-4_4)) RCM,
 and a `CCAM-v2105` submission from the
 University of Queensland and the Queensland Department of Environment and Science
-([NCI 2024c](https://dx.doi.org/10.25914/h0bx-be42))
-produced by running a different configuration of CCAM
-([Chapman et al, 2023](https://doi.org/10.1029/2023EF003548)).
+([Chapman et al, 2023](https://doi.org/10.1029/2023EF003548),
+[NCI 2024c](https://dx.doi.org/10.25914/h0bx-be42))
+produced by running a different configuration of CCAM.
 Data from the New South Wales and Australian Regional Climate Modelling (NARCliM2.0)
 submission to CORDEX-CMIP6 ([Di Virgilio et al, 2025](https://doi.org/10.5194/gmd-18-671-2025))
 was not available at the time the intercomparison was conducted.
