@@ -216,7 +216,7 @@ There are a number of decisions to make when implementing the ECDFm method:
   For the NPCP intercomparsion, adjustment factors were calculated for each month.
 - _Quantiles_:
   The software allows the user to specify the number of quantiles for which to calculate an adjustment factor.
-  We aim to have approximately 10-15 data values between each quantile.
+  We aimed to have approximately 10-15 data values between each quantile.
   For the NPCP bias correction tasks (that train on 30 or 40 years of daily data),
   that meant 100 quantiles for each month.
 - _Adjustment factor smoothing_:
@@ -712,7 +712,7 @@ and were not substantially modified by dynamical downscaling
 or by most of the bias correction methods (Figure 1a,b and 2a,b; e.g. Figure 5).
 The exception was the MRNBC method,
 which unlike the other methods does attempt to explicitly correct for
-biases in variability at multiple time scales (Section 2.5.1).
+biases in variability at multiple timescales (Section 2.5.1).
 The MRNBC method was able to reduce biases in interannual temperature variability
 on the calibration task (Figure 1a,b; e.g. Figure 5g)
 but actually inflated those biases on cross-validation (Figure 2a,b; Figure 6j).
@@ -1012,7 +1012,7 @@ The first major initiative on the Climate Projections Roadmap for Australia
 is the production of next-generation national-scale climate projections.
 A primary data source for those projections is the CMIP6 ensemble,
 but that dataset does not provide regional-scale or unbiased information.
-For many applications (e.g. regional impact modelling),
+For many applications (e.g. regional impact modelling, metrics that involve absolute thresholds),
 that means some form of downscaling and bias correction is required.
 A number of modelling groups have used RCMs to dynamically downscale CMIP6 data over Australia,
 but the resulting CORDEX-CMIP6 dataset still has substantial biases
@@ -1020,7 +1020,7 @@ but the resulting CORDEX-CMIP6 dataset still has substantial biases
 In order to help select the most appropriate methods for bias correction,
 the NPCP established a bias correction intercomparison project.
 This paper presents the results of the first phase of that intercomparison,
-which focused on assessing the methods available to the ACS at the time of writing
+which focused on assessing the methods available to the ACS
 for producing a general-purpose bias corrected version of the CORDEX-CMIP6 Australasia dataset.
 
 The intercomparison involved validating the various bias correction methods
@@ -1069,7 +1069,7 @@ The impact of the multivariate MRNBC method on the inter-variable aspects of the
 was difficult to assess with the simple metrics employed in our analysis.
 For instance, bias in the cross-correlation between the monthly mean anomaly timeseries
 of precipitation and daily maximum temperature
-(a metric we ultimately decided not to include)
+(a metric we ultimately decided not to include in the paper)
 showed little change with dynamical downscaling or bias correction of any kind.
 Having said that,
 when multiple variables are bias corrected for input into a hydrological model
@@ -1092,7 +1092,9 @@ A detailed analysis of why the QME and ECDFm methods performed differently in
 specific instances despite some methodological similarities
 was beyond the scope of this paper,
 but we hypothesise that it could be related to the data transform that the QME method
-implements before any quantile matching is performed.
+implements before any quantile matching is performed,
+as well as the modifications it makes to adjustment factors
+at the extreme ends of the distribution.
 
 The QDC method compared very favourably to the bias correction methods.
 On any given metric it generally performed as well as the best performing bias correction method,
