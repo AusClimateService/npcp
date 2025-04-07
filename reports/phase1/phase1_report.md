@@ -53,8 +53,8 @@ national-scale climate projections by the Australian Climate Service (ACS).
 The first phase of the bias correction intercomparison was therefore
 designed to support that initiative.
 
-It focused on bias correction methods that were available to the ACS at that time
-(i.e. with functional software that was sufficiently well documented)
+It focused on bias correction methods that were available to the ACS at the time
+(i.e. with existing functional software that was sufficiently well documented)
 and applied those methods to a subset of the multi-scenario, multi-model ensemble
 of regional climate model (RCM) simulations produced by NPCP partner organisations.
 The RCMs were forced by data from a selection
@@ -92,13 +92,13 @@ The first step in a typical bias correction procedure involves
 establishing a statistical relationship or transfer function
 between model outputs and observations over a calibration (i.e. historical/training) time period.
 The established transfer function is then applied to the target model data
-(e.g. future model projections) in order to produce a "bias corrected" model time series.
+(e.g. future model projections) in order to produce a "bias corrected" model timeseries.
 There are a wide variety of transfer functions / bias correction methodologies out there,
 ranging from relatively simple methods that take a single variable as input
 to more sophisticated multivariate approaches.
 
 Through a series of NPCP meetings and workshops on the topic of bias correction,
-five methods were identified as being available for use by the ACS at that time:
+five methods were identified as being available for use by the ACS at the time:
 - Equi-distant/ratio Cumulative Density Function (CDF) matching (ECDFm; univariate)
 - Quantile Matching for Extremes (QME; univariate)
 - Quantile Delta Change (QDC; univariate)
@@ -126,7 +126,7 @@ The simplest bias correction procedure is a mean correction,
 where the difference or ratio between the mean model and observed value
 over the calibration period (i.e. the mean bias)
 is removed (via subtraction or division) from the target model data
-in order to produce the bias corrected model time series.
+in order to produce the bias corrected model timeseries.
 Quantile-based methods are a popular and slightly more sophisticated approach,
 where the bias is calculated for a series of quantiles (instead of just the mean)
 and then removed from the corresponding quantiles of the target model data.
@@ -144,7 +144,7 @@ In contrast to bias correction,
 delta change approaches establish a transfer function between baseline and future model outputs
 (e.g. from an historical model experiment and future climate emission scenario experiment)
 and then apply that transfer function to observations from the same baseline period
-to create a future time series.
+to create a future timeseries.
 The QDC method is conceptually very similar to ECDFm
 and is essentially the most basic quantile-based delta change method available.
 
@@ -159,7 +159,8 @@ by correcting the data for biases in the mean, standard deviation and lag-0 and 
 at multiple timescales (daily, monthly, seasonal and annual;
 [Mehrotra and Sharma 2015](https://doi.org/10.1016/j.jhydrol.2014.11.037)).
 
-Each of the methods is described in more detail below.
+Each of the methods is described in more detail below,
+including details of the implementation choices and custom settings used in this particular study.
 
 ### 2.1. ECDFm
 
@@ -315,7 +316,7 @@ Rather than use the data from a model simulation of the future climate directly,
 the delta change approach calculates the relative change
 between a future and historical modelled time period.
 That relative change is then applied to observed data from the same historical time period
-in order to produce a time series for the future period.
+in order to produce a timeseries for the future period.
 
 While the simplest application of the delta change approach
 is to apply the mean model change to the observed data,
@@ -444,11 +445,8 @@ Three different GCMs were selected in order to sample a range of different model
 and projected changes driving the RCM simulations.
 For instance, the ACCESS-ESM1-5 model simulates a strong drying trend over Australia,
 EC-Earth3 a strong increase in rainfall and
-CESM2 a mix of increasing and decreasing rainfall across the country
+CESM2 a mix of increasing and decreasing rainfall trends across the country
 (see [Grose et al 2023](https://doi.org/10.1016/j.cliser.2023.100368) for a detailed comparison). 
-
-https://doi.org/10.1175/JAMC-D-24-0004.1
-
 Similarly, data from three different RCM modelling groups was assessed
 in order to sample a range of different RCM biases: 
 a `BARPA-R` submission from the Bureau of Meteorology
@@ -462,7 +460,7 @@ a `CCAM-v2203-SN` submission from CSIRO
 produced by running the Conformal Cubic Atmospheric Model
 (CCAM; [McGregor and Dix 2008](https://doi.org/10.1007/978-0-387-49791-4_4)) RCM,
 and a `CCAM-v2105` submission from the
-University of Queensland and the Queensland Department of Environment and Science
+University of Queensland and the Queensland Department of Energy and Climate
 ([Chapman et al, 2023](https://doi.org/10.1029/2023EF003548),
 [NCI 2024c](https://dx.doi.org/10.25914/h0bx-be42))
 produced by running a different configuration of CCAM.
@@ -491,7 +489,8 @@ For precipitation-related metrics, we masked all grid points
 that were not influenced by observations on 90% or more days over the 1960-2019 period.
 
 The spatial resolution of the datasets ranged from 0.05 degrees of latitude and longitude for AGCD
-to 0.2 degrees for CCAM-v2105 over the entire landmass of Australia.
+to native model grids of approximately 0.10 to 0.15 degrees
+for the BARPA-R, CCAM-v2203-SN and CCAM-v2105 models over the entire landmass of Australia. 
 When comparing RCM data against observations of higher spatial resolution,
 differences can arise not only from model bias/errors (which bias correction seeks to remove),
 but also from the resolution (or scale) gap between the datasets.
@@ -499,7 +498,8 @@ The latter discrepancy — which is not a model error —
 is known as the representativeness problem
 ([Zwiers et al 2013](https://doi.org/10.1007/978-94-007-6692-1_13)).
 In order to avoid this problem in the intercomparison,
-all data were regridded to the 0.2 degrees grid using conservative remapping.
+all data were regridded to the standard CORDEX grid that is used for making comparisons across models
+(the 0.2 degree AUS-20i grid) using conservative remapping.
 
 ## 4. Assessment
 
@@ -558,7 +558,7 @@ climatology, variability, distribution (precipitation only), extremes and trends
 To aid cross-study comparability,
 we employed metrics that were used by previous bias correction assessments for Australia
 (e.g. [Vogel et al 2023](https://doi.org/10.1016/j.jhydrol.2023.129693))
-and/or the widely used list of climate indices
+and/or selected from the widely used list of climate indices
 recommended by the Expert Team on Climate Change Detection and Indices
 (ETCCDI; e.g. [Alexander et al 2006](https://doi.org/10.1029/2005JD006290)).
 The complete results for each variable and metric are available in a series of supplementary files
@@ -617,7 +617,7 @@ or all ERA5/RCM combinations (right column).
 
 After a bias correction method has been applied,
 any residual bias on the calibration task
-(i.e. an in-sample test, where the training and target data are the same)
+(i.e. an in-sample test where the training and target data are the same)
 may be attributed to the method doing an imperfect job of quantifying and removing the model error.
 Since historical CMIP6 simulations do not match the observed phasing of climate variability,
 this "error" consists of both true model error and also a component related to
@@ -638,7 +638,9 @@ so it was presented separately in Figure 1 and 2.
 The magnitude of the residual bias and the relative performance of each of the bias correction methods
 was similar for both the ERA5 and CMIP6-based data,
 which suggests that any mismatch in climate variability between the CMIP6 historical data
-and observations was a minor factor.
+and observations was a minor factor
+(one reason for using long 30-40 year periods for each task
+was to reduce the influence of any climate variability mismatch).
 We therefore focus the remaining presentation and discussion of results on the CMIP6-based data.
 
 The results for each variable and assessment category are discussed in the sections below,
