@@ -1041,18 +1041,19 @@ The best-performing bias correction methods were QME and MRNBC
 for univariate and multivariate approaches, respectively.
 Both methods were effective in reducing model bias for most but not quite all of the assessment metrics.
 To understand why bias correction is not equally effective on all metrics,
-it is useful to consider the climate system as a multivariate distribution having
-marginal, temporal, spatial, and inter-variable aspects
-([Maraun et al 2015](https://doi.org/10.1002/2014EF000259)).
-As a non-parametric quantile-based univariate method applied to each month separately,
-the QME method directly modifies the marginal aspects of the distribution
-(e.g. the univariate mean and variance) and also some temporal aspects
-(e.g. amplitude of the seasonal cycle, number of threshold exceedances),
-but does not modify other temporal aspects (e.g. sequencing, variability)
+it is useful to consider the climate system as a multivariate distribution
+having marginal, temporal, spatial, and inter-variable aspects
+([Maraun et al 2015](https://doi.org/10.1002/2014EF000259).
+As non-parametric quantile-based univariate methods applied to each month separately,
+the QME and ECDFm methods directly modify the marginal aspects of the distribution
+(e.g., the univariate mean and variance) and also some temporal aspects
+(e.g., amplitude of the seasonal cycle, number of threshold exceedances),
+but do not directly modify some other temporal aspects
+(e.g., weather sequencing, interannual or multi-year variability)
 or any spatial or inter-variable aspects.
-It was therefore not surprising that the QME method had little impact
-on model bias for interannual variability and weather sequencing (CSDI and WSDI),
-which relate to temporal aspects that are not likely to be modified by that method. 
+It was therefore not surprising that the QME and ECDFm methods had little impact
+on model bias for the metrics relating to weather sequencing (CSDI and WSDI),
+which relate to temporal aspects that are not likely to be substantially modified by those methods. 
 
 The MRNBC method is specifically designed to modify temporal variability,
 so its performance on the interannual variability metric
@@ -1077,7 +1078,8 @@ when multiple variables are bias corrected for input into a hydrological model
 it has been shown on assessments similar to our calibration task 
 that the MRNBC method outperforms univariate alternatives over Australia
 when the hydrological model outputs are compared to observations
-([Vogel et al 2023](https://doi.org/10.1016/j.jhydrol.2023.129693)).
+([Vogel et al 2023](https://doi.org/10.1016/j.jhydrol.2023.129693)),
+noting that cross-validation was not used in that study.
  
 For most assessment metrics, the ECDFm method performed similarly to QME and MRNBC.
 An exception was the metrics relating to precipitation variability,
