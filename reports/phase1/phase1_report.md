@@ -151,9 +151,9 @@ and is essentially the most basic quantile-based delta change method available.
 Unlike the univariate approaches, multivariate techniques tend to be iterative,
 whereby a bias correction method is applied repeatedly until convergence is reached
 (i.e. until the biases are no longer getting smaller)
-The MBCn method is quantile-based, repeatedly applying a multivariate orthogonal rotation
-to the data followed by the univariate QDC method
-([Cannon 2018](https://doi.org/10.1007/s00382-017-3580-6))
+The MBCn method involves repeatedly applying a multivariate orthogonal rotation to the data,
+correcting the rotated data via empirical quantile mapping each time
+([Cannon 2018](https://doi.org/10.1007/s00382-017-3580-6)).
 The MRNBC method is also quantile-based and attempts to address biases in serial dependence
 by correcting the data for biases in the mean, standard deviation and lag-0 and lag-1 auto and cross correlations
 at multiple timescales (daily, monthly, seasonal and annual;
