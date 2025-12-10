@@ -8,7 +8,7 @@ import numpy as np
 import xarray as xr
 
 import geopandas as gpd
-from shapely.geometry import mapping
+import regionmask
 
 
 def get_aus_shape():
@@ -20,41 +20,25 @@ def get_aus_shape():
     )
 
     return aus_shape
-    
-
-def get_nrm_super_cluster(supcluster_abbreviation):
-    """Get shape for an NRM super cluster"""
-
-    nrm_sub_clusters = gpd.read_file(
-        '/g/data/ia39/aus-ref-clim-data-nci/shapefiles/data/nrm_regions/nrm_regions.shp',
-        crs="epsg:4326"
-    )
-    nrm_super_clusters = nrm_sub_clusters.dissolve(by='SupClusNm', as_index=False)
-    nrm_super_clusters = nrm_super_clusters.drop(columns=['SubClusNm', 'SubClusAb', 'ClusterNm', 'ClusterAb'])
-    nrm_super_clusters = nrm_super_clusters[['SupClusNm', 'SupClusAb', 'geometry']]
-    
-    supcluster_shape = nrm_super_clusters[nrm_super_clusters['SupClusAb'] == supcluster_abbreviation]
-
-    return supcluster_shape
 
 
-def clip_data(data, shape):
+def clip_data(da, shape):
     """Clip data"""
 
-    data_prep = (
-        data
-        .rio.write_crs(4326, inplace=True)
-        .rio.set_spatial_dims(x_dim="lon", y_dim="lat", inplace=True)
-        .rio.write_coordinate_system(inplace=True)
+    region = regionmask.from_geopandas(
+        shape,
+        names='AUS_NAME21',
+        abbrevs='AUS_CODE21',
+        name='country',
     )
+    mask = region.mask_3D(da)
+    mask = mask.isel(region=(mask.abbrevs=='AUS'))
+    mask = mask.squeeze()
+    da_clipped = da.where(mask)
+#    da_clipped = da_clipped.dropna(dim='lat', how='all')
+#    da_clipped = da_clipped.dropna(dim='lon', how='all')
     
-    data_clipped = data_prep.rio.clip(
-        shape.geometry.apply(mapping),
-        shape.crs,
-        drop=False
-    )
-    
-    return data_clipped
+    return da_clipped
 
 
 def get_npcp_data(
@@ -74,7 +58,7 @@ def get_npcp_data(
     assert downscaling_model in ['AGCD', 'BOM-BARPA-R', 'UQ-DES-CCAM-2105', 'CSIRO-CCAM-2203', 'GCM']
     assert bias_correction_method in ['raw', 'ecdfm', 'qme', 'qdc', 'mbcn', 'mrnbc']
     assert task in ['task-reference', 'task-projection', 'task-historical', 'task-xvalidation']
-    assert region in [None, 'AU', 'NA', 'SA', 'EA', 'R']
+    assert region in [None, 'AU',]
     
     file_start = variable if bias_correction_method in ['raw', 'qme'] else f'{variable}_NPCP'
     file_end = '1231.nc' if bias_correction_method == 'ecdfm' else '.nc'
@@ -96,9 +80,6 @@ def get_npcp_data(
     
     if region == 'AU':
         shape = get_aus_shape()
-        da = clip_data(ds[variable], shape)
-    elif region:
-        shape = get_nrm_super_cluster(region)
         da = clip_data(ds[variable], shape)
     else:
         da = ds[variable]
