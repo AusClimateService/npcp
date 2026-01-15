@@ -1,4 +1,4 @@
-_This report is currently in draft form and is not complete._
+_A version of this report has been submitted to the [Journal of Southern Hemisphere Earth System Science](https://connectsci.au/es) for publication._
 
 # Phase 1 Report
 
