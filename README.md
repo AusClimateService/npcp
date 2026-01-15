@@ -3,7 +3,7 @@
 This repository contains code and information relating to the
 National Partnership for Climate Projections (NPCP) bias correction intercomparison project.
 
-Phase 1 of the intercomparison is now complete.
+Phase 1 of the intercomparison is now complete - you can read the technical report [here](https://github.com/AusClimateService/npcp/blob/master/reports/phase1/phase1_report.md).
 
 There might be an opportunity for a second phase of the intercomparison.
 Ideas for that phase are being collected at https://github.com/AusClimateService/npcp/issues/3.
