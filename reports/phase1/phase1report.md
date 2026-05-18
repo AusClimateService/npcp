@@ -1,4 +1,5 @@
-_A version of this report has been submitted to the [Journal of Southern Hemisphere Earth System Science](https://connectsci.au/es) for publication._
+_A version of this report has been published in the scientific literature:  
+Irving D, Takbash A, Peter J, Gammon A, Dowdy A, Dao TL, Kapoor A, Black M, Jakob D, Grose M (2026). [An intercomparison of climate model bias correction methods across Australia](https://doi.org/10.1071/ES25023). *Journal of Southern Hemisphere Earth Systems Science*. 76(2), ES25023. doi:10.1071/ES25023._
 
 # Phase 1 Report
 
